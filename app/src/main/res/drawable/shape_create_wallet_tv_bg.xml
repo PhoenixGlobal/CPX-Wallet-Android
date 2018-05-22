@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <corners android:radius="@dimen/shape_new_visitor_bt_corner" />
+
+    <solid android:color="@color/text_color_white" />
+
+    <stroke
+        android:width="1dp"
+        android:color="#E6E6E6"
+        android:dashGap="3dp"
+        android:dashWidth="3dp" />
+</shape>

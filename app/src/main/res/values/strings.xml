@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Apex</string>
+    <string name="new_visitor_create_wallet">创建钱包</string>
+    <string name="new_visitor_import_wallet">导入钱包</string>
+    <string name="create_wallet_security">您将在这个设备上生成一个新的加密的脱机钱包。我们建议选择一个强密码，确保您的资金安全。PS：生成一个强大安全的钱包是一个高度计算密集型的任务，可能需要几分钟。这个过程将在后台执行，期间您仍然可用您的手机，一旦我们完成了您的钱包，我们会让你知道。</string>
+    <string name="create_wallet_et_name">钱包名称</string>
+    <string name="create_wallet_et_pwd">密码</string>
+    <string name="create_wallet_et_repeat_pwd">重复密码</string>
+    <string name="create_wallet_rb_read">我已经仔细阅读并同意</string>
+    <string name="create_wallet_tv_privacy">服务及隐私条款</string>
+    <string name="create_wallet_bt_confirm">确定</string>
+    <string name="create_wallet_import">导入钱包</string>
+    <string name="tb_title_main">资产</string>
+    <string name="main_tv_balance">560</string>
+    <string name="fragment_assets_balance">560</string>
+    <string name="tv_assets_unit">CPX</string>
+    <string name="et_assets_search">搜索钱包</string>
+    <string name="tv_assets_search_cancel">Cancel</string>
+    <string name="assets_rv_item_wallet_name">钱包名称</string>
+    <string name="assets_rv_item_wallet_addr">钱包地址</string>
+    <string name="tv_assets_rv_item_balance">50</string>
+    <string name="tv_assets_rv_item_unit">cpx</string>
+    <string name="wallet_detail_name">钱包名称</string>
+    <string name="tv_wallet_detail_addr">钱包地址钱包地址钱包地址钱包地址</string>
+    <string name="bt_wallet_detail_tx_transfer">转账</string>
+    <string name="bt_wallet_detail_tx_gathering">收款</string>
+    <string name="tb_title_transfer">转账</string>
+    <string name="tv_transfer_from_content">From</string>
+    <string name="tv_transfer_from_wallet_name">付款方钱包名称</string>
+    <string name="tv_transfer_from_wallet_addr">钱包地址</string>
+    <string name="tv_transfer_to_wallet_name">收款方钱包名称</string>
+    <string name="tv_transfer_to_content">To</string>
+    <string name="tv_transfer_to_wallet_addr">钱包地址</string>
+    <string name="bt_transfer_send">发送</string>
+    <string name="et_transfer_amount">交易金额</string>
+</resources>

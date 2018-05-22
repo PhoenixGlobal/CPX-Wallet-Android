@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.WalletDetailActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/create_wallet_tb_height"
+        android:background="@drawable/shape_create_wallet_tb_bg">
+
+        <TextView
+            android:id="@+id/tv_wallet_detail_wallet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:text="@string/wallet_detail_name"
+            android:textColor="@color/text_color_white" />
+
+        <TextView
+            android:id="@+id/tv_wallet_detail_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/fragment_assets_balance"
+            android:textColor="@color/text_color_white"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_wallet_detail_balance"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="100dp"
+            android:text="@string/tv_assets_unit"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tv_assets_unit_size" />
+
+        <TextView
+            android:id="@+id/tv_wallet_detail_addr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_wallet_detail_balance"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textIsSelectable="true"
+            android:text="@string/tv_wallet_detail_addr"
+            android:textColor="@color/text_color_white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/rl_wallet_detail_tx_margin_top">
+
+        <Button
+            android:id="@+id/bt_wallet_detail_transfer"
+            android:layout_width="@dimen/bt_wallet_detail_tx_width"
+            android:layout_height="@dimen/bt_wallet_detail_tx_height"
+            android:layout_marginStart="@dimen/rl_wallet_detail_tx_margin_start"
+            android:background="@drawable/shape_new_visitor_bt_bg"
+            android:text="@string/bt_wallet_detail_tx_transfer"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/bt_wallet_detail_tx_font_size" />
+
+        <Button
+            android:id="@+id/bt_wallet_detail_gathering"
+            android:layout_width="@dimen/bt_wallet_detail_tx_width"
+            android:layout_height="@dimen/bt_wallet_detail_tx_height"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/rl_wallet_detail_tx_margin_end"
+            android:background="@drawable/shape_new_visitor_bt_bg"
+            android:text="@string/bt_wallet_detail_tx_gathering"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/bt_wallet_detail_tx_font_size" />
+
+    </RelativeLayout>
+
+</LinearLayout>

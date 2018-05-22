@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/create_wallet_tb_height"
+        android:background="@drawable/shape_create_wallet_tb_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:text="@string/tb_title_main"
+            android:textColor="@color/text_color_white" />
+
+        <TextView
+            android:id="@+id/tv_assets_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/fragment_assets_balance"
+            android:textColor="@color/text_color_white"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_assets_balance"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="111dp"
+            android:text="@string/tv_assets_unit"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tv_assets_unit_size" />
+
+        <EditText
+            android:id="@+id/et_assets_search"
+            android:layout_width="@dimen/et_assets_search_width"
+            android:layout_height="@dimen/et_assets_search_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/et_assets_search_margin_bottom"
+            android:layout_marginStart="@dimen/et_assets_search_margin_start"
+            android:background="@drawable/shape_new_visitor_bt_bg"
+            android:hint="@string/et_assets_search"
+            android:paddingEnd="@dimen/et_assets_search_padding_end"
+            android:paddingStart="@dimen/et_assets_search_padding_start"
+            android:textColorHint="@color/text_color_white"
+            android:textSize="@dimen/et_assets_search_font_size" />
+
+        <TextView
+            android:id="@+id/tv_assets_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/et_assets_search"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/tv_assets_cancel_margin_end"
+            android:text="@string/tv_assets_search_cancel"
+            android:textColor="@color/text_color_white" />
+    </RelativeLayout>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sl_assets_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/rv_assets_margin_start"
+        android:layout_marginStart="@dimen/rv_assets_margin_end"
+        android:layout_marginTop="@dimen/rv_assets_margin_top">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_assets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

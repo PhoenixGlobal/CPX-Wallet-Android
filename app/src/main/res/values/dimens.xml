@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="new_visitor_icon_margin_top">175dp</dimen>
+    <dimen name="new_visitor_bt_margin_top">180dp</dimen>
+    <dimen name="new_visitor_bt_width">178dp</dimen>
+    <dimen name="new_visitor_bt_height">41dp</dimen>
+    <dimen name="shape_new_visitor_bt_corner">10dp</dimen>
+    <dimen name="new_visitor_bt_between_space">17dp</dimen>
+    <dimen name="create_wallet_tb_height">193dp</dimen>
+    <dimen name="create_wallet_tv_width">311dp</dimen>
+    <dimen name="create_wallet_tv_height">161dp</dimen>
+    <dimen name="create_wallet_tv_margin_top">-96dp</dimen>
+    <dimen name="create_wallet_tv_padding">12dp</dimen>
+    <dimen name="create_wallet_et_margin_top">20dp</dimen>
+    <dimen name="create_wallet_tv_size">12sp</dimen>
+    <dimen name="create_wallet_rb_text_size">10sp</dimen>
+    <dimen name="create_wallet_ll_margin_top">15dp</dimen>
+    <dimen name="create_wallet_tv_margin_start">5dp</dimen>
+    <dimen name="create_wallet_bt_confirm_width">144dp</dimen>
+    <dimen name="create_wallet_bt_confirm_height">38dp</dimen>
+    <dimen name="create_wallet_bt_margin_top">10dp</dimen>
+    <dimen name="create_wallet_tv_import_margin_top">10dp</dimen>
+    <dimen name="create_wallet_et_import_size">12sp</dimen>
+    <dimen name="tb_title_size">16sp</dimen>
+    <dimen name="tb_title_padding">15dp</dimen>
+    <dimen name="main_tv_title_margin_top">30dp</dimen>
+
+
+    <!--override BottomNavigationBar dimens-->
+    <dimen name="fixed_height_bottom_padding">5dp</dimen>
+
+
+    <dimen name="fragment_assets_title_margin_top">25dp</dimen>
+    <dimen name="rv_assets_margin_start">20dp</dimen>
+    <dimen name="rv_assets_margin_end">20dp</dimen>
+    <dimen name="rv_assets_margin_top">-18dp</dimen>
+    <dimen name="tv_assets_unit_size">16sp</dimen>
+    <dimen name="tv_assets_cancel_margin_end">30dp</dimen>
+    <dimen name="et_assets_search_margin_bottom">27dp</dimen>
+    <dimen name="et_assets_search_margin_start">35dp</dimen>
+    <dimen name="v_assets_rv_item">50dp</dimen>
+    <dimen name="v_assets_rv_item_margin_end">120dp</dimen>
+    <dimen name="tv_assets_rv_item_balance_margin_end">50dp</dimen>
+    <dimen name="tv_assets_rv_item_balance_margin_top">11dp</dimen>
+    <dimen name="cv_assets_rv_item_bg_corner">5dp</dimen>
+    <dimen name="tv_assets_rv_item_unit_margin_end">20dp</dimen>
+    <dimen name="tv_assets_rv_item_balance_size">20sp</dimen>
+    <dimen name="tv_assets_rv_item_wallet_name_size">16sp</dimen>
+    <dimen name="rl_assets_rv_item_height">100dp</dimen>
+    <dimen name="ll_assets_rv_item_padding">20dp</dimen>
+    <dimen name="bt_wallet_detail_tx_width">140dp</dimen>
+    <dimen name="bt_wallet_detail_tx_height">45dp</dimen>
+    <dimen name="rl_wallet_detail_tx_margin_top">22dp</dimen>
+    <dimen name="rl_wallet_detail_tx_margin_start">34dp</dimen>
+    <dimen name="rl_wallet_detail_tx_margin_end">34dp</dimen>
+    <dimen name="bt_wallet_detail_tx_font_size">18sp</dimen>
+    <dimen name="et_create_wallet_font_size">16sp</dimen>
+    <dimen name="et_assets_search_width">240dp</dimen>
+    <dimen name="et_assets_search_height">30dp</dimen>
+    <dimen name="et_assets_search_padding_end">84dp</dimen>
+    <dimen name="et_assets_search_padding_start">34dp</dimen>
+    <dimen name="et_assets_search_font_size">16sp</dimen>
+    <dimen name="tv_transfer_from_margin_top">5dp</dimen>
+    <dimen name="tv_transfer_from_margin_start">5dp</dimen>
+    <dimen name="tv_transfer_from_font_size">20sp</dimen>
+    <dimen name="tv_transfer_from_wallet_name_font_size">20sp</dimen>
+    <dimen name="tv_transfer_from_wallet_addr_font_size">14sp</dimen>
+</resources>
