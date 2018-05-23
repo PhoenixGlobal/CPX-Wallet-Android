@@ -82,6 +82,10 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
                 .colorPrimary));
         mSl_assets_rv.setOnRefreshListener(this);
 
+        setBalanceSum();
+    }
+
+    private void setBalanceSum() {
         double balanceSum = 0.0;
         for (WalletBean mWalletBean : mMWalletBeans) {
             if (null == mWalletBean) {
@@ -173,6 +177,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
                                 public void run() {
                                     mSl_assets_rv.setRefreshing(false);
                                     mAssetsRecyclerViewAdapter.notifyDataSetChanged();
+                                    setBalanceSum();
                                 }
                             });
 

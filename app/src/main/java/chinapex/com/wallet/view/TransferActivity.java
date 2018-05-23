@@ -185,6 +185,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(int statusCode, String msg, String result) {
                         CpLog.i(TAG, "getrawtransaction onSuccess");
+                        CpLog.i(TAG, "getrawtransaction onSuccess:" + result);
                         ResponseGetRawTransaction responseGetRawTransaction = GsonUtils.json2Bean
                                 (result, ResponseGetRawTransaction.class);
                         List<ResponseGetRawTransaction.ResultBean.VoutBean> voutBeans =
@@ -216,6 +217,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                             @Override
                             public void onSuccess(int statusCode, String msg, String result) {
                                 CpLog.i(TAG, "getblock onSuccess");
+                                CpLog.i(TAG, "getblock onSuccess:" + result);
 
                                 ResponseGetBlock responseGetBlock = GsonUtils.json2Bean(result,
                                         ResponseGetBlock.class);
@@ -261,6 +263,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                                                             msg, String
                                                                                   result) {
                                                         CpLog.i(TAG, "send onSuccess");
+                                                        CpLog.i(TAG, "send onSuccess:" + result);
 
                                                         ResponseSendRawTransaction
                                                                 responseSendRawTransaction =
@@ -273,7 +276,8 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                                                                             .LENGTH_LONG).show();
                                                             String txID = "0x" + tx.getID();
                                                             CpLog.i(TAG, "txID:" + txID);
-                                                            SharedPreferencesUtils.putParam(TransferActivity.this, Constant
+                                                            SharedPreferencesUtils.putParam
+                                                                    (TransferActivity.this, Constant
                                                                     .SP_TX_ID, txID);
 
 
