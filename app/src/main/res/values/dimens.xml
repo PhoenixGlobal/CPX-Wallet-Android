@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="new_visitor_icon_margin_top">173dp</dimen>
-    <dimen name="new_visitor_bt_margin_top">181dp</dimen>
+    <dimen name="new_visitor_icon_margin_top">148dp</dimen>
+    <dimen name="new_visitor_bt_margin_top">180dp</dimen>
     <dimen name="new_visitor_bt_width">178dp</dimen>
     <dimen name="new_visitor_bt_height">41dp</dimen>
     <dimen name="shape_new_visitor_bt_corner">10dp</dimen>
     <dimen name="new_visitor_bt_between_space">15dp</dimen>
-    <dimen name="create_wallet_tb_height">193dp</dimen>
+    <dimen name="create_wallet_tb_height">182dp</dimen>
     <dimen name="create_wallet_tv_width">311dp</dimen>
-    <dimen name="create_wallet_tv_height">161dp</dimen>
-    <dimen name="create_wallet_tv_margin_top">-96dp</dimen>
+    <dimen name="create_wallet_tv_height">174dp</dimen>
+    <dimen name="create_wallet_tv_margin_top">-104dp</dimen>
     <dimen name="create_wallet_tv_padding">12dp</dimen>
     <dimen name="create_wallet_et_margin_top">20dp</dimen>
     <dimen name="create_wallet_tv_size">12sp</dimen>
-    <dimen name="create_wallet_rb_text_size">10sp</dimen>
-    <dimen name="create_wallet_ll_margin_top">15dp</dimen>
+    <dimen name="create_wallet_rb_text_size">12sp</dimen>
+    <dimen name="create_wallet_ll_margin_top">10dp</dimen>
     <dimen name="create_wallet_tv_margin_start">5dp</dimen>
     <dimen name="create_wallet_bt_confirm_width">144dp</dimen>
     <dimen name="create_wallet_bt_confirm_height">38dp</dimen>

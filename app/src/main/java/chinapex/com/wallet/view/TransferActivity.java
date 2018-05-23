@@ -271,15 +271,13 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                                                                         ResponseSendRawTransaction.class);
                                                         if (responseSendRawTransaction.isResult()) {
                                                             CpLog.i(TAG, "broadcast success");
-                                                            Toast.makeText(TransferActivity.this,
-                                                                    "broadcast success", Toast
-                                                                            .LENGTH_LONG).show();
                                                             String txID = "0x" + tx.getID();
                                                             CpLog.i(TAG, "txID:" + txID);
                                                             SharedPreferencesUtils.putParam
                                                                     (TransferActivity.this, Constant
                                                                     .SP_TX_ID, txID);
 
+                                                            finish();
 
                                                         }
 

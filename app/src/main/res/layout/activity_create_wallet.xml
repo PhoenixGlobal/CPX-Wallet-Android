@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center_horizontal"
-              android:orientation="vertical"
-              tools:context="chinapex.com.wallet.view.CreateWalletActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.CreateWalletActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_create_wallet"
@@ -22,7 +22,7 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/new_visitor_create_wallet"
             android:textColor="@color/text_color_white"
-            android:textSize="@dimen/tb_title_size"/>
+            android:textSize="@dimen/tb_title_size" />
     </android.support.v7.widget.Toolbar>
 
     <TextView
@@ -34,7 +34,7 @@
         android:gravity="center_vertical"
         android:padding="@dimen/create_wallet_tv_padding"
         android:text="@string/create_wallet_security"
-        android:textSize="@dimen/create_wallet_tv_size"/>
+        android:textSize="@dimen/create_wallet_tv_size" />
 
     <EditText
         android:id="@+id/et_create_wallet_name"
@@ -43,7 +43,7 @@
         android:layout_marginTop="@dimen/create_wallet_et_margin_top"
         android:ems="12"
         android:hint="@string/create_wallet_et_name"
-        android:textSize="@dimen/et_create_wallet_font_size"/>
+        android:textSize="@dimen/et_create_wallet_font_size" />
 
     <EditText
         android:id="@+id/et_create_wallet_pwd"
@@ -53,7 +53,7 @@
         android:ems="12"
         android:hint="@string/create_wallet_et_pwd"
         android:inputType="textPassword"
-        android:textSize="@dimen/et_create_wallet_font_size"/>
+        android:textSize="@dimen/et_create_wallet_font_size" />
 
     <EditText
         android:id="@+id/et_create_wallet_repeat_pwd"
@@ -63,21 +63,30 @@
         android:ems="12"
         android:hint="@string/create_wallet_et_repeat_pwd"
         android:inputType="textPassword"
-        android:textSize="@dimen/et_create_wallet_font_size"/>
+        android:textSize="@dimen/et_create_wallet_font_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/create_wallet_ll_margin_top"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/rb_create_wallet_read"
+        <ImageButton
+            android:id="@+id/ib_create_wallet_privacy_point"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="55dp"
+            android:background="@null"
+            android:src="@drawable/selector_privacy_point"
+            />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:text="@string/create_wallet_rb_read"
-            android:textSize="@dimen/create_wallet_rb_text_size"/>
+            android:textSize="@dimen/create_wallet_rb_text_size" />
 
         <TextView
             android:id="@+id/tv_create_wallet_privacy"
@@ -86,7 +95,7 @@
             android:layout_marginStart="@dimen/create_wallet_tv_margin_start"
             android:text="@string/create_wallet_tv_privacy"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/create_wallet_rb_text_size"/>
+            android:textSize="@dimen/create_wallet_rb_text_size" />
     </LinearLayout>
 
     <Button
@@ -94,9 +103,9 @@
         android:layout_width="@dimen/create_wallet_bt_confirm_width"
         android:layout_height="@dimen/create_wallet_bt_confirm_height"
         android:layout_marginTop="@dimen/create_wallet_bt_margin_top"
-        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:background="@drawable/shape_gray_bt_bg"
         android:text="@string/create_wallet_bt_confirm"
-        android:textColor="@color/text_color_white"/>
+        android:textColor="@color/colorAccent" />
 
     <EditText
         android:id="@+id/et_create_wallet_import"
@@ -107,6 +116,6 @@
         android:focusableInTouchMode="false"
         android:text="@string/create_wallet_import"
         android:textColor="@color/create_wallet_et_import_color"
-        android:textSize="@dimen/create_wallet_et_import_size"/>
+        android:textSize="@dimen/create_wallet_et_import_size" />
 
 </LinearLayout>

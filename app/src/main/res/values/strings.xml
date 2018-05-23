@@ -4,8 +4,8 @@
     <string name="new_visitor_import_wallet">导入钱包</string>
     <string name="create_wallet_security">您将在这个设备上生成一个新的加密的脱机钱包。我们建议选择一个强密码，确保您的资金安全。PS：生成一个强大安全的钱包是一个高度计算密集型的任务，可能需要几分钟。这个过程将在后台执行，期间您仍然可用您的手机，一旦我们完成了您的钱包，我们会让你知道。</string>
     <string name="create_wallet_et_name">钱包名称</string>
-    <string name="create_wallet_et_pwd">密码</string>
-    <string name="create_wallet_et_repeat_pwd">重复密码</string>
+    <string name="create_wallet_et_pwd">密码(不少于6个字)</string>
+    <string name="create_wallet_et_repeat_pwd">重复密码(不少于6个字)</string>
     <string name="create_wallet_rb_read">我已经仔细阅读并同意</string>
     <string name="create_wallet_tv_privacy">服务及隐私条款</string>
     <string name="create_wallet_bt_confirm">确定</string>

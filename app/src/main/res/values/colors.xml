@@ -2,10 +2,12 @@
 <resources>
     <color name="colorPrimary">#4C8EFA</color>
     <color name="colorPrimaryDark">#4C8EFA</color>
+    <color name="color_new_visitor_bt_bg">#cc4C8EFA</color>
     <color name="colorAccent">#979797</color>
     <color name="text_color_white">#FFFFFF</color>
     <color name="create_wallet_et_import_color">#666666</color>
     <color name="transfer_wallet_font_color">#000000</color>
     <color name="transfer_view_color">#DDDDDD</color>
+    <color name="color_privacy_gray">#F1F1F1</color>
 
 </resources>

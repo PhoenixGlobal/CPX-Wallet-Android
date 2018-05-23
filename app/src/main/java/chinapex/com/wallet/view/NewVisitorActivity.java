@@ -67,5 +67,18 @@ public class NewVisitorActivity extends BaseActivity implements View.OnClickList
         CpLog.i(TAG, "lll_new_visitorWidth:" + lll_new_visitorWidth);
         CpLog.i(TAG, "ll_new_visitorHeight:" + ll_new_visitorHeight);
 
+
+        /**
+         * 获取状态栏高度——方法1
+         * */
+        int statusBarHeight1 = -1;
+        //获取status_bar_height资源的ID
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            //根据资源ID获取响应的尺寸值
+            statusBarHeight1 = getResources().getDimensionPixelSize(resourceId);
+        }
+        CpLog.d(TAG, "状态栏-方法1:" + statusBarHeight1);
+
     }
 }
