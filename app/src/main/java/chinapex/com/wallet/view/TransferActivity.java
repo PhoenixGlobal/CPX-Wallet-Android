@@ -165,7 +165,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         return tx;
     }
 
-    private void sendTxData(String txid) {
+    private void sendTxData(final String txid) {
         final RequestGetRawTransaction requestGetRawTransaction = new RequestGetRawTransaction();
         requestGetRawTransaction.setJsonrpc("2.0");
         requestGetRawTransaction.setMethod("getrawtransaction");
@@ -271,9 +271,11 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                                                             Toast.makeText(TransferActivity.this,
                                                                     "broadcast success", Toast
                                                                             .LENGTH_LONG).show();
+                                                            String txID = "0x" + tx.getID();
+                                                            CpLog.i(TAG, "txID:" + txID);
+                                                            SharedPreferencesUtils.putParam(TransferActivity.this, Constant
+                                                                    .SP_TX_ID, txID);
 
-                                                            CpLog.i(TAG, "txid:" + "0x" + tx
-                                                                    .getID());
 
                                                         }
 

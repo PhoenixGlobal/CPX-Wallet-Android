@@ -33,4 +33,7 @@
     <string name="tv_transfer_to_wallet_addr">钱包地址</string>
     <string name="bt_transfer_send">发送</string>
     <string name="et_transfer_amount">交易金额</string>
+    <string name="me_title">我</string>
+    <string name="bt_me_manage_wallet">管理钱包</string>
+    <string name="bt_me_transactions">交易记录</string>
 </resources>

@@ -14,6 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:textSize="@dimen/tb_title_size"
             android:text="@string/tb_title_main"
             android:textColor="@color/text_color_white" />
 
@@ -22,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:gravity="bottom"
             android:text="@string/fragment_assets_balance"
             android:textColor="@color/text_color_white"
             android:textSize="40sp" />
@@ -31,10 +33,11 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tv_assets_balance"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="111dp"
+            android:layout_marginEnd="80dp"
+            android:layout_alignBaseline="@+id/tv_assets_balance"
             android:text="@string/tv_assets_unit"
             android:textColor="@color/text_color_white"
-            android:textSize="@dimen/tv_assets_unit_size" />
+            android:textSize="@dimen/tv_assets_unit_size"/>
 
         <EditText
             android:id="@+id/et_assets_search"
@@ -56,9 +59,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/et_assets_search"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/tv_assets_cancel_margin_end"
+            android:layout_marginEnd="20dp"
             android:text="@string/tv_assets_search_cancel"
-            android:textColor="@color/text_color_white" />
+            android:textColor="@color/text_color_white"
+            android:textSize="16sp"/>
     </RelativeLayout>
 
 

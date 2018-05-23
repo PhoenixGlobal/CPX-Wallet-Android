@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
@@ -107,9 +108,17 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
             walletKeyStore.setWalletAddr(mWalletNew.address());
             walletKeyStore.setWalletKeyStore(keyStore);
             walletKeyStores.add(walletKeyStore);
-            SharedPreferencesUtils.putParam(this, Constant.SP_WALLET_KEYSTORE, GsonUtils
-                    .toJsonStr(walletKeyStores));
 
+            String keyStoresJson = (String) SharedPreferencesUtils.getParam(this, Constant.SP_WALLET_KEYSTORE, "");
+            if (TextUtils.isEmpty(keyStoresJson)) {
+                CpLog.w(TAG, "keyStoresJson is null!");
+                SharedPreferencesUtils.putParam(this, Constant.SP_WALLET_KEYSTORE, GsonUtils.toJsonStr(walletKeyStores));
+                return;
+            }
+
+            List<WalletKeyStore> walletKeyStoresSaved = GsonUtils.json2List(keyStoresJson);
+            walletKeyStoresSaved.add(walletKeyStore);
+            SharedPreferencesUtils.putParam(this, Constant.SP_WALLET_KEYSTORE, GsonUtils.toJsonStr(walletKeyStoresSaved));
         } catch (Exception e) {
             CpLog.e(TAG, "toKeyStore exception:" + e.getMessage());
         }

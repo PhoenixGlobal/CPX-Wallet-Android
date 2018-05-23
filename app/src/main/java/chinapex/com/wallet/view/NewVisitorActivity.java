@@ -1,14 +1,18 @@
 package chinapex.com.wallet.view;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
+import chinapex.com.wallet.utils.CpLog;
 
 public class NewVisitorActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final String TAG = NewVisitorActivity.class.getSimpleName();
     private Button mCreate_wallet;
     private Button mImport_wallet;
 
@@ -18,6 +22,7 @@ public class NewVisitorActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_new_visitor);
 
         initView();
+        testScreen();
     }
 
     private void initView() {
@@ -38,5 +43,29 @@ public class NewVisitorActivity extends BaseActivity implements View.OnClickList
             case R.id.bt_new_visitor_import_wallet:
                 break;
         }
+    }
+
+    private void testScreen() {
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int width = metric.widthPixels;
+        int height = metric.heightPixels;
+        float density = metric.density;
+        int densityDpi = metric.densityDpi;
+        float xdpi = metric.xdpi;
+        float ydpi = metric.ydpi;
+        CpLog.i(TAG, "width:" + width);
+        CpLog.i(TAG, "height:" + height);
+        CpLog.i(TAG, "density:" + density);
+        CpLog.i(TAG, "densityDpi:" + densityDpi);
+        CpLog.i(TAG, "xdpi:" + xdpi);
+        CpLog.i(TAG, "ydpi:" + ydpi);
+
+        LinearLayout ll_new_visitor = (LinearLayout) findViewById(R.id.ll_new_visitor);
+        int lll_new_visitorWidth = ll_new_visitor.getWidth();
+        int ll_new_visitorHeight = ll_new_visitor.getHeight();
+        CpLog.i(TAG, "lll_new_visitorWidth:" + lll_new_visitorWidth);
+        CpLog.i(TAG, "ll_new_visitorHeight:" + ll_new_visitorHeight);
+
     }
 }

@@ -29,4 +29,7 @@ public class Constant {
     public static final String ASSETS_GAS =
             "0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7";
 
+    //txids
+    public static final String SP_TX_ID = "spTxId";
+
 }

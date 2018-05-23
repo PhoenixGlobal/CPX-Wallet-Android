@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="chinapex.com.wallet.view.MainActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/ll_main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="chinapex.com.wallet.view.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_main"
@@ -21,19 +21,19 @@
             android:layout_marginTop="@dimen/main_tv_title_margin_top"
             android:text="@string/tb_title_main"
             android:textColor="@color/text_color_white"
-            android:textSize="@dimen/tb_title_size" />
+            android:textSize="@dimen/tb_title_size"/>
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/fl_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bn_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

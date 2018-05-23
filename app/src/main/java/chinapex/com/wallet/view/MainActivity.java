@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         initBottomNavigationBar();
         initFragment();
 
-//        testScreen();
+        testScreen();
     }
 
     private void initData() {
@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         mTv_main_title.setText(mBnItemTitles[position]);
 
         //如果当前fragment为资产页，隐藏ToolBar
-        if (position == 1) {
+        if (position != 0) {
             mTb_main.setVisibility(View.GONE);
         } else {
             mTb_main.setVisibility(View.VISIBLE);
@@ -177,6 +177,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         int ll_mainHeight = ll_main.getHeight();
         CpLog.i(TAG, "ll_mainWidth:" + ll_mainWidth);
         CpLog.i(TAG, "ll_mainHeight:" + ll_mainHeight);
+
+        int height1 = getWindowManager().getDefaultDisplay().getHeight();
+        CpLog.i(TAG, "height1:" + height1);
 
     }
 }

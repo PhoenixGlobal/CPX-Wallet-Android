@@ -1,6 +1,5 @@
 package chinapex.com.wallet.view.assets;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +9,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +40,10 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
 
     private static final String TAG = AssetsFragment.class.getSimpleName();
     private RecyclerView mRv_assets;
-    private ArrayList<WalletBean> mWalletBeans;
+    private List<WalletBean> mMWalletBeans;
     private SwipeRefreshLayout mSl_assets_rv;
     private AssetsRecyclerViewAdapter mAssetsRecyclerViewAdapter;
+    private TextView mTv_assets_balance;
 
     @Nullable
     @Override
@@ -50,47 +51,53 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
             savedInstanceState) {
 
         View fragment_assets = inflater.inflate(R.layout.fragment_assets, container, false);
-        initView(fragment_assets);
         return fragment_assets;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        mRv_assets.setLayoutManager(new LinearLayoutManager(ApexWalletApplication.getInstance(),
-                LinearLayoutManager.VERTICAL,
-                false));
-        mAssetsRecyclerViewAdapter = new AssetsRecyclerViewAdapter
-                (getData());
-        mAssetsRecyclerViewAdapter.setOnItemClickListener(this);
-
-        int space = 20;
-        mRv_assets.addItemDecoration(new SpacesItemDecoration(space));
-
-        mRv_assets.setAdapter(mAssetsRecyclerViewAdapter);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initView(view);
     }
 
     private void initView(View view) {
         mRv_assets = (RecyclerView) view.findViewById(R.id.rv_assets);
         mSl_assets_rv = (SwipeRefreshLayout) view.findViewById(R.id.sl_assets_rv);
+        mTv_assets_balance = view.findViewById(R.id.tv_assets_balance);
+
+        mRv_assets.setLayoutManager(new LinearLayoutManager(ApexWalletApplication.getInstance(),
+                LinearLayoutManager.VERTICAL,
+                false));
+        mMWalletBeans = getData();
+        mAssetsRecyclerViewAdapter = new AssetsRecyclerViewAdapter(mMWalletBeans);
+        mAssetsRecyclerViewAdapter.setOnItemClickListener(this);
+
+        int space = 20;
+        mRv_assets.addItemDecoration(new SpacesItemDecoration(space));
+
+        mRv_assets.setAdapter(mAssetsRecyclerViewAdapter);
 
         mSl_assets_rv.setColorSchemeColors(this.getActivity().getResources().getColor(R.color
                 .colorPrimary));
         mSl_assets_rv.setOnRefreshListener(this);
+
+        double balanceSum = 0.0;
+        for (WalletBean mWalletBean : mMWalletBeans) {
+            if (null == mWalletBean) {
+                CpLog.e(TAG, "mWalletBean is null!");
+                continue;
+            }
+            balanceSum = balanceSum + mWalletBean.getBalance();
+        }
+        mTv_assets_balance.setText(String.valueOf(balanceSum));
     }
 
     @Override
     public void onItemClick(int position) {
         CpLog.i(TAG, "onItemClick:" + position);
         startActivityParcelable(WalletDetailActivity.class, false, Constant.WALLET_BEAN,
-                mWalletBeans.get(position));
+                mMWalletBeans.get(position));
 
     }
 
@@ -108,22 +115,22 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
             return null;
         }
 
-        mWalletBeans = new ArrayList<>();
+        List<WalletBean> walletBeans = new ArrayList<>();
         for (WalletKeyStore walletKeyStore : walletKeyStores) {
             WalletBean walletBean = new WalletBean();
             walletBean.setWalletName(walletKeyStore.getWalletName());
             walletBean.setWalletAddr(walletKeyStore.getWalletAddr());
             walletBean.setBalance(0.0);
-            mWalletBeans.add(walletBean);
+            walletBeans.add(walletBean);
         }
 
-        return mWalletBeans;
+        return walletBeans;
     }
 
 
     @Override
     public void onRefresh() {
-        getBalance(mWalletBeans);
+        getBalance(mMWalletBeans);
     }
 
     private void getBalance(List<WalletBean> walletBeanList) {
