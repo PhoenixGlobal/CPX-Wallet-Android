@@ -14,7 +14,9 @@
         android:theme="@style/AppTheme">
 
         <!-- 新用户activity -->
-        <activity android:name=".view.NewVisitorActivity">
+        <activity
+            android:name=".view.NewVisitorActivity"
+            android:theme="@style/AppTheme.MyTranslucentNavigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

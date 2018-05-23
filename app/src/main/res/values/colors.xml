@@ -9,5 +9,5 @@
     <color name="transfer_wallet_font_color">#000000</color>
     <color name="transfer_view_color">#DDDDDD</color>
     <color name="color_privacy_gray">#F1F1F1</color>
-
+    <color name="myNavigationBarColor">#4C8EFA</color>
 </resources>

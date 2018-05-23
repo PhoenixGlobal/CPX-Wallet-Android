@@ -1,7 +1,10 @@
 package chinapex.com.wallet.view;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +35,9 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
     private boolean mIsSelectedPrivacy;
     private boolean mIsAgreePrivacy;
     private ImageButton mIb_create_wallet_privacy_point;
+    private TextInputLayout mTl_create_wallet_name;
+    private TextInputLayout mTl_create_wallet_pwd;
+    private TextInputLayout mTl_create_wallet_repeat_pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +53,59 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         mEt_create_wallet_repeat_pwd = (EditText) findViewById(R.id.et_create_wallet_repeat_pwd);
         mBt_create_wallet_confirm = (Button) findViewById(R.id.bt_create_wallet_confirm);
         mIb_create_wallet_privacy_point = findViewById(R.id.ib_create_wallet_privacy_point);
+        mTl_create_wallet_name = (TextInputLayout) findViewById(R.id.tl_create_wallet_name);
+        mTl_create_wallet_pwd = (TextInputLayout) findViewById(R.id.tl_create_wallet_pwd);
+        mTl_create_wallet_repeat_pwd = (TextInputLayout) findViewById(R.id
+                .tl_create_wallet_repeat_pwd);
 
         mBt_create_wallet_confirm.setOnClickListener(this);
         mIb_create_wallet_privacy_point.setOnClickListener(this);
+
+        mEt_create_wallet_name.addTextChangedListener(new MyTextWatcher(mEt_create_wallet_name) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() <= 0) {
+                    //设置错误提示信息
+                    showError(mTl_create_wallet_name, "用户名不能为空");
+                } else {
+                    //关闭错误提示
+                    mTl_create_wallet_name.setErrorEnabled(false);
+                }
+            }
+        });
+
+        mEt_create_wallet_pwd.addTextChangedListener(new MyTextWatcher(mEt_create_wallet_pwd) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() < 6) {
+                    //设置错误提示信息
+                    showError(mTl_create_wallet_pwd, "密码不能少于6位");
+                } else {
+                    //关闭错误提示
+                    mTl_create_wallet_pwd.setErrorEnabled(false);
+                }
+            }
+        });
+
+        mEt_create_wallet_repeat_pwd.addTextChangedListener(new MyTextWatcher
+                (mEt_create_wallet_repeat_pwd) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String pwd = mEt_create_wallet_pwd.getText().toString().trim();
+                String repeatPwd = mEt_create_wallet_repeat_pwd.getText().toString().trim();
+
+                if (s.length() < 6) {
+                    //设置错误提示信息
+                    showError(mTl_create_wallet_repeat_pwd, "密码不能少于6位");
+                } else if (TextUtils.isEmpty(repeatPwd) || !repeatPwd.equals(pwd)) {
+                    showError(mTl_create_wallet_repeat_pwd, "密码不一致");
+                } else {
+                    //关闭错误提示
+                    mTl_create_wallet_repeat_pwd.setErrorEnabled(false);
+                }
+
+            }
+        });
     }
 
     @Override
@@ -155,7 +211,19 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         } catch (Exception e) {
             CpLog.e(TAG, "toKeyStore exception:" + e.getMessage());
         }
+    }
 
+    private void showError(TextInputLayout textInputLayout, String error) {
+        textInputLayout.setError(error);
+        EditText editText = textInputLayout.getEditText();
+        if (null == editText) {
+            CpLog.e(TAG, "editText is null!");
+            return;
+        }
+
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
     }
 
 }

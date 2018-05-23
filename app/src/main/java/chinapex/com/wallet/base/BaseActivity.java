@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import java.lang.reflect.Field;
 
@@ -47,6 +49,7 @@ public class BaseActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View
                     .SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+
     }
 
     public void startActivity(Class cls, boolean isFinish) {
@@ -71,6 +74,5 @@ public class BaseActivity extends AppCompatActivity {
             this.finish();
         }
     }
-
 
 }

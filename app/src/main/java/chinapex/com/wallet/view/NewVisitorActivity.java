@@ -1,8 +1,12 @@
 package chinapex.com.wallet.view;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -19,6 +23,9 @@ public class NewVisitorActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //è®¾ç½®é€æ˜å¯¼èˆªé”®
+        setNavigationBarColorTransparent();
         setContentView(R.layout.activity_new_visitor);
 
         initView();
@@ -45,6 +52,16 @@ public class NewVisitorActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    private void setNavigationBarColorTransparent() {
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setNavigationBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+
+    }
+
     private void testScreen() {
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
@@ -69,16 +86,16 @@ public class NewVisitorActivity extends BaseActivity implements View.OnClickList
 
 
         /**
-         * »ñÈ¡×´Ì¬À¸¸ß¶È¡ª¡ª·½·¨1
+         * è·å–çŠ¶æ€æ é«˜åº¦â€”â€”æ–¹æ³•1
          * */
         int statusBarHeight1 = -1;
-        //»ñÈ¡status_bar_height×ÊÔ´µÄID
+        //è·å–status_bar_heightèµ„æºçš„ID
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            //¸ù¾İ×ÊÔ´ID»ñÈ¡ÏìÓ¦µÄ³ß´çÖµ
+            //æ ¹æ®èµ„æºIDè·å–å“åº”çš„å°ºå¯¸å€¼
             statusBarHeight1 = getResources().getDimensionPixelSize(resourceId);
         }
-        CpLog.d(TAG, "×´Ì¬À¸-·½·¨1:" + statusBarHeight1);
+        CpLog.d(TAG, "çŠ¶æ€æ -æ–¹æ³•1:" + statusBarHeight1);
 
     }
 }

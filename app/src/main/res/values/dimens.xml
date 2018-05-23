@@ -18,8 +18,8 @@
     <dimen name="create_wallet_tv_margin_start">5dp</dimen>
     <dimen name="create_wallet_bt_confirm_width">144dp</dimen>
     <dimen name="create_wallet_bt_confirm_height">38dp</dimen>
-    <dimen name="create_wallet_bt_margin_top">10dp</dimen>
-    <dimen name="create_wallet_tv_import_margin_top">10dp</dimen>
+    <dimen name="create_wallet_bt_margin_top">15dp</dimen>
+    <dimen name="create_wallet_tv_import_margin_top">25dp</dimen>
     <dimen name="create_wallet_et_import_size">12sp</dimen>
     <dimen name="tb_title_size">18sp</dimen>
     <dimen name="tb_title_padding">15dp</dimen>
@@ -54,7 +54,7 @@
     <dimen name="rl_wallet_detail_tx_margin_start">34dp</dimen>
     <dimen name="rl_wallet_detail_tx_margin_end">34dp</dimen>
     <dimen name="bt_wallet_detail_tx_font_size">18sp</dimen>
-    <dimen name="et_create_wallet_font_size">16sp</dimen>
+    <dimen name="et_create_wallet_font_size">14sp</dimen>
     <dimen name="et_assets_search_width">240dp</dimen>
     <dimen name="et_assets_search_height">30dp</dimen>
     <dimen name="et_assets_search_padding_end">84dp</dimen>
