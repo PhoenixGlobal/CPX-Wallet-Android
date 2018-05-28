@@ -36,4 +36,23 @@
     <string name="me_title">我</string>
     <string name="bt_me_manage_wallet">管理钱包</string>
     <string name="bt_me_transactions">交易记录</string>
+    <string name="tv_wallet_detail_drawer_title">钱包名称</string>
+    <string name="tv_wallet_detail_drawer_menu_text">扫一扫</string>
+    <string name="tb_title_gathering">收款</string>
+    <string name="tv_gathering_title">你的钱包/地址</string>
+    <string name="tv_gathering_wallet_name">Wallet 0x2334</string>
+    <string name="tv_gathering_wallet_addr">0x2334dwq212…342023</string>
+    <string name="bt_gathering_copy_addr">复制收款地址</string>
+    <string name="tb_title_backup">备份钱包</string>
+    <string name="tv_backup_content">备份钱包</string>
+    <string name="tv_backup_detail">导出【助记词】并抄写到安全的地方，千万不要保存到网络上，然后尝试转入、转出小额资产开始使用。</string>
+    <string name="bt_backup_content">备份钱包</string>
+    <string name="tv_copy_mnemonic_content">抄写下你的钱包助记词</string>
+    <string name="tv_copy_mnemonic">助记词用于恢复钱包或重复钱包密码，将它准确的抄写到纸上，并存放在的只有你知道的安全的地方。</string>
+    <string name="tv_copy_mnemonic_default">found like industry letter runny bag craft tomato pencil cat luckin latte</string>
+    <string name="bt_copy_mnemonic_content">下一步</string>
+    <string name="tv_copy_mnemonic_attention_content">请勿截图，如果有人获取你的助记词将直接获取你的资产！请抄写下助记词并存放在安全的地方。</string>
+    <string name="tv_confirm_mnemonic">确定你的钱包助记词</string>
+    <string name="tv_confirm_mnemonic_content">请按顺序点击助记词，以确认你的备份助记词正确。</string>
+    <string name="bt_confirm_mnemonic_confirm">确定</string>
 </resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.wallet.GatheringActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_gathering"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@drawable/shape_create_wallet_tb_bg"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/main_tv_title_margin_top"
+            android:text="@string/tb_title_gathering"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tb_title_size" />
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/iv_gathering_qr_code"
+        android:layout_width="198dp"
+        android:layout_height="198dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="34dp"
+        android:background="@color/color_privacy_gray"
+        android:scaleType="center" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="89dp"
+        android:background="@color/view_separator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/tv_gathering_title"
+        android:textColor="@color/tv_gathering_title"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_gathering_wallet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="@string/tv_gathering_wallet_name"
+        android:textColor="@color/tv_gathering_wallet_name"
+        android:textSize="@dimen/tv_gathering_wallet_name" />
+
+    <TextView
+        android:id="@+id/tv_gathering_wallet_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:ellipsize="middle"
+        android:maxEms="15"
+        android:singleLine="true"
+        android:text="@string/tv_gathering_wallet_addr"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/tv_gathering_wallet_addr" />
+
+    <Button
+        android:id="@+id/bt_gathering_copy_addr"
+        android:layout_width="293dp"
+        android:layout_height="39dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:text="@string/bt_gathering_copy_addr"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/bt_gathering_copy_addr_text_size" />
+
+</LinearLayout>

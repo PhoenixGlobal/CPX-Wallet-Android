@@ -7,7 +7,7 @@
     android:focusableInTouchMode="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="chinapex.com.wallet.view.CreateWalletActivity">
+    tools:context="chinapex.com.wallet.view.wallet.CreateWalletActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_create_wallet"
@@ -47,7 +47,6 @@
             android:id="@+id/et_create_wallet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/create_wallet_et_margin_top"
             android:ems="14"
             android:hint="@string/create_wallet_et_name"
             android:textSize="@dimen/et_create_wallet_font_size" />
@@ -62,7 +61,6 @@
             android:id="@+id/et_create_wallet_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/create_wallet_et_margin_top"
             android:ems="14"
             android:hint="@string/create_wallet_et_pwd"
             android:inputType="textPassword"
@@ -78,7 +76,6 @@
             android:id="@+id/et_create_wallet_repeat_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/create_wallet_et_margin_top"
             android:ems="14"
             android:hint="@string/create_wallet_et_repeat_pwd"
             android:inputType="textPassword"
@@ -94,13 +91,14 @@
 
         <ImageButton
             android:id="@+id/ib_create_wallet_privacy_point"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="45dp"
             android:background="@null"
             android:src="@drawable/selector_privacy_point" />
 
         <TextView
+            android:id="@+id/tv_create_wallet_privacy_have_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create_wallet_rb_read"

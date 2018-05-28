@@ -15,6 +15,7 @@ import android.view.WindowManager;
 
 import java.lang.reflect.Field;
 
+import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
 /**
@@ -60,6 +61,15 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void startActivity(Class cls, boolean isFinish, String tag) {
+        Intent intent = new Intent(this, cls);
+        intent.putExtra(Constant.WHERE_FROM_ACTIVITY, tag);
+        startActivity(intent);
+        if (isFinish) {
+            finish();
+        }
+    }
+
     public void startActivityParcelable(Class cls, boolean isFinish, String parcelableKey,
                                         Parcelable parcelable) {
         if (null == parcelable || TextUtils.isEmpty(parcelableKey)) {
@@ -72,6 +82,27 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
         if (isFinish) {
             this.finish();
+        }
+    }
+
+    public void startActivityBundle(Class cls, boolean isFinish, String backupKey, String
+            mnemonicStr) {
+        Intent intent = new Intent(this, cls);
+        intent.putExtra(backupKey, mnemonicStr);
+        startActivity(intent);
+        if (isFinish) {
+            finish();
+        }
+    }
+
+    public void startActivityBundle(Class cls, boolean isFinish, String backupKey, String
+            mnemonicStr, String tag) {
+        Intent intent = new Intent(this, cls);
+        intent.putExtra(backupKey, mnemonicStr);
+        intent.putExtra(Constant.WHERE_FROM_ACTIVITY, tag);
+        startActivity(intent);
+        if (isFinish) {
+            finish();
         }
     }
 

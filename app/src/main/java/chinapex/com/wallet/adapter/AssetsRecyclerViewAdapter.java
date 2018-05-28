@@ -13,15 +13,22 @@ import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.utils.CpLog;
 
-public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecyclerViewAdapter.AssetsAdapterHolder> implements
-        View.OnClickListener {
+public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecyclerViewAdapter
+        .AssetsAdapterHolder> implements
+        View.OnClickListener, View.OnLongClickListener {
 
     private static final String TAG = AssetsRecyclerViewAdapter.class.getSimpleName();
     private OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
     private List<WalletBean> mWalletBeans;
+
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(int position);
     }
 
     public AssetsRecyclerViewAdapter(List<WalletBean> walletBeans) {
@@ -30,6 +37,10 @@ public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecycl
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
     }
 
     @Override
@@ -41,6 +52,16 @@ public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecycl
         mOnItemClickListener.onItemClick((Integer) v.getTag());
     }
 
+    @Override
+    public boolean onLongClick(View v) {
+        if (null == mOnItemLongClickListener) {
+            CpLog.e(TAG, "mOnItemLongClickListener is null!");
+            return false;
+        }
+        mOnItemLongClickListener.onItemLongClick((Integer) v.getTag());
+        return true;
+    }
+
     @NonNull
     @Override
     public AssetsAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,6 +69,7 @@ public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecycl
                 parent, false);
         AssetsAdapterHolder holder = new AssetsAdapterHolder(view);
         view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
         return holder;
     }
 

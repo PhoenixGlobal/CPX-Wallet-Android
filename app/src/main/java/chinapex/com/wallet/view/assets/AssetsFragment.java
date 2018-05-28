@@ -29,14 +29,15 @@ import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
 import chinapex.com.wallet.utils.SharedPreferencesUtils;
-import chinapex.com.wallet.view.WalletDetailActivity;
+import chinapex.com.wallet.view.wallet.WalletDetailActivity;
 
 /**
  * Created by SteelCabbage on 2018/5/21 0021.
  */
 
 public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAdapter
-        .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+        .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, AssetsRecyclerViewAdapter
+        .OnItemLongClickListener {
 
     private static final String TAG = AssetsFragment.class.getSimpleName();
     private RecyclerView mRv_assets;
@@ -72,6 +73,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         mMWalletBeans = getData();
         mAssetsRecyclerViewAdapter = new AssetsRecyclerViewAdapter(mMWalletBeans);
         mAssetsRecyclerViewAdapter.setOnItemClickListener(this);
+        mAssetsRecyclerViewAdapter.setOnItemLongClickListener(this);
 
         int space = 20;
         mRv_assets.addItemDecoration(new SpacesItemDecoration(space));
@@ -103,6 +105,12 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         startActivityParcelable(WalletDetailActivity.class, false, Constant.WALLET_BEAN,
                 mMWalletBeans.get(position));
 
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+        CpLog.i(TAG, "长按了onItemLongClick:" + position);
+        // TODO: 2018/5/24 0024 长按左滑删除逻辑
     }
 
     private List<WalletBean> getData() {
@@ -194,4 +202,6 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
 
         }
     }
+
+
 }

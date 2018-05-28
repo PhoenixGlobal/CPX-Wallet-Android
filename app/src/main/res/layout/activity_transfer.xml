@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="chinapex.com.wallet.view.TransferActivity">
+    tools:context="chinapex.com.wallet.view.wallet.TransferActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_transfer"
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/transfer_view_color" />
+        android:background="@color/view_separator" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/transfer_view_color" />
+        android:background="@color/view_separator" />
 
     <EditText
         android:id="@+id/et_transfer_amount"
@@ -111,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/transfer_view_color" />
+        android:background="@color/view_separator" />
 
     <EditText
         android:id="@+id/et_transfer_tx_id"

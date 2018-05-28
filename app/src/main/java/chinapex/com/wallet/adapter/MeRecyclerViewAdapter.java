@@ -13,11 +13,12 @@ import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.utils.CpLog;
 
-public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAdapter.MeAdapterHolder> implements View
+public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAdapter
+        .MeAdapterHolder> implements View
         .OnClickListener {
 
     private static final String TAG = MeRecyclerViewAdapter.class.getSimpleName();
-    private MeRecyclerViewAdapter.OnItemClickListener mOnItemClickListener;
+    private OnItemClickListener mOnItemClickListener;
     private List<TransactionRecord> mTransactionRecords;
 
     public interface OnItemClickListener {
@@ -44,7 +45,8 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
     @NonNull
     @Override
     public MeAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_me_tx_item,
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
+                        .recyclerview_me_tx_item,
                 parent, false);
         MeAdapterHolder holder = new MeAdapterHolder(view);
         view.setOnClickListener(this);

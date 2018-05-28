@@ -19,9 +19,17 @@ public class Constant {
 
     //create wallet
     public static final String SP_WALLET_KEYSTORE = "spWalletKeystore";
+    public static final String WHERE_FROM_ACTIVITY = "whereFromActivity";
+    public static final String WHERE_FROM_NEW_VISITOR_ACTIVITY = "NewVisitorActivity";
+    public static final String WHERE_FROM_WALLET_DETAIL_ACTIVITY = "WalletDetailActivity";
 
-    //wallet Detail
-    public static final String PARCELABLE_WALLET_BEAN = "parcelableWalletBean";
+    //backup wallet
+    public static final String BACKUP_MNEMONIC = "backupMnemonic";
+
+    //wallet detail transfer
+    public static final String PARCELABLE_WALLET_BEAN_TRANSFER = "parcelableWalletBeanTransfer";
+    //wallet detail gathering
+    public static final String PARCELABLE_WALLET_BEAN_GATHERING = "parcelableWalletBeanGathering";
 
     //asset name
     public static final String ASSETS_NEO =
@@ -31,5 +39,8 @@ public class Constant {
 
     //txids
     public static final String SP_TX_ID = "spTxId";
+
+    //wallet title
+    public static final String WALLET_NAME = "Wallet ";
 
 }

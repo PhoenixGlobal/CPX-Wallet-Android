@@ -5,9 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -16,7 +14,6 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.base.BaseFragment;
-import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.FragmentFactory;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar
@@ -38,8 +35,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         initToolBar();
         initBottomNavigationBar();
         initFragment();
-
-        testScreen();
     }
 
     private void initData() {
@@ -155,31 +150,4 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
 //        return true;
 //    }
 
-
-    private void testScreen() {
-        DisplayMetrics metric = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels;
-        int height = metric.heightPixels;
-        float density = metric.density;
-        int densityDpi = metric.densityDpi;
-        float xdpi = metric.xdpi;
-        float ydpi = metric.ydpi;
-        CpLog.i(TAG, "width:" + width);
-        CpLog.i(TAG, "height:" + height);
-        CpLog.i(TAG, "density:" + density);
-        CpLog.i(TAG, "densityDpi:" + densityDpi);
-        CpLog.i(TAG, "xdpi:" + xdpi);
-        CpLog.i(TAG, "ydpi:" + ydpi);
-
-        LinearLayout ll_main = (LinearLayout) findViewById(R.id.ll_main);
-        int ll_mainWidth = ll_main.getWidth();
-        int ll_mainHeight = ll_main.getHeight();
-        CpLog.i(TAG, "ll_mainWidth:" + ll_mainWidth);
-        CpLog.i(TAG, "ll_mainHeight:" + ll_mainHeight);
-
-        int height1 = getWindowManager().getDefaultDisplay().getHeight();
-        CpLog.i(TAG, "height1:" + height1);
-
-    }
 }
