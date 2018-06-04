@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="chinapex.com.wallet.view.wallet.WalletDetailActivity">
+    tools:context="chinapex.com.wallet.view.assets.WalletDetailActivity">
 
     <!--主内容-->
     <LinearLayout
@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/create_wallet_tb_height"
-            android:background="@drawable/shape_create_wallet_tb_bg">
+            android:background="@drawable/tb_bg">
 
             <TextView
                 android:id="@+id/tv_wallet_detail_wallet_name"
@@ -56,6 +56,7 @@
                 android:layout_below="@+id/tv_wallet_detail_balance"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
+                android:lines="1"
                 android:text="@string/tv_wallet_detail_addr"
                 android:textColor="@color/text_color_white"
                 android:textIsSelectable="true" />

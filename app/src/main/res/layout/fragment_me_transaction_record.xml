@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/create_wallet_tb_height"
+        android:background="@drawable/tb_bg">
+
+        <TextView
+            android:id="@+id/tv_me_transaction_record_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:text="@string/tv_me_manager_detail_title"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tv_me_manager_detail_title_size" />
+
+        <ImageButton
+            android:id="@+id/ib_me_transaction_record_switch"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/icon_me_transaction_record_switch" />
+
+        <TextView
+            android:id="@+id/tv_me_transaction_record_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="54dp"
+            android:gravity="bottom"
+            android:text="@string/fragment_assets_balance"
+            android:textColor="@color/text_color_white"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/tv_me_transaction_record_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_me_transaction_record_balance"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="80dp"
+            android:text="@string/tv_assets_unit"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tv_assets_unit_size" />
+
+        <TextView
+            android:id="@+id/tv_me_transaction_record_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_me_transaction_record_unit"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:ellipsize="middle"
+            android:ems="10"
+            android:singleLine="true"
+            android:text="@string/tv_manager_detail_address"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="263dp"
+            android:layout_height="29dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="22dp"
+            android:background="@drawable/shape_bg_search"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/icon_search" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="9dp"
+                android:background="@null"
+                android:hint="@string/et_me_transaction_record_search"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/ib_me_transaction_record_switch"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/tv_me_transaction_record_cancel"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tv_me_transacticon_record_tx_addr"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lines="1"
+            android:text="@string/tv_me_transacticon_record_tx_amount"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tv_me_transacticon_record_tx_time"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

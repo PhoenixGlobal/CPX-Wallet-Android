@@ -31,8 +31,8 @@
 
 
     <dimen name="fragment_assets_title_margin_top">25dp</dimen>
-    <dimen name="rv_assets_margin_start">20dp</dimen>
-    <dimen name="rv_assets_margin_end">20dp</dimen>
+    <dimen name="rv_assets_margin_start">10dp</dimen>
+    <dimen name="rv_assets_margin_end">10dp</dimen>
     <dimen name="rv_assets_margin_top">-18dp</dimen>
     <dimen name="tv_assets_unit_size">16sp</dimen>
     <dimen name="tv_assets_cancel_margin_end">30dp</dimen>
@@ -60,11 +60,11 @@
     <dimen name="et_assets_search_padding_end">84dp</dimen>
     <dimen name="et_assets_search_padding_start">34dp</dimen>
     <dimen name="et_assets_search_font_size">16sp</dimen>
-    <dimen name="tv_transfer_from_margin_top">5dp</dimen>
-    <dimen name="tv_transfer_from_margin_start">5dp</dimen>
-    <dimen name="tv_transfer_from_font_size">20sp</dimen>
-    <dimen name="tv_transfer_from_wallet_name_font_size">20sp</dimen>
-    <dimen name="tv_transfer_from_wallet_addr_font_size">14sp</dimen>
+    <dimen name="tv_transfer_from_margin_top">22dp</dimen>
+    <dimen name="tv_transfer_from_margin_start">21dp</dimen>
+    <dimen name="tv_transfer_from_font_size">18sp</dimen>
+    <dimen name="tv_transfer_from_wallet_name_font_size">18sp</dimen>
+    <dimen name="tv_transfer_from_wallet_addr_font_size">12sp</dimen>
     <dimen name="iv_new_visitor_width">186dp</dimen>
     <dimen name="iv_new_visitor_height">43dp</dimen>
     <dimen name="tv_me_title_size">18sp</dimen>
@@ -75,4 +75,5 @@
     <dimen name="tv_gathering_wallet_name">20sp</dimen>
     <dimen name="tv_gathering_wallet_addr">14sp</dimen>
     <dimen name="bt_gathering_copy_addr_text_size">14sp</dimen>
+    <dimen name="tv_me_manager_detail_title_size">20sp</dimen>
 </resources>

@@ -17,6 +17,9 @@ import java.util.List;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.WalletKeyStore;
+import chinapex.com.wallet.executor.TaskController;
+import chinapex.com.wallet.executor.callback.ICreateWalletCallback;
+import chinapex.com.wallet.executor.runnable.CreateWallet;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
@@ -24,14 +27,14 @@ import chinapex.com.wallet.utils.SharedPreferencesUtils;
 import neomobile.Neomobile;
 import neomobile.Wallet;
 
-public class CreateWalletActivity extends BaseActivity implements View.OnClickListener {
+public class CreateWalletActivity extends BaseActivity implements View.OnClickListener,
+        ICreateWalletCallback {
 
     private static final String TAG = CreateWalletActivity.class.getSimpleName();
     private Button mBt_create_wallet_confirm;
     private EditText mEt_create_wallet_name;
     private EditText mEt_create_wallet_pwd;
     private EditText mEt_create_wallet_repeat_pwd;
-    private Wallet mWalletNew;
     private boolean mIsSelectedPrivacy;
     private boolean mIsAgreePrivacy;
     private ImageButton mIb_create_wallet_privacy_point;
@@ -140,18 +143,9 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
                     CpLog.w(TAG, "checkInput is false!");
                     return;
                 }
-                newNeoAddr(mEt_create_wallet_pwd.getText().toString().trim());
-
-                //助记词
-                String mnemonicEnUs = null;
-                try {
-                    mnemonicEnUs = mWalletNew.mnemonic("en_US");
-                    CpLog.i(TAG, "mnemonicEnUs:" + mnemonicEnUs);
-                } catch (Exception e) {
-                    CpLog.e(TAG, "mnemonicEnUs exception:" + e.getMessage());
-                }
-                startActivityBundle(BackupWalletActivity.class, false, Constant.BACKUP_MNEMONIC,
-                        mnemonicEnUs, mWhereFromActivity);
+                String walletName = mEt_create_wallet_name.getText().toString().trim();
+                String walletPwd = mEt_create_wallet_pwd.getText().toString().trim();
+                TaskController.getInstance().submit(new CreateWallet(walletName, walletPwd, this));
                 break;
             case R.id.tv_create_wallet_privacy_have_read:
             case R.id.ib_create_wallet_privacy_point:
@@ -206,42 +200,6 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         return true;
     }
 
-    private void newNeoAddr(String pwd) {
-        try {
-            mWalletNew = Neomobile.new_();
-        } catch (Exception e) {
-            CpLog.e(TAG, "new_() exception:" + e.getMessage());
-        }
-
-        try {
-            String keyStore = mWalletNew.toKeyStore(pwd);
-            CpLog.i(TAG, "keyStore:" + keyStore);
-
-            ArrayList<WalletKeyStore> walletKeyStores = new ArrayList<>();
-            WalletKeyStore walletKeyStore = new WalletKeyStore();
-            walletKeyStore.setWalletName(mEt_create_wallet_name.getText().toString().trim());
-            walletKeyStore.setWalletAddr(mWalletNew.address());
-            walletKeyStore.setWalletKeyStore(keyStore);
-            walletKeyStores.add(walletKeyStore);
-
-            String keyStoresJson = (String) SharedPreferencesUtils.getParam(this, Constant
-                    .SP_WALLET_KEYSTORE, "");
-            if (TextUtils.isEmpty(keyStoresJson)) {
-                CpLog.w(TAG, "keyStoresJson is null!");
-                SharedPreferencesUtils.putParam(this, Constant.SP_WALLET_KEYSTORE, GsonUtils
-                        .toJsonStr(walletKeyStores));
-                return;
-            }
-
-            List<WalletKeyStore> walletKeyStoresSaved = GsonUtils.json2List(keyStoresJson);
-            walletKeyStoresSaved.add(walletKeyStore);
-            SharedPreferencesUtils.putParam(this, Constant.SP_WALLET_KEYSTORE, GsonUtils
-                    .toJsonStr(walletKeyStoresSaved));
-        } catch (Exception e) {
-            CpLog.e(TAG, "toKeyStore exception:" + e.getMessage());
-        }
-    }
-
     private void showError(TextInputLayout textInputLayout, String error) {
         textInputLayout.setError(error);
         EditText editText = textInputLayout.getEditText();
@@ -253,5 +211,29 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         editText.setFocusable(true);
         editText.setFocusableInTouchMode(true);
         editText.requestFocus();
+    }
+
+    @Override
+    public void newWallet(Wallet wallet) {
+        if (null == wallet) {
+            CpLog.e(TAG, "wallet is null！");
+            return;
+        }
+
+        String mnemonicEnUs = null;
+        try {
+            mnemonicEnUs = wallet.mnemonic("en_US");
+            CpLog.i(TAG, "mnemonicEnUs:" + mnemonicEnUs);
+        } catch (Exception e) {
+            CpLog.e(TAG, "mnemonicEnUs exception:" + e.getMessage());
+        }
+
+        if (TextUtils.isEmpty(mnemonicEnUs)) {
+            CpLog.e(TAG,"mnemonicEnUs is null！");
+            return;
+        }
+
+        startActivityBundle(BackupWalletActivity.class, false, Constant.BACKUP_MNEMONIC,
+                mnemonicEnUs, mWhereFromActivity);
     }
 }

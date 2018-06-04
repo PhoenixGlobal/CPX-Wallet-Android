@@ -1,10 +1,16 @@
-package chinapex.com.wallet.view.wallet;
+package chinapex.com.wallet.view.assets;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitmapUtils;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
@@ -20,6 +26,7 @@ public class GatheringActivity extends BaseActivity implements View.OnClickListe
     private TextView mTv_gathering_wallet_name;
     private TextView mTv_gathering_wallet_addr;
     private Button mBt_gathering_copy_addr;
+    private ImageView mIv_gathering_qr_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,7 @@ public class GatheringActivity extends BaseActivity implements View.OnClickListe
         mTv_gathering_wallet_name = (TextView) findViewById(R.id.tv_gathering_wallet_name);
         mTv_gathering_wallet_addr = (TextView) findViewById(R.id.tv_gathering_wallet_addr);
         mBt_gathering_copy_addr = (Button) findViewById(R.id.bt_gathering_copy_addr);
+        mIv_gathering_qr_code = (ImageView) findViewById(R.id.iv_gathering_qr_code);
 
         mBt_gathering_copy_addr.setOnClickListener(this);
     }
@@ -54,6 +62,17 @@ public class GatheringActivity extends BaseActivity implements View.OnClickListe
         mTv_gathering_wallet_name.setText(String.valueOf(Constant.WALLET_NAME + mWalletBean
                 .getWalletName()));
         mTv_gathering_wallet_addr.setText(mWalletBean.getWalletAddr());
+
+        //生成二维码
+        String walletAddr = mWalletBean.getWalletAddr();
+        Bitmap bitmap;
+        try {
+            bitmap = BitmapUtils.create2DCode(walletAddr);
+            mIv_gathering_qr_code.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            CpLog.e(TAG, "qrCode exception:" + e.getMessage());
+        }
+
     }
 
     @Override
@@ -61,7 +80,8 @@ public class GatheringActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.bt_gathering_copy_addr:
                 CpLog.i(TAG, "bt_gathering_copy_addr is click！");
-                PhoneUtils.copy2Clipboard(this, "bt_gathering_copy_addr is click！");
+                PhoneUtils.copy2Clipboard(this, mWalletBean.getWalletAddr());
+                Toast.makeText(this, "收款地址已复制", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

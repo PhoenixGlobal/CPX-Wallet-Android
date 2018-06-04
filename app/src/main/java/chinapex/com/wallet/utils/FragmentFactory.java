@@ -4,6 +4,8 @@ import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.view.assets.AssetsFragment;
 import chinapex.com.wallet.view.discover.DiscoverFragment;
 import chinapex.com.wallet.view.me.MeFragment;
+import chinapex.com.wallet.view.me.MeManagerDetailFragment;
+import chinapex.com.wallet.view.me.MeTransactionRecordFragment;
 import chinapex.com.wallet.view.wallet.BackupFragment;
 import chinapex.com.wallet.view.wallet.ConfirmMnemonicFragment;
 import chinapex.com.wallet.view.wallet.CopyMnemonicFragment;
@@ -17,6 +19,9 @@ public class FragmentFactory {
     private static BackupFragment sBackupFragment; //7
     private static CopyMnemonicFragment sCopyMnemonicFragment; //8
     private static ConfirmMnemonicFragment sConfirmMnemonicFragment; //9
+
+    private static MeManagerDetailFragment sMeManagerDetailFragment; //10
+    private static MeTransactionRecordFragment sMeTransactionRecordFragment; //11
 
     public static BaseFragment getFragment(int position) {
         BaseFragment baseFragment = null;
@@ -70,6 +75,21 @@ public class FragmentFactory {
                     sConfirmMnemonicFragment = new ConfirmMnemonicFragment();
                 }
                 baseFragment = sConfirmMnemonicFragment;
+                break;
+            //meFragment subPage
+            case 10:
+                if (null == sMeManagerDetailFragment) {
+                    sMeManagerDetailFragment = new MeManagerDetailFragment();
+                }
+                baseFragment = sMeManagerDetailFragment;
+                break;
+            case 11:
+                if (null == sMeTransactionRecordFragment) {
+                    sMeTransactionRecordFragment = new MeTransactionRecordFragment();
+                }
+                baseFragment = sMeTransactionRecordFragment;
+                break;
+            default:
                 break;
         }
         return baseFragment;

@@ -1,4 +1,4 @@
-package chinapex.com.wallet.view.wallet;
+package chinapex.com.wallet.view.assets;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.zxing.activity.CaptureActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.WalletDetailMenu;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.view.wallet.CreateWalletActivity;
 
 public class WalletDetailActivity extends BaseActivity implements View.OnClickListener,
         DrawerLayout.DrawerListener, WalletDetailDrawerRecyclerViewAdapter.OnItemClickListener {
@@ -131,7 +134,7 @@ public class WalletDetailActivity extends BaseActivity implements View.OnClickLi
         switch (position) {
             case 0:
                 CpLog.i(TAG, "扫一扫");
-
+                startActivity(new Intent(WalletDetailActivity.this, CaptureActivity.class));
                 break;
             case 1:
                 CpLog.i(TAG, "创建钱包");

@@ -10,7 +10,8 @@
         android:id="@+id/tb_backup"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/shape_create_wallet_tb_bg">
+
+        android:background="@drawable/tb_bg">
 
         <TextView
             android:id="@+id/tv_backup_title"

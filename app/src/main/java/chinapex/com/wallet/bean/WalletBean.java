@@ -7,7 +7,10 @@ public class WalletBean implements Parcelable {
 
     private String mWalletName;
     private String mWalletAddr;
+    private int backupState;
+    private String keyStore;
     private Double mBalance;
+    private boolean isSelected;
 
     public WalletBean() {
     }
@@ -28,23 +31,37 @@ public class WalletBean implements Parcelable {
         mWalletAddr = walletAddr;
     }
 
+    public int getBackupState() {
+        return backupState;
+    }
+
+    public void setBackupState(int backupState) {
+        this.backupState = backupState;
+    }
+
+    public String getKeyStore() {
+        return keyStore;
+    }
+
+    public void setKeyStore(String keyStore) {
+        this.keyStore = keyStore;
+    }
+
     public Double getBalance() {
         return mBalance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         mBalance = balance;
     }
 
-    @Override
-    public String toString() {
-        return "WalletBean{" +
-                "mWalletName='" + mWalletName + '\'' +
-                ", mWalletAddr='" + mWalletAddr + '\'' +
-                ", mBalance='" + mBalance + '\'' +
-                '}';
+    public boolean isSelected() {
+        return isSelected;
     }
 
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     @Override
     public int describeContents() {
@@ -55,17 +72,20 @@ public class WalletBean implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.mWalletName);
         dest.writeString(this.mWalletAddr);
+        dest.writeInt(this.backupState);
+        dest.writeString(this.keyStore);
         dest.writeValue(this.mBalance);
     }
 
     protected WalletBean(Parcel in) {
         this.mWalletName = in.readString();
         this.mWalletAddr = in.readString();
+        this.backupState = in.readInt();
+        this.keyStore = in.readString();
         this.mBalance = (Double) in.readValue(Double.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<WalletBean> CREATOR = new Parcelable
-            .Creator<WalletBean>() {
+    public static final Creator<WalletBean> CREATOR = new Creator<WalletBean>() {
         @Override
         public WalletBean createFromParcel(Parcel source) {
             return new WalletBean(source);
@@ -76,4 +96,33 @@ public class WalletBean implements Parcelable {
             return new WalletBean[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "WalletBean{" +
+                "mWalletName='" + mWalletName + '\'' +
+                ", mWalletAddr='" + mWalletAddr + '\'' +
+                ", backupState=" + backupState +
+                ", keyStore='" + keyStore + '\'' +
+                ", mBalance=" + mBalance +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WalletBean that = (WalletBean) o;
+
+        if (!mWalletName.equals(that.mWalletName)) return false;
+        return mWalletAddr.equals(that.mWalletAddr);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mWalletName.hashCode();
+        result = 31 * result + mWalletAddr.hashCode();
+        return result;
+    }
 }

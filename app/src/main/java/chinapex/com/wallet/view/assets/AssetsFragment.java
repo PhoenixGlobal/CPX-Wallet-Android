@@ -24,12 +24,12 @@ import chinapex.com.wallet.bean.request.RequestGetAccountState;
 import chinapex.com.wallet.bean.response.ResponseGetAccountState;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
+import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
 import chinapex.com.wallet.utils.SharedPreferencesUtils;
-import chinapex.com.wallet.view.wallet.WalletDetailActivity;
 
 /**
  * Created by SteelCabbage on 2018/5/21 0021.
@@ -84,19 +84,6 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
                 .colorPrimary));
         mSl_assets_rv.setOnRefreshListener(this);
 
-        setBalanceSum();
-    }
-
-    private void setBalanceSum() {
-        double balanceSum = 0.0;
-        for (WalletBean mWalletBean : mMWalletBeans) {
-            if (null == mWalletBean) {
-                CpLog.e(TAG, "mWalletBean is null!");
-                continue;
-            }
-            balanceSum = balanceSum + mWalletBean.getBalance();
-        }
-        mTv_assets_balance.setText(String.valueOf(balanceSum));
     }
 
     @Override
@@ -114,28 +101,15 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     }
 
     private List<WalletBean> getData() {
-        String keyStores = (String) SharedPreferencesUtils.getParam(this.getActivity(), Constant
-                .SP_WALLET_KEYSTORE, "");
-        if (TextUtils.isEmpty(keyStores)) {
-            CpLog.e(TAG, "keyStores is null!");
-            return null;
-        }
-
-        List<WalletKeyStore> walletKeyStores = GsonUtils.json2List(keyStores);
-        if (null == walletKeyStores) {
-            CpLog.e(TAG, "jsonListObject is null!");
-            return null;
-        }
-
         List<WalletBean> walletBeans = new ArrayList<>();
-        for (WalletKeyStore walletKeyStore : walletKeyStores) {
-            WalletBean walletBean = new WalletBean();
-            walletBean.setWalletName(walletKeyStore.getWalletName());
-            walletBean.setWalletAddr(walletKeyStore.getWalletAddr());
-            walletBean.setBalance(0.0);
-            walletBeans.add(walletBean);
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
+                .getInstance());
+        if (null == apexWalletDbDao) {
+            CpLog.e(TAG, "apexWalletDbDao is null！");
+            return walletBeans;
         }
 
+        walletBeans.addAll(apexWalletDbDao.queryWalletBeans(Constant.TABLE_APEX_WALLET));
         return walletBeans;
     }
 
@@ -185,7 +159,6 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
                                 public void run() {
                                     mSl_assets_rv.setRefreshing(false);
                                     mAssetsRecyclerViewAdapter.notifyDataSetChanged();
-                                    setBalanceSum();
                                 }
                             });
 

@@ -24,6 +24,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * Created by SteelCabbage on 2018/3/23.
@@ -132,7 +133,49 @@ public class OkHttpClientManager {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
+                ResponseBody responseBody = response.body();
+                if (null == responseBody) {
+                    iNetCallback.onFailed(Constant.NET_BODY_NULL, "responseBody is null!");
+                    CpLog.e(TAG, "onResponse() -> responseBody is null");
+                    return;
+                }
+
+                String result = responseBody.string();
+                iNetCallback.onSuccess(Constant.NET_SUCCESS, "onResponse", result);
+            }
+        });
+    }
+
+    public void get(String url, final INetCallback iNetCallback) {
+        if (TextUtils.isEmpty(url)) {
+            CpLog.e(TAG, "get() -> url is null!");
+            return;
+        }
+
+        if (null == iNetCallback) {
+            CpLog.e(TAG, "get() -> iNetCallback is null!");
+            return;
+        }
+
+        Request request = new Request.Builder().url(url).build();
+
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                iNetCallback.onFailed(Constant.NET_ERROR, e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                ResponseBody responseBody = response.body();
+                if (null == responseBody) {
+                    iNetCallback.onFailed(Constant.NET_BODY_NULL, "responseBody is null!");
+                    CpLog.e(TAG, "onResponse() -> responseBody is null");
+                    return;
+                }
+
+                String result = responseBody.string();
                 iNetCallback.onSuccess(Constant.NET_SUCCESS, "onResponse", result);
             }
         });

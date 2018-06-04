@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="chinapex.com.wallet.view.wallet.TransferActivity">
+    tools:context="chinapex.com.wallet.view.assets.TransferActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_transfer"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/shape_create_wallet_tb_bg">
+        android:background="@drawable/tb_bg">
 
         <TextView
             android:id="@+id/tv_transfer_title"
@@ -29,18 +29,16 @@
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:layout_marginTop="@dimen/tv_transfer_from_margin_top"
         android:text="@string/tv_transfer_from_content"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/tv_transfer_from_font_size"
-        android:textStyle="bold" />
+        android:textColor="@color/tv_gathering_title"
+        android:textSize="@dimen/tv_transfer_from_font_size" />
 
     <TextView
         android:id="@+id/tv_transfer_from_wallet_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:layout_marginTop="@dimen/tv_transfer_from_margin_top"
         android:text="@string/tv_transfer_from_wallet_name"
-        android:textColor="@color/transfer_wallet_font_color"
+        android:textColor="@color/tv_gathering_wallet_name"
         android:textSize="@dimen/tv_transfer_from_wallet_name_font_size" />
 
     <TextView
@@ -48,45 +46,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:layout_marginTop="@dimen/tv_transfer_from_margin_top"
         android:text="@string/tv_transfer_from_wallet_addr"
-        android:textIsSelectable="true"
         android:textColor="@color/transfer_wallet_font_color"
+        android:textIsSelectable="true"
         android:textSize="@dimen/tv_transfer_from_wallet_addr_font_size" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="11dp"
         android:background="@color/view_separator" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:layout_marginTop="@dimen/tv_transfer_from_margin_top"
+        android:layout_marginTop="10dp"
         android:text="@string/tv_transfer_to_content"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/tv_transfer_from_font_size"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/et_transfer_to_wallet_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:layout_marginTop="@dimen/tv_transfer_from_margin_top"
-        android:background="@null"
-        android:hint="@string/tv_transfer_to_wallet_name"
-        android:textColor="@color/transfer_wallet_font_color"
-        android:textSize="@dimen/tv_transfer_from_wallet_name_font_size" />
+        android:textSize="@dimen/tv_transfer_from_font_size" />
 
     <EditText
         android:id="@+id/et_transfer_to_wallet_addr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:layout_marginTop="@dimen/tv_transfer_from_margin_top"
         android:background="@null"
         android:hint="@string/tv_transfer_to_wallet_addr"
         android:textColor="@color/transfer_wallet_font_color"
@@ -95,38 +79,46 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="11dp"
         android:background="@color/view_separator" />
 
-    <EditText
-        android:id="@+id/et_transfer_amount"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="@string/et_transfer_amount" />
+        android:orientation="horizontal"
+        android:gravity="bottom">
+
+        <EditText
+            android:id="@+id/et_transfer_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="5dp"
+            android:ems="15"
+            android:hint="@string/et_transfer_amount"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cpx"
+            android:textColor="@color/tv_gathering_wallet_name" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="11dp"
         android:background="@color/view_separator" />
 
-    <EditText
-        android:id="@+id/et_transfer_tx_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:layout_marginTop="5dp"
-        android:hint="请输入txid" />
 
     <EditText
         android:id="@+id/et_transfer_pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
+        android:layout_marginTop="5dp"
         android:hint="请输入密码" />
 
     <Button
@@ -134,7 +126,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/bt_transfer_send"
         android:textColor="@color/text_color_white" />

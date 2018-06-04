@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="chinapex.com.wallet.view.wallet.GatheringActivity">
+    tools:context="chinapex.com.wallet.view.assets.GatheringActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_gathering"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/shape_create_wallet_tb_bg"
+        android:background="@drawable/tb_bg"
         android:gravity="center_vertical">
 
         <TextView
@@ -30,7 +30,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="34dp"
         android:background="@color/color_privacy_gray"
-        android:scaleType="center" />
+        android:scaleType="fitCenter" />
 
     <View
         android:layout_width="match_parent"

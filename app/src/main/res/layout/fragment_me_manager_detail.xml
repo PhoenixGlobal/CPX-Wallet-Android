@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/create_wallet_tb_height"
+        android:background="@drawable/tb_bg">
+
+        <TextView
+            android:id="@+id/tv_me_manager_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:text="@string/tv_me_manager_detail_title"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tv_me_manager_detail_title_size" />
+
+        <TextView
+            android:id="@+id/tv_me_manager_detail_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/tv_me_manager_detail_title"
+            android:layout_marginEnd="10dp"
+            android:text="@string/tv_me_manager_detail_save"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_me_manager_detail_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="54dp"
+            android:gravity="bottom"
+            android:text="@string/fragment_assets_balance"
+            android:textColor="@color/text_color_white"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/tv_me_manager_detail_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_me_manager_detail_balance"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="80dp"
+            android:text="@string/tv_assets_unit"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tv_assets_unit_size" />
+
+        <TextView
+            android:id="@+id/tv_me_manager_detail_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_me_manager_detail_unit"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:ellipsize="middle"
+            android:ems="10"
+            android:singleLine="true"
+            android:text="@string/tv_manager_detail_address"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/tv_me_manager_detail_bottom_name"
+        android:textColor="@color/tv_gathering_title"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_me_manager_detail_bottom_wallet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:text="@string/tv_me_manager_detail_bottom_wallet_name"
+        android:textColor="@color/tv_gathering_wallet_name"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="302dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/view_separator" />
+
+    <Button
+        android:id="@+id/bt_me_manager_detail_backup"
+        android:layout_width="293dp"
+        android:layout_height="39dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="156dp"
+        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:text="@string/tv_me_manager_detail_backup"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/bt_me_manager_detail_delete"
+        android:layout_width="293dp"
+        android:layout_height="39dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/shape_gray_bt_bg"
+        android:text="@string/tv_me_manager_detail_delete"
+        android:textColor="@color/tv_copy_mnemonic_color"
+        android:textSize="16sp" />
+
+</LinearLayout>
