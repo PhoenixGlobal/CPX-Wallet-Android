@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseFragment;
+import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.FragmentFactory;
 
@@ -40,9 +41,7 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
         mBt_backup = view.findViewById(R.id.bt_backup);
 
         mBt_backup.setOnClickListener(this);
-
     }
-
 
 
     @Override
@@ -59,12 +58,12 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
     private void toCopyMnemonicFragment() {
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager()
                 .beginTransaction();
-        BaseFragment fragment = FragmentFactory.getFragment(8);
+        BaseFragment fragment = FragmentFactory.getFragment(Constant.FRAGMENT_TAG_COPY_MNEMONIC);
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(R.id.fl_backup, fragment, "" + 8);
+            fragmentTransaction.add(R.id.fl_backup, fragment, Constant.FRAGMENT_TAG_COPY_MNEMONIC);
             fragmentTransaction.addToBackStack(null);
         }
-        fragmentTransaction.show(fragment).hide(FragmentFactory.getFragment(7)).commit();
+        fragmentTransaction.show(fragment).hide(FragmentFactory.getFragment(Constant.FRAGMENT_TAG_BACKUP)).commit();
 
         BackupWalletActivity backupWalletActivity = (BackupWalletActivity) getActivity();
         if (null == backupWalletActivity) {

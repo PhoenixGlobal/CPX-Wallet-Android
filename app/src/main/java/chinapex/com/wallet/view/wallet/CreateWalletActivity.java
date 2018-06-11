@@ -1,6 +1,7 @@
 package chinapex.com.wallet.view.wallet;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
@@ -11,20 +12,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
-import chinapex.com.wallet.bean.WalletKeyStore;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICreateWalletCallback;
 import chinapex.com.wallet.executor.runnable.CreateWallet;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
-import chinapex.com.wallet.utils.GsonUtils;
-import chinapex.com.wallet.utils.SharedPreferencesUtils;
-import neomobile.Neomobile;
 import neomobile.Wallet;
 
 public class CreateWalletActivity extends BaseActivity implements View.OnClickListener,
@@ -42,8 +36,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
     private TextInputLayout mTl_create_wallet_pwd;
     private TextInputLayout mTl_create_wallet_repeat_pwd;
     private TextView mTv_create_wallet_privacy_have_read;
-    public static CreateWalletActivity sCreateWalletActivity;
-    private String mWhereFromActivity;
+    private Button mBt_create_wallet_import;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +44,6 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.activity_create_wallet);
 
         initView();
-        sCreateWalletActivity = this;
         initData();
     }
 
@@ -60,17 +52,17 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         mEt_create_wallet_pwd = (EditText) findViewById(R.id.et_create_wallet_pwd);
         mEt_create_wallet_repeat_pwd = (EditText) findViewById(R.id.et_create_wallet_repeat_pwd);
         mBt_create_wallet_confirm = (Button) findViewById(R.id.bt_create_wallet_confirm);
+        mBt_create_wallet_import = (Button) findViewById(R.id.bt_create_wallet_import);
         mIb_create_wallet_privacy_point = findViewById(R.id.ib_create_wallet_privacy_point);
-        mTv_create_wallet_privacy_have_read = (TextView) findViewById(R.id
-                .tv_create_wallet_privacy_have_read);
+        mTv_create_wallet_privacy_have_read = (TextView) findViewById(R.id.tv_create_wallet_privacy_have_read);
         mTl_create_wallet_name = (TextInputLayout) findViewById(R.id.tl_create_wallet_name);
         mTl_create_wallet_pwd = (TextInputLayout) findViewById(R.id.tl_create_wallet_pwd);
-        mTl_create_wallet_repeat_pwd = (TextInputLayout) findViewById(R.id
-                .tl_create_wallet_repeat_pwd);
+        mTl_create_wallet_repeat_pwd = (TextInputLayout) findViewById(R.id.tl_create_wallet_repeat_pwd);
 
         mBt_create_wallet_confirm.setOnClickListener(this);
         mIb_create_wallet_privacy_point.setOnClickListener(this);
         mTv_create_wallet_privacy_have_read.setOnClickListener(this);
+        mBt_create_wallet_import.setOnClickListener(this);
 
         mEt_create_wallet_name.addTextChangedListener(new MyTextWatcher(mEt_create_wallet_name) {
             @Override
@@ -125,8 +117,6 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
             CpLog.e(TAG, "intent is null!");
             return;
         }
-
-        mWhereFromActivity = intent.getStringExtra(Constant.WHERE_FROM_ACTIVITY);
     }
 
     @Override
@@ -147,24 +137,22 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
                 String walletPwd = mEt_create_wallet_pwd.getText().toString().trim();
                 TaskController.getInstance().submit(new CreateWallet(walletName, walletPwd, this));
                 break;
+            case R.id.bt_create_wallet_import:
+                startActivity(ImportWalletActivity.class, true);
+                break;
             case R.id.tv_create_wallet_privacy_have_read:
             case R.id.ib_create_wallet_privacy_point:
                 if (mIsSelectedPrivacy) {
                     mIsSelectedPrivacy = false;
-                    mIb_create_wallet_privacy_point.setImageResource(R.drawable
-                            .shape_privacy_point);
-                    mBt_create_wallet_confirm.setBackgroundResource(R.drawable
-                            .shape_new_visitor_bt_bg);
-                    mBt_create_wallet_confirm.setTextColor(getResources().getColor(R.color
-                            .text_color_white));
+                    mIb_create_wallet_privacy_point.setImageResource(R.drawable.shape_privacy_point);
+                    mBt_create_wallet_confirm.setBackgroundResource(R.drawable.shape_new_visitor_bt_bg);
+                    mBt_create_wallet_confirm.setTextColor(Color.WHITE);
                     mIsAgreePrivacy = true;
                 } else {
                     mIsSelectedPrivacy = true;
-                    mIb_create_wallet_privacy_point.setImageResource(R.drawable
-                            .shape_privacy_point_def);
+                    mIb_create_wallet_privacy_point.setImageResource(R.drawable.shape_privacy_point_def);
                     mBt_create_wallet_confirm.setBackgroundResource(R.drawable.shape_gray_bt_bg);
-                    mBt_create_wallet_confirm.setTextColor(getResources().getColor(R.color
-                            .colorAccent));
+                    mBt_create_wallet_confirm.setTextColor(getResources().getColor(R.color.colorAccent));
                     mIsAgreePrivacy = false;
                 }
                 break;
@@ -229,11 +217,10 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         }
 
         if (TextUtils.isEmpty(mnemonicEnUs)) {
-            CpLog.e(TAG,"mnemonicEnUs is null！");
+            CpLog.e(TAG, "mnemonicEnUs is null！");
             return;
         }
 
-        startActivityBundle(BackupWalletActivity.class, false, Constant.BACKUP_MNEMONIC,
-                mnemonicEnUs, mWhereFromActivity);
+        startActivityBundle(BackupWalletActivity.class, true, Constant.BACKUP_MNEMONIC, mnemonicEnUs);
     }
 }

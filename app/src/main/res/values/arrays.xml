@@ -7,16 +7,30 @@
         <item>我</item>
     </string-array>
 
-    <!--钱包详情页，侧滑菜单图片-->
-    <integer-array name="wallet_detail_drawer_icons">
+    <!--余额详情页，侧滑菜单图片-->
+    <integer-array name="balance_detail_drawer_icons">
         <item>@drawable/icon_scan</item>
         <item>@drawable/icon_wallet</item>
     </integer-array>
 
-    <!--钱包详情页，侧滑菜单文字-->
-    <string-array name="wallet_detail_drawer_texts">
+    <!--余额详情页，侧滑菜单文字-->
+    <string-array name="balance_detail_drawer_texts">
         <item>扫一扫</item>
         <item>创建钱包</item>
+    </string-array>
+
+    <!--资产页，侧滑菜单图片-->
+    <integer-array name="assets_drawer_icons">
+        <item>@drawable/icon_assets_add</item>
+        <item>@drawable/icon_assets_wallet</item>
+        <item>@drawable/icon_import_wallet</item>
+    </integer-array>
+
+    <!--资产页，侧滑菜单文字-->
+    <string-array name="assets_drawer_texts">
+        <item>添加资产</item>
+        <item>创建钱包</item>
+        <item>导入钱包</item>
     </string-array>
 
     <!--备份钱包-->

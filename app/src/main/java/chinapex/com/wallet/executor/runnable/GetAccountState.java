@@ -3,8 +3,12 @@ package chinapex.com.wallet.executor.runnable;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.request.RequestGetAccountState;
+import chinapex.com.wallet.bean.response.ResponseGetAccountState;
+import chinapex.com.wallet.executor.callback.IGetAccountStateCallback;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
@@ -15,21 +19,21 @@ import chinapex.com.wallet.utils.GsonUtils;
  * Created by SteelCabbage on 2018/5/17 0017.
  */
 
-public class GetAccountState implements Runnable {
+public class GetAccountState implements Runnable, INetCallback {
 
     private static final String TAG = GetAccountState.class.getSimpleName();
     private String mAddress;
-    private INetCallback mINetCallback;
+    private IGetAccountStateCallback mIGetAccountStateCallback;
 
-    public GetAccountState(String account, INetCallback iNetCallback) {
+    public GetAccountState(String account, IGetAccountStateCallback iGetAccountStateCallback) {
         mAddress = account;
-        mINetCallback = iNetCallback;
+        mIGetAccountStateCallback = iGetAccountStateCallback;
     }
 
     @Override
     public void run() {
-        if (TextUtils.isEmpty(mAddress) || null == mINetCallback) {
-            CpLog.e(TAG, "run() -> mAccount or mIResultCallback is null！");
+        if (TextUtils.isEmpty(mAddress) || null == mIGetAccountStateCallback) {
+            CpLog.e(TAG, "run() -> mAccount or mIGetAccountStateCallback is null！");
             return;
         }
 
@@ -42,7 +46,53 @@ public class GetAccountState implements Runnable {
         requestGetAccountState.setParams(arrayList);
 
         OkHttpClientManager.getInstance().postJson(Constant.URL_CLI, GsonUtils.toJsonStr
-                (requestGetAccountState), mINetCallback);
+                (requestGetAccountState), this);
     }
 
+    @Override
+    public void onSuccess(int statusCode, String msg, String result) {
+        ResponseGetAccountState responseGetAccountState = GsonUtils.json2Bean(result,
+                ResponseGetAccountState.class);
+        if (null == responseGetAccountState) {
+            CpLog.e(TAG, "responseGetAccountState is null!");
+            mIGetAccountStateCallback.assetsBalance(null);
+            return;
+        }
+
+        ResponseGetAccountState.ResultBean resultBean = responseGetAccountState.getResult();
+        if (null == resultBean) {
+            CpLog.e(TAG, "resultBean is null!");
+            mIGetAccountStateCallback.assetsBalance(null);
+            return;
+        }
+
+        List<ResponseGetAccountState.ResultBean.BalancesBean> balances = resultBean.getBalances();
+        if (null == balances || balances.isEmpty()) {
+            CpLog.e(TAG, "balances is null or empty!");
+            mIGetAccountStateCallback.assetsBalance(null);
+            return;
+        }
+
+        List<BalanceBean> balanceBeans = new ArrayList<>();
+        for (ResponseGetAccountState.ResultBean.BalancesBean balance : balances) {
+            if (null == balance) {
+                CpLog.e(TAG, "balance is null!");
+                continue;
+            }
+
+            BalanceBean balanceBean = new BalanceBean();
+            balanceBean.setMapState(0);
+            balanceBean.setAssetsID(balance.getAsset());
+            balanceBean.setAssetsValue(balance.getValue());
+            balanceBeans.add(balanceBean);
+        }
+
+        mIGetAccountStateCallback.assetsBalance(balanceBeans);
+    }
+
+    @Override
+    public void onFailed(int failedCode, String msg) {
+        CpLog.e(TAG, "onFailed() -> msg:" + msg);
+        mIGetAccountStateCallback.assetsBalance(null);
+    }
 }

@@ -77,12 +77,13 @@ public class CopyMnemonicFragment extends BaseFragment implements View.OnClickLi
     private void toConfirmMnemonicFragment() {
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager()
                 .beginTransaction();
-        BaseFragment fragment = FragmentFactory.getFragment(9);
+        BaseFragment fragment = FragmentFactory.getFragment(Constant.FRAGMENT_TAG_CONFIRM_MNEMONIC);
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(R.id.fl_backup, fragment, "" + 9);
+            fragmentTransaction.add(R.id.fl_backup, fragment, Constant.FRAGMENT_TAG_CONFIRM_MNEMONIC);
             fragmentTransaction.addToBackStack(null);
         }
-        fragmentTransaction.show(fragment).hide(FragmentFactory.getFragment(8)).commit();
+        fragmentTransaction.show(fragment).hide(FragmentFactory.getFragment(Constant.FRAGMENT_TAG_COPY_MNEMONIC))
+                .commit();
 
         BackupWalletActivity backupWalletActivity = (BackupWalletActivity) getActivity();
         if (null == backupWalletActivity) {

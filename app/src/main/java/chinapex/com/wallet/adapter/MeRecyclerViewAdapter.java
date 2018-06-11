@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import chinapex.com.wallet.R;
-import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
@@ -66,20 +65,27 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
         holder.walletName.setText(String.valueOf(Constant.WALLET_NAME + walletBean.getWalletName
                 ()));
         holder.walletAddr.setText(walletBean.getWalletAddr());
-        holder.balance.setText(String.valueOf(walletBean.getBalance()));
 
-        int backupState = walletBean.getBackupState();
-        switch (backupState) {
-            //未备份
-            case 0:
-                holder.isBackup.setVisibility(View.VISIBLE);
-                break;
-            //已备份
-            case 1:
-                holder.isBackup.setVisibility(View.INVISIBLE);
-                break;
-            default:
-                break;
+        int selectedTag = walletBean.getSelectedTag();
+
+        if (selectedTag == Constant.SELECTED_TAG_TRANSACTION_RECORED) {
+            holder.isBackup.setVisibility(View.INVISIBLE);
+            holder.itemView.setTag(position);
+            return;
+        }
+
+        if (selectedTag == Constant.SELECTED_TAG_MANAGER_WALLET) {
+            int backupState = walletBean.getBackupState();
+            switch (backupState) {
+                case Constant.BACKUP_UNFINISHED:
+                    holder.isBackup.setVisibility(View.VISIBLE);
+                    break;
+                case Constant.BACKUP_FINISH:
+                    holder.isBackup.setVisibility(View.INVISIBLE);
+                    break;
+                default:
+                    break;
+            }
         }
 
         holder.itemView.setTag(position);
@@ -93,7 +99,6 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
     class MeAdapterHolder extends RecyclerView.ViewHolder {
         TextView walletName;
         TextView walletAddr;
-        TextView balance;
         TextView isBackup;
 
 
@@ -101,7 +106,6 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
             super(itemView);
             walletName = itemView.findViewById(R.id.tv_me_rv_item_wallet_name);
             walletAddr = itemView.findViewById(R.id.tv_me_rv_item_wallet_addr);
-            balance = itemView.findViewById(R.id.tv_me_rv_item_balance);
             isBackup = itemView.findViewById(R.id.tv_me_rv_item_backup);
         }
     }

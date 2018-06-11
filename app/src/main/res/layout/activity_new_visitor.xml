@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/new_visitor_bt_margin_top"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/new_visitor_create_wallet"
-        android:textColor="@color/text_color_white"/>
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/bt_new_visitor_import_wallet"
@@ -33,7 +33,7 @@
         android:layout_marginTop="@dimen/new_visitor_bt_between_space"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/new_visitor_import_wallet"
-        android:textColor="@color/text_color_white"/>
+        android:textColor="@android:color/white"/>
 
 
 </LinearLayout>

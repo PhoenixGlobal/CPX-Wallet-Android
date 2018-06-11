@@ -1,19 +1,19 @@
 package chinapex.com.wallet.view.me;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,28 +23,29 @@ import chinapex.com.wallet.adapter.MeRecyclerViewAdapter;
 import chinapex.com.wallet.adapter.SpacesItemDecoration;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.WalletKeyStore;
+import chinapex.com.wallet.changelistener.ApexListeners;
+import chinapex.com.wallet.changelistener.OnItemAddListener;
+import chinapex.com.wallet.changelistener.OnItemDeleteListener;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.FragmentFactory;
-import chinapex.com.wallet.utils.GsonUtils;
-import chinapex.com.wallet.utils.SharedPreferencesUtils;
+import chinapex.com.wallet.view.MeSkipActivity;
 
 /**
  * Created by SteelCabbage on 2018/5/21 0021.
  */
 
 public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
-        .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+        .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
+        OnItemDeleteListener, OnItemAddListener {
 
     private static final String TAG = MeFragment.class.getSimpleName();
     private RecyclerView mRv_me;
     private MeRecyclerViewAdapter mMeRecyclerViewAdapter;
     private List<WalletBean> mWalletBeans;
     private SwipeRefreshLayout mSl_me;
-    private TextView mTv_me_wallet_balance;
     private Button mBt_me_manage_wallet;
     private Button mBt_me_transaction_record;
     private boolean mIsTransactionRecordState;
@@ -63,13 +64,12 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
-
+        initData();
     }
 
     private void initView(View view) {
         mRv_me = view.findViewById(R.id.rv_me);
         mSl_me = view.findViewById(R.id.sl_me);
-        mTv_me_wallet_balance = view.findViewById(R.id.tv_me_wallet_balance);
         mBt_me_manage_wallet = view.findViewById(R.id.bt_me_manage_wallet);
         mBt_me_transaction_record = view.findViewById(R.id.bt_me_transaction_record);
 
@@ -92,6 +92,11 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
         mBt_me_transaction_record.setOnClickListener(this);
     }
 
+    private void initData() {
+        ApexListeners.getInstance().addOnItemDeleteListener(this);
+        ApexListeners.getInstance().addOnItemAddListener(this);
+    }
+
     @Override
     public void onItemClick(int position) {
         mCurrentClickedWalletBean = mWalletBeans.get(position);
@@ -110,26 +115,18 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
 
     @Override
     public void onRefresh() {
-        // TODO: 2018/5/30 0030
-        new Thread(new Runnable() {
+        // 预留后续刷新功能
+        getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(2000);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSl_me.setRefreshing(false);
-                    }
-                });
-
+                mSl_me.setRefreshing(false);
             }
-        }).start();
+        });
     }
 
     private List<WalletBean> initWalletBeans() {
         List<WalletBean> walletBeans = new ArrayList<>();
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return walletBeans;
@@ -142,58 +139,98 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            //点击管理钱包
+            // 管理钱包
             case R.id.bt_me_manage_wallet:
-                mBt_me_manage_wallet.setBackgroundResource(R.drawable.shape_white_bt_bg);
-                mBt_me_manage_wallet.setTextColor(ApexWalletApplication.getInstance().getResources()
-                        .getColor(R.color.colorPrimary));
-
-                mBt_me_transaction_record.setBackgroundResource(0);
-                mBt_me_transaction_record.setTextColor(Color.WHITE);
-
-                mIsTransactionRecordState = false;
-//                toMeManagerDetailFragment();
+                manageWalletIsSelected();
                 break;
-            //点击交易记录
+            // 交易记录
             case R.id.bt_me_transaction_record:
-                mBt_me_transaction_record.setBackgroundResource(R.drawable.shape_white_bt_bg);
-                mBt_me_transaction_record.setTextColor(ApexWalletApplication.getInstance()
-                        .getResources().getColor(R.color.colorPrimary));
-
-                mBt_me_manage_wallet.setBackgroundResource(0);
-                mBt_me_manage_wallet.setTextColor(Color.WHITE);
-
-                mIsTransactionRecordState = true;
-//                toMeTransactionRecordFragment();
+                transactionRecordIsSelected();
                 break;
         }
+    }
+
+    private void manageWalletIsSelected() {
+        mBt_me_manage_wallet.setBackgroundResource(R.drawable.shape_white_bt_bg);
+        mBt_me_manage_wallet.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color
+                .colorPrimary));
+
+//                mBt_me_transaction_record.setBackgroundResource(0);
+        // 为适配小米4，否则button会有边框背景
+        mBt_me_transaction_record.setBackground(new ColorDrawable(0));
+        mBt_me_transaction_record.setTextColor(Color.WHITE);
+
+        mIsTransactionRecordState = false;
+
+        for (WalletBean walletBean : mWalletBeans) {
+            walletBean.setSelectedTag(Constant.SELECTED_TAG_MANAGER_WALLET);
+        }
+
+        mMeRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    private void transactionRecordIsSelected() {
+        mBt_me_transaction_record.setBackgroundResource(R.drawable.shape_white_bt_bg);
+        mBt_me_transaction_record.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color
+                .colorPrimary));
+
+//                mBt_me_manage_wallet.setBackgroundResource(0);
+        // 为适配小米4，否则button会有边框背景
+        mBt_me_manage_wallet.setBackground(new ColorDrawable(0));
+        mBt_me_manage_wallet.setTextColor(Color.WHITE);
+
+        mIsTransactionRecordState = true;
+
+        for (WalletBean walletBean : mWalletBeans) {
+            walletBean.setSelectedTag(Constant.SELECTED_TAG_TRANSACTION_RECORED);
+        }
+
+        mMeRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     private void toMeManagerDetailFragment() {
-        FragmentTransaction fragmentTransaction = getActivity().getFragmentManager()
-                .beginTransaction();
-        BaseFragment fragment = FragmentFactory.getFragment(10);
-        if (!fragment.isAdded()) {
-            fragmentTransaction.add(R.id.fl_main, fragment, "" + 10);
-            fragmentTransaction.addToBackStack(null);
-        }
-        fragmentTransaction.show(fragment).hide(FragmentFactory.getFragment(2)).commit();
-
+        startActivityBundle(MeSkipActivity.class, false, Constant.ME_MANAGER_DETAIL_BUNDLE, Constant
+                .ME_SKIP_ACTIVITY_FRAGMENT_TAG, Constant.FRAGMENT_TAG_ME_MANAGE_DETAIL, Constant
+                .PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWalletBean);
     }
 
     private void toMeTransactionRecordFragment() {
-        FragmentTransaction fragmentTransaction = getActivity().getFragmentManager()
-                .beginTransaction();
-        BaseFragment fragment = FragmentFactory.getFragment(11);
-        if (!fragment.isAdded()) {
-            fragmentTransaction.add(R.id.fl_main, fragment, "" + 11);
-            fragmentTransaction.addToBackStack(null);
-        }
-        fragmentTransaction.show(fragment).hide(FragmentFactory.getFragment(2)).commit();
-
+        startActivityBundle(MeSkipActivity.class, false, Constant.ME_MANAGER_DETAIL_BUNDLE, Constant
+                .ME_SKIP_ACTIVITY_FRAGMENT_TAG, Constant.FRAGMENT_TAG_ME_TRANSACTION_RECORD, Constant
+                .PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWalletBean);
     }
 
-    public WalletBean getCurrentClickedWalletBean() {
-        return mCurrentClickedWalletBean;
+    // 删除钱包时回调
+    @Override
+    public void onItemDelete(WalletBean walletBean) {
+        if (null == walletBean) {
+            CpLog.e(TAG, "onItemDelete() -> walletBean is null!");
+            return;
+        }
+
+        mWalletBeans.remove(walletBean);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mMeRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    // 新增钱包时回调
+    @Override
+    public void onItemAdd(WalletBean walletBean) {
+        if (null == walletBean) {
+            CpLog.e(TAG, "onItemAdd() -> walletBean is null!");
+            return;
+        }
+
+        mWalletBeans.add(walletBean);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mMeRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }

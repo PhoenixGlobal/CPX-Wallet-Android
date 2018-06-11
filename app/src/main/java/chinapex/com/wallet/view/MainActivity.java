@@ -16,6 +16,7 @@ import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.runnable.GetUtxos;
+import chinapex.com.wallet.global.ApexCache;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
@@ -34,6 +35,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 后续备份助记词完成后不再跳转MainActivity
+        ApexCache.getInstance().setStartMainActivity(false);
 
         initData();
         initView();
@@ -119,14 +123,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
     public void onTabUnselected(int position) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.hide(FragmentFactory.getFragment(position));
-
-        //解决在管理钱包或交易记录时，跳转发现等，出现fragment重影
-        for (int i = 10; i < 12; i++) {
-            BaseFragment fragment = FragmentFactory.getFragment(i);
-            if (fragment.isVisible()) {
-                fragmentTransaction.hide(fragment);
-            }
-        }
         fragmentTransaction.commit();
     }
 

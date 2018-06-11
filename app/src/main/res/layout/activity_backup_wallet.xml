@@ -10,7 +10,6 @@
         android:id="@+id/tb_backup"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-
         android:background="@drawable/tb_bg">
 
         <TextView
@@ -20,7 +19,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/main_tv_title_margin_top"
             android:text="@string/tb_title_backup"
-            android:textColor="@color/text_color_white"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/tb_title_size" />
     </android.support.v7.widget.Toolbar>
 

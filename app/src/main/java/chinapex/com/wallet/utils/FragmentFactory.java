@@ -1,14 +1,17 @@
 package chinapex.com.wallet.utils;
 
 import chinapex.com.wallet.base.BaseFragment;
+import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.view.assets.AssetsFragment;
 import chinapex.com.wallet.view.discover.DiscoverFragment;
 import chinapex.com.wallet.view.me.MeFragment;
-import chinapex.com.wallet.view.me.MeManagerDetailFragment;
+import chinapex.com.wallet.view.me.MeManageDetailFragment;
 import chinapex.com.wallet.view.me.MeTransactionRecordFragment;
 import chinapex.com.wallet.view.wallet.BackupFragment;
 import chinapex.com.wallet.view.wallet.ConfirmMnemonicFragment;
 import chinapex.com.wallet.view.wallet.CopyMnemonicFragment;
+import chinapex.com.wallet.view.wallet.ImportKeystoreFragment;
+import chinapex.com.wallet.view.wallet.ImportMnemonicFragment;
 
 public class FragmentFactory {
 
@@ -16,12 +19,15 @@ public class FragmentFactory {
     private static AssetsFragment sAssetsFragment; //1
     private static MeFragment sMeFragment; //2
 
-    private static BackupFragment sBackupFragment; //7
-    private static CopyMnemonicFragment sCopyMnemonicFragment; //8
-    private static ConfirmMnemonicFragment sConfirmMnemonicFragment; //9
+    private static BackupFragment sBackupFragment;
+    private static CopyMnemonicFragment sCopyMnemonicFragment;
+    private static ConfirmMnemonicFragment sConfirmMnemonicFragment;
 
-    private static MeManagerDetailFragment sMeManagerDetailFragment; //10
-    private static MeTransactionRecordFragment sMeTransactionRecordFragment; //11
+    private static MeManageDetailFragment sMeManageDetailFragment;
+    private static MeTransactionRecordFragment sMeTransactionRecordFragment;
+
+    private static ImportMnemonicFragment sImportMnemonicFragment;
+    private static ImportKeystoreFragment sImportKeystoreFragment;
 
     public static BaseFragment getFragment(int position) {
         BaseFragment baseFragment = null;
@@ -44,50 +50,56 @@ public class FragmentFactory {
                 }
                 baseFragment = sMeFragment;
                 break;
-            case 3:
-                //home page reserved
+            default:
                 break;
-            case 4:
-                //home page reserved
-                break;
-            case 5:
-                //home page reserved
-                break;
-            case 6:
-                //home page reserved
-                break;
+        }
+        return baseFragment;
+    }
 
-            //backup page
-            case 7:
+    public static BaseFragment getFragment(String fragmentTag) {
+        BaseFragment baseFragment = null;
+        switch (fragmentTag) {
+            case Constant.FRAGMENT_TAG_BACKUP:
                 if (null == sBackupFragment) {
                     sBackupFragment = new BackupFragment();
                 }
                 baseFragment = sBackupFragment;
                 break;
-            case 8:
+            case Constant.FRAGMENT_TAG_COPY_MNEMONIC:
                 if (null == sCopyMnemonicFragment) {
                     sCopyMnemonicFragment = new CopyMnemonicFragment();
                 }
                 baseFragment = sCopyMnemonicFragment;
                 break;
-            case 9:
+            case Constant.FRAGMENT_TAG_CONFIRM_MNEMONIC:
                 if (null == sConfirmMnemonicFragment) {
                     sConfirmMnemonicFragment = new ConfirmMnemonicFragment();
                 }
                 baseFragment = sConfirmMnemonicFragment;
                 break;
-            //meFragment subPage
-            case 10:
-                if (null == sMeManagerDetailFragment) {
-                    sMeManagerDetailFragment = new MeManagerDetailFragment();
+            case Constant.FRAGMENT_TAG_ME_MANAGE_DETAIL:
+                if (null == sMeManageDetailFragment) {
+                    sMeManageDetailFragment = new MeManageDetailFragment();
                 }
-                baseFragment = sMeManagerDetailFragment;
+                baseFragment = sMeManageDetailFragment;
                 break;
-            case 11:
+            case Constant.FRAGMENT_TAG_ME_TRANSACTION_RECORD:
                 if (null == sMeTransactionRecordFragment) {
                     sMeTransactionRecordFragment = new MeTransactionRecordFragment();
                 }
                 baseFragment = sMeTransactionRecordFragment;
+                break;
+            case Constant.FRAGMENT_TAG_IMPORT_MNEMONIC:
+                if (null == sImportMnemonicFragment) {
+                    sImportMnemonicFragment = new ImportMnemonicFragment();
+                }
+                baseFragment = sImportMnemonicFragment;
+                break;
+            case Constant.FRAGMENT_TAG_IMPORT_KEYSTORE:
+                if (null == sImportKeystoreFragment) {
+                    sImportKeystoreFragment = new ImportKeystoreFragment();
+                }
+                baseFragment = sImportKeystoreFragment;
                 break;
             default:
                 break;

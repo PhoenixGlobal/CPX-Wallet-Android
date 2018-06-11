@@ -70,7 +70,7 @@
         android:layout_marginTop="21dp"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/bt_copy_mnemonic_content"
-        android:textColor="@color/text_color_white" />
+        android:textColor="@android:color/white" />
 
 
 </LinearLayout>

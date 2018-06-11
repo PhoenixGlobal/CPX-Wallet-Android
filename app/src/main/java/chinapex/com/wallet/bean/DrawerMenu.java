@@ -4,11 +4,11 @@ package chinapex.com.wallet.bean;
  * Created by SteelCabbage on 2018/5/24 0024.
  */
 
-public class WalletDetailMenu {
+public class DrawerMenu {
     private int menuIcon;
     private String menuText;
 
-    public WalletDetailMenu() {
+    public DrawerMenu() {
 
     }
 

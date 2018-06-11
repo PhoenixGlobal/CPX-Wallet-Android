@@ -4,15 +4,15 @@
     <color name="colorPrimaryDark">#4C8EFA</color>
     <color name="color_new_visitor_bt_bg">#cc4C8EFA</color>
     <color name="colorAccent">#979797</color>
-    <color name="text_color_white">#FFFFFF</color>
     <color name="create_wallet_et_import_color">#666666</color>
-    <color name="transfer_wallet_font_color">#000000</color>
     <color name="view_separator">#DDDDDD</color>
     <color name="color_privacy_gray">#F1F1F1</color>
-    <color name="myNavigationBarColor">#000000</color>
     <color name="tv_wallet_detail_drawer_title">#B0C7FA</color>
     <color name="tv_gathering_title">#999999</color>
     <color name="tv_gathering_wallet_name">#333333</color>
     <color name="tv_copy_mnemonic_color">#666666</color>
     <color name="recyclerview_separator_view">#E5E5E5</color>
+    <color name="dialog_pwd">#030303</color>
+    <color name="assets_overview_value">#5D99FA</color>
+    <color name="balance_detail_decline">#54CA80</color>
 </resources>

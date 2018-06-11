@@ -2,6 +2,7 @@ package chinapex.com.wallet.global;
 
 import android.app.Application;
 
+import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -19,6 +20,7 @@ public class ApexWalletApplication extends Application {
         CpLog.i(TAG, "onCreate() -> start!");
         sApexWalletApplication = this;
         TaskController.getInstance().doInit();
+        ApexListeners.getInstance().doInit();
     }
 
     public static ApexWalletApplication getInstance() {

@@ -30,7 +30,7 @@
     <dimen name="fixed_height_bottom_padding">5dp</dimen>
 
 
-    <dimen name="fragment_assets_title_margin_top">25dp</dimen>
+    <dimen name="fragment_assets_title_margin_top">30dp</dimen>
     <dimen name="rv_assets_margin_start">10dp</dimen>
     <dimen name="rv_assets_margin_end">10dp</dimen>
     <dimen name="rv_assets_margin_top">-18dp</dimen>
@@ -45,15 +45,15 @@
     <dimen name="cv_assets_rv_item_bg_corner">5dp</dimen>
     <dimen name="tv_assets_rv_item_unit_margin_end">20dp</dimen>
     <dimen name="tv_assets_rv_item_balance_size">20sp</dimen>
-    <dimen name="tv_assets_rv_item_wallet_name_size">16sp</dimen>
+    <dimen name="tv_assets_rv_item_wallet_name_size">18sp</dimen>
     <dimen name="rl_assets_rv_item_height">100dp</dimen>
     <dimen name="ll_assets_rv_item_padding">20dp</dimen>
-    <dimen name="bt_wallet_detail_tx_width">140dp</dimen>
-    <dimen name="bt_wallet_detail_tx_height">45dp</dimen>
+    <dimen name="bt_wallet_detail_tx_width">144dp</dimen>
+    <dimen name="bt_wallet_detail_tx_height">39dp</dimen>
     <dimen name="rl_wallet_detail_tx_margin_top">22dp</dimen>
     <dimen name="rl_wallet_detail_tx_margin_start">34dp</dimen>
     <dimen name="rl_wallet_detail_tx_margin_end">34dp</dimen>
-    <dimen name="bt_wallet_detail_tx_font_size">18sp</dimen>
+    <dimen name="bt_wallet_detail_tx_font_size">14sp</dimen>
     <dimen name="et_create_wallet_font_size">14sp</dimen>
     <dimen name="et_assets_search_width">240dp</dimen>
     <dimen name="et_assets_search_height">30dp</dimen>
@@ -68,7 +68,7 @@
     <dimen name="iv_new_visitor_width">186dp</dimen>
     <dimen name="iv_new_visitor_height">43dp</dimen>
     <dimen name="tv_me_title_size">18sp</dimen>
-    <dimen name="ll_me_bt_bg">42dp</dimen>
+    <dimen name="ll_me_bt_bg">37dp</dimen>
     <dimen name="ll_wallet_detail_drawer_width">199dp</dimen>
     <dimen name="tv_wallet_detail_drawer_title_margin_top">24dp</dimen>
     <dimen name="rv_wallet_detail_drawer_menu_margin_top">35dp</dimen>

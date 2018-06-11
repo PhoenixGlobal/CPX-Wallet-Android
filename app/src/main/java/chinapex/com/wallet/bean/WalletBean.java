@@ -9,8 +9,8 @@ public class WalletBean implements Parcelable {
     private String mWalletAddr;
     private int backupState;
     private String keyStore;
-    private Double mBalance;
     private boolean isSelected;
+    private int selectedTag;
 
     public WalletBean() {
     }
@@ -47,20 +47,20 @@ public class WalletBean implements Parcelable {
         this.keyStore = keyStore;
     }
 
-    public Double getBalance() {
-        return mBalance;
-    }
-
-    public void setBalance(Double balance) {
-        mBalance = balance;
-    }
-
     public boolean isSelected() {
         return isSelected;
     }
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public int getSelectedTag() {
+        return selectedTag;
+    }
+
+    public void setSelectedTag(int selectedTag) {
+        this.selectedTag = selectedTag;
     }
 
     @Override
@@ -74,7 +74,6 @@ public class WalletBean implements Parcelable {
         dest.writeString(this.mWalletAddr);
         dest.writeInt(this.backupState);
         dest.writeString(this.keyStore);
-        dest.writeValue(this.mBalance);
     }
 
     protected WalletBean(Parcel in) {
@@ -82,7 +81,6 @@ public class WalletBean implements Parcelable {
         this.mWalletAddr = in.readString();
         this.backupState = in.readInt();
         this.keyStore = in.readString();
-        this.mBalance = (Double) in.readValue(Double.class.getClassLoader());
     }
 
     public static final Creator<WalletBean> CREATOR = new Creator<WalletBean>() {
@@ -96,17 +94,6 @@ public class WalletBean implements Parcelable {
             return new WalletBean[size];
         }
     };
-
-    @Override
-    public String toString() {
-        return "WalletBean{" +
-                "mWalletName='" + mWalletName + '\'' +
-                ", mWalletAddr='" + mWalletAddr + '\'' +
-                ", backupState=" + backupState +
-                ", keyStore='" + keyStore + '\'' +
-                ", mBalance=" + mBalance +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {

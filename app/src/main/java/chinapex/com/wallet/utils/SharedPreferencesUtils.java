@@ -4,10 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.google.gson.JsonArray;
-
-import java.util.List;
-
 /**
  * Created by SteelCabbage on 2018/3/30 0030.
  */
@@ -98,64 +94,5 @@ public class SharedPreferencesUtils {
 
         return null;
     }
-
-//    public static <T> boolean putListData(Context context, String key, List<T> list) {
-//        if (null == context
-//                || TextUtils.isEmpty(key)
-//                || null == list
-//                || list.isEmpty()) {
-//            CpLog.e(TAG, "params is illegal!");
-//            return false;
-//        }
-//
-//        String type = list.get(0).getClass().getSimpleName();
-//
-//        SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sp.edit();
-//        JsonArray array = new JsonArray();
-//        try {
-//            switch (type) {
-//                case "Boolean":
-//                    for (int i = 0; i < list.size(); i++) {
-//                        array.add((Boolean) list.get(i));
-//                    }
-//                    break;
-//                case "Long":
-//                    for (int i = 0; i < list.size(); i++) {
-//                        array.add((Long) list.get(i));
-//                    }
-//                    break;
-//                case "Float":
-//                    for (int i = 0; i < list.size(); i++) {
-//                        array.add((Float) list.get(i));
-//                    }
-//                    break;
-//                case "String":
-//                    for (int i = 0; i < list.size(); i++) {
-//                        array.add((String) list.get(i));
-//                    }
-//                    break;
-//                case "Integer":
-//                    for (int i = 0; i < list.size(); i++) {
-//                        array.add((Integer) list.get(i));
-//                    }
-//                    break;
-//                default:
-//                    Gson gson = new Gson();
-//                    for (int i = 0; i < list.size(); i++) {
-//                        JsonElement obj = gson.toJsonTree(list.get(i));
-//                        array.add(obj);
-//                    }
-//                    break;
-//            }
-//            editor.putString(key, array.toString());
-//            editor.putString(key, GsonUtils.toJsonStr(list));
-//        } catch (Exception e) {
-//            CpLog.e(TAG, "exception:" + e.getMessage());
-//            return false;
-//        }
-//        editor.apply();
-//        return true;
-//    }
 
 }

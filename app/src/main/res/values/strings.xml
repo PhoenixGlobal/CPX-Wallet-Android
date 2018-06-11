@@ -69,4 +69,12 @@
     <string name="tv_me_transacticon_record_tx_addr">转帐地址</string>
     <string name="tv_me_transacticon_record_tx_amount">交易额(CPX)</string>
     <string name="tv_me_transacticon_record_tx_time">交易时间</string>
+    <string name="tv_dialog_pwd_title">请输入密码</string>
+    <string name="tv_dialog_pwd_explain">请慎重，此操作无法撤销</string>
+    <string name="bt_dialog_pwd_cancel">取消</string>
+    <string name="bt_dialog_pwd_confirm">确认</string>
+    <string name="et_dialog_pwd_hint">Password</string>
+    <string name="tv_title_import">导入钱包</string>
+    <string name="bt_import_wallet_mnemonic">助记词</string>
+    <string name="bt_import_wallet_keystore">Keystore</string>
 </resources>

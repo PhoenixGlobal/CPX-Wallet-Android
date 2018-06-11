@@ -19,7 +19,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/main_tv_title_margin_top"
             android:text="@string/tb_title_transfer"
-            android:textColor="@color/text_color_white"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/tb_title_size" />
     </android.support.v7.widget.Toolbar>
 
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:text="@string/tv_transfer_from_wallet_addr"
-        android:textColor="@color/transfer_wallet_font_color"
+        android:textColor="@android:color/black"
         android:textIsSelectable="true"
         android:textSize="@dimen/tv_transfer_from_wallet_addr_font_size" />
 
@@ -73,7 +73,7 @@
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:background="@null"
         android:hint="@string/tv_transfer_to_wallet_addr"
-        android:textColor="@color/transfer_wallet_font_color"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/tv_transfer_from_wallet_addr_font_size" />
 
     <View
@@ -129,7 +129,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/bt_transfer_send"
-        android:textColor="@color/text_color_white" />
+        android:textColor="@android:color/white" />
 
 
 </LinearLayout>

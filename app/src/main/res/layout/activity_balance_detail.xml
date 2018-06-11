@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dl_balance_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--主内容-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="139dp"
+            android:background="@drawable/tb_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_balance_detail_assets_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+                android:text="CPX"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tb_title_size" />
+
+            <TextView
+                android:id="@+id/tv_balance_detail_assets_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="2.0032"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_balance_detail_transfer"
+                android:layout_width="@dimen/bt_wallet_detail_tx_width"
+                android:layout_height="@dimen/bt_wallet_detail_tx_height"
+                android:background="@drawable/shape_new_visitor_bt_bg"
+                android:text="@string/bt_wallet_detail_tx_transfer"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bt_wallet_detail_tx_font_size" />
+
+            <Button
+                android:id="@+id/bt_balance_detail_gathering"
+                android:layout_width="@dimen/bt_wallet_detail_tx_width"
+                android:layout_height="@dimen/bt_wallet_detail_tx_height"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/shape_new_visitor_bt_bg"
+                android:text="@string/bt_wallet_detail_tx_gathering"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bt_wallet_detail_tx_font_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_balance_detail_map"
+            android:layout_width="333dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/shape_assets_overview_map_def"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:gravity="center"
+                android:text="CPX 映射" />
+
+            <ImageButton
+                android:id="@+id/ib_balance_detail_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="225dp"
+                android:background="@null"
+                android:src="@drawable/icon_wallet_item_arrows" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--侧滑内容-->
+    <LinearLayout
+        android:layout_width="@dimen/ll_wallet_detail_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_balance_detail_drawer_title"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:background="@color/tv_wallet_detail_drawer_title"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="@string/tv_wallet_detail_drawer_title"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_balance_detail_drawer_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

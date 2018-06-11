@@ -23,7 +23,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:text="@string/new_visitor_create_wallet"
-            android:textColor="@color/text_color_white"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/tb_title_size" />
     </android.support.v7.widget.Toolbar>
 
@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:ems="14"
             android:hint="@string/create_wallet_et_name"
+            android:inputType="text"
             android:textSize="@dimen/et_create_wallet_font_size" />
     </android.support.design.widget.TextInputLayout>
 
@@ -85,15 +86,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/create_wallet_ll_margin_top"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/ib_create_wallet_privacy_point"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="45dp"
             android:background="@null"
             android:src="@drawable/selector_privacy_point" />
 
@@ -123,15 +122,20 @@
         android:text="@string/create_wallet_bt_confirm"
         android:textColor="@color/colorAccent" />
 
-    <EditText
-        android:id="@+id/et_create_wallet_import"
+    <Button
+        android:id="@+id/bt_create_wallet_import"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/create_wallet_tv_import_margin_top"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
+        android:background="@null"
+        android:gravity="bottom|center_horizontal"
         android:text="@string/create_wallet_import"
         android:textColor="@color/create_wallet_et_import_color"
         android:textSize="@dimen/create_wallet_et_import_size" />
+
+    <View
+        android:layout_width="77dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorAccent" />
 
 </LinearLayout>

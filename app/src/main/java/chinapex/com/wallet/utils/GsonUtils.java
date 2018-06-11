@@ -1,16 +1,7 @@
 package chinapex.com.wallet.utils;
 
-import android.text.TextUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import chinapex.com.wallet.bean.WalletKeyStore;
 
 /**
  * Created by SteelCabbage on 2018/3/23.
@@ -56,22 +47,22 @@ public class GsonUtils {
         return t;
     }
 
-    public static List<WalletKeyStore> json2List(String listJson) {
-        if (TextUtils.isEmpty(listJson)) {
-            CpLog.e(TAG, "listJson is null!");
-            return null;
-        }
-
-        List<WalletKeyStore> list = null;
-        try {
-            list = sGson.fromJson(listJson, new TypeToken<List<WalletKeyStore>>() {
-            }.getType());
-        } catch (JsonSyntaxException e) {
-            CpLog.e(TAG, "json2List exception:" + e.getMessage());
-        }
-
-        return list;
-    }
+//    public static List<WalletKeyStore> json2List(String listJson) {
+//        if (TextUtils.isEmpty(listJson)) {
+//            CpLog.e(TAG, "listJson is null!");
+//            return null;
+//        }
+//
+//        List<WalletKeyStore> list = null;
+//        try {
+//            list = sGson.fromJson(listJson, new TypeToken<List<WalletKeyStore>>() {
+//            }.getType());
+//        } catch (JsonSyntaxException e) {
+//            CpLog.e(TAG, "json2List exception:" + e.getMessage());
+//        }
+//
+//        return list;
+//    }
 
 
 }

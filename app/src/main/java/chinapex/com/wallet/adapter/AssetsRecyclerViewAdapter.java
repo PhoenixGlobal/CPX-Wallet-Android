@@ -80,7 +80,6 @@ public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecycl
         holder.walletName.setText(String.valueOf(Constant.WALLET_NAME + mWalletBeans.get
                 (position).getWalletName()));
         holder.walletAddr.setText(mWalletBeans.get(position).getWalletAddr());
-        holder.balance.setText(String.valueOf(mWalletBeans.get(position).getBalance()));
         holder.itemView.setTag(position);
     }
 
@@ -92,13 +91,11 @@ public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecycl
     class AssetsAdapterHolder extends RecyclerView.ViewHolder {
         TextView walletName;
         TextView walletAddr;
-        TextView balance;
 
         AssetsAdapterHolder(View itemView) {
             super(itemView);
             walletName = itemView.findViewById(R.id.tv_assets_rv_item_wallet_name);
             walletAddr = itemView.findViewById(R.id.tv_assets_rv_item_wallet_addr);
-            balance = itemView.findViewById(R.id.tv_assets_rv_item_balance);
         }
     }
 }

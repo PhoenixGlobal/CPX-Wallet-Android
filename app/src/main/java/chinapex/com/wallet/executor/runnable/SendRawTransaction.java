@@ -3,6 +3,8 @@ package chinapex.com.wallet.executor.runnable;
 import java.util.ArrayList;
 
 import chinapex.com.wallet.bean.request.RequestSendRawTransaction;
+import chinapex.com.wallet.bean.response.ResponseSendRawTransaction;
+import chinapex.com.wallet.executor.callback.ISendRawTransactionCallback;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
@@ -13,15 +15,15 @@ import chinapex.com.wallet.utils.GsonUtils;
  * Created by SteelCabbage on 2018/5/30 0030.
  */
 
-public class SendRawTransaction implements Runnable {
+public class SendRawTransaction implements Runnable, INetCallback {
 
     private static final String TAG = SendRawTransaction.class.getSimpleName();
     private String mTxData;
-    private INetCallback mINetCallback;
+    private ISendRawTransactionCallback mISendRawTransactionCallback;
 
-    public SendRawTransaction(String txData, INetCallback INetCallback) {
+    public SendRawTransaction(String txData, ISendRawTransactionCallback iSendRawTransactionCallback) {
         mTxData = txData;
-        mINetCallback = INetCallback;
+        mISendRawTransactionCallback = iSendRawTransactionCallback;
     }
 
     @Override
@@ -31,8 +33,8 @@ public class SendRawTransaction implements Runnable {
             return;
         }
 
-        if (null == mINetCallback) {
-            CpLog.e(TAG, "mINetCallback is null!");
+        if (null == mISendRawTransactionCallback) {
+            CpLog.e(TAG, "mISendRawTransactionCallback is null!");
             return;
         }
 
@@ -45,6 +47,25 @@ public class SendRawTransaction implements Runnable {
         requestSendRawTransaction.setId(1);
 
         OkHttpClientManager.getInstance().postJson(Constant.URL_CLI, GsonUtils.toJsonStr
-                (requestSendRawTransaction), mINetCallback);
+                (requestSendRawTransaction), this);
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String msg, String result) {
+        ResponseSendRawTransaction responseSendRawTransaction = GsonUtils
+                .json2Bean(result, ResponseSendRawTransaction.class);
+        if (null == responseSendRawTransaction) {
+            mISendRawTransactionCallback.sendTxData(false);
+            return;
+        }
+
+        CpLog.i(TAG, "onSuccess() -> broadcast:" + responseSendRawTransaction.isResult());
+        mISendRawTransactionCallback.sendTxData(responseSendRawTransaction.isResult());
+    }
+
+    @Override
+    public void onFailed(int failedCode, String msg) {
+        CpLog.e(TAG, "onFailed() -> msg:" + msg);
+        mISendRawTransactionCallback.sendTxData(false);
     }
 }

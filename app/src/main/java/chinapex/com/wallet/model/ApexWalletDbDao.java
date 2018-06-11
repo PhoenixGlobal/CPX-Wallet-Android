@@ -35,14 +35,8 @@ public class ApexWalletDbDao {
 
     private SQLiteDatabase mDatabase;
 
-    private ReentrantLock mReentrantLock;
-
-    private Context mContext;
-
     private ApexWalletDbDao(Context context) {
-        mContext = context;
         mApexWalletDbHelper = new ApexWalletDbHelper(context);
-        mReentrantLock = new ReentrantLock();
     }
 
     public static ApexWalletDbDao getInstance(Context context) {
@@ -103,20 +97,24 @@ public class ApexWalletDbDao {
         closeDatabase();
     }
 
-    private static final String WHERE_CLAUSE_WALLET_NAME_EQ = Constant.FIELD_WALLET_NAME + " = ?";
+    private static final String WHERE_CLAUSE_WALLET_NAME_EQ_AND_ADDRESS_EQ = Constant
+            .FIELD_WALLET_NAME + " = ?" + " and " + Constant.FIELD_WALLET_ADDRESS + " = ?";
 
-    public void deleteByWalletName(String tableName, String walletName) {
-        if (TextUtils.isEmpty(walletName)) {
-            CpLog.e(TAG, "deleteByWalletName() -> walletName is null!");
+    public void deleteByWalletNameAndAddr(String tableName, String walletName, String
+            walletAddress) {
+        if (TextUtils.isEmpty(walletName) || TextUtils.isEmpty(walletAddress)) {
+            CpLog.e(TAG, "deleteByWalletName() -> walletName or walletAddress is null!");
             return;
         }
 
         SQLiteDatabase db = openDatabase();
         try {
             db.beginTransaction();
-            db.delete(tableName, WHERE_CLAUSE_WALLET_NAME_EQ, new String[]{walletName});
+            db.delete(tableName, WHERE_CLAUSE_WALLET_NAME_EQ_AND_ADDRESS_EQ, new
+                    String[]{walletName, walletAddress});
             db.setTransactionSuccessful();
-            CpLog.i(TAG, "deleteByWalletName() -> delete " + walletName + " ok!");
+            CpLog.i(TAG, "deleteByWalletName() -> delete " + walletName + ":" + walletAddress + "" +
+                    " ok!");
         } catch (Exception e) {
             CpLog.e(TAG, "deleteByWalletName exception:" + e.getMessage());
         } finally {
@@ -161,6 +159,8 @@ public class ApexWalletDbDao {
         return walletBeans;
     }
 
+    private static final String WHERE_CLAUSE_WALLET_NAME_EQ = Constant.FIELD_WALLET_NAME + " = ?";
+
     public WalletBean queryByWalletName(String tableName, String walletName) {
         if (TextUtils.isEmpty(tableName)
                 || TextUtils.isEmpty(walletName)) {
@@ -188,6 +188,46 @@ public class ApexWalletDbDao {
                 WalletBean walletBean = new WalletBean();
                 walletBean.setWalletName(walletNameTmp);
                 walletBean.setWalletAddr(walletAddress);
+                walletBean.setBackupState(backupState);
+                walletBean.setKeyStore(walletKeystore);
+
+                walletBeans.add(walletBean);
+            }
+            cursor.close();
+        }
+        closeDatabase();
+        return walletBeans.get(0);
+    }
+
+    private static final String WHERE_CLAUSE_WALLET_ADDRESS_EQ = Constant.FIELD_WALLET_ADDRESS + " = ?";
+
+    public WalletBean queryByWalletNaAddress(String tableName, String walletAddress) {
+        if (TextUtils.isEmpty(tableName)
+                || TextUtils.isEmpty(walletAddress)) {
+            CpLog.e(TAG, "queryByWalletName() -> tableName or walletAddress is null!");
+            return null;
+        }
+
+        ArrayList<WalletBean> walletBeans = new ArrayList<>();
+
+        SQLiteDatabase db = openDatabase();
+        Cursor cursor = db.query(tableName, null, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new
+                String[]{walletAddress}, null, null, null);
+        if (null != cursor) {
+            while (cursor.moveToNext()) {
+                int walletNameIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_NAME);
+                int walletAddrIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_ADDRESS);
+                int backupStateIndex = cursor.getColumnIndex(Constant.FIELD_BACKUP_STATE);
+                int walletKeystoreIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_KEYSTORE);
+
+                String walletName = cursor.getString(walletNameIndex);
+                String walletAddr = cursor.getString(walletAddrIndex);
+                int backupState = cursor.getInt(backupStateIndex);
+                String walletKeystore = cursor.getString(walletKeystoreIndex);
+
+                WalletBean walletBean = new WalletBean();
+                walletBean.setWalletName(walletName);
+                walletBean.setWalletAddr(walletAddr);
                 walletBean.setBackupState(backupState);
                 walletBean.setKeyStore(walletKeystore);
 

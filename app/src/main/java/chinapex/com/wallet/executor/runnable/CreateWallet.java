@@ -4,6 +4,7 @@ package chinapex.com.wallet.executor.runnable;
 import android.text.TextUtils;
 
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.callback.ICreateWalletCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -24,10 +25,10 @@ public class CreateWallet implements Runnable {
     private ICreateWalletCallback mICreateWalletCallback;
 
     public CreateWallet(String walletName, String pwd, ICreateWalletCallback
-            ICreateWalletCallback) {
+            iCreateWalletCallback) {
         mWalletName = walletName;
         mPwd = pwd;
-        mICreateWalletCallback = ICreateWalletCallback;
+        mICreateWalletCallback = iCreateWalletCallback;
     }
 
     @Override
@@ -66,8 +67,7 @@ public class CreateWallet implements Runnable {
         WalletBean walletBean = new WalletBean();
         walletBean.setWalletName(mWalletName);
         walletBean.setWalletAddr(wallet.address());
-        //todo: 0 or 1 待确认
-        walletBean.setBackupState(0);
+        walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
         walletBean.setKeyStore(toKeyStore);
 
         ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
@@ -78,6 +78,7 @@ public class CreateWallet implements Runnable {
         }
 
         apexWalletDbDao.insert(Constant.TABLE_APEX_WALLET, walletBean);
+        ApexListeners.getInstance().notifyItemAdd(walletBean);
         mICreateWalletCallback.newWallet(wallet);
     }
 }
