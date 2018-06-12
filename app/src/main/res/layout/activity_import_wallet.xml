@@ -36,7 +36,7 @@
                 android:background="@drawable/shape_white_bt_bg"
                 android:text="@string/bt_import_wallet_mnemonic"
                 android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/bt_import_wallet_keystore"
@@ -47,7 +47,7 @@
                 android:text="@string/bt_import_wallet_keystore"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </RelativeLayout>

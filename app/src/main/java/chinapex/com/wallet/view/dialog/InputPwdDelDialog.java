@@ -16,14 +16,13 @@ import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.TaskController;
-import chinapex.com.wallet.executor.callback.IFromKeystoreGenerateWalletCallback;
+import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
 import chinapex.com.wallet.executor.runnable.FromKeystoreToWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
-import neomobile.Neomobile;
 import neomobile.Wallet;
 
 /**
@@ -31,7 +30,7 @@ import neomobile.Wallet;
  */
 
 public class InputPwdDelDialog extends DialogFragment implements View.OnClickListener,
-        IFromKeystoreGenerateWalletCallback {
+        IFromKeystoreToWalletCallback {
 
     private static final String TAG = InputPwdDelDialog.class.getSimpleName();
     private WalletBean mCurrentWalletBean;
@@ -102,7 +101,8 @@ public class InputPwdDelDialog extends DialogFragment implements View.OnClickLis
                 break;
             case R.id.bt_dialog_pwd_del_confirm:
                 String pwd = mEt_dialog_pwd_del.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean, pwd, this));
+                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean
+                        .getKeyStore(), pwd, this));
                 break;
         }
     }
@@ -129,14 +129,15 @@ public class InputPwdDelDialog extends DialogFragment implements View.OnClickLis
             return;
         }
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
+                .getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
         }
 
-        apexWalletDbDao.deleteByWalletNameAndAddr(Constant.TABLE_APEX_WALLET, mCurrentWalletBean.getWalletName(),
-                mCurrentWalletBean.getWalletAddr());
+        apexWalletDbDao.deleteByWalletNameAndAddr(Constant.TABLE_APEX_WALLET, mCurrentWalletBean
+                .getWalletName(), mCurrentWalletBean.getWalletAddr());
 
         ApexListeners.getInstance().notifyItemDelete(mCurrentWalletBean);
         dismiss();

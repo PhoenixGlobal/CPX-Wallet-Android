@@ -31,6 +31,7 @@ import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.utils.DensityUtil;
 import chinapex.com.wallet.view.wallet.CreateWalletActivity;
 import chinapex.com.wallet.view.wallet.ImportWalletActivity;
 
@@ -84,7 +85,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         mAssetsRecyclerViewAdapter.setOnItemClickListener(this);
         mAssetsRecyclerViewAdapter.setOnItemLongClickListener(this);
 
-        int space = 20;
+        int space = DensityUtil.dip2px(getActivity(), 5);
         mRv_assets.addItemDecoration(new SpacesItemDecoration(space));
 
         mRv_assets.setAdapter(mAssetsRecyclerViewAdapter);
@@ -121,7 +122,8 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
 
     @Override
     public void onItemClick(int position) {
-        startActivityParcelable(AssetsOverviewActivity.class, false, Constant.WALLET_BEAN, mWalletBeans.get(position));
+        startActivityParcelable(AssetsOverviewActivity.class, false, Constant.WALLET_BEAN,
+                mWalletBeans.get(position));
     }
 
     @Override

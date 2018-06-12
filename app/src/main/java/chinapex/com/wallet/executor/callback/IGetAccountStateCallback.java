@@ -1,6 +1,6 @@
 package chinapex.com.wallet.executor.callback;
 
-import java.util.List;
+import java.util.Map;
 
 import chinapex.com.wallet.bean.BalanceBean;
 
@@ -9,5 +9,5 @@ import chinapex.com.wallet.bean.BalanceBean;
  * E-Mail：liuyi_61@163.com
  */
 public interface IGetAccountStateCallback {
-    void assetsBalance(List<BalanceBean> balanceBeans);
+    void assetsBalance(Map<String, BalanceBean> balanceBeans);
 }

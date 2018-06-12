@@ -15,4 +15,5 @@
     <color name="dialog_pwd">#030303</color>
     <color name="assets_overview_value">#5D99FA</color>
     <color name="balance_detail_decline">#54CA80</color>
+    <color name="export_keystore_text">#535353</color>
 </resources>

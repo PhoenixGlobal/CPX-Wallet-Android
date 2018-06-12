@@ -34,7 +34,7 @@
                 android:background="@drawable/shape_white_bt_bg"
                 android:text="@string/bt_me_manage_wallet"
                 android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/bt_me_transaction_record"
@@ -44,7 +44,7 @@
                 android:background="@null"
                 android:text="@string/bt_me_transactions"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </RelativeLayout>

@@ -15,7 +15,7 @@ import chinapex.com.wallet.bean.AssertTxBean;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICreateAssertTxCallback;
-import chinapex.com.wallet.executor.callback.IFromKeystoreGenerateWalletCallback;
+import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
 import chinapex.com.wallet.executor.callback.IGetUtxosCallback;
 import chinapex.com.wallet.executor.callback.ISendRawTransactionCallback;
 import chinapex.com.wallet.executor.runnable.CreateAssertTx;
@@ -28,7 +28,7 @@ import neomobile.Tx;
 import neomobile.Wallet;
 
 public class TransferActivity extends BaseActivity implements View.OnClickListener,
-        IGetUtxosCallback, ISendRawTransactionCallback, IFromKeystoreGenerateWalletCallback,
+        IGetUtxosCallback, ISendRawTransactionCallback, IFromKeystoreToWalletCallback,
         ICreateAssertTxCallback {
 
     private static final String TAG = TransferActivity.class.getSimpleName();
@@ -86,8 +86,8 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.bt_transfer_send:
                 String pwd = mEt_transfer_pwd.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mWalletBean, pwd,
-                        this));
+                TaskController.getInstance().submit(new FromKeystoreToWallet(mWalletBean
+                        .getKeyStore(), pwd, this));
                 break;
             default:
                 break;
@@ -113,7 +113,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         }
 
         AssertTxBean assertTxBean = new AssertTxBean();
-        assertTxBean.setAssetsID(Constant.ASSETS_NEO);
+        assertTxBean.setAssetsID(Constant.ASSETS_CPX);
         assertTxBean.setAddrFrom(mWalletFrom.address());
         assertTxBean.setAddrTo(mEt_transfer_to_wallet_addr.getText().toString().trim());
         assertTxBean.setTransferAmount(Double.valueOf(mEt_transfer_amount.getText().toString()

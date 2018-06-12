@@ -81,6 +81,7 @@ public class ApexWalletDbDao {
         contentValues.put(Constant.FIELD_WALLET_ADDRESS, walletBean.getWalletAddr());
         contentValues.put(Constant.FIELD_BACKUP_STATE, walletBean.getBackupState());
         contentValues.put(Constant.FIELD_WALLET_KEYSTORE, walletBean.getKeyStore());
+        contentValues.put(Constant.FIELD_WALLET_ASSETS_JSON, walletBean.getAssetsJson());
         contentValues.put(Constant.FIELD_CREATE_TIME, SystemClock.currentThreadTimeMillis());
 
         SQLiteDatabase db = openDatabase();
@@ -139,17 +140,21 @@ public class ApexWalletDbDao {
                 int walletAddressIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_ADDRESS);
                 int backupStateIndex = cursor.getColumnIndex(Constant.FIELD_BACKUP_STATE);
                 int walletKeystoreIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_KEYSTORE);
+                int walletAssetsJsonIndex = cursor.getColumnIndex(Constant
+                        .FIELD_WALLET_ASSETS_JSON);
 
                 String walletName = cursor.getString(walletNameIndex);
                 String walletAddress = cursor.getString(walletAddressIndex);
                 int backupState = cursor.getInt(backupStateIndex);
                 String walletKeystore = cursor.getString(walletKeystoreIndex);
+                String walletAssetsJson = cursor.getString(walletAssetsJsonIndex);
 
                 WalletBean walletBean = new WalletBean();
                 walletBean.setWalletName(walletName);
                 walletBean.setWalletAddr(walletAddress);
                 walletBean.setBackupState(backupState);
                 walletBean.setKeyStore(walletKeystore);
+                walletBean.setAssetsJson(walletAssetsJson);
 
                 walletBeans.add(walletBean);
             }
@@ -179,29 +184,34 @@ public class ApexWalletDbDao {
                 int walletAddressIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_ADDRESS);
                 int backupStateIndex = cursor.getColumnIndex(Constant.FIELD_BACKUP_STATE);
                 int walletKeystoreIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_KEYSTORE);
+                int walletAssetsJsonIndex = cursor.getColumnIndex(Constant
+                        .FIELD_WALLET_ASSETS_JSON);
 
                 String walletNameTmp = cursor.getString(walletNameIndex);
                 String walletAddress = cursor.getString(walletAddressIndex);
                 int backupState = cursor.getInt(backupStateIndex);
                 String walletKeystore = cursor.getString(walletKeystoreIndex);
+                String walletAssetsJson = cursor.getString(walletAssetsJsonIndex);
 
                 WalletBean walletBean = new WalletBean();
                 walletBean.setWalletName(walletNameTmp);
                 walletBean.setWalletAddr(walletAddress);
                 walletBean.setBackupState(backupState);
                 walletBean.setKeyStore(walletKeystore);
+                walletBean.setAssetsJson(walletAssetsJson);
 
                 walletBeans.add(walletBean);
             }
             cursor.close();
         }
         closeDatabase();
-        return walletBeans.get(0);
+        return walletBeans.isEmpty() ? null : walletBeans.get(0);
     }
 
-    private static final String WHERE_CLAUSE_WALLET_ADDRESS_EQ = Constant.FIELD_WALLET_ADDRESS + " = ?";
+    private static final String WHERE_CLAUSE_WALLET_ADDRESS_EQ = Constant.FIELD_WALLET_ADDRESS +
+            " = ?";
 
-    public WalletBean queryByWalletNaAddress(String tableName, String walletAddress) {
+    public WalletBean queryByWalletAddress(String tableName, String walletAddress) {
         if (TextUtils.isEmpty(tableName)
                 || TextUtils.isEmpty(walletAddress)) {
             CpLog.e(TAG, "queryByWalletName() -> tableName or walletAddress is null!");
@@ -219,30 +229,33 @@ public class ApexWalletDbDao {
                 int walletAddrIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_ADDRESS);
                 int backupStateIndex = cursor.getColumnIndex(Constant.FIELD_BACKUP_STATE);
                 int walletKeystoreIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_KEYSTORE);
+                int walletAssetsJsonIndex = cursor.getColumnIndex(Constant
+                        .FIELD_WALLET_ASSETS_JSON);
 
                 String walletName = cursor.getString(walletNameIndex);
                 String walletAddr = cursor.getString(walletAddrIndex);
                 int backupState = cursor.getInt(backupStateIndex);
                 String walletKeystore = cursor.getString(walletKeystoreIndex);
+                String walletAssetsJson = cursor.getString(walletAssetsJsonIndex);
 
                 WalletBean walletBean = new WalletBean();
                 walletBean.setWalletName(walletName);
                 walletBean.setWalletAddr(walletAddr);
                 walletBean.setBackupState(backupState);
                 walletBean.setKeyStore(walletKeystore);
+                walletBean.setAssetsJson(walletAssetsJson);
 
                 walletBeans.add(walletBean);
             }
             cursor.close();
         }
         closeDatabase();
-        return walletBeans.get(0);
+        return walletBeans.isEmpty() ? null : walletBeans.get(0);
     }
 
-    public void updateBackupStateByWalletName(String tableName, String walletName, int
-            backupState) {
-        if (TextUtils.isEmpty(tableName) || TextUtils.isEmpty(walletName)) {
-            CpLog.e(TAG, "insert() -> tableName or walletName is null!");
+    public void updateBackupState(String tableName, String walletAddress, int backupState) {
+        if (TextUtils.isEmpty(tableName) || TextUtils.isEmpty(walletAddress)) {
+            CpLog.e(TAG, "insert() -> tableName or walletAddress is null!");
             return;
         }
 
@@ -252,19 +265,19 @@ public class ApexWalletDbDao {
         SQLiteDatabase db = openDatabase();
         try {
             db.beginTransaction();
-            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_NAME_EQ, new
-                    String[]{walletName + ""});
+            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new
+                    String[]{walletAddress + ""});
             db.setTransactionSuccessful();
-            CpLog.i(TAG, "updateBackupStateByWalletName() -> update" + backupState + " ok!");
+            CpLog.i(TAG, "updateBackupState -> update" + backupState + " ok!");
         } catch (SQLException e) {
-            CpLog.e(TAG, "updateBackupStateByWalletName exception:" + e.getMessage());
+            CpLog.e(TAG, "updateBackupState exception:" + e.getMessage());
         } finally {
             db.endTransaction();
         }
         closeDatabase();
     }
 
-    public void updateWalletNameByWalletName(String tableName, String walletNameOld, String
+    public void updateWalletName(String tableName, String walletNameOld, String
             walletNameNew) {
         if (TextUtils.isEmpty(tableName)
                 || TextUtils.isEmpty(walletNameOld)

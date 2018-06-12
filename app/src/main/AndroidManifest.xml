@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!--扫一扫相关权限-->
+    <!-- 扫一扫相关权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -22,35 +22,36 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--新用户-->
+        <!-- 新用户 -->
         <activity
             android:name=".view.NewVisitorActivity"
             android:theme="@style/AppTheme.MyTranslucentNavigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!--主activity-->
+        <!-- 主activity -->
         <activity android:name=".view.MainActivity" />
-        <!--跳转activity-->
+        <!-- 跳转activity -->
         <activity android:name=".view.MeSkipActivity" />
-        <!--新建钱包-->
+        <!-- 新建钱包 -->
         <activity android:name=".view.wallet.CreateWalletActivity" />
-        <!--导入钱包-->
+        <!-- 导入钱包 -->
         <activity android:name=".view.wallet.ImportWalletActivity" />
-        <!--备份-->
+        <!-- 备份 -->
         <activity android:name=".view.wallet.BackupWalletActivity" />
-        <!--资产概览-->
+        <!-- 资产概览 -->
         <activity android:name=".view.assets.AssetsOverviewActivity" />
-        <!--余额明细-->
+        <!-- 余额明细 -->
         <activity android:name=".view.assets.BalanceDetailActivity" />
-        <!--转账-->
+        <!-- 转账 -->
         <activity android:name=".view.assets.TransferActivity" />
-        <!--收款-->
+        <!-- 收款 -->
         <activity android:name=".view.assets.GatheringActivity" />
-
+        <activity android:name=".view.wallet.ExportKeystoreActivity"></activity>
     </application>
 
 </manifest>

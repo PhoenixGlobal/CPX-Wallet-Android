@@ -54,10 +54,12 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         mBt_create_wallet_confirm = (Button) findViewById(R.id.bt_create_wallet_confirm);
         mBt_create_wallet_import = (Button) findViewById(R.id.bt_create_wallet_import);
         mIb_create_wallet_privacy_point = findViewById(R.id.ib_create_wallet_privacy_point);
-        mTv_create_wallet_privacy_have_read = (TextView) findViewById(R.id.tv_create_wallet_privacy_have_read);
+        mTv_create_wallet_privacy_have_read = (TextView) findViewById(R.id
+                .tv_create_wallet_privacy_have_read);
         mTl_create_wallet_name = (TextInputLayout) findViewById(R.id.tl_create_wallet_name);
         mTl_create_wallet_pwd = (TextInputLayout) findViewById(R.id.tl_create_wallet_pwd);
-        mTl_create_wallet_repeat_pwd = (TextInputLayout) findViewById(R.id.tl_create_wallet_repeat_pwd);
+        mTl_create_wallet_repeat_pwd = (TextInputLayout) findViewById(R.id
+                .tl_create_wallet_repeat_pwd);
 
         mBt_create_wallet_confirm.setOnClickListener(this);
         mIb_create_wallet_privacy_point.setOnClickListener(this);
@@ -112,22 +114,12 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initData() {
-        Intent intent = getIntent();
-        if (null == intent) {
-            CpLog.e(TAG, "intent is null!");
-            return;
-        }
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.et_create_wallet_name:
-                break;
-            case R.id.et_create_wallet_pwd:
-                break;
-            case R.id.et_create_wallet_repeat_pwd:
-                break;
             case R.id.bt_create_wallet_confirm:
                 if (!checkInput()) {
                     CpLog.w(TAG, "checkInput is false!");
@@ -144,15 +136,19 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
             case R.id.ib_create_wallet_privacy_point:
                 if (mIsSelectedPrivacy) {
                     mIsSelectedPrivacy = false;
-                    mIb_create_wallet_privacy_point.setImageResource(R.drawable.shape_privacy_point);
-                    mBt_create_wallet_confirm.setBackgroundResource(R.drawable.shape_new_visitor_bt_bg);
+                    mIb_create_wallet_privacy_point.setImageResource(R.drawable
+                            .shape_privacy_point);
+                    mBt_create_wallet_confirm.setBackgroundResource(R.drawable
+                            .shape_new_visitor_bt_bg);
                     mBt_create_wallet_confirm.setTextColor(Color.WHITE);
                     mIsAgreePrivacy = true;
                 } else {
                     mIsSelectedPrivacy = true;
-                    mIb_create_wallet_privacy_point.setImageResource(R.drawable.shape_privacy_point_def);
+                    mIb_create_wallet_privacy_point.setImageResource(R.drawable
+                            .shape_privacy_point_def);
                     mBt_create_wallet_confirm.setBackgroundResource(R.drawable.shape_gray_bt_bg);
-                    mBt_create_wallet_confirm.setTextColor(getResources().getColor(R.color.colorAccent));
+                    mBt_create_wallet_confirm.setTextColor(getResources().getColor(R.color
+                            .colorAccent));
                     mIsAgreePrivacy = false;
                 }
                 break;
@@ -221,6 +217,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
             return;
         }
 
-        startActivityBundle(BackupWalletActivity.class, true, Constant.BACKUP_MNEMONIC, mnemonicEnUs);
+        startActivityBundle(BackupWalletActivity.class, true, Constant.BACKUP_MNEMONIC,
+                mnemonicEnUs);
     }
 }

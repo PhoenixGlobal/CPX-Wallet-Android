@@ -21,7 +21,7 @@
     <dimen name="create_wallet_bt_margin_top">17dp</dimen>
     <dimen name="create_wallet_tv_import_margin_top">26dp</dimen>
     <dimen name="create_wallet_et_import_size">12sp</dimen>
-    <dimen name="tb_title_size">18sp</dimen>
+    <dimen name="tb_title_size">16sp</dimen>
     <dimen name="tb_title_padding">15dp</dimen>
     <dimen name="main_tv_title_margin_top">30dp</dimen>
 
@@ -67,7 +67,7 @@
     <dimen name="tv_transfer_from_wallet_addr_font_size">12sp</dimen>
     <dimen name="iv_new_visitor_width">186dp</dimen>
     <dimen name="iv_new_visitor_height">43dp</dimen>
-    <dimen name="tv_me_title_size">18sp</dimen>
+    <dimen name="tv_me_title_size">16sp</dimen>
     <dimen name="ll_me_bt_bg">37dp</dimen>
     <dimen name="ll_wallet_detail_drawer_width">199dp</dimen>
     <dimen name="tv_wallet_detail_drawer_title_margin_top">24dp</dimen>

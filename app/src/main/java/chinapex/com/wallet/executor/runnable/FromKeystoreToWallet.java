@@ -3,7 +3,7 @@ package chinapex.com.wallet.executor.runnable;
 import android.text.TextUtils;
 
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.executor.callback.IFromKeystoreGenerateWalletCallback;
+import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -18,46 +18,33 @@ import neomobile.Wallet;
 public class FromKeystoreToWallet implements Runnable {
 
     private static final String TAG = FromKeystoreToWallet.class.getSimpleName();
-    private WalletBean mWalletBean;
+    private String mKeystore;
     private String mPwd;
-    private IFromKeystoreGenerateWalletCallback mIFromKeystoreGenerateWalletCallback;
+    private IFromKeystoreToWalletCallback mIFromKeystoreToWalletCallback;
 
-    public FromKeystoreToWallet(WalletBean walletBean, String pwd, IFromKeystoreGenerateWalletCallback IFromKeystoreGenerateWalletCallback) {
-        mWalletBean = walletBean;
+    public FromKeystoreToWallet(String keystore, String pwd, IFromKeystoreToWalletCallback
+            IFromKeystoreToWalletCallback) {
+        mKeystore = keystore;
         mPwd = pwd;
-        mIFromKeystoreGenerateWalletCallback = IFromKeystoreGenerateWalletCallback;
+        mIFromKeystoreToWalletCallback = IFromKeystoreToWalletCallback;
     }
 
     @Override
     public void run() {
-        if (null == mWalletBean
+        if (TextUtils.isEmpty(mKeystore)
                 || TextUtils.isEmpty(mPwd)
-                || null == mIFromKeystoreGenerateWalletCallback) {
-            CpLog.e(TAG, "mWalletBean or mPwd or mIFromKeystoreGenerateWalletCallback is null！");
-            return;
-        }
-
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
-        if (null == apexWalletDbDao) {
-            CpLog.e(TAG, "apexWalletDbDao is null！");
-            return;
-        }
-
-        WalletBean walletBean = apexWalletDbDao.queryByWalletNaAddress(Constant.TABLE_APEX_WALLET,
-                mWalletBean.getWalletAddr());
-        if (null == walletBean) {
-            CpLog.e(TAG, "walletBean is null!");
+                || null == mIFromKeystoreToWalletCallback) {
+            CpLog.e(TAG, "mKeystore or mPwd or mIFromKeystoreToWalletCallback is null！");
             return;
         }
 
         Wallet wallet = null;
         try {
-            wallet = Neomobile.fromKeyStore(walletBean.getKeyStore(), mPwd);
+            wallet = Neomobile.fromKeyStore(mKeystore, mPwd);
             CpLog.i(TAG, "wallet address:" + wallet.address());
         } catch (Exception e) {
             CpLog.e(TAG, "fromKeyStore exception:" + e.getMessage());
         }
-        mIFromKeystoreGenerateWalletCallback.fromKeystoreWallet(wallet);
+        mIFromKeystoreToWalletCallback.fromKeystoreWallet(wallet);
     }
 }

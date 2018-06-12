@@ -23,8 +23,8 @@
             android:id="@+id/tv_me_manager_detail_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignBaseline="@+id/tv_me_manager_detail_title"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
             android:text="@string/tv_me_manager_detail_save"
             android:textColor="@android:color/white"
@@ -71,12 +71,35 @@
         android:layout_marginTop="11dp"
         android:background="@color/view_separator" />
 
+    <RelativeLayout
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="导出Keystore"
+            android:textColor="@color/tv_gathering_title"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/ib_manage_detail_export"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/icon_wallet_item_arrows" />
+    </RelativeLayout>
+
     <Button
         android:id="@+id/bt_me_manager_detail_backup"
         android:layout_width="293dp"
         android:layout_height="39dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="121dp"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/tv_me_manager_detail_backup"
         android:textColor="@android:color/white"

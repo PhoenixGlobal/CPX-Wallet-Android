@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.adapter.AssetsOverviewRecyclerViewAdapter;
@@ -25,6 +26,7 @@ import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
+import chinapex.com.wallet.utils.GsonUtils;
 
 public class AssetsOverviewActivity extends BaseActivity implements
         AssetsOverviewRecyclerViewAdapter.OnItemClickListener, IGetAccountStateCallback,
@@ -57,16 +59,6 @@ public class AssetsOverviewActivity extends BaseActivity implements
         mRv_assets_overview = (RecyclerView) findViewById(R.id.rv_assets_overview);
         mSl_assets_overview_rv = (SwipeRefreshLayout) findViewById(R.id.sl_assets_overview_rv);
 
-        mRv_assets_overview.setLayoutManager(new LinearLayoutManager(ApexWalletApplication
-                .getInstance(), LinearLayoutManager.VERTICAL, false));
-        mBalanceBeans = getBalanceBeans();
-        mAssetsOverviewRecyclerViewAdapter = new AssetsOverviewRecyclerViewAdapter(mBalanceBeans);
-        mAssetsOverviewRecyclerViewAdapter.setOnItemClickListener(this);
-
-        int space = DensityUtil.dip2px(this, 5);
-        mRv_assets_overview.addItemDecoration(new SpacesItemDecoration(space));
-        mRv_assets_overview.setAdapter(mAssetsOverviewRecyclerViewAdapter);
-
         mSl_assets_overview_rv.setColorSchemeColors(this.getResources().getColor(R.color
                 .colorPrimary));
         mSl_assets_overview_rv.setOnRefreshListener(this);
@@ -80,9 +72,20 @@ public class AssetsOverviewActivity extends BaseActivity implements
         }
 
         mWalletBean = (WalletBean) intent.getParcelableExtra(Constant.WALLET_BEAN);
+
         mTv_assets_overview_wallet_name.setText(String.valueOf(Constant.WALLET_NAME + mWalletBean
                 .getWalletName()));
         mTv_assets_overview_wallet_address.setText(mWalletBean.getWalletAddr());
+
+        mRv_assets_overview.setLayoutManager(new LinearLayoutManager(ApexWalletApplication
+                .getInstance(), LinearLayoutManager.VERTICAL, false));
+        mBalanceBeans = getBalanceBeans();
+        mAssetsOverviewRecyclerViewAdapter = new AssetsOverviewRecyclerViewAdapter(mBalanceBeans);
+        mAssetsOverviewRecyclerViewAdapter.setOnItemClickListener(this);
+
+        int space = DensityUtil.dip2px(this, 5);
+        mRv_assets_overview.addItemDecoration(new SpacesItemDecoration(space));
+        mRv_assets_overview.setAdapter(mAssetsOverviewRecyclerViewAdapter);
     }
 
     private void getAssetsBalance() {
@@ -105,34 +108,31 @@ public class AssetsOverviewActivity extends BaseActivity implements
     }
 
     private List<BalanceBean> getBalanceBeans() {
-        ArrayList<BalanceBean> balanceBeans = new ArrayList<>();
+        if (null == mWalletBean) {
+            CpLog.e(TAG, "mWalletBean is null!");
+            return null;
+        }
 
-        for (int i = 0; i < 1; i++) {
-            BalanceBean balanceBean = new BalanceBean();
-            balanceBean.setMapState(0);
-            balanceBean.setAssetsID(Constant.ASSETS_NEO);
-            balanceBean.setAssetsValue(1.6789 + i + "");
-            balanceBeans.add(balanceBean);
+        String assetsJson = mWalletBean.getAssetsJson();
+        List<String> assets = GsonUtils.json2List(assetsJson, String.class);
+        if (null == assets || assets.isEmpty()) {
+            CpLog.e(TAG, "assets is null or empty!");
+            return null;
         }
-        for (int i = 0; i < 1; i++) {
+
+        ArrayList<BalanceBean> balanceBeans = new ArrayList<>();
+        for (String asset : assets) {
             BalanceBean balanceBean = new BalanceBean();
             balanceBean.setMapState(0);
-            balanceBean.setAssetsID(Constant.ASSETS_NEO_GAS);
-            balanceBean.setAssetsValue(1.9876 + i + "");
-            balanceBeans.add(balanceBean);
-        }
-        for (int i = 0; i < 1; i++) {
-            BalanceBean balanceBean = new BalanceBean();
-            balanceBean.setMapState(0);
-            balanceBean.setAssetsID(Constant.ASSETS_CPX);
-            balanceBean.setAssetsValue(1.5566 + i + "");
+            balanceBean.setAssetsID(asset);
+            balanceBean.setAssetsValue("0");
             balanceBeans.add(balanceBean);
         }
         return balanceBeans;
     }
 
     @Override
-    public void assetsBalance(List<BalanceBean> balanceBeans) {
+    public void assetsBalance(Map<String, BalanceBean> balanceBeans) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -140,12 +140,45 @@ public class AssetsOverviewActivity extends BaseActivity implements
             }
         });
 
-        if (null == balanceBeans || balanceBeans.isEmpty()) {
-            CpLog.e(TAG, "assetsBalance is null or empty!");
+        if (null == mBalanceBeans || mBalanceBeans.isEmpty()) {
+            CpLog.e(TAG, "mBalanceBeans is null or empty!");
             return;
         }
 
-        mBalanceBeans.addAll(balanceBeans);
+        if (null == balanceBeans || balanceBeans.isEmpty()) {
+            CpLog.w(TAG, "the current assets is null!");
+            for (BalanceBean balanceBean0 : mBalanceBeans) {
+                if (null == balanceBean0) {
+                    CpLog.e(TAG, "balanceBean0 is null!");
+                    continue;
+                }
+                balanceBean0.setAssetsValue("0");
+            }
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mAssetsOverviewRecyclerViewAdapter.notifyDataSetChanged();
+                }
+            });
+
+            return;
+        }
+
+        for (BalanceBean balanceBean : mBalanceBeans) {
+            if (null == balanceBean) {
+                CpLog.e(TAG, "balanceBean is null!");
+                continue;
+            }
+
+            String assetsID = balanceBean.getAssetsID();
+            if (balanceBeans.containsKey(assetsID)) {
+                balanceBean.setAssetsValue(balanceBeans.get(assetsID).getAssetsValue());
+            } else {
+                balanceBean.setAssetsValue("0");
+            }
+        }
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -14,12 +14,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.base.BaseFragment;
-import chinapex.com.wallet.executor.TaskController;
-import chinapex.com.wallet.executor.runnable.GetUtxos;
 import chinapex.com.wallet.global.ApexCache;
-import chinapex.com.wallet.net.INetCallback;
-import chinapex.com.wallet.net.OkHttpClientManager;
-import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.FragmentFactory;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar
@@ -44,7 +39,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         initToolBar();
         initBottomNavigationBar();
         initFragment();
-
     }
 
     private void initData() {
