@@ -17,6 +17,7 @@ import chinapex.com.wallet.utils.FragmentFactory;
 
 public class ImportWalletActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final String TAG = ImportWalletActivity.class.getSimpleName();
     private Button mBt_import_wallet_mnemonic;
     private Button mBt_import_wallet_keystore;
 
@@ -40,8 +41,10 @@ public class ImportWalletActivity extends BaseActivity implements View.OnClickLi
     private void initData() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        BaseFragment importMnemonicFragment = FragmentFactory.getFragment(Constant.FRAGMENT_TAG_IMPORT_MNEMONIC);
-        fragmentTransaction.add(R.id.fl_import_wallet, importMnemonicFragment, Constant.FRAGMENT_TAG_IMPORT_MNEMONIC);
+        BaseFragment importMnemonicFragment = FragmentFactory.getFragment(Constant
+                .FRAGMENT_TAG_IMPORT_MNEMONIC);
+        fragmentTransaction.add(R.id.fl_import_wallet, importMnemonicFragment, Constant
+                .FRAGMENT_TAG_IMPORT_MNEMONIC);
         fragmentTransaction.show(importMnemonicFragment).commit();
     }
 
@@ -59,24 +62,28 @@ public class ImportWalletActivity extends BaseActivity implements View.OnClickLi
 
     private void mnemonicIsSelected() {
         mBt_import_wallet_mnemonic.setBackgroundResource(R.drawable.shape_white_bt_bg);
-        mBt_import_wallet_mnemonic.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color
+        mBt_import_wallet_mnemonic.setTextColor(ApexWalletApplication.getInstance().getResources
+                ().getColor(R.color
                 .colorPrimary));
 
         mBt_import_wallet_keystore.setBackground(new ColorDrawable(0));
         mBt_import_wallet_keystore.setTextColor(Color.WHITE);
 
-        switchFragment(Constant.FRAGMENT_TAG_IMPORT_MNEMONIC, Constant.FRAGMENT_TAG_IMPORT_KEYSTORE);
+        switchFragment(Constant.FRAGMENT_TAG_IMPORT_MNEMONIC, Constant
+                .FRAGMENT_TAG_IMPORT_KEYSTORE);
     }
 
     private void keystoreIsSelected() {
         mBt_import_wallet_keystore.setBackgroundResource(R.drawable.shape_white_bt_bg);
-        mBt_import_wallet_keystore.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color
+        mBt_import_wallet_keystore.setTextColor(ApexWalletApplication.getInstance().getResources
+                ().getColor(R.color
                 .colorPrimary));
 
         mBt_import_wallet_mnemonic.setBackground(new ColorDrawable(0));
         mBt_import_wallet_mnemonic.setTextColor(Color.WHITE);
 
-        switchFragment(Constant.FRAGMENT_TAG_IMPORT_KEYSTORE, Constant.FRAGMENT_TAG_IMPORT_MNEMONIC);
+        switchFragment(Constant.FRAGMENT_TAG_IMPORT_KEYSTORE, Constant
+                .FRAGMENT_TAG_IMPORT_MNEMONIC);
     }
 
     private void switchFragment(String showFragmentTag, String hideFragmentTag) {
@@ -93,4 +100,5 @@ public class ImportWalletActivity extends BaseActivity implements View.OnClickLi
         fragmentTransaction.hide(hideFragment);
         fragmentTransaction.commit();
     }
+
 }

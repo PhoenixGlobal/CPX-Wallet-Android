@@ -58,7 +58,6 @@ public class CreateWallet implements Runnable {
         String toKeyStore = null;
         try {
             toKeyStore = wallet.toKeyStore(mPwd);
-            CpLog.i(TAG, "toKeyStore:" + toKeyStore);
         } catch (Exception e) {
             CpLog.e(TAG, "toKeyStore exception:" + e.getMessage());
         }

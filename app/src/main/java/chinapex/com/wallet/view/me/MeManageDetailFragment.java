@@ -6,33 +6,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.changelistener.ApexListeners;
+import chinapex.com.wallet.changelistener.OnItemStateUpdateListener;
+import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
+import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.view.MeSkipActivity;
-import chinapex.com.wallet.view.dialog.InputPwdDelDialog;
-import chinapex.com.wallet.view.wallet.BackupWalletActivity;
+import chinapex.com.wallet.view.dialog.BackupWalletPwdDialog;
+import chinapex.com.wallet.view.dialog.DeleteWalletPwdDialog;
+import chinapex.com.wallet.view.dialog.ExportKeystorePwdDialog;
 import chinapex.com.wallet.view.wallet.ExportKeystoreActivity;
 
 /**
  * Created by SteelCabbage on 2018/5/31 0031.
  */
 
-public class MeManageDetailFragment extends BaseFragment implements View.OnClickListener {
+public class MeManageDetailFragment extends BaseFragment implements View.OnClickListener,
+        OnItemStateUpdateListener {
 
     private static final String TAG = MeManageDetailFragment.class.getSimpleName();
     private TextView mTv_me_manager_detail_title;
     private TextView mTv_me_manager_detail_address;
-    private TextView mTv_me_manager_detail_bottom_wallet_name;
     private Button mBt_me_manager_detail_backup;
     private Button mBt_me_manager_detail_delete;
     private WalletBean mCurrentClickedWalletBean;
     private ImageButton mIb_manage_detail_export;
+    private EditText mEt_me_manager_detail_bottom_wallet_name;
+    private Button mBt_me_manager_detail_save;
 
 
     @Nullable
@@ -52,15 +61,18 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
     private void initView(View view) {
         mTv_me_manager_detail_title = view.findViewById(R.id.tv_me_manager_detail_title);
         mTv_me_manager_detail_address = view.findViewById(R.id.tv_me_manager_detail_address);
-        mTv_me_manager_detail_bottom_wallet_name = view.findViewById(R.id
-                .tv_me_manager_detail_bottom_wallet_name);
+        mEt_me_manager_detail_bottom_wallet_name = view.findViewById(R.id
+                .et_me_manager_detail_bottom_wallet_name);
         mBt_me_manager_detail_backup = view.findViewById(R.id.bt_me_manager_detail_backup);
         mBt_me_manager_detail_delete = view.findViewById(R.id.bt_me_manager_detail_delete);
+        mBt_me_manager_detail_save = view.findViewById(R.id.bt_me_manager_detail_save);
         mIb_manage_detail_export = view.findViewById(R.id.ib_manage_detail_export);
 
         mBt_me_manager_detail_backup.setOnClickListener(this);
         mBt_me_manager_detail_delete.setOnClickListener(this);
+        mBt_me_manager_detail_save.setOnClickListener(this);
         mIb_manage_detail_export.setOnClickListener(this);
+        ApexListeners.getInstance().addOnItemStateUpdateListener(this);
     }
 
     private void initData() {
@@ -72,13 +84,80 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
         }
 
         mTv_me_manager_detail_title.setText(String.valueOf(Constant.WALLET_NAME +
-                mCurrentClickedWalletBean
-                        .getWalletName()));
-        mTv_me_manager_detail_address.setText(mCurrentClickedWalletBean.getWalletAddr());
-        mTv_me_manager_detail_bottom_wallet_name.setText(String.valueOf(Constant.WALLET_NAME +
                 mCurrentClickedWalletBean.getWalletName()));
+        mTv_me_manager_detail_address.setText(mCurrentClickedWalletBean.getWalletAddr());
+        mEt_me_manager_detail_bottom_wallet_name.setText(String.valueOf(mCurrentClickedWalletBean
+                .getWalletName()));
 
-        int backupState = mCurrentClickedWalletBean.getBackupState();
+        setIsShowBackupKey(mCurrentClickedWalletBean.getBackupState());
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ib_manage_detail_export:
+                showExportKeystorePwdDialog();
+                break;
+            case R.id.bt_me_manager_detail_backup:
+                showBackupWalletPwdDialog();
+                break;
+            case R.id.bt_me_manager_detail_delete:
+                showDeleteWalletPwdDialog();
+                break;
+            case R.id.bt_me_manager_detail_save:
+                modifyWalletName();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void modifyWalletName() {
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
+                .getInstance());
+        if (null == apexWalletDbDao) {
+            CpLog.e(TAG, "apexWalletDbDao is null!");
+            return;
+        }
+
+        String newWalletName = mEt_me_manager_detail_bottom_wallet_name.getText().toString().trim();
+        apexWalletDbDao.updateWalletName(Constant.TABLE_APEX_WALLET, mCurrentClickedWalletBean
+                .getWalletAddr(), newWalletName);
+        mTv_me_manager_detail_title.setText(String.valueOf(Constant.WALLET_NAME + newWalletName));
+        mCurrentClickedWalletBean.setWalletName(newWalletName);
+        ApexListeners.getInstance().notifyItemNameUpdate(mCurrentClickedWalletBean);
+        Toast.makeText(getActivity(), "钱包名称保存成功", Toast.LENGTH_SHORT).show();
+    }
+
+    public void showDeleteWalletPwdDialog() {
+        DeleteWalletPwdDialog deleteWalletPwdDialog = DeleteWalletPwdDialog.newInstance();
+        deleteWalletPwdDialog.setCurrentWalletBean(mCurrentClickedWalletBean);
+        deleteWalletPwdDialog.show(getFragmentManager(), "DeleteWalletPwdDialog");
+    }
+
+    public void showBackupWalletPwdDialog() {
+        BackupWalletPwdDialog backupWalletPwdDialog = BackupWalletPwdDialog.newInstance();
+        backupWalletPwdDialog.setCurrentWalletBean(mCurrentClickedWalletBean);
+        backupWalletPwdDialog.show(getFragmentManager(), "BackupWalletPwdDialog");
+    }
+
+    public void showExportKeystorePwdDialog() {
+        ExportKeystorePwdDialog exportKeystorePwdDialog = ExportKeystorePwdDialog.newInstance();
+        exportKeystorePwdDialog.setCurrentWalletBean(mCurrentClickedWalletBean);
+        exportKeystorePwdDialog.show(getFragmentManager(), "ExportKeystorePwdDialog");
+    }
+
+    @Override
+    public void OnItemStateUpdate(WalletBean walletBean) {
+        if (null == walletBean) {
+            CpLog.e(TAG, "walletBean is null!");
+            return;
+        }
+
+        setIsShowBackupKey(walletBean.getBackupState());
+    }
+
+    private void setIsShowBackupKey(int backupState) {
         switch (backupState) {
             //未备份
             case Constant.BACKUP_UNFINISHED:
@@ -92,28 +171,4 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
                 break;
         }
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ib_manage_detail_export:
-                startActivity(ExportKeystoreActivity.class, false);
-                break;
-            case R.id.bt_me_manager_detail_backup:
-                startActivity(BackupWalletActivity.class, false);
-                break;
-            case R.id.bt_me_manager_detail_delete:
-                showInputPwdDialog();
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void showInputPwdDialog() {
-        InputPwdDelDialog inputPwdDelDialog = InputPwdDelDialog.newInstance();
-        inputPwdDelDialog.setCurrentWalletBean(mCurrentClickedWalletBean);
-        inputPwdDelDialog.show(getFragmentManager(), "InputPwdDelDialog");
-    }
-
 }

@@ -34,25 +34,11 @@ public class NewVisitorActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        isFirstEnter();
-
         // 设置透明导航键
         setNavigationBarColorTransparent();
         setContentView(R.layout.activity_new_visitor);
 
         initView();
-
-    }
-
-    private void isFirstEnter() {
-        boolean isFirstEnter = (boolean) SharedPreferencesUtils.getParam(ApexWalletApplication.getInstance(), Constant
-                .IS_FIRST_ENTER, true);
-        if (isFirstEnter) {
-            CpLog.i(TAG, "this is first enter!");
-            SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant.IS_FIRST_ENTER, false);
-        } else {
-            startActivity(MainActivity.class, true);
-        }
     }
 
     private void initView() {

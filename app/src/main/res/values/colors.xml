@@ -2,18 +2,17 @@
 <resources>
     <color name="colorPrimary">#4C8EFA</color>
     <color name="colorPrimaryDark">#4C8EFA</color>
-    <color name="color_new_visitor_bt_bg">#cc4C8EFA</color>
     <color name="colorAccent">#979797</color>
-    <color name="create_wallet_et_import_color">#666666</color>
-    <color name="view_separator">#DDDDDD</color>
-    <color name="color_privacy_gray">#F1F1F1</color>
-    <color name="tv_wallet_detail_drawer_title">#B0C7FA</color>
-    <color name="tv_gathering_title">#999999</color>
-    <color name="tv_gathering_wallet_name">#333333</color>
-    <color name="tv_copy_mnemonic_color">#666666</color>
-    <color name="recyclerview_separator_view">#E5E5E5</color>
-    <color name="dialog_pwd">#030303</color>
-    <color name="assets_overview_value">#5D99FA</color>
-    <color name="balance_detail_decline">#54CA80</color>
-    <color name="export_keystore_text">#535353</color>
+    <color name="c_cc4C8EFA">#cc4C8EFA</color>
+    <color name="c_666666">#666666</color>
+    <color name="c_DDDDDD">#DDDDDD</color>
+    <color name="c_F1F1F1">#F1F1F1</color>
+    <color name="c_B0C7FA">#B0C7FA</color>
+    <color name="c_999999">#999999</color>
+    <color name="c_333333">#333333</color>
+    <color name="c_E5E5E5">#E5E5E5</color>
+    <color name="c_030303">#030303</color>
+    <color name="c_5D99FA">#5D99FA</color>
+    <color name="c_54CA80">#54CA80</color>
+    <color name="c_535353">#535353</color>
 </resources>

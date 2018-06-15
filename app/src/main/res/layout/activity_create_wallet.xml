@@ -129,7 +129,7 @@
         android:background="@null"
         android:gravity="bottom|center_horizontal"
         android:text="@string/create_wallet_import"
-        android:textColor="@color/create_wallet_et_import_color"
+        android:textColor="@color/c_666666"
         android:textSize="@dimen/create_wallet_et_import_size" />
 
     <View

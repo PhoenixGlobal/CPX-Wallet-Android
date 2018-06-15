@@ -6,7 +6,8 @@ package chinapex.com.wallet.global;
 
 public class Constant {
     // application state value
-    public static final String IS_FIRST_ENTER = "isFirstEnter";
+    public static final String IS_FIRST_ENTER_APP = "isFirstEnterApp";
+    public static final String IS_FIRST_ENTER_MAIN = "isFirstEnterMain";
 
     // net
     public static final long CONNECT_TIMEOUT = 5;
@@ -15,19 +16,21 @@ public class Constant {
     public static final int NET_ERROR = -1;
     public static final int NET_SUCCESS = 1;
     public static final int NET_BODY_NULL = 0;
-    //    public static final String HOSTNAME_VERIFIER = "40.125.171.0";
+
+    // neo测试网ip
+//    public static final String HOSTNAME_VERIFIER = "40.125.171.0";
 //    public static final String URL_CLI = "http://40.125.171.0:20332";
 //    public static final String URL_UTXOS = "http://40.125.171.0:8083/utxos/";
 
-    // neo测试网
+    // neo测试网域名
 //    public static final String HOSTNAME_VERIFIER = "dev.chinapex.com.cn";
 //    public static final String URL_CLI = "http://dev.chinapex.com.cn:10086/neo-cli/";
 //    public static final String URL_UTXOS = "http://dev.chinapex.com.cn:10086/tool/utxos/";
 
     // neo正式网
     public static final String HOSTNAME_VERIFIER = "tracker.chinapex.com.cn";
-    public static final String URL_CLI = "http://tracker.chinapex.com.cn:10086/neo-cli/";
-    public static final String URL_UTXOS = "http://tracker.chinapex.com.cn:10086/tool/utxos/";
+    public static final String URL_CLI = "http://tracker.chinapex.com.cn:80/neo-cli/";
+    public static final String URL_UTXOS = "http://tracker.chinapex.com.cn:80/tool/utxos/";
 
     // fragmentTag
     public static final String FRAGMENT_TAG_IMPORT_MNEMONIC = "ImportMnemonicFragment";
@@ -52,12 +55,14 @@ public class Constant {
             "parcelableWalletBeanManageDetail";
 
     // backup wallet
+    public static final String BACKUP_KEYSTORE = "backupKeystore";
     public static final String BACKUP_MNEMONIC = "backupMnemonic";
     public static final int BACKUP_UNFINISHED = 0;
     public static final int BACKUP_FINISH = 1;
 
     // wallet detail transfer
     public static final String PARCELABLE_WALLET_BEAN_TRANSFER = "parcelableWalletBeanTransfer";
+    public static final String PARCELABLE_BALANCE_BEAN_TRANSFER = "parcelableBalanceBeanTransfer";
     // wallet detail gathering
     public static final String PARCELABLE_WALLET_BEAN_GATHERING = "parcelableWalletBeanGathering";
 

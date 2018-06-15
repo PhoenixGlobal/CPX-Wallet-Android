@@ -21,8 +21,9 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public void startActivityBundle(Class cls, boolean isFinish, String bundleKey, String key, String value, String
-            parcelableKey, Parcelable parcelable) {
+    public void startActivityBundle(Class cls, boolean isFinish, String bundleKey, String key,
+                                    String value, String
+                                            parcelableKey, Parcelable parcelable) {
         Intent intent = new Intent(ApexWalletApplication.getInstance(), cls);
         Bundle bundle = new Bundle();
         bundle.putString(key, value);
@@ -34,7 +35,8 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public void startActivityParcelable(Class cls, boolean isFinish, String parcelableKey, Parcelable parcelable) {
+    public void startActivityParcelable(Class cls, boolean isFinish, String parcelableKey,
+                                        Parcelable parcelable) {
         if (null == parcelable || TextUtils.isEmpty(parcelableKey)) {
             CpLog.e(TAG, "parcelable or parcelableKey is null!");
             return;
@@ -42,6 +44,15 @@ public class BaseFragment extends Fragment {
 
         Intent intent = new Intent(ApexWalletApplication.getInstance(), cls);
         intent.putExtra(parcelableKey, parcelable);
+        startActivity(intent);
+        if (isFinish) {
+            getActivity().finish();
+        }
+    }
+
+    public void startActivityBundle(Class cls, boolean isFinish, String key, String value) {
+        Intent intent = new Intent(ApexWalletApplication.getInstance(), cls);
+        intent.putExtra(key, value);
         startActivity(intent);
         if (isFinish) {
             getActivity().finish();

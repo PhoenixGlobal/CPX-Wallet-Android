@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CPX"
-            android:textColor="@color/tv_gathering_wallet_name"
+            android:textColor="@color/c_333333"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
             android:layout_marginStart="25dp"
             android:background="@drawable/shape_assets_overview_map_def"
             android:text="一键映射"
-            android:textColor="@color/tv_gathering_title" />
+            android:textColor="@color/c_999999" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="30dp"
                 android:text="2.0032"
-                android:textColor="@color/assets_overview_value"
+                android:textColor="@color/c_5D99FA"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="cpx"
-                android:textColor="@color/assets_overview_value" />
+                android:textColor="@color/c_5D99FA" />
 
         </RelativeLayout>
 

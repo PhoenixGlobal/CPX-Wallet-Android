@@ -27,7 +27,7 @@
                 android:ems="6"
                 android:singleLine="true"
                 android:text="@string/assets_rv_item_wallet_name"
-                android:textColor="@color/tv_gathering_wallet_name"
+                android:textColor="@color/c_333333"
                 android:textSize="@dimen/tv_assets_rv_item_wallet_name_size"
                 android:textStyle="bold" />
 

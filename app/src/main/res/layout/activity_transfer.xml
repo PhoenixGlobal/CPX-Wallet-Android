@@ -29,7 +29,7 @@
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:layout_marginTop="@dimen/tv_transfer_from_margin_top"
         android:text="@string/tv_transfer_from_content"
-        android:textColor="@color/tv_gathering_title"
+        android:textColor="@color/c_999999"
         android:textSize="@dimen/tv_transfer_from_font_size" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:text="@string/tv_transfer_from_wallet_name"
-        android:textColor="@color/tv_gathering_wallet_name"
+        android:textColor="@color/c_333333"
         android:textSize="@dimen/tv_transfer_from_wallet_name_font_size" />
 
     <TextView
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="11dp"
-        android:background="@color/view_separator" />
+        android:background="@color/c_DDDDDD" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,13 +80,13 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="11dp"
-        android:background="@color/view_separator" />
+        android:background="@color/c_DDDDDD" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/et_transfer_amount"
@@ -99,10 +99,11 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_transfer_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="cpx"
-            android:textColor="@color/tv_gathering_wallet_name" />
+            android:textColor="@color/c_333333" />
 
     </LinearLayout>
 
@@ -110,16 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="11dp"
-        android:background="@color/view_separator" />
-
-
-    <EditText
-        android:id="@+id/et_transfer_pwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:layout_marginTop="5dp"
-        android:hint="请输入密码" />
+        android:background="@color/c_DDDDDD" />
 
     <Button
         android:id="@+id/bt_transfer_send"

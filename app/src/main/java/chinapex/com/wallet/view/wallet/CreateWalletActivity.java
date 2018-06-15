@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICreateWalletCallback;
 import chinapex.com.wallet.executor.runnable.CreateWallet;
+import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import neomobile.Wallet;
@@ -207,7 +209,6 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         String mnemonicEnUs = null;
         try {
             mnemonicEnUs = wallet.mnemonic("en_US");
-            CpLog.i(TAG, "mnemonicEnUs:" + mnemonicEnUs);
         } catch (Exception e) {
             CpLog.e(TAG, "mnemonicEnUs exception:" + e.getMessage());
         }
@@ -217,7 +218,13 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
             return;
         }
 
-        startActivityBundle(BackupWalletActivity.class, true, Constant.BACKUP_MNEMONIC,
-                mnemonicEnUs);
+        WalletBean walletBean = new WalletBean();
+        walletBean.setWalletAddr(wallet.address());
+        walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
+        Intent intent = new Intent(ApexWalletApplication.getInstance(), BackupWalletActivity.class);
+        intent.putExtra(Constant.BACKUP_MNEMONIC, mnemonicEnUs);
+        intent.putExtra(Constant.WALLET_BEAN, walletBean);
+        startActivity(intent);
+        finish();
     }
 }

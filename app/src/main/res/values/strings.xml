@@ -77,7 +77,7 @@
     <string name="tv_title_import">导入钱包</string>
     <string name="bt_import_wallet_mnemonic">助记词</string>
     <string name="bt_import_wallet_keystore">Keystore</string>
-    <string name="tv_import_wallet_notice">直接复制粘贴其他手机CPEX钱包APP的Keystore文件内容至输入框。</string>
+    <string name="tv_import_wallet_notice">直接复制粘贴其他手机的Apex钱包的Keystore内容至输入框。</string>
     <string name="export_keystore_off_line_content">请复制粘贴Keystore文件到安全、离线的地方保存。切勿保存至邮箱、记事本、网盘、聊天工具等，非常危险。</string>
     <string name="export_keystore_off_line">离线保存</string>
     <string name="export_keystore_no_net">请勿使用网络传输</string>

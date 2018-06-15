@@ -22,17 +22,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- 新用户 -->
+        <!--启动页-->
         <activity
-            android:name=".view.NewVisitorActivity"
+            android:name=".view.BootPageActivity"
             android:theme="@style/AppTheme.MyTranslucentNavigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
+        <!-- 新用户 -->
+        <activity
+            android:name=".view.NewVisitorActivity"
+            android:theme="@style/AppTheme.MyTranslucentNavigation" />
         <!-- 主activity -->
         <activity android:name=".view.MainActivity" />
         <!-- 跳转activity -->
@@ -51,7 +55,8 @@
         <activity android:name=".view.assets.TransferActivity" />
         <!-- 收款 -->
         <activity android:name=".view.assets.GatheringActivity" />
-        <activity android:name=".view.wallet.ExportKeystoreActivity"></activity>
+        <!--导出Keystore-->
+        <activity android:name=".view.wallet.ExportKeystoreActivity" />
     </application>
 
 </manifest>

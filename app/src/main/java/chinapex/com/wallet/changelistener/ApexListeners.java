@@ -18,6 +18,10 @@ public class ApexListeners {
 
     private List<OnItemAddListener> mOnItemAddListeners;
 
+    private List<OnItemStateUpdateListener> mOnItemStateUpdateListeners;
+
+    private List<OnItemNameUpdateListener> mOnItemNameUpdateListeners;
+
     private ApexListeners() {
 
     }
@@ -33,6 +37,8 @@ public class ApexListeners {
     public void doInit() {
         mOnItemDeleteListeners = new ArrayList<>();
         mOnItemAddListeners = new ArrayList<>();
+        mOnItemStateUpdateListeners = new ArrayList<>();
+        mOnItemNameUpdateListeners = new ArrayList<>();
     }
 
     public void onDestroy() {
@@ -43,8 +49,12 @@ public class ApexListeners {
 
         mOnItemDeleteListeners.clear();
         mOnItemAddListeners.clear();
+        mOnItemStateUpdateListeners.clear();
+        mOnItemNameUpdateListeners.clear();
         mOnItemDeleteListeners = null;
         mOnItemAddListeners = null;
+        mOnItemStateUpdateListeners = null;
+        mOnItemNameUpdateListeners = null;
     }
 
 
@@ -64,6 +74,24 @@ public class ApexListeners {
         }
 
         mOnItemAddListeners.add(onItemAddListener);
+    }
+
+    public void addOnItemStateUpdateListener(OnItemStateUpdateListener onItemStateUpdateListener) {
+        if (null == mOnItemStateUpdateListeners || null == onItemStateUpdateListener) {
+            CpLog.e(TAG, "mOnItemStateUpdateListeners or onItemStateUpdateListener is null!");
+            return;
+        }
+
+        mOnItemStateUpdateListeners.add(onItemStateUpdateListener);
+    }
+
+    public void addOnItemNameUpdateListener(OnItemNameUpdateListener onItemNameUpdateListener) {
+        if (null == mOnItemNameUpdateListeners || null == onItemNameUpdateListener) {
+            CpLog.e(TAG, "mOnItemNameUpdateListeners or onItemNameUpdateListener is null!");
+            return;
+        }
+
+        mOnItemNameUpdateListeners.add(onItemNameUpdateListener);
     }
 
     public void notifyItemDelete(WalletBean walletBean) {
@@ -95,6 +123,38 @@ public class ApexListeners {
             }
 
             onItemAddListener.onItemAdd(walletBean);
+        }
+    }
+
+    public void notifyItemStateUpdate(WalletBean walletBean) {
+        if (null == mOnItemStateUpdateListeners) {
+            CpLog.e(TAG, "mOnItemStateUpdateListeners is null!");
+            return;
+        }
+
+        for (OnItemStateUpdateListener onItemStateUpdateListener : mOnItemStateUpdateListeners) {
+            if (null == onItemStateUpdateListener) {
+                CpLog.e(TAG, "onItemStateUpdateListener is null!");
+                continue;
+            }
+
+            onItemStateUpdateListener.OnItemStateUpdate(walletBean);
+        }
+    }
+
+    public void notifyItemNameUpdate(WalletBean walletBean) {
+        if (null == mOnItemNameUpdateListeners) {
+            CpLog.e(TAG, "mOnItemNameUpdateListeners is null!");
+            return;
+        }
+
+        for (OnItemNameUpdateListener onItemNameUpdateListener : mOnItemNameUpdateListeners) {
+            if (null == onItemNameUpdateListener) {
+                CpLog.e(TAG, "onItemNameUpdateListener is null!");
+                continue;
+            }
+
+            onItemNameUpdateListener.OnItemNameUpdate(walletBean);
         }
     }
 }

@@ -28,6 +28,8 @@ import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
+import chinapex.com.wallet.utils.SharedPreferencesUtils;
+import chinapex.com.wallet.view.MainActivity;
 import neomobile.Wallet;
 
 /**
@@ -116,7 +118,7 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
                     mBt_import_wallet_keystore.setBackgroundResource(R.drawable
                             .shape_import_wallet_bt_bg_def);
                     mBt_import_wallet_keystore.setTextColor(getResources().getColor(R.color
-                            .create_wallet_et_import_color));
+                            .c_666666));
                     mIsAgreePrivacy = false;
                 }
                 break;
@@ -191,10 +193,16 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
                 walletAddress);
         if (null != walletBeanTmp) {
             CpLog.e(TAG, "this walletBeanTmp from keystore has existed!");
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), "重复导入，此钱包已存在", Toast.LENGTH_SHORT).show();
+                }
+            });
             return;
         }
 
-        String keystorePwd = mEt_import_wallet_keystore_pwd.getText().toString().trim();
+        String keystore = mEt_import_wallet_keystore.getText().toString().trim();
         ArrayList<String> assetses = new ArrayList<>();
         assetses.add(Constant.ASSETS_CPX);
         assetses.add(Constant.ASSETS_NEO);
@@ -204,12 +212,24 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         walletBean.setWalletName(Constant.WALLET_NAME_IMPORT_DEFAULT);
         walletBean.setWalletAddr(walletAddress);
         walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
-        walletBean.setKeyStore(keystorePwd);
+        walletBean.setKeyStore(keystore);
         walletBean.setAssetsJson(GsonUtils.toJsonStr(assetses));
 
         apexWalletDbDao.insert(Constant.TABLE_APEX_WALLET, walletBean);
-
         ApexListeners.getInstance().notifyItemAdd(walletBean);
-        getActivity().finish();
+
+        isFirstEnter();
+    }
+
+    private void isFirstEnter() {
+        boolean isFirstExport = (boolean) SharedPreferencesUtils.getParam(ApexWalletApplication
+                .getInstance(), Constant.IS_FIRST_ENTER_MAIN, true);
+        if (isFirstExport) {
+            SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant
+                    .IS_FIRST_ENTER_MAIN, false);
+            startActivity(MainActivity.class, true);
+        } else {
+            getActivity().finish();
+        }
     }
 }

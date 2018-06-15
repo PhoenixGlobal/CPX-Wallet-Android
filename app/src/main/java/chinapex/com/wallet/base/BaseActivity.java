@@ -101,13 +101,4 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void startActivityBundle(Class cls, boolean isFinish, String backupKey, String mnemonicStr) {
-        Intent intent = new Intent(ApexWalletApplication.getInstance(), cls);
-        intent.putExtra(backupKey, mnemonicStr);
-        startActivity(intent);
-        if (isFinish) {
-            finish();
-        }
-    }
-
 }

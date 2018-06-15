@@ -3,6 +3,7 @@ package chinapex.com.wallet.view.assets;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,14 +16,15 @@ import android.widget.TextView;
 import com.google.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.adapter.DrawerMenuRecyclerViewAdapter;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.BalanceBean;
-import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.DrawerMenu;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.view.wallet.CreateWalletActivity;
@@ -55,10 +57,13 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
     private void initView() {
         mBt_balance_detail_transfer = (Button) findViewById(R.id.bt_balance_detail_transfer);
         mBt_balance_detail_gathering = (Button) findViewById(R.id.bt_balance_detail_gathering);
-        mTv_balance_detail_assets_name = (TextView) findViewById(R.id.tv_balance_detail_assets_name);
-        mTv_balance_detail_assets_value = (TextView) findViewById(R.id.tv_balance_detail_assets_value);
+        mTv_balance_detail_assets_name = (TextView) findViewById(R.id
+                .tv_balance_detail_assets_name);
+        mTv_balance_detail_assets_value = (TextView) findViewById(R.id
+                .tv_balance_detail_assets_value);
         mDl_balance_detail = (DrawerLayout) findViewById(R.id.dl_balance_detail);
-        mTv_balance_detail_drawer_title = (TextView) findViewById(R.id.tv_balance_detail_drawer_title);
+        mTv_balance_detail_drawer_title = (TextView) findViewById(R.id
+                .tv_balance_detail_drawer_title);
         mRv_balance_detail_drawer_menu = findViewById(R.id.rv_balance_detail_drawer_menu);
         mLl_balance_detail_map = (LinearLayout) findViewById(R.id.ll_balance_detail_map);
 
@@ -66,7 +71,8 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
         mBt_balance_detail_gathering.setOnClickListener(this);
         mDl_balance_detail.addDrawerListener(this);
 
-        mRv_balance_detail_drawer_menu.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
+        mRv_balance_detail_drawer_menu.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL,
                 false));
 
         mDrawerMenuRecyclerViewAdapter = new DrawerMenuRecyclerViewAdapter(getWalletDetailMenus());
@@ -117,12 +123,14 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_balance_detail_transfer:
-                startActivityParcelable(TransferActivity.class, false, Constant.PARCELABLE_WALLET_BEAN_TRANSFER,
-                        mWalletBean);
+                HashMap<String, Parcelable> hashMap = new HashMap<>();
+                hashMap.put(Constant.PARCELABLE_WALLET_BEAN_TRANSFER, mWalletBean);
+                hashMap.put(Constant.PARCELABLE_BALANCE_BEAN_TRANSFER, mBalanceBean);
+                startActivityParcelables(TransferActivity.class, false, hashMap);
                 break;
             case R.id.bt_balance_detail_gathering:
-                startActivityParcelable(GatheringActivity.class, false, Constant.PARCELABLE_WALLET_BEAN_GATHERING,
-                        mWalletBean);
+                startActivityParcelable(GatheringActivity.class, false, Constant
+                        .PARCELABLE_WALLET_BEAN_GATHERING, mWalletBean);
                 break;
             default:
                 break;

@@ -4,6 +4,6 @@
 
     <corners android:radius="@dimen/shape_new_visitor_bt_corner" />
 
-    <solid android:color="@color/color_privacy_gray" />
+    <solid android:color="@color/c_F1F1F1" />
 
 </shape>

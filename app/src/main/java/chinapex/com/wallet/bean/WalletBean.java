@@ -113,15 +113,12 @@ public class WalletBean implements Parcelable {
 
         WalletBean that = (WalletBean) o;
 
-        if (!mWalletName.equals(that.mWalletName)) return false;
         return mWalletAddr.equals(that.mWalletAddr);
     }
 
     @Override
     public int hashCode() {
-        int result = mWalletName.hashCode();
-        result = 31 * result + mWalletAddr.hashCode();
-        return result;
+        return mWalletAddr.hashCode();
     }
 
     @Override

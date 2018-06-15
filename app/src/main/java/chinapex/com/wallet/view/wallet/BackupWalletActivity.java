@@ -1,6 +1,5 @@
 package chinapex.com.wallet.view.wallet;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.FragmentFactory;
@@ -22,6 +22,7 @@ public class BackupWalletActivity extends BaseActivity {
     private Toolbar mTb_backup;
     private String[] mBackupTitles;
     private String mBackupMnemonic;
+    private WalletBean mWalletBean;
 
 
     @Override
@@ -45,10 +46,8 @@ public class BackupWalletActivity extends BaseActivity {
         }
 
         mBackupMnemonic = intent.getStringExtra(Constant.BACKUP_MNEMONIC);
-        if (TextUtils.isEmpty(mBackupMnemonic)) {
-            CpLog.e(TAG, "mBackupMnemonic is null!");
-            return;
-        }
+        mWalletBean = intent.getParcelableExtra(Constant.WALLET_BEAN);
+
     }
 
     private void initView() {
@@ -66,12 +65,6 @@ public class BackupWalletActivity extends BaseActivity {
     private void initFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        for (int i = 7; i < mBackupTitles.length + 7; i++) {
-//            Fragment fragment = fragmentManager.findFragmentByTag(i + "");
-//            if (null != fragment) {
-//                fragmentTransaction.remove(fragment);
-//            }
-//        }
         fragmentTransaction.add(R.id.fl_backup, FragmentFactory.getFragment(Constant.FRAGMENT_TAG_BACKUP), Constant
                 .FRAGMENT_TAG_BACKUP);
         fragmentTransaction.commit();
@@ -87,4 +80,7 @@ public class BackupWalletActivity extends BaseActivity {
         return mBackupMnemonic;
     }
 
+    public WalletBean getWalletBean() {
+        return mWalletBean;
+    }
 }

@@ -106,7 +106,7 @@
             android:id="@+id/tv_balance_detail_drawer_title"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:background="@color/tv_wallet_detail_drawer_title"
+            android:background="@color/c_B0C7FA"
             android:gravity="center"
             android:paddingTop="10dp"
             android:text="@string/tv_wallet_detail_drawer_title"

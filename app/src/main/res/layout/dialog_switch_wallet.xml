@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ib_switch_wallet_close"
         android:layout_marginTop="10dp"
-        android:divider="@color/view_separator" />
+        android:divider="@color/c_DDDDDD" />
 
 
 </RelativeLayout>

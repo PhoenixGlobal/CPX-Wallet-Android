@@ -277,12 +277,12 @@ public class ApexWalletDbDao {
         closeDatabase();
     }
 
-    public void updateWalletName(String tableName, String walletNameOld, String
+    public void updateWalletName(String tableName, String walletAddress, String
             walletNameNew) {
         if (TextUtils.isEmpty(tableName)
-                || TextUtils.isEmpty(walletNameOld)
+                || TextUtils.isEmpty(walletAddress)
                 || TextUtils.isEmpty(walletNameNew)) {
-            CpLog.e(TAG, "insert() -> tableName or walletName or walletNameNew is null!");
+            CpLog.e(TAG, "tableName or walletAddress or walletNameNew is null!");
             return;
         }
 
@@ -292,10 +292,10 @@ public class ApexWalletDbDao {
         SQLiteDatabase db = openDatabase();
         try {
             db.beginTransaction();
-            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_NAME_EQ, new
-                    String[]{walletNameOld + ""});
+            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new
+                    String[]{walletAddress + ""});
             db.setTransactionSuccessful();
-            CpLog.i(TAG, "updateBackupStateByWalletName() -> update " + walletNameOld + " ok!");
+            CpLog.i(TAG, "updateWalletName: " + walletNameNew + " is ok!");
         } catch (SQLException e) {
             CpLog.e(TAG, "updateBackupStateByWalletName exception:" + e.getMessage());
         } finally {

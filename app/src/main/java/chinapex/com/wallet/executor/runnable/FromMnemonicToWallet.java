@@ -23,21 +23,18 @@ public class FromMnemonicToWallet implements java.lang.Runnable {
     private static final String TAG = FromMnemonicToWallet.class.getSimpleName();
     private String mMnemonic;
     private String mMnemonicType;
-    private String mPwd;
     private IFromMnemonicToWalletCallback mIFromMnemonicToWalletCallback;
 
-    public FromMnemonicToWallet(String mnemonic, String mnemonicType, String pwd,
+    public FromMnemonicToWallet(String mnemonic, String mnemonicType,
                                 IFromMnemonicToWalletCallback IFromMnemonicToWalletCallback) {
         mMnemonic = mnemonic;
         mMnemonicType = mnemonicType;
-        mPwd = pwd;
         mIFromMnemonicToWalletCallback = IFromMnemonicToWalletCallback;
     }
 
     @Override
     public void run() {
         if (TextUtils.isEmpty(mMnemonic)
-                || TextUtils.isEmpty(mPwd)
                 || null == mIFromMnemonicToWalletCallback) {
             CpLog.e(TAG, "mMnemonic or mPwd or mIFromMnemonicToWalletCallback is null!");
             return;
@@ -49,46 +46,6 @@ public class FromMnemonicToWallet implements java.lang.Runnable {
         } catch (Exception e) {
             CpLog.e(TAG, "fromMnemonic exception:" + e.getMessage());
         }
-
-        if (null == wallet) {
-            CpLog.e(TAG, "from mnemonic wallet is null!");
-            return;
-        }
-
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
-        if (null == apexWalletDbDao) {
-            CpLog.e(TAG, "apexWalletDbDao is null!");
-            return;
-        }
-
-        String walletAddress = wallet.address();
-        CpLog.i(TAG, "wallet address:" + walletAddress);
-        WalletBean queryByWalletAddress = apexWalletDbDao.queryByWalletAddress(Constant
-                .TABLE_APEX_WALLET, walletAddress);
-        if (null != queryByWalletAddress) {
-            CpLog.e(TAG, "this wallet from mnemonic has existed!");
-            return;
-        }
-
-        ArrayList<String> assetses = new ArrayList<>();
-        assetses.add(Constant.ASSETS_CPX);
-        assetses.add(Constant.ASSETS_NEO);
-        assetses.add(Constant.ASSETS_NEO_GAS);
-
-        WalletBean walletBean = new WalletBean();
-        walletBean.setWalletName(Constant.WALLET_NAME_IMPORT_DEFAULT);
-        walletBean.setWalletAddr(walletAddress);
-        walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
-        walletBean.setAssetsJson(GsonUtils.toJsonStr(assetses));
-        try {
-            walletBean.setKeyStore(wallet.toKeyStore(mPwd));
-        } catch (Exception e) {
-            CpLog.e(TAG, "toKeyStore exception:" + e.getMessage());
-            return;
-        }
-
-        apexWalletDbDao.insert(Constant.TABLE_APEX_WALLET, walletBean);
 
         mIFromMnemonicToWalletCallback.fromMnemonicToWallet(wallet);
     }

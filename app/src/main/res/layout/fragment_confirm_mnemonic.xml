@@ -11,7 +11,7 @@
         android:layout_marginTop="38dp"
         android:gravity="center"
         android:text="@string/tv_confirm_mnemonic"
-        android:textColor="@color/tv_copy_mnemonic_color"
+        android:textColor="@color/c_666666"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/tv_confirm_mnemonic_content"
-        android:textColor="@color/create_wallet_et_import_color"
+        android:textColor="@color/c_666666"
         android:textSize="12sp" />
 
     <android.support.v7.widget.RecyclerView

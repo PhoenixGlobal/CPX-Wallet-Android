@@ -1,6 +1,7 @@
 package chinapex.com.wallet.view.dialog;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,32 +15,32 @@ import android.widget.Toast;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
 import chinapex.com.wallet.executor.runnable.FromKeystoreToWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
-import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
+import chinapex.com.wallet.view.wallet.ExportKeystoreActivity;
 import neomobile.Wallet;
 
 /**
  * Created by SteelCabbage on 2018/5/31 0031.
  */
 
-public class InputPwdDelDialog extends DialogFragment implements View.OnClickListener,
+public class ExportKeystorePwdDialog extends DialogFragment implements View.OnClickListener,
         IFromKeystoreToWalletCallback {
 
-    private static final String TAG = InputPwdDelDialog.class.getSimpleName();
+    private static final String TAG = ExportKeystorePwdDialog.class.getSimpleName();
     private WalletBean mCurrentWalletBean;
-    private Button mBt_dialog_pwd_del_cancel;
-    private Button mBt_dialog_pwd_del_confirm;
-    private EditText mEt_dialog_pwd_del;
+    private Button mBt_dialog_pwd_export_keystore_cancel;
+    private Button mBt_dialog_pwd_export_keystore_confirm;
+    private EditText mEt_dialog_pwd_export_keystore;
 
-    public static InputPwdDelDialog newInstance() {
-        return new InputPwdDelDialog();
+
+    public static ExportKeystorePwdDialog newInstance() {
+        return new ExportKeystorePwdDialog();
     }
 
     public void setCurrentWalletBean(WalletBean currentWalletBean) {
@@ -61,7 +62,7 @@ public class InputPwdDelDialog extends DialogFragment implements View.OnClickLis
         // 点击空白区域不可取消
         setCancelable(false);
 
-        return inflater.inflate(R.layout.dialog_pwd, container, false);
+        return inflater.inflate(R.layout.dialog_export_keystore_pwd, container, false);
     }
 
     @Override
@@ -84,23 +85,25 @@ public class InputPwdDelDialog extends DialogFragment implements View.OnClickLis
     }
 
     private void initView(View view) {
-        mBt_dialog_pwd_del_cancel = view.findViewById(R.id.bt_dialog_pwd_del_cancel);
-        mBt_dialog_pwd_del_confirm = view.findViewById(R.id.bt_dialog_pwd_del_confirm);
-        mEt_dialog_pwd_del = view.findViewById(R.id.et_dialog_pwd_del);
+        mBt_dialog_pwd_export_keystore_cancel = view.findViewById(R.id
+                .bt_dialog_pwd_export_keystore_cancel);
+        mBt_dialog_pwd_export_keystore_confirm = view.findViewById(R.id
+                .bt_dialog_pwd_export_keystore_confirm);
+        mEt_dialog_pwd_export_keystore = view.findViewById(R.id.et_dialog_pwd_export_keystore);
 
-        mBt_dialog_pwd_del_cancel.setOnClickListener(this);
-        mBt_dialog_pwd_del_confirm.setOnClickListener(this);
+        mBt_dialog_pwd_export_keystore_cancel.setOnClickListener(this);
+        mBt_dialog_pwd_export_keystore_confirm.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt_dialog_pwd_del_cancel:
+            case R.id.bt_dialog_pwd_export_keystore_cancel:
                 dismiss();
                 break;
-            case R.id.bt_dialog_pwd_del_confirm:
-                String pwd = mEt_dialog_pwd_del.getText().toString().trim();
+            case R.id.bt_dialog_pwd_export_keystore_confirm:
+                String pwd = mEt_dialog_pwd_export_keystore.getText().toString().trim();
                 TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean
                         .getKeyStore(), pwd, this));
                 break;
@@ -120,26 +123,11 @@ public class InputPwdDelDialog extends DialogFragment implements View.OnClickLis
             return;
         }
 
-        deleteWalletByNameAndAddr();
-    }
-
-    private void deleteWalletByNameAndAddr() {
-        if (null == mCurrentWalletBean) {
-            CpLog.e(TAG, "mCurrentWalletBean is null!");
-            return;
-        }
-
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
-        if (null == apexWalletDbDao) {
-            CpLog.e(TAG, "apexWalletDbDao is null!");
-            return;
-        }
-
-        apexWalletDbDao.deleteByWalletNameAndAddr(Constant.TABLE_APEX_WALLET, mCurrentWalletBean
-                .getWalletName(), mCurrentWalletBean.getWalletAddr());
-
-        ApexListeners.getInstance().notifyItemDelete(mCurrentWalletBean);
+        Intent intent = new Intent(ApexWalletApplication.getInstance(), ExportKeystoreActivity
+                .class);
+        intent.putExtra(Constant.BACKUP_KEYSTORE, mCurrentWalletBean.getKeyStore());
+        startActivity(intent);
         dismiss();
     }
+
 }

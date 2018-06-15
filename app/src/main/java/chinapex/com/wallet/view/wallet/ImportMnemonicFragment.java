@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.WalletBean;
@@ -25,6 +27,9 @@ import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.utils.GsonUtils;
+import chinapex.com.wallet.utils.SharedPreferencesUtils;
+import chinapex.com.wallet.view.MainActivity;
 import neomobile.Wallet;
 
 /**
@@ -138,7 +143,7 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
                     mBt_import_wallet_mnemonic.setBackgroundResource(R.drawable
                             .shape_import_wallet_bt_bg_def);
                     mBt_import_wallet_mnemonic.setTextColor(getResources().getColor(R.color
-                            .create_wallet_et_import_color));
+                            .c_666666));
                     mIsAgreePrivacy = false;
                 }
                 break;
@@ -149,9 +154,8 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
                 }
 
                 String mnemonic = mEt_import_wallet_mnemonic.getText().toString().trim();
-                String pwd = mEt_import_wallet_repeat_pwd.getText().toString().trim();
                 TaskController.getInstance().submit(new FromMnemonicToWallet(mnemonic, "en_US",
-                        pwd, this));
+                        this));
                 break;
             default:
                 break;
@@ -198,7 +202,7 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
     @Override
     public void fromMnemonicToWallet(Wallet wallet) {
         if (null == wallet) {
-            CpLog.e(TAG, "wallet is null!");
+            CpLog.e(TAG, "fromMnemonicToWallet() -> wallet is null!");
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -216,14 +220,54 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
             return;
         }
 
-        WalletBean walletBean = apexWalletDbDao.queryByWalletAddress(Constant.TABLE_APEX_WALLET,
-                wallet.address());
-        if (null == walletBean) {
-            CpLog.e(TAG, "walletBean is null!");
+        String walletAddress = wallet.address();
+        WalletBean queryByWalletAddress = apexWalletDbDao.queryByWalletAddress(Constant
+                .TABLE_APEX_WALLET, walletAddress);
+        if (null != queryByWalletAddress) {
+            CpLog.e(TAG, "this wallet from mnemonic has existed!");
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), "重复导入，此钱包已存在", Toast.LENGTH_SHORT).show();
+                }
+            });
             return;
         }
 
+        ArrayList<String> assetses = new ArrayList<>();
+        assetses.add(Constant.ASSETS_CPX);
+        assetses.add(Constant.ASSETS_NEO);
+        assetses.add(Constant.ASSETS_NEO_GAS);
+
+        WalletBean walletBean = new WalletBean();
+        walletBean.setWalletName(Constant.WALLET_NAME_IMPORT_DEFAULT);
+        walletBean.setWalletAddr(walletAddress);
+        walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
+        walletBean.setAssetsJson(GsonUtils.toJsonStr(assetses));
+
+        String pwd = mEt_import_wallet_repeat_pwd.getText().toString().trim();
+        try {
+            walletBean.setKeyStore(wallet.toKeyStore(pwd));
+        } catch (Exception e) {
+            CpLog.e(TAG, "toKeyStore exception:" + e.getMessage());
+            return;
+        }
+
+        apexWalletDbDao.insert(Constant.TABLE_APEX_WALLET, walletBean);
         ApexListeners.getInstance().notifyItemAdd(walletBean);
-        getActivity().finish();
+
+        isFirstEnter();
+    }
+
+    private void isFirstEnter() {
+        boolean isFirstExport = (boolean) SharedPreferencesUtils.getParam(ApexWalletApplication
+                .getInstance(), Constant.IS_FIRST_ENTER_MAIN, true);
+        if (isFirstExport) {
+            SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant
+                    .IS_FIRST_ENTER_MAIN, false);
+            startActivity(MainActivity.class, true);
+        } else {
+            getActivity().finish();
+        }
     }
 }

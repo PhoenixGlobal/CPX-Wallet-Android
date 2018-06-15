@@ -21,9 +21,11 @@ import chinapex.com.wallet.adapter.BackupShowMnemonicAdapter;
 import chinapex.com.wallet.adapter.SpacesItemDecoration;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.MnemonicState;
-import chinapex.com.wallet.global.ApexCache;
+import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
+import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.SharedPreferencesUtils;
 import chinapex.com.wallet.view.MainActivity;
@@ -124,11 +126,8 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
             case R.id.bt_confirm_mnemonic_confirm:
                 // TODO: 2018/6/10 校验助记词顺序是否正确，正确置为已备份
 
-                boolean startMainActivity = ApexCache.getInstance().isStartMainActivity();
-                if (startMainActivity) {
-                    startActivity(MainActivity.class, true);
-                }
-                getActivity().finish();
+                updateWalletBackupState();
+                isFirstEnter();
                 break;
             default:
                 break;
@@ -159,6 +158,45 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
             mMnemonicStatesShow.remove(mnemonicState);
         }
         mBackupShowMnemonicAdapter.notifyDataSetChanged();
+    }
+
+    private void updateWalletBackupState() {
+        BackupWalletActivity backupWalletActivity = (BackupWalletActivity) getActivity();
+        if (null == backupWalletActivity) {
+            CpLog.e(TAG, "updateWalletBackupState() -> backupWalletActivity is null!");
+            return;
+        }
+
+        WalletBean walletBean = backupWalletActivity.getWalletBean();
+        if (null == walletBean) {
+            CpLog.e(TAG, "walletBean is null!");
+            return;
+        }
+
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
+                .getInstance());
+        if (null == apexWalletDbDao) {
+            CpLog.e(TAG, "apexWalletDbDao is null!");
+            return;
+        }
+
+        apexWalletDbDao.updateBackupState(Constant.TABLE_APEX_WALLET, walletBean.getWalletAddr(),
+                Constant.BACKUP_FINISH);
+        walletBean.setBackupState(Constant.BACKUP_FINISH);
+
+        ApexListeners.getInstance().notifyItemStateUpdate(walletBean);
+    }
+
+    private void isFirstEnter() {
+        boolean isFirstExport = (boolean) SharedPreferencesUtils.getParam(ApexWalletApplication
+                .getInstance(), Constant.IS_FIRST_ENTER_MAIN, true);
+        if (isFirstExport) {
+            SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant
+                    .IS_FIRST_ENTER_MAIN, false);
+            startActivity(MainActivity.class, true);
+        } else {
+            getActivity().finish();
+        }
     }
 
 }

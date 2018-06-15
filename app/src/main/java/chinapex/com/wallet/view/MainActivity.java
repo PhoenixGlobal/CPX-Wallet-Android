@@ -15,7 +15,10 @@ import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.global.ApexCache;
+import chinapex.com.wallet.global.ApexWalletApplication;
+import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.FragmentFactory;
+import chinapex.com.wallet.utils.SharedPreferencesUtils;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar
         .OnTabSelectedListener {
@@ -31,8 +34,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 后续备份助记词完成后不再跳转MainActivity
-        ApexCache.getInstance().setStartMainActivity(false);
+        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant
+                .IS_FIRST_ENTER_MAIN, false);
 
         initData();
         initView();
