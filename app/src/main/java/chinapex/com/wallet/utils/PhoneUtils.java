@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by SteelCabbage on 2018/5/24 0024.
  */
@@ -14,6 +17,7 @@ import android.util.DisplayMetrics;
 public class PhoneUtils {
 
     private static final String TAG = PhoneUtils.class.getSimpleName();
+    private static SimpleDateFormat sSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 获取顶部状态栏高度
@@ -82,5 +86,16 @@ public class PhoneUtils {
 
         ClipData clipData = ClipData.newPlainText("text", copyContent);
         clipboardManager.setPrimaryClip(clipData);
+    }
+
+
+    public static String getFormatTime(long time) {
+        String formatTime = null;
+        try {
+            formatTime = sSimpleDateFormat.format(new Date(time));
+        } catch (Exception e) {
+            CpLog.e(TAG, "getFormatTime exception:" + e.getMessage());
+        }
+        return formatTime;
     }
 }

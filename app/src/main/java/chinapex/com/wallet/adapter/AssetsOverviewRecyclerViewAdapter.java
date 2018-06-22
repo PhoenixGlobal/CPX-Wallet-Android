@@ -67,17 +67,14 @@ public class AssetsOverviewRecyclerViewAdapter extends RecyclerView
         switch (balanceBean.getAssetsID()) {
             case Constant.ASSETS_NEO:
                 holder.assetsName.setText(Constant.MARK_NEO);
-                holder.assetsUnit.setText(Constant.UNIT_NEO);
                 holder.mapState.setVisibility(View.INVISIBLE);
                 break;
             case Constant.ASSETS_NEO_GAS:
                 holder.assetsName.setText(Constant.MARK_NEO_GAS);
-                holder.assetsUnit.setText(Constant.UNIT_NEO_GAS);
                 holder.mapState.setVisibility(View.INVISIBLE);
                 break;
             case Constant.ASSETS_CPX:
                 holder.assetsName.setText(Constant.MARK_CPX);
-                holder.assetsUnit.setText(Constant.UNIT_CPX);
                 holder.mapState.setVisibility(View.VISIBLE);
                 break;
             default:
@@ -98,14 +95,12 @@ public class AssetsOverviewRecyclerViewAdapter extends RecyclerView
         TextView assetsName;
         TextView assetsValue;
         Button mapState;
-        TextView assetsUnit;
 
         AssetsOverviewAdapterHolder(View itemView) {
             super(itemView);
             assetsName = itemView.findViewById(R.id.tv_assets_overview_assets_name);
             assetsValue = itemView.findViewById(R.id.tv_assets_overview_assets_value);
             mapState = itemView.findViewById(R.id.bt_assets_overview_map);
-            assetsUnit = itemView.findViewById(R.id.tv_assets_overview_assets_unit);
         }
     }
 }

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/bg_new_visitor"
-              android:orientation="vertical"
-              android:id="@+id/ll_new_visitor"
-              tools:context="chinapex.com.wallet.view.NewVisitorActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_new_visitor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_new_visitor"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.NewVisitorActivity">
 
     <ImageView
-        android:layout_width="@dimen/iv_new_visitor_width"
-        android:layout_height="@dimen/iv_new_visitor_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/new_visitor_icon_margin_top"
-        android:background="@drawable/icon_new_visitor"/>
+        android:background="@drawable/icon_new_visitor" />
 
     <Button
         android:id="@+id/bt_new_visitor_create_wallet"
@@ -23,7 +23,8 @@
         android:layout_marginTop="@dimen/new_visitor_bt_margin_top"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/new_visitor_create_wallet"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/bt_new_visitor_import_wallet"
@@ -33,7 +34,8 @@
         android:layout_marginTop="@dimen/new_visitor_bt_between_space"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/new_visitor_import_wallet"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
 
 </LinearLayout>

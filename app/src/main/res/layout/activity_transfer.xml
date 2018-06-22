@@ -10,7 +10,7 @@
         android:id="@+id/tb_transfer"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/tb_bg">
+        android:background="@color/c_3660A7">
 
         <TextView
             android:id="@+id/tv_transfer_title"
@@ -85,6 +85,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:gravity="bottom"
         android:orientation="horizontal">
 
@@ -92,36 +93,40 @@
             android:id="@+id/et_transfer_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="41dp"
+            android:layout_marginStart="51dp"
             android:layout_marginTop="5dp"
             android:ems="15"
             android:hint="@string/et_transfer_amount"
-            android:textSize="12sp" />
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_transfer_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="cpx"
-            android:textColor="@color/c_333333" />
+            android:textColor="@color/c_333333"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="24dp"
         android:background="@color/c_DDDDDD" />
 
     <Button
         android:id="@+id/bt_transfer_send"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_width="267dp"
+        android:layout_height="33dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:layout_marginTop="158dp"
+        android:background="@drawable/shape_balance_detail_bt_bg"
         android:text="@string/bt_transfer_send"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 
 
 </LinearLayout>

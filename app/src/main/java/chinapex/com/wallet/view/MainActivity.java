@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         initToolBar();
         initBottomNavigationBar();
         initFragment();
+        mTb_main.setVisibility(View.GONE);
     }
 
     private void initData() {
@@ -70,12 +71,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
     }
 
     private void initBottomNavigationBar() {
-        mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_discover,
-                mBnItemTitles[0]));
+//        mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_discover,
+//                mBnItemTitles[0]));
         mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_assets,
-                mBnItemTitles[1]));
+                mBnItemTitles[0]));
         mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_me,
-                mBnItemTitles[2]));
+                mBnItemTitles[1]));
         mBn_main.setActiveColor(R.color.colorPrimary);
         mBn_main.setInActiveColor(R.color.colorAccent);
         mBn_main.initialise();
@@ -108,12 +109,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
 
         mTv_main_title.setText(mBnItemTitles[position]);
 
+
         //如果当前fragment为资产页，隐藏ToolBar
-        if (position != 0) {
-            mTb_main.setVisibility(View.GONE);
-        } else {
-            mTb_main.setVisibility(View.VISIBLE);
-        }
+//        if (position != 0) {
+//            mTb_main.setVisibility(View.GONE);
+//        } else {
+//            mTb_main.setVisibility(View.VISIBLE);
+//        }
     }
 
     @Override

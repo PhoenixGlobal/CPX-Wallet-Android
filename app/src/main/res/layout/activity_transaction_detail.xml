@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.me.TransactionDetailActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="@string/transaction_detail_title"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/title_18sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:singleLine="true"
+        android:text="+10002.00000001"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/title_small_16sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="转账金额 (CPX)"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/c_DDDDDD" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:text="付款钱包地址"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:text="AKJZ6oNkSLzAvStDe8SrBvd83DntY4AvTq"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="收款钱包地址"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:text="AKJZ6oNkSLzAvStDe8SrBvd83DntY4AvTq"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="交易时间"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:text="2018-05-28 11:03:22"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="交易单号"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_tx_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:text="0xfbc12dd529a981b734e9324b3c0693d6b173b29c204922b27840749d661ca53f"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+</LinearLayout>

@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
 
-    <corners android:radius="@dimen/shape_new_visitor_bt_corner"/>
+    <corners android:radius="2dp"/>
 
     <solid android:color="@android:color/white"/>
 

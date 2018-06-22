@@ -11,10 +11,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="139dp"
+            android:layout_height="133dp"
             android:background="@drawable/tb_bg">
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -28,19 +29,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="25dp"
+                android:layout_marginEnd="13dp"
                 android:layout_marginTop="35dp"
                 android:background="@null"
                 android:src="@drawable/icon_ellipsis" />
 
             <LinearLayout
                 android:id="@+id/ll_assets_search"
-                android:layout_width="263dp"
-                android:layout_height="29dp"
+                android:layout_width="279dp"
+                android:layout_height="27dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="26dp"
-                android:layout_marginStart="22dp"
+                android:layout_marginStart="28dp"
                 android:background="@drawable/shape_bg_search"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -54,12 +57,13 @@
                     android:id="@+id/et_assets_search"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="9dp"
+                    android:layout_marginStart="6dp"
                     android:background="@null"
+                    android:singleLine="true"
                     android:hint="@string/et_assets_search"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/paratext_14sp" />
 
             </LinearLayout>
 
@@ -69,19 +73,20 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/ll_assets_search"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
-                android:text="@string/tv_assets_search_cancel"
                 android:layout_marginBottom="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/tv_assets_search_cancel"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="@dimen/paratext_14sp" />
+
+
         </RelativeLayout>
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/sl_assets_rv"
-            android:layout_width="wrap_content"
+            android:layout_width="320dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/rv_assets_margin_start"
-            android:layout_marginStart="@dimen/rv_assets_margin_end"
             android:layout_marginTop="@dimen/rv_assets_margin_top">
 
             <android.support.v7.widget.RecyclerView
@@ -105,7 +110,7 @@
             android:id="@+id/rv_assets_drawer_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="37dp"
             android:divider="@null">
 
         </android.support.v7.widget.RecyclerView>

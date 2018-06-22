@@ -11,7 +11,8 @@
         android:background="@drawable/shape_backup_show_mnemonic"
         android:gravity="center"
         android:lines="1"
-        android:padding="2dp"
+        android:padding="5dp"
+        android:textSize="14sp"
         android:textColor="@android:color/black" />
 
 </RelativeLayout>

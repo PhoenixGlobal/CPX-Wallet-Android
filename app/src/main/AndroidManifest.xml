@@ -22,41 +22,64 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--启动页-->
+        <!-- 启动页 -->
         <activity
             android:name=".view.BootPageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.MyTranslucentNavigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <!-- 新用户 -->
         <activity
             android:name=".view.NewVisitorActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.MyTranslucentNavigation" />
         <!-- 主activity -->
-        <activity android:name=".view.MainActivity" />
+        <activity
+            android:name=".view.MainActivity"
+            android:screenOrientation="portrait" />
         <!-- 跳转activity -->
-        <activity android:name=".view.MeSkipActivity" />
+        <activity
+            android:name=".view.MeSkipActivity"
+            android:screenOrientation="portrait" />
         <!-- 新建钱包 -->
-        <activity android:name=".view.wallet.CreateWalletActivity" />
+        <activity
+            android:name=".view.wallet.CreateWalletActivity"
+            android:screenOrientation="portrait" />
         <!-- 导入钱包 -->
-        <activity android:name=".view.wallet.ImportWalletActivity" />
+        <activity
+            android:name=".view.wallet.ImportWalletActivity"
+            android:screenOrientation="portrait" />
         <!-- 备份 -->
-        <activity android:name=".view.wallet.BackupWalletActivity" />
+        <activity
+            android:name=".view.wallet.BackupWalletActivity"
+            android:screenOrientation="portrait" />
         <!-- 资产概览 -->
-        <activity android:name=".view.assets.AssetsOverviewActivity" />
+        <activity
+            android:name=".view.assets.AssetsOverviewActivity"
+            android:screenOrientation="portrait" />
         <!-- 余额明细 -->
-        <activity android:name=".view.assets.BalanceDetailActivity" />
+        <activity
+            android:name=".view.assets.BalanceDetailActivity"
+            android:screenOrientation="portrait" />
         <!-- 转账 -->
-        <activity android:name=".view.assets.TransferActivity" />
+        <activity
+            android:name=".view.assets.TransferActivity"
+            android:screenOrientation="portrait" />
         <!-- 收款 -->
-        <activity android:name=".view.assets.GatheringActivity" />
-        <!--导出Keystore-->
-        <activity android:name=".view.wallet.ExportKeystoreActivity" />
+        <activity
+            android:name=".view.assets.GatheringActivity"
+            android:screenOrientation="portrait" />
+        <!-- 导出Keystore -->
+        <activity
+            android:name=".view.wallet.ExportKeystoreActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.me.TransactionDetailActivity"></activity>
     </application>
 
 </manifest>

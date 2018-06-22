@@ -11,30 +11,38 @@
         android:layout_height="@dimen/rl_assets_rv_item_height"
         android:background="@android:color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="15dp">
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:scaleType="center"
+            android:src="@drawable/logo_nep5_cpx" />
 
         <TextView
             android:id="@+id/tv_assets_overview_assets_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="CPX"
             android:textColor="@color/c_333333"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/bt_assets_overview_map"
-            android:layout_width="73dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="25dp"
+            android:layout_width="63dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="15dp"
             android:background="@drawable/shape_assets_overview_map_def"
             android:text="一键映射"
-            android:textColor="@color/c_999999" />
+            android:textColor="@color/c_999999"
+            android:textSize="12sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tv_assets_overview_assets_value"
@@ -42,20 +50,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="30dp"
-                android:text="2.0032"
+                android:layout_marginEnd="20dp"
+                android:singleLine="true"
+                android:text="2.00320000"
                 android:textColor="@color/c_5D99FA"
                 android:textSize="22sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_assets_overview_assets_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:text="cpx"
-                android:textColor="@color/c_5D99FA" />
 
         </RelativeLayout>
 

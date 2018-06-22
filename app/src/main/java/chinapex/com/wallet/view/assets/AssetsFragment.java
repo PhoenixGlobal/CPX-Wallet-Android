@@ -235,13 +235,10 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     public void drawerMenuOnItemClick(int position) {
         switch (position) {
             case 0:
-                // 添加资产
-                break;
-            case 1:
                 // 创建钱包
                 startActivity(CreateWalletActivity.class, false);
                 break;
-            case 2:
+            case 1:
                 // 导入钱包
                 startActivity(ImportWalletActivity.class, false);
                 break;

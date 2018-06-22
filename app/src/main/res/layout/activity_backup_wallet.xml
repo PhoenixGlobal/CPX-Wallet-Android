@@ -10,7 +10,7 @@
         android:id="@+id/tb_backup"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/tb_bg">
+        android:background="@color/c_3660A7">
 
         <TextView
             android:id="@+id/tv_backup_title"

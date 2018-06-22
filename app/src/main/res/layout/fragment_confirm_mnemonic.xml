@@ -8,43 +8,44 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="@string/tv_confirm_mnemonic"
         android:textColor="@color/c_666666"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
-        android:layout_width="295dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/tv_confirm_mnemonic_content"
         android:textColor="@color/c_666666"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_confirm_mnemonic_show"
-        android:layout_width="336dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="21dp"
-        android:padding="5dp"
-        android:background="@drawable/shape_bg_copy_mnemonic" />
+        android:layout_width="330dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_bg_copy_mnemonic"
+        android:padding="5dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_confirm_mnemonic_click"
-        android:layout_width="312dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp" />
+        android:layout_width="330dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:id="@+id/bt_confirm_mnemonic_confirm"
         android:layout_width="293dp"
         android:layout_height="39dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/shape_new_visitor_bt_bg"
         android:text="@string/bt_confirm_mnemonic_confirm"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 
 
 </LinearLayout>

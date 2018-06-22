@@ -10,7 +10,7 @@
         android:id="@+id/tb_gathering"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/tb_bg"
+        android:background="@color/c_3660A7"
         android:gravity="center_vertical">
 
         <TextView
@@ -25,33 +25,34 @@
 
     <ImageView
         android:id="@+id/iv_gathering_qr_code"
-        android:layout_width="198dp"
-        android:layout_height="198dp"
+        android:layout_width="195dp"
+        android:layout_height="195dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="27dp"
         android:background="@color/c_F1F1F1"
         android:scaleType="fitCenter" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="39dp"
         android:background="@color/c_DDDDDD" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="20dp"
         android:text="@string/tv_gathering_title"
         android:textColor="@color/c_999999"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tv_gathering_wallet_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tv_gathering_wallet_name"
         android:textColor="@color/c_333333"
         android:textSize="@dimen/tv_gathering_wallet_name" />
@@ -61,8 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
-        android:ellipsize="middle"
-        android:maxEms="15"
+        android:layout_marginTop="8dp"
         android:singleLine="true"
         android:text="@string/tv_gathering_wallet_addr"
         android:textColor="@android:color/black"
@@ -70,11 +70,11 @@
 
     <Button
         android:id="@+id/bt_gathering_copy_addr"
-        android:layout_width="293dp"
-        android:layout_height="39dp"
+        android:layout_width="267dp"
+        android:layout_height="33dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:layout_marginTop="62dp"
+        android:background="@drawable/shape_balance_detail_bt_bg"
         android:text="@string/bt_gathering_copy_addr"
         android:textColor="@android:color/white"
         android:textSize="@dimen/bt_gathering_copy_addr_text_size" />

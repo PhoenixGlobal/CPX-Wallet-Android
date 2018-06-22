@@ -54,6 +54,17 @@ public class Constant {
     public static final String PARCELABLE_WALLET_BEAN_MANAGE_DETAIL =
             "parcelableWalletBeanManageDetail";
 
+    // transaction record
+    public static final int TRANSACTION_STATE_FAIL = 0;
+    public static final int TRANSACTION_STATE_SUCCESS = 1;
+    public static final int TRANSACTION_STATE_CONFIRMING = 2;
+
+    public static final String TRANSACTION_STATE_FAIL_TEXT = "交易失败";
+    public static final String TRANSACTION_STATE_SUCCESS_TEXT = "交易成功";
+    public static final String TRANSACTION_STATE_CONFIRMING_TEXT = "交易确认";
+
+    public static final String PARCELABLE_TRANSACTION_RECORD = "parcelableTransactionRecord";
+
     // backup wallet
     public static final String BACKUP_KEYSTORE = "backupKeystore";
     public static final String BACKUP_MNEMONIC = "backupMnemonic";

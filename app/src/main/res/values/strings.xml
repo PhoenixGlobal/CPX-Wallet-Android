@@ -86,4 +86,5 @@
     <string name="export_keystore_strongbox_content">如需在线保存，则建议使用安全等级更高的1Password等密码保管软件保存Keystore。</string>
     <string name="tv_title_export_keystore">导出Keystore</string>
     <string name="bt_copy_keystore_text">复制Keystore</string>
+    <string name="transaction_detail_title">交易详情</string>
 </resources>

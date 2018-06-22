@@ -34,7 +34,10 @@
         android:layout_marginTop="@dimen/create_wallet_tv_margin_top"
         android:background="@drawable/shape_create_wallet_tv_bg"
         android:gravity="center_vertical"
-        android:padding="@dimen/create_wallet_tv_padding"
+        android:paddingBottom="17dp"
+        android:paddingEnd="13dp"
+        android:paddingStart="13dp"
+        android:paddingTop="17dp"
         android:text="@string/create_wallet_security"
         android:textSize="@dimen/create_wallet_tv_size" />
 
@@ -86,6 +89,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -120,7 +124,8 @@
         android:layout_marginTop="@dimen/create_wallet_bt_margin_top"
         android:background="@drawable/shape_gray_bt_bg"
         android:text="@string/create_wallet_bt_confirm"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/bt_create_wallet_import"

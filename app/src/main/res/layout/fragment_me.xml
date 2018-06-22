@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="106dp"
         android:background="@drawable/tb_bg">
 
         <TextView
@@ -18,9 +18,9 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/tv_me_title_size" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
@@ -28,25 +28,24 @@
 
             <Button
                 android:id="@+id/bt_me_manage_wallet"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
+                android:layout_width="162dp"
+                android:layout_height="30dp"
                 android:background="@drawable/shape_white_bt_bg"
                 android:text="@string/bt_me_manage_wallet"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/bt_me_transaction_record"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
+                android:layout_width="162dp"
+                android:layout_height="30dp"
                 android:background="@null"
+                android:layout_alignParentEnd="true"
                 android:text="@string/bt_me_transactions"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 

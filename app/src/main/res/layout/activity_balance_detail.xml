@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="139dp"
+            android:layout_height="133dp"
             android:background="@drawable/tb_bg"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -49,36 +49,42 @@
                 android:id="@+id/bt_balance_detail_transfer"
                 android:layout_width="@dimen/bt_wallet_detail_tx_width"
                 android:layout_height="@dimen/bt_wallet_detail_tx_height"
-                android:background="@drawable/shape_new_visitor_bt_bg"
+                android:background="@drawable/selector_balance_detail_bt"
                 android:text="@string/bt_wallet_detail_tx_transfer"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/bt_wallet_detail_tx_font_size" />
 
             <Button
                 android:id="@+id/bt_balance_detail_gathering"
                 android:layout_width="@dimen/bt_wallet_detail_tx_width"
                 android:layout_height="@dimen/bt_wallet_detail_tx_height"
-                android:layout_marginStart="12dp"
-                android:background="@drawable/shape_new_visitor_bt_bg"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/selector_balance_detail_bt"
                 android:text="@string/bt_wallet_detail_tx_gathering"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/bt_wallet_detail_tx_font_size" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_balance_detail_map"
-            android:layout_width="333dp"
+            android:layout_width="323dp"
             android:layout_height="32dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/shape_assets_overview_map_def"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
+                android:src="@drawable/logo_nep5_cpx"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
                 android:gravity="center"
                 android:text="CPX 映射" />
 
@@ -86,7 +92,7 @@
                 android:id="@+id/ib_balance_detail_map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="225dp"
+                android:layout_marginStart="210dp"
                 android:background="@null"
                 android:src="@drawable/icon_wallet_item_arrows" />
 

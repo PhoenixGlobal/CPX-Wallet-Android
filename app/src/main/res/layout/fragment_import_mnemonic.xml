@@ -10,8 +10,8 @@
         android:id="@+id/et_import_wallet_mnemonic"
         android:layout_width="match_parent"
         android:layout_height="101dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/shape_import_wallet_tv_bg"
         android:gravity="top|start"
@@ -20,7 +20,7 @@
         android:paddingEnd="13dp"
         android:paddingStart="13dp"
         android:paddingTop="8dp"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tl_import_wallet_pwd"
@@ -89,12 +89,12 @@
 
     <Button
         android:id="@+id/bt_import_wallet_mnemonic"
-        android:layout_width="293dp"
-        android:layout_height="39dp"
+        android:layout_width="267dp"
+        android:layout_height="33dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="75dp"
         android:background="@drawable/shape_import_wallet_bt_bg_def"
         android:text="开始导入"
         android:textColor="@color/c_666666"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 </LinearLayout>

@@ -10,12 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/rl_assets_rv_item_height"
         android:background="@android:color/white"
-        android:padding="20dp">
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
@@ -36,7 +37,7 @@
                 android:singleLine="true"
                 android:text="@string/assets_rv_item_wallet_addr"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <ImageButton

@@ -53,7 +53,7 @@ public class DrawerMenuRecyclerViewAdapter extends RecyclerView
     public DrawerMenuAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int
             viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
-                        .recyclerview_wallet_detail_menu,
+                        .recyclerview_drawer_menu,
                 parent, false);
         DrawerMenuAdapterHolder holder = new DrawerMenuAdapterHolder(view);
         view.setOnClickListener(this);
