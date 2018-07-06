@@ -14,7 +14,7 @@
     <string name="main_tv_balance">560</string>
     <string name="fragment_assets_balance">560</string>
     <string name="tv_assets_unit">CPX</string>
-    <string name="et_assets_search">搜索钱包</string>
+    <string name="et_assets_search">搜索钱包地址</string>
     <string name="tv_assets_search_cancel">Cancel</string>
     <string name="assets_rv_item_wallet_name">钱包名称</string>
     <string name="assets_rv_item_wallet_addr">钱包地址</string>
@@ -64,7 +64,7 @@
     <string name="tv_me_manager_detail_modify_pwd">修改密码</string>
     <string name="tv_me_manager_detail_backup">备份助记词</string>
     <string name="tv_me_manager_detail_delete">删除钱包</string>
-    <string name="et_me_transaction_record_search">搜索转账地址</string>
+    <string name="et_me_transaction_record_search">搜索交易单号</string>
     <string name="tv_me_transaction_record_cancel">Cancel</string>
     <string name="tv_me_transacticon_record_tx_addr">转帐地址</string>
     <string name="tv_me_transacticon_record_tx_amount">交易额(CPX)</string>

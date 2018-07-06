@@ -68,8 +68,7 @@ public class SwitchTransactionRecyclerViewAdapter extends RecyclerView
             return;
         }
 
-        holder.walletName.setText(String.valueOf(Constant.WALLET_NAME + walletBean.getWalletName
-                ()));
+        holder.walletName.setText(walletBean.getWalletName());
 
         if (walletBean.isSelected()) {
             holder.walletName.setBackgroundColor(ApexWalletApplication.getInstance().getResources

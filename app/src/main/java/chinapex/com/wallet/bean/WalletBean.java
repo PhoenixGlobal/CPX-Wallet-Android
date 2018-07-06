@@ -10,6 +10,7 @@ public class WalletBean implements Parcelable {
     private int backupState;
     private String keyStore;
     private String assetsJson;
+    private String assetsNep5Json;
     private boolean isSelected;
     private int selectedTag;
 
@@ -72,39 +73,13 @@ public class WalletBean implements Parcelable {
         this.assetsJson = assetsJson;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getAssetsNep5Json() {
+        return assetsNep5Json;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.mWalletName);
-        dest.writeString(this.mWalletAddr);
-        dest.writeInt(this.backupState);
-        dest.writeString(this.keyStore);
-        dest.writeString(this.assetsJson);
+    public void setAssetsNep5Json(String assetsNep5Json) {
+        this.assetsNep5Json = assetsNep5Json;
     }
-
-    protected WalletBean(Parcel in) {
-        this.mWalletName = in.readString();
-        this.mWalletAddr = in.readString();
-        this.backupState = in.readInt();
-        this.keyStore = in.readString();
-        this.assetsJson = in.readString();
-    }
-
-    public static final Creator<WalletBean> CREATOR = new Creator<WalletBean>() {
-        @Override
-        public WalletBean createFromParcel(Parcel source) {
-            return new WalletBean(source);
-        }
-
-        @Override
-        public WalletBean[] newArray(int size) {
-            return new WalletBean[size];
-        }
-    };
 
     @Override
     public boolean equals(Object o) {
@@ -122,13 +97,39 @@ public class WalletBean implements Parcelable {
     }
 
     @Override
-    public String toString() {
-        return "WalletBean{" +
-                "mWalletName='" + mWalletName + '\'' +
-                ", mWalletAddr='" + mWalletAddr + '\'' +
-                ", backupState=" + backupState +
-                ", keyStore='" + keyStore + '\'' +
-                ", assetsJson='" + assetsJson + '\'' +
-                '}';
+    public int describeContents() {
+        return 0;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.mWalletName);
+        dest.writeString(this.mWalletAddr);
+        dest.writeInt(this.backupState);
+        dest.writeString(this.keyStore);
+        dest.writeString(this.assetsJson);
+        dest.writeString(this.assetsNep5Json);
+    }
+
+    protected WalletBean(Parcel in) {
+        this.mWalletName = in.readString();
+        this.mWalletAddr = in.readString();
+        this.backupState = in.readInt();
+        this.keyStore = in.readString();
+        this.assetsJson = in.readString();
+        this.assetsNep5Json = in.readString();
+    }
+
+    public static final Creator<WalletBean> CREATOR = new Creator<WalletBean>() {
+        @Override
+        public WalletBean createFromParcel(Parcel source) {
+            return new WalletBean(source);
+        }
+
+        @Override
+        public WalletBean[] newArray(int size) {
+            return new WalletBean[size];
+        }
+    };
+
 }

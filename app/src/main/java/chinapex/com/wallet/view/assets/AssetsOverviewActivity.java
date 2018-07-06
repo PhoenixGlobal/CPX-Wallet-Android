@@ -29,19 +29,24 @@ import chinapex.com.wallet.bean.DrawerMenu;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IGetAccountStateCallback;
+import chinapex.com.wallet.executor.callback.IGetNep5BalanceCallback;
 import chinapex.com.wallet.executor.runnable.GetAccountState;
+import chinapex.com.wallet.executor.runnable.GetNep5Balance;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
 import chinapex.com.wallet.utils.GsonUtils;
+import chinapex.com.wallet.utils.PhoneUtils;
+import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.wallet.CreateWalletActivity;
 import chinapex.com.wallet.view.wallet.ImportWalletActivity;
 
 public class AssetsOverviewActivity extends BaseActivity implements
         AssetsOverviewRecyclerViewAdapter.OnItemClickListener, IGetAccountStateCallback,
         SwipeRefreshLayout.OnRefreshListener, DrawerLayout.DrawerListener,
-        DrawerMenuRecyclerViewAdapter.DrawerMenuOnItemClickListener, View.OnClickListener {
+        DrawerMenuRecyclerViewAdapter.DrawerMenuOnItemClickListener, View.OnClickListener,
+        IGetNep5BalanceCallback {
 
     private static final String TAG = AssetsOverviewActivity.class.getSimpleName();
     private TextView mTv_assets_overview_wallet_name;
@@ -92,6 +97,9 @@ public class AssetsOverviewActivity extends BaseActivity implements
         mDrawerMenuRecyclerViewAdapter = new DrawerMenuRecyclerViewAdapter(getAssetsMenus());
         mDrawerMenuRecyclerViewAdapter.setDrawerMenuOnItemClickListener(this);
         mRv_assets_overview_drawer_menu.setAdapter(mDrawerMenuRecyclerViewAdapter);
+
+        // 复制地址
+        mTv_assets_overview_wallet_address.setOnClickListener(this);
     }
 
     private void initData() {
@@ -103,8 +111,7 @@ public class AssetsOverviewActivity extends BaseActivity implements
 
         mWalletBean = (WalletBean) intent.getParcelableExtra(Constant.WALLET_BEAN);
 
-        mTv_assets_overview_wallet_name.setText(String.valueOf(Constant.WALLET_NAME + mWalletBean
-                .getWalletName()));
+        mTv_assets_overview_wallet_name.setText(mWalletBean.getWalletName());
         mTv_assets_overview_wallet_address.setText(mWalletBean.getWalletAddr());
 
         mRv_assets_overview.setLayoutManager(new LinearLayoutManager(ApexWalletApplication
@@ -113,13 +120,15 @@ public class AssetsOverviewActivity extends BaseActivity implements
         mAssetsOverviewRecyclerViewAdapter = new AssetsOverviewRecyclerViewAdapter(mBalanceBeans);
         mAssetsOverviewRecyclerViewAdapter.setOnItemClickListener(this);
 
-        int space = DensityUtil.dip2px(this, 5);
+        int space = DensityUtil.dip2px(this, 8);
         mRv_assets_overview.addItemDecoration(new SpacesItemDecoration(space));
         mRv_assets_overview.setAdapter(mAssetsOverviewRecyclerViewAdapter);
     }
 
     private void getAssetsBalance() {
         TaskController.getInstance().submit(new GetAccountState(mWalletBean.getWalletAddr(), this));
+        TaskController.getInstance().submit(new GetNep5Balance(Constant.ASSETS_CPX, mWalletBean
+                .getWalletAddr(), this));
     }
 
     @Override
@@ -137,9 +146,52 @@ public class AssetsOverviewActivity extends BaseActivity implements
 
     }
 
+    // 设置默认添加的资产
     private List<BalanceBean> getBalanceBeans() {
+        mBalanceBeans = new ArrayList<>();
+
+        List<BalanceBean> nep5Assets = getNep5Assets();
+        if (null != nep5Assets && !nep5Assets.isEmpty()) {
+            mBalanceBeans.addAll(nep5Assets);
+        }
+
+        List<BalanceBean> globalAssets = getGlobalAssets();
+        if (null != globalAssets && !globalAssets.isEmpty()) {
+            mBalanceBeans.addAll(globalAssets);
+        }
+
+        return mBalanceBeans;
+    }
+
+    private List<BalanceBean> getNep5Assets() {
         if (null == mWalletBean) {
-            CpLog.e(TAG, "mWalletBean is null!");
+            CpLog.e(TAG, "getNep5Assets() -> mWalletBean is null!");
+            return null;
+        }
+
+        String assetsNep5Json = mWalletBean.getAssetsNep5Json();
+        List<String> assetsNep5 = GsonUtils.json2List(assetsNep5Json, String.class);
+        if (null == assetsNep5 || assetsNep5.isEmpty()) {
+            CpLog.e(TAG, "assetsNep5 is null or empty!");
+            return null;
+        }
+
+        ArrayList<BalanceBean> balanceBeans = new ArrayList<>();
+        for (String assetNep5 : assetsNep5) {
+            BalanceBean balanceBean = new BalanceBean();
+            balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
+            balanceBean.setAssetsID(assetNep5);
+            balanceBean.setAssetType(Constant.ASSET_TYPE_NEP5);
+            balanceBean.setAssetDecimal(8);
+            balanceBean.setAssetsValue("0");
+            balanceBeans.add(balanceBean);
+        }
+        return balanceBeans;
+    }
+
+    private List<BalanceBean> getGlobalAssets() {
+        if (null == mWalletBean) {
+            CpLog.e(TAG, "getGlobalAssets() -> mWalletBean is null!");
             return null;
         }
 
@@ -153,8 +205,10 @@ public class AssetsOverviewActivity extends BaseActivity implements
         ArrayList<BalanceBean> balanceBeans = new ArrayList<>();
         for (String asset : assets) {
             BalanceBean balanceBean = new BalanceBean();
-            balanceBean.setMapState(0);
+            balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
             balanceBean.setAssetsID(asset);
+            balanceBean.setAssetType(Constant.ASSET_TYPE_GLOBAL);
+            balanceBean.setAssetDecimal(8);
             balanceBean.setAssetsValue("0");
             balanceBeans.add(balanceBean);
         }
@@ -162,7 +216,7 @@ public class AssetsOverviewActivity extends BaseActivity implements
     }
 
     @Override
-    public void assetsBalance(Map<String, BalanceBean> balanceBeans) {
+    public void getNep5Balance(Map<String, BalanceBean> balanceBeans) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -176,13 +230,16 @@ public class AssetsOverviewActivity extends BaseActivity implements
         }
 
         if (null == balanceBeans || balanceBeans.isEmpty()) {
-            CpLog.w(TAG, "the current assets is null!");
+            CpLog.w(TAG, "getNep5Balance() -> the current assets is null!");
             for (BalanceBean balanceBean0 : mBalanceBeans) {
                 if (null == balanceBean0) {
                     CpLog.e(TAG, "balanceBean0 is null!");
                     continue;
                 }
-                balanceBean0.setAssetsValue("0");
+
+                if (Constant.ASSET_TYPE_NEP5.equals(balanceBean0.getAssetType())) {
+                    balanceBean0.setAssetsValue("0");
+                }
             }
 
             runOnUiThread(new Runnable() {
@@ -205,7 +262,70 @@ public class AssetsOverviewActivity extends BaseActivity implements
             if (balanceBeans.containsKey(assetsID)) {
                 balanceBean.setAssetsValue(balanceBeans.get(assetsID).getAssetsValue());
             } else {
-                balanceBean.setAssetsValue("0");
+                if (Constant.ASSET_TYPE_NEP5.equals(balanceBean.getAssetType())) {
+                    balanceBean.setAssetsValue("0");
+                }
+            }
+        }
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mAssetsOverviewRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
+    public void assetsBalance(Map<String, BalanceBean> balanceBeans) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mSl_assets_overview_rv.setRefreshing(false);
+            }
+        });
+
+        if (null == mBalanceBeans || mBalanceBeans.isEmpty()) {
+            CpLog.e(TAG, "mBalanceBeans is null or empty!");
+            return;
+        }
+
+        if (null == balanceBeans || balanceBeans.isEmpty()) {
+            CpLog.w(TAG, "assetsBalance() -> the current assets is null!");
+            for (BalanceBean balanceBean0 : mBalanceBeans) {
+                if (null == balanceBean0) {
+                    CpLog.e(TAG, "balanceBean0 is null!");
+                    continue;
+                }
+
+                if (Constant.ASSET_TYPE_GLOBAL.equals(balanceBean0.getAssetType())) {
+                    balanceBean0.setAssetsValue("0");
+                }
+            }
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mAssetsOverviewRecyclerViewAdapter.notifyDataSetChanged();
+                }
+            });
+
+            return;
+        }
+
+        for (BalanceBean balanceBean : mBalanceBeans) {
+            if (null == balanceBean) {
+                CpLog.e(TAG, "balanceBean is null!");
+                continue;
+            }
+
+            String assetsID = balanceBean.getAssetsID();
+            if (balanceBeans.containsKey(assetsID)) {
+                balanceBean.setAssetsValue(balanceBeans.get(assetsID).getAssetsValue());
+            } else {
+                if (Constant.ASSET_TYPE_GLOBAL.equals(balanceBean.getAssetType())) {
+                    balanceBean.setAssetsValue("0");
+                }
             }
         }
 
@@ -231,6 +351,8 @@ public class AssetsOverviewActivity extends BaseActivity implements
         }
 
         TaskController.getInstance().submit(new GetAccountState(mWalletBean.getWalletAddr(), this));
+        TaskController.getInstance().submit(new GetNep5Balance(Constant.ASSETS_CPX, mWalletBean
+                .getWalletAddr(), this));
     }
 
     @Override
@@ -296,6 +418,10 @@ public class AssetsOverviewActivity extends BaseActivity implements
             case R.id.ib_assets_overview_ellipsis:
                 openDrawer(mLl_assets_overview_drawer);
                 break;
+            case R.id.tv_assets_overview_wallet_address:
+                String copyAddr = mTv_assets_overview_wallet_address.getText().toString().trim();
+                PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), copyAddr);
+                ToastUtils.getInstance().showToast("钱包地址已复制");
             default:
                 break;
         }
@@ -312,5 +438,6 @@ public class AssetsOverviewActivity extends BaseActivity implements
             mDl_assets_overview.closeDrawer(drawer);
         }
     }
+
 
 }

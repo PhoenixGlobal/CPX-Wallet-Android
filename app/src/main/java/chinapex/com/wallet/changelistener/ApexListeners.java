@@ -3,6 +3,7 @@ package chinapex.com.wallet.changelistener;
 import java.util.ArrayList;
 import java.util.List;
 
+import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -22,6 +23,8 @@ public class ApexListeners {
 
     private List<OnItemNameUpdateListener> mOnItemNameUpdateListeners;
 
+    private List<OnTxStateUpdateListener> mOnTxStateUpdateListeners;
+
     private ApexListeners() {
 
     }
@@ -39,6 +42,7 @@ public class ApexListeners {
         mOnItemAddListeners = new ArrayList<>();
         mOnItemStateUpdateListeners = new ArrayList<>();
         mOnItemNameUpdateListeners = new ArrayList<>();
+        mOnTxStateUpdateListeners = new ArrayList<>();
     }
 
     public void onDestroy() {
@@ -51,47 +55,104 @@ public class ApexListeners {
         mOnItemAddListeners.clear();
         mOnItemStateUpdateListeners.clear();
         mOnItemNameUpdateListeners.clear();
+        mOnTxStateUpdateListeners.clear();
         mOnItemDeleteListeners = null;
         mOnItemAddListeners = null;
         mOnItemStateUpdateListeners = null;
         mOnItemNameUpdateListeners = null;
+        mOnTxStateUpdateListeners = null;
     }
 
 
     public void addOnItemDeleteListener(OnItemDeleteListener onItemDeleteListener) {
         if (null == mOnItemDeleteListeners || null == onItemDeleteListener) {
-            CpLog.e(TAG, "mOnItemDeleteListeners or OnItemDeleteListener is null!");
+            CpLog.e(TAG, "1:mOnItemDeleteListeners or OnItemDeleteListener is null!");
             return;
         }
 
         mOnItemDeleteListeners.add(onItemDeleteListener);
     }
 
+    public void removeOnItemDeleteListener(OnItemDeleteListener onItemDeleteListener) {
+        if (null == mOnItemDeleteListeners || null == onItemDeleteListener) {
+            CpLog.e(TAG, "0:mOnItemDeleteListeners or OnItemDeleteListener is null!");
+            return;
+        }
+
+        mOnItemDeleteListeners.remove(onItemDeleteListener);
+    }
+
     public void addOnItemAddListener(OnItemAddListener onItemAddListener) {
         if (null == mOnItemAddListeners || null == onItemAddListener) {
-            CpLog.e(TAG, "mOnItemAddListeners or onItemAddListener is null!");
+            CpLog.e(TAG, "1:mOnItemAddListeners or onItemAddListener is null!");
             return;
         }
 
         mOnItemAddListeners.add(onItemAddListener);
     }
 
+    public void removeOnItemAddListener(OnItemAddListener onItemAddListener) {
+        if (null == mOnItemAddListeners || null == onItemAddListener) {
+            CpLog.e(TAG, "0:mOnItemAddListeners or onItemAddListener is null!");
+            return;
+        }
+
+        mOnItemAddListeners.remove(onItemAddListener);
+    }
+
     public void addOnItemStateUpdateListener(OnItemStateUpdateListener onItemStateUpdateListener) {
         if (null == mOnItemStateUpdateListeners || null == onItemStateUpdateListener) {
-            CpLog.e(TAG, "mOnItemStateUpdateListeners or onItemStateUpdateListener is null!");
+            CpLog.e(TAG, "1:mOnItemStateUpdateListeners or onItemStateUpdateListener is null!");
             return;
         }
 
         mOnItemStateUpdateListeners.add(onItemStateUpdateListener);
     }
 
+    public void removeOnItemStateUpdateListener(OnItemStateUpdateListener
+                                                        onItemStateUpdateListener) {
+        if (null == mOnItemStateUpdateListeners || null == onItemStateUpdateListener) {
+            CpLog.e(TAG, "0:mOnItemStateUpdateListeners or onItemStateUpdateListener is null!");
+            return;
+        }
+
+        mOnItemStateUpdateListeners.remove(onItemStateUpdateListener);
+    }
+
     public void addOnItemNameUpdateListener(OnItemNameUpdateListener onItemNameUpdateListener) {
         if (null == mOnItemNameUpdateListeners || null == onItemNameUpdateListener) {
-            CpLog.e(TAG, "mOnItemNameUpdateListeners or onItemNameUpdateListener is null!");
+            CpLog.e(TAG, "1:mOnItemNameUpdateListeners or onItemNameUpdateListener is null!");
             return;
         }
 
         mOnItemNameUpdateListeners.add(onItemNameUpdateListener);
+    }
+
+    public void removeOnItemNameUpdateListener(OnItemNameUpdateListener onItemNameUpdateListener) {
+        if (null == mOnItemNameUpdateListeners || null == onItemNameUpdateListener) {
+            CpLog.e(TAG, "0:mOnItemNameUpdateListeners or onItemNameUpdateListener is null!");
+            return;
+        }
+
+        mOnItemNameUpdateListeners.remove(onItemNameUpdateListener);
+    }
+
+    public void addOnTxStateUpdateListener(OnTxStateUpdateListener onTxStateUpdateListener) {
+        if (null == mOnTxStateUpdateListeners || null == onTxStateUpdateListener) {
+            CpLog.e(TAG, "1:mOnTxStateUpdateListeners or onTxStateUpdateListener is null!");
+            return;
+        }
+
+        mOnTxStateUpdateListeners.add(onTxStateUpdateListener);
+    }
+
+    public void removeOnTxStateUpdateListener(OnTxStateUpdateListener onTxStateUpdateListener) {
+        if (null == mOnTxStateUpdateListeners || null == onTxStateUpdateListener) {
+            CpLog.e(TAG, "0:mOnTxStateUpdateListeners or onTxStateUpdateListener is null!");
+            return;
+        }
+
+        mOnTxStateUpdateListeners.remove(onTxStateUpdateListener);
     }
 
     public void notifyItemDelete(WalletBean walletBean) {
@@ -155,6 +216,22 @@ public class ApexListeners {
             }
 
             onItemNameUpdateListener.OnItemNameUpdate(walletBean);
+        }
+    }
+
+    public void notifyTxStateUpdate(String txID, int state, long txTime) {
+        if (null == mOnTxStateUpdateListeners) {
+            CpLog.e(TAG, "mOnTxStateUpdateListeners is null!");
+            return;
+        }
+
+        for (OnTxStateUpdateListener onTxStateUpdateListener : mOnTxStateUpdateListeners) {
+            if (null == onTxStateUpdateListener) {
+                CpLog.e(TAG, "onTxStateUpdateListener is null!");
+                continue;
+            }
+
+            onTxStateUpdateListener.onTxStateUpdate(txID, state, txTime);
         }
     }
 }

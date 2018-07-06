@@ -20,11 +20,12 @@ import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.utils.PhoneUtils;
+import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.MeSkipActivity;
 import chinapex.com.wallet.view.dialog.BackupWalletPwdDialog;
 import chinapex.com.wallet.view.dialog.DeleteWalletPwdDialog;
 import chinapex.com.wallet.view.dialog.ExportKeystorePwdDialog;
-import chinapex.com.wallet.view.wallet.ExportKeystoreActivity;
 
 /**
  * Created by SteelCabbage on 2018/5/31 0031.
@@ -73,6 +74,9 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
         mBt_me_manager_detail_save.setOnClickListener(this);
         mIb_manage_detail_export.setOnClickListener(this);
         ApexListeners.getInstance().addOnItemStateUpdateListener(this);
+
+        // 复制地址
+        mTv_me_manager_detail_address.setOnClickListener(this);
     }
 
     private void initData() {
@@ -83,8 +87,7 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
             return;
         }
 
-        mTv_me_manager_detail_title.setText(String.valueOf(Constant.WALLET_NAME +
-                mCurrentClickedWalletBean.getWalletName()));
+        mTv_me_manager_detail_title.setText(mCurrentClickedWalletBean.getWalletName());
         mTv_me_manager_detail_address.setText(mCurrentClickedWalletBean.getWalletAddr());
         mEt_me_manager_detail_bottom_wallet_name.setText(String.valueOf(mCurrentClickedWalletBean
                 .getWalletName()));
@@ -107,6 +110,11 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
             case R.id.bt_me_manager_detail_save:
                 modifyWalletName();
                 break;
+            case R.id.tv_me_manager_detail_address:
+                String copyAddr = mTv_me_manager_detail_address.getText().toString().trim();
+                PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), copyAddr);
+                ToastUtils.getInstance().showToast("钱包地址已复制");
+                break;
             default:
                 break;
         }
@@ -123,7 +131,7 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
         String newWalletName = mEt_me_manager_detail_bottom_wallet_name.getText().toString().trim();
         apexWalletDbDao.updateWalletName(Constant.TABLE_APEX_WALLET, mCurrentClickedWalletBean
                 .getWalletAddr(), newWalletName);
-        mTv_me_manager_detail_title.setText(String.valueOf(Constant.WALLET_NAME + newWalletName));
+        mTv_me_manager_detail_title.setText(newWalletName);
         mCurrentClickedWalletBean.setWalletName(newWalletName);
         ApexListeners.getInstance().notifyItemNameUpdate(mCurrentClickedWalletBean);
         Toast.makeText(getActivity(), "钱包名称保存成功", Toast.LENGTH_SHORT).show();

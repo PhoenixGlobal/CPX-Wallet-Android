@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="chinapex.com.wallet.view.assets.TransferActivity">
 
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
         android:id="@+id/tb_transfer"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -16,12 +16,22 @@
             android:id="@+id/tv_transfer_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/main_tv_title_margin_top"
             android:text="@string/tb_title_transfer"
             android:textColor="@android:color/white"
             android:textSize="@dimen/tb_title_size" />
-    </android.support.v7.widget.Toolbar>
+
+        <ImageButton
+            android:id="@+id/ib_transfer_scan"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:background="@null"
+            android:src="@drawable/icon_scan_qr_code" />
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,6 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
+        android:ellipsize="middle"
+        android:ems="10"
+        android:singleLine="true"
         android:text="@string/tv_transfer_from_wallet_name"
         android:textColor="@color/c_333333"
         android:textSize="@dimen/tv_transfer_from_wallet_name_font_size" />

@@ -127,6 +127,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
                     CpLog.w(TAG, "checkInput is false!");
                     return;
                 }
+
                 String walletName = mEt_create_wallet_name.getText().toString().trim();
                 String walletPwd = mEt_create_wallet_pwd.getText().toString().trim();
                 TaskController.getInstance().submit(new CreateWallet(walletName, walletPwd, this));
@@ -164,17 +165,27 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         String wallet_pwd = mEt_create_wallet_pwd.getText().toString().trim();
         String repeat_pwd = mEt_create_wallet_repeat_pwd.getText().toString().trim();
 
-        if (TextUtils.isEmpty(wallet_name)
-                || TextUtils.isEmpty(wallet_pwd)
-                || TextUtils.isEmpty(repeat_pwd)) {
-            Toast.makeText(this, "不能为空！", Toast.LENGTH_LONG).show();
-            CpLog.w(TAG, "wallet_name or wallet_pwd or repeat_pwd is null!");
+        if (TextUtils.isEmpty(wallet_name)) {
+            Toast.makeText(this, "钱包名不能为空！", Toast.LENGTH_LONG).show();
+            CpLog.w(TAG, "wallet_name is null!");
+            return false;
+        }
+
+        if (TextUtils.isEmpty(wallet_pwd) || TextUtils.isEmpty(repeat_pwd)) {
+            Toast.makeText(this, "密码不能为空！", Toast.LENGTH_LONG).show();
+            CpLog.w(TAG, "wallet_pwd or repeat_pwd is null!");
             return false;
         }
 
         if (!wallet_pwd.equals(repeat_pwd)) {
             Toast.makeText(this, "密码不一致", Toast.LENGTH_LONG).show();
             CpLog.w(TAG, "wallet_pwd and repeat_pwd is not same!");
+            return false;
+        }
+
+        if (repeat_pwd.length() < 6) {
+            Toast.makeText(this, "密码不能少于6个字！", Toast.LENGTH_LONG).show();
+            CpLog.w(TAG, "repeat_pwd.length() < 6!");
             return false;
         }
 
@@ -201,6 +212,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void newWallet(Wallet wallet) {
+        CpLog.i(TAG, "0000000000000000000000000000");
         if (null == wallet) {
             CpLog.e(TAG, "wallet is null！");
             return;
@@ -221,7 +233,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         WalletBean walletBean = new WalletBean();
         walletBean.setWalletAddr(wallet.address());
         walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
-        Intent intent = new Intent(ApexWalletApplication.getInstance(), BackupWalletActivity.class);
+        Intent intent = new Intent(this, BackupWalletActivity.class);
         intent.putExtra(Constant.BACKUP_MNEMONIC, mnemonicEnUs);
         intent.putExtra(Constant.WALLET_BEAN, walletBean);
         startActivity(intent);

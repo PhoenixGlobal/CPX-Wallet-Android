@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import chinapex.com.wallet.global.Constant;
-import chinapex.com.wallet.utils.CpLog;
 
 /**
  * Created by SteelCabbage on 2018/3/28 0028.
@@ -33,6 +32,8 @@ public class ApexWalletDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Constant.SQL_CREATE_APEX_WALLET);
+        db.execSQL(Constant.SQL_CREATE_TRANSACTION_RECORD);
+        db.execSQL(Constant.SQL_CREATE_TX_CACHE);
 
     }
 

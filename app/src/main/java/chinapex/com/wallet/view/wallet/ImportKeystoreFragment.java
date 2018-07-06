@@ -77,21 +77,6 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         mIb_import_wallet_keystore_privacy_point.setOnClickListener(this);
         mTv_import_wallet_keystore_privacy_have_read.setOnClickListener(this);
         mBt_import_wallet_keystore.setOnClickListener(this);
-
-        mEt_import_wallet_keystore_pwd.addTextChangedListener(new MyTextWatcher
-                (mEt_import_wallet_keystore_pwd) {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() < 6) {
-                    //设置错误提示信息
-                    showError(mTl_import_wallet_keystore, "密码不能少于6位");
-                } else {
-                    //关闭错误提示
-                    mTl_import_wallet_keystore.setErrorEnabled(false);
-                }
-            }
-        });
-
     }
 
     private void initData() {
@@ -154,19 +139,6 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         return true;
     }
 
-    private void showError(TextInputLayout textInputLayout, String error) {
-        textInputLayout.setError(error);
-        EditText editText = textInputLayout.getEditText();
-        if (null == editText) {
-            CpLog.e(TAG, "editText is null!");
-            return;
-        }
-
-        editText.setFocusable(true);
-        editText.setFocusableInTouchMode(true);
-        editText.requestFocus();
-    }
-
     @Override
     public void fromKeystoreWallet(Wallet wallet) {
         if (null == wallet) {
@@ -203,19 +175,23 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         }
 
         String keystore = mEt_import_wallet_keystore.getText().toString().trim();
-        ArrayList<String> assetses = new ArrayList<>();
-        assetses.add(Constant.ASSETS_CPX);
-        assetses.add(Constant.ASSETS_NEO);
-        assetses.add(Constant.ASSETS_NEO_GAS);
+        ArrayList<String> assets = new ArrayList<>();
+        assets.add(Constant.ASSETS_NEO);
+        assets.add(Constant.ASSETS_NEO_GAS);
+
+        ArrayList<String> assetsNep5 = new ArrayList<>();
+        assetsNep5.add(Constant.ASSETS_CPX);
 
         WalletBean walletBean = new WalletBean();
         walletBean.setWalletName(Constant.WALLET_NAME_IMPORT_DEFAULT);
         walletBean.setWalletAddr(walletAddress);
         walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
         walletBean.setKeyStore(keystore);
-        walletBean.setAssetsJson(GsonUtils.toJsonStr(assetses));
+        walletBean.setAssetsJson(GsonUtils.toJsonStr(assets));
+        walletBean.setAssetsNep5Json(GsonUtils.toJsonStr(assetsNep5));
 
         apexWalletDbDao.insert(Constant.TABLE_APEX_WALLET, walletBean);
+        CpLog.i(TAG, "ApexListeners.getInstance().notifyItemAdd");
         ApexListeners.getInstance().notifyItemAdd(walletBean);
 
         isFirstEnter();

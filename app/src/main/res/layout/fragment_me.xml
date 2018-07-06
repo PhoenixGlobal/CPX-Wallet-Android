@@ -51,10 +51,9 @@
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/sl_me"
-        android:layout_width="match_parent"
+        android:layout_width="343dp"
+        android:layout_gravity="center_horizontal"
         android:layout_height="match_parent"
-        android:layout_marginEnd="@dimen/rv_assets_margin_start"
-        android:layout_marginStart="@dimen/rv_assets_margin_end"
         android:layout_marginTop="10dp">
 
         <android.support.v7.widget.RecyclerView

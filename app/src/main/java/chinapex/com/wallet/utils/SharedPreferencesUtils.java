@@ -12,7 +12,7 @@ public class SharedPreferencesUtils {
 
     private static final String TAG = SharedPreferencesUtils.class.getSimpleName();
 
-    private static final String SP_NAME = "sp_analytics";
+    private static final String SP_NAME = "sp_apex";
 
 
     public static void putParam(Context context, String key, Object value) {
@@ -93,6 +93,21 @@ public class SharedPreferencesUtils {
         }
 
         return null;
+    }
+
+    public static void remove(Context context, String key) {
+        if (null == context || TextUtils.isEmpty(key)) {
+            CpLog.e(TAG, "remove() -> context or key is null!");
+            return;
+        }
+
+        SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+        if (null == sp) {
+            CpLog.e(TAG, "sp is null!");
+            return;
+        }
+
+        sp.edit().remove(key).apply();
     }
 
 }

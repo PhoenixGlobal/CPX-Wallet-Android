@@ -2,16 +2,21 @@ package chinapex.com.wallet.view.me;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.TransactionRecord;
+import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.PhoneUtils;
+import chinapex.com.wallet.utils.ToastUtils;
 
-public class TransactionDetailActivity extends BaseActivity {
+public class TransactionDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = TransactionDetailActivity.class.getSimpleName();
     private TransactionRecord mTransactionRecord;
@@ -38,6 +43,10 @@ public class TransactionDetailActivity extends BaseActivity {
         mTv_transaction_detail_to = (TextView) findViewById(R.id.tv_transaction_detail_to);
         mTv_transaction_detail_time = (TextView) findViewById(R.id.tv_transaction_detail_time);
         mTv_transaction_detail_tx_id = (TextView) findViewById(R.id.tv_transaction_detail_tx_id);
+
+        mTv_transaction_detail_from.setOnClickListener(this);
+        mTv_transaction_detail_to.setOnClickListener(this);
+        mTv_transaction_detail_tx_id.setOnClickListener(this);
     }
 
     private void initData() {
@@ -55,10 +64,41 @@ public class TransactionDetailActivity extends BaseActivity {
 
         mTv_transaction_detail_amount.setText(mTransactionRecord.getTxAmount());
         mTv_transaction_detail_unit.setText(String.valueOf("转账金额 (" + mTransactionRecord
-                .getSymbol() + ")"));
-        mTv_transaction_detail_from.setText(mTransactionRecord.getFrom());
-        mTv_transaction_detail_to.setText(mTransactionRecord.getTo());
-        mTv_transaction_detail_time.setText(PhoneUtils.getFormatTime(mTransactionRecord.getTime()));
+                .getAssetSymbol() + ")"));
+        mTv_transaction_detail_from.setText(mTransactionRecord.getTxFrom());
+        mTv_transaction_detail_to.setText(mTransactionRecord.getTxTo());
+        mTv_transaction_detail_time.setText(PhoneUtils.getFormatTime(mTransactionRecord.getTxTime
+                ()));
         mTv_transaction_detail_tx_id.setText(mTransactionRecord.getTxID());
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_transaction_detail_from:
+                String from = mTv_transaction_detail_from.getText().toString().trim();
+                copy2Clipboard(from, "付款钱包地址已复制");
+                break;
+            case R.id.tv_transaction_detail_to:
+                String to = mTv_transaction_detail_to.getText().toString().trim();
+                copy2Clipboard(to, "收款钱包地址已复制");
+                break;
+            case R.id.tv_transaction_detail_tx_id:
+                String txid = mTv_transaction_detail_tx_id.getText().toString().trim();
+                copy2Clipboard(txid, "交易单号已复制");
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void copy2Clipboard(String content, String toastMsg) {
+        if (TextUtils.isEmpty(content) || TextUtils.isEmpty(toastMsg)) {
+            CpLog.e(TAG, "content or toastMsg is null!");
+            return;
+        }
+
+        PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), content);
+        ToastUtils.getInstance().showToast(toastMsg);
     }
 }

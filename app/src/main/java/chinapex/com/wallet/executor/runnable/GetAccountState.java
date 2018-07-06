@@ -74,7 +74,6 @@ public class GetAccountState implements Runnable, INetCallback {
             return;
         }
 
-//        List<BalanceBean> balanceBeans = new ArrayList<>();
         HashMap<String, BalanceBean> balanceBeans = new HashMap<>();
         for (ResponseGetAccountState.ResultBean.BalancesBean balance : balances) {
             if (null == balance) {
@@ -83,8 +82,10 @@ public class GetAccountState implements Runnable, INetCallback {
             }
 
             BalanceBean balanceBean = new BalanceBean();
-            balanceBean.setMapState(0);
+            balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
             balanceBean.setAssetsID(balance.getAsset());
+            balanceBean.setAssetType(Constant.ASSET_TYPE_GLOBAL);
+            balanceBean.setAssetDecimal(8);
             balanceBean.setAssetsValue(balance.getValue());
             balanceBeans.put(balance.getAsset(), balanceBean);
         }

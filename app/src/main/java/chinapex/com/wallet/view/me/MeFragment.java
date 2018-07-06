@@ -79,7 +79,7 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
         mMeRecyclerViewAdapter = new MeRecyclerViewAdapter(mWalletBeans);
         mMeRecyclerViewAdapter.setOnItemClickListener(this);
 
-        int space = DensityUtil.dip2px(getActivity(), 5);
+        int space = DensityUtil.dip2px(getActivity(), 8);
         mRv_me.addItemDecoration(new SpacesItemDecoration(space));
 
         mRv_me.setAdapter(mMeRecyclerViewAdapter);
@@ -214,6 +214,11 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
             return;
         }
 
+        if (!mWalletBeans.contains(walletBean)) {
+            CpLog.e(TAG, "onItemDelete() -> this wallet not exist!");
+            return;
+        }
+
         mWalletBeans.remove(walletBean);
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -228,6 +233,11 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
     public void onItemAdd(WalletBean walletBean) {
         if (null == walletBean) {
             CpLog.e(TAG, "onItemAdd() -> walletBean is null!");
+            return;
+        }
+
+        if (mWalletBeans.contains(walletBean)) {
+            CpLog.e(TAG, "onItemAdd() -> this wallet has existed!");
             return;
         }
 
@@ -283,4 +293,14 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
 
         mMeRecyclerViewAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ApexListeners.getInstance().removeOnItemDeleteListener(this);
+        ApexListeners.getInstance().removeOnItemAddListener(this);
+        ApexListeners.getInstance().removeOnItemStateUpdateListener(this);
+        ApexListeners.getInstance().removeOnItemNameUpdateListener(this);
+    }
+
 }

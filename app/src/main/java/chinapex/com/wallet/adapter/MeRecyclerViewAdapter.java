@@ -62,8 +62,7 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
             return;
         }
 
-        holder.walletName.setText(String.valueOf(Constant.WALLET_NAME + walletBean.getWalletName
-                ()));
+        holder.walletName.setText(walletBean.getWalletName());
         holder.walletAddr.setText(walletBean.getWalletAddr());
 
         int selectedTag = walletBean.getSelectedTag();

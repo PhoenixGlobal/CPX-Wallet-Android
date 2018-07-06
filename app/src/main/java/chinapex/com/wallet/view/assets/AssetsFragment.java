@@ -8,13 +8,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import chinapex.com.wallet.R;
@@ -44,7 +50,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, AssetsRecyclerViewAdapter
         .OnItemLongClickListener, OnItemDeleteListener, OnItemAddListener, DrawerLayout
         .DrawerListener, DrawerMenuRecyclerViewAdapter.DrawerMenuOnItemClickListener, View
-        .OnClickListener, OnItemNameUpdateListener {
+        .OnClickListener, OnItemNameUpdateListener, TextWatcher {
 
     private static final String TAG = AssetsFragment.class.getSimpleName();
     private RecyclerView mRv_assets;
@@ -56,6 +62,9 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     private DrawerMenuRecyclerViewAdapter mDrawerMenuRecyclerViewAdapter;
     private ImageButton mIb_assets_ellipsis;
     private LinearLayout mLl_assets_drawer;
+    private EditText mEt_assets_search;
+    private List<WalletBean> mSearchTmpWalletBeans;
+    private TextView mTv_assets_cancel;
 
     @Nullable
     @Override
@@ -77,16 +86,21 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     private void initView(View view) {
         mRv_assets = (RecyclerView) view.findViewById(R.id.rv_assets);
         mSl_assets_rv = (SwipeRefreshLayout) view.findViewById(R.id.sl_assets_rv);
+        mEt_assets_search = view.findViewById(R.id.et_assets_search);
+        mTv_assets_cancel = view.findViewById(R.id.tv_assets_cancel);
+
+        // 搜索功能
+        mEt_assets_search.addTextChangedListener(this);
+        mTv_assets_cancel.setOnClickListener(this);
 
         mRv_assets.setLayoutManager(new LinearLayoutManager(ApexWalletApplication.getInstance(),
-                LinearLayoutManager.VERTICAL,
-                false));
+                LinearLayoutManager.VERTICAL, false));
         mWalletBeans = getData();
         mAssetsRecyclerViewAdapter = new AssetsRecyclerViewAdapter(mWalletBeans);
         mAssetsRecyclerViewAdapter.setOnItemClickListener(this);
         mAssetsRecyclerViewAdapter.setOnItemLongClickListener(this);
 
-        int space = DensityUtil.dip2px(getActivity(), 5);
+        int space = DensityUtil.dip2px(getActivity(), 8);
         mRv_assets.addItemDecoration(new SpacesItemDecoration(space));
 
         mRv_assets.setAdapter(mAssetsRecyclerViewAdapter);
@@ -120,6 +134,8 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         ApexListeners.getInstance().addOnItemDeleteListener(this);
         ApexListeners.getInstance().addOnItemAddListener(this);
         ApexListeners.getInstance().addOnItemNameUpdateListener(this);
+        mSearchTmpWalletBeans = new ArrayList<>();
+        mSearchTmpWalletBeans.addAll(mWalletBeans);
     }
 
     @Override
@@ -171,11 +187,13 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
             return;
         }
         mWalletBeans.remove(walletBean);
+        mSearchTmpWalletBeans.remove(walletBean);
         mAssetsRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemAdd(WalletBean walletBean) {
+        CpLog.i(TAG, "onItemAdd");
         if (null == walletBean) {
             CpLog.e(TAG, "onItemAdd() -> walletBean is null!");
             return;
@@ -187,6 +205,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         }
 
         mWalletBeans.add(walletBean);
+        mSearchTmpWalletBeans.add(walletBean);
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -254,6 +273,9 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
             case R.id.ib_assets_ellipsis:
                 openDrawer(mLl_assets_drawer);
                 break;
+            case R.id.tv_assets_cancel:
+                mEt_assets_search.getText().clear();
+                break;
             default:
                 break;
         }
@@ -286,9 +308,67 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
 
             if (walletBeanTmp.equals(walletBean)) {
                 walletBeanTmp.setWalletName(walletBean.getWalletName());
+                WalletBean searchTmpWalletBean = mSearchTmpWalletBeans.get(mWalletBeans.indexOf
+                        (walletBeanTmp));
+                if (null == searchTmpWalletBean) {
+                    CpLog.e(TAG, "searchTmpWalletBean is null!");
+                    continue;
+                }
+
+                searchTmpWalletBean.setWalletName(walletBean.getWalletName());
             }
         }
 
         mAssetsRecyclerViewAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (null == mSearchTmpWalletBeans || mSearchTmpWalletBeans.isEmpty()) {
+            CpLog.e(TAG, "mWalletBeans is null or empty!");
+            return;
+        }
+
+        mWalletBeans.clear();
+        mWalletBeans.addAll(mSearchTmpWalletBeans);
+
+        if (TextUtils.isEmpty(s)) {
+            CpLog.w(TAG, "onTextChanged() -> is empty!");
+            mAssetsRecyclerViewAdapter.notifyDataSetChanged();
+            return;
+        }
+
+        Iterator<WalletBean> iterator = mWalletBeans.iterator();
+        while (iterator.hasNext()) {
+            WalletBean walletBean = iterator.next();
+            if (null == walletBean) {
+                CpLog.e(TAG, "walletBean is null!");
+                continue;
+            }
+
+            if (!walletBean.getWalletAddr().contains(s)) {
+                iterator.remove();
+            }
+        }
+
+        mAssetsRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ApexListeners.getInstance().removeOnItemDeleteListener(this);
+        ApexListeners.getInstance().removeOnItemAddListener(this);
+        ApexListeners.getInstance().removeOnItemNameUpdateListener(this);
+    }
+
 }

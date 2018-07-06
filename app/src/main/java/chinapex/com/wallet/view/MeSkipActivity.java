@@ -76,4 +76,10 @@ public class MeSkipActivity extends BaseActivity implements OnItemDeleteListener
     public void onItemDelete(WalletBean walletBean) {
         finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ApexListeners.getInstance().removeOnItemDeleteListener(this);
+    }
 }

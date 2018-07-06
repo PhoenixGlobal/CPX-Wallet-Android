@@ -2,6 +2,7 @@ package chinapex.com.wallet.executor;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import chinapex.com.wallet.utils.CpLog;
@@ -65,15 +66,13 @@ public class TaskController {
         mScheduledExecutorService.submit(runnable);
     }
 
-    public void schedule(Runnable runnable, long initialDelay, long period) {
+    public ScheduledFuture schedule(Runnable runnable, long initialDelay, long period) {
         if (null == mScheduledExecutorService || null == runnable) {
-            CpLog.e(TAG, "submitPeriod() -> mScheduledExecutorService or runnable is null!");
-            return;
+            CpLog.e(TAG, "schedule() -> mScheduledExecutorService or runnable is null!");
+            return null;
         }
 
-        mScheduledExecutorService.scheduleAtFixedRate(runnable, initialDelay,
-                period, TimeUnit.MILLISECONDS);
+        return mScheduledExecutorService.scheduleAtFixedRate(runnable, initialDelay, period, TimeUnit.MILLISECONDS);
     }
-
 
 }

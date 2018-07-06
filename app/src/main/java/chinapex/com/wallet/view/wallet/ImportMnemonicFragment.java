@@ -167,7 +167,7 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
         String repeat_pwd = mEt_import_wallet_repeat_pwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(wallet_pwd) || TextUtils.isEmpty(repeat_pwd)) {
-            Toast.makeText(getActivity(), "不能为空！", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "密码不能为空！", Toast.LENGTH_LONG).show();
             CpLog.w(TAG, "wallet_name or wallet_pwd or repeat_pwd is null!");
             return false;
         }
@@ -175,6 +175,12 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
         if (!wallet_pwd.equals(repeat_pwd)) {
             Toast.makeText(getActivity(), "密码不一致", Toast.LENGTH_LONG).show();
             CpLog.w(TAG, "wallet_pwd and repeat_pwd is not same!");
+            return false;
+        }
+
+        if (repeat_pwd.length() < 6) {
+            Toast.makeText(getActivity(), "密码不能少于6个字！", Toast.LENGTH_LONG).show();
+            CpLog.w(TAG, "repeat_pwd.length() < 6!");
             return false;
         }
 
@@ -234,16 +240,19 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
             return;
         }
 
-        ArrayList<String> assetses = new ArrayList<>();
-        assetses.add(Constant.ASSETS_CPX);
-        assetses.add(Constant.ASSETS_NEO);
-        assetses.add(Constant.ASSETS_NEO_GAS);
+        ArrayList<String> assets = new ArrayList<>();
+        assets.add(Constant.ASSETS_NEO);
+        assets.add(Constant.ASSETS_NEO_GAS);
+
+        ArrayList<String> assetsNep5 = new ArrayList<>();
+        assetsNep5.add(Constant.ASSETS_CPX);
 
         WalletBean walletBean = new WalletBean();
         walletBean.setWalletName(Constant.WALLET_NAME_IMPORT_DEFAULT);
         walletBean.setWalletAddr(walletAddress);
         walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
-        walletBean.setAssetsJson(GsonUtils.toJsonStr(assetses));
+        walletBean.setAssetsJson(GsonUtils.toJsonStr(assets));
+        walletBean.setAssetsNep5Json(GsonUtils.toJsonStr(assetsNep5));
 
         String pwd = mEt_import_wallet_repeat_pwd.getText().toString().trim();
         try {
@@ -254,6 +263,7 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
         }
 
         apexWalletDbDao.insert(Constant.TABLE_APEX_WALLET, walletBean);
+        CpLog.i(TAG, "ApexListeners.getInstance().notifyItemAdd");
         ApexListeners.getInstance().notifyItemAdd(walletBean);
 
         isFirstEnter();

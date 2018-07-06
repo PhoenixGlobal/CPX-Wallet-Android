@@ -16,6 +16,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
             android:text="@string/tv_me_manager_detail_title"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:ems="6"
             android:textColor="@android:color/white"
             android:textSize="@dimen/title_18sp" />
 
@@ -60,6 +63,7 @@
                 android:background="@drawable/icon_search" />
 
             <EditText
+                android:id="@+id/et_tx_records_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="9dp"
@@ -72,6 +76,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_tx_records_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/ib_me_transaction_record_switch"

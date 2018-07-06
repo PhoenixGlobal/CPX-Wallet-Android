@@ -11,7 +11,6 @@ import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
 public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecyclerViewAdapter
@@ -77,8 +76,7 @@ public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecycl
 
     @Override
     public void onBindViewHolder(@NonNull AssetsAdapterHolder holder, int position) {
-        holder.walletName.setText(String.valueOf(Constant.WALLET_NAME + mWalletBeans.get
-                (position).getWalletName()));
+        holder.walletName.setText(mWalletBeans.get(position).getWalletName());
         holder.walletAddr.setText(mWalletBeans.get(position).getWalletAddr());
         holder.itemView.setTag(position);
     }

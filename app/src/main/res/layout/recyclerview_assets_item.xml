@@ -24,9 +24,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/assets_rv_item_wallet_name"
+                android:singleLine="true"
+                android:ems="6"
                 android:textColor="@color/c_333333"
-                android:textSize="@dimen/tv_assets_rv_item_wallet_name_size"
-                android:textStyle="bold" />
+                android:textSize="@dimen/card_title" />
 
             <TextView
                 android:id="@+id/tv_assets_rv_item_wallet_addr"
@@ -34,10 +35,11 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="middle"
                 android:ems="12"
+                android:layout_marginTop="5dp"
                 android:singleLine="true"
                 android:text="@string/assets_rv_item_wallet_addr"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="@dimen/paratext_14sp" />
         </LinearLayout>
 
         <ImageButton

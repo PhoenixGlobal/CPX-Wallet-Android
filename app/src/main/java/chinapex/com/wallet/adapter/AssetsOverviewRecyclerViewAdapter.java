@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.BalanceBean;
+import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -67,15 +69,21 @@ public class AssetsOverviewRecyclerViewAdapter extends RecyclerView
         switch (balanceBean.getAssetsID()) {
             case Constant.ASSETS_NEO:
                 holder.assetsName.setText(Constant.MARK_NEO);
-                holder.mapState.setVisibility(View.INVISIBLE);
+                holder.mapState.setVisibility(View.GONE);
+                holder.assetLogo.setBackground(ApexWalletApplication.getInstance().getResources()
+                        .getDrawable(R.drawable.logo_global_neo));
                 break;
             case Constant.ASSETS_NEO_GAS:
                 holder.assetsName.setText(Constant.MARK_NEO_GAS);
-                holder.mapState.setVisibility(View.INVISIBLE);
+                holder.mapState.setVisibility(View.GONE);
+                holder.assetLogo.setBackground(ApexWalletApplication.getInstance().getResources()
+                        .getDrawable(R.drawable.logo_global_gas));
                 break;
             case Constant.ASSETS_CPX:
                 holder.assetsName.setText(Constant.MARK_CPX);
                 holder.mapState.setVisibility(View.VISIBLE);
+                holder.assetLogo.setBackground(ApexWalletApplication.getInstance().getResources()
+                        .getDrawable(R.drawable.logo_nep5_cpx));
                 break;
             default:
                 break;
@@ -92,12 +100,14 @@ public class AssetsOverviewRecyclerViewAdapter extends RecyclerView
     }
 
     class AssetsOverviewAdapterHolder extends RecyclerView.ViewHolder {
+        ImageView assetLogo;
         TextView assetsName;
         TextView assetsValue;
         Button mapState;
 
         AssetsOverviewAdapterHolder(View itemView) {
             super(itemView);
+            assetLogo = itemView.findViewById(R.id.iv_assets_overview_item_logo);
             assetsName = itemView.findViewById(R.id.tv_assets_overview_assets_name);
             assetsValue = itemView.findViewById(R.id.tv_assets_overview_assets_value);
             mapState = itemView.findViewById(R.id.bt_assets_overview_map);

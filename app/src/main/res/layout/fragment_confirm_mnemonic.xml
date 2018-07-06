@@ -29,13 +29,15 @@
         android:layout_height="175dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/shape_bg_copy_mnemonic"
+        android:overScrollMode="never"
         android:padding="5dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_confirm_mnemonic_click"
         android:layout_width="330dp"
         android:layout_height="175dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:overScrollMode="never" />
 
     <Button
         android:id="@+id/bt_confirm_mnemonic_confirm"

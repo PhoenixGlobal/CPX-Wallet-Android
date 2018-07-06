@@ -79,7 +79,8 @@
         <activity
             android:name=".view.wallet.ExportKeystoreActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.me.TransactionDetailActivity"></activity>
+        <!--交易记录明细-->
+        <activity android:name=".view.me.TransactionDetailActivity" />
     </application>
 
 </manifest>

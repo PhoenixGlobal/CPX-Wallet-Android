@@ -22,7 +22,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
-                android:text="Wallet 0x2334"
+                android:text="Wallet 0x233400000000000000000"
+                android:gravity="center_horizontal"
+                android:singleLine="true"
+                android:ems="6"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/tb_title_size" />
 
@@ -51,7 +54,7 @@
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/sl_assets_overview_rv"
-            android:layout_width="320dp"
+            android:layout_width="343dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:layout_marginTop="-26dp">

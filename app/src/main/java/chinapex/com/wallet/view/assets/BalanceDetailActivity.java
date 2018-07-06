@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -44,6 +45,9 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
     private DrawerMenuRecyclerViewAdapter mDrawerMenuRecyclerViewAdapter;
     private BalanceBean mBalanceBean;
     private LinearLayout mLl_balance_detail_map;
+    // QR_CODE activity请求码
+    private final static int REQ_CODE = 1028;
+    private LinearLayout mLl_balance_detail_drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,9 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
         mDrawerMenuRecyclerViewAdapter = new DrawerMenuRecyclerViewAdapter(getWalletDetailMenus());
         mDrawerMenuRecyclerViewAdapter.setDrawerMenuOnItemClickListener(this);
         mRv_balance_detail_drawer_menu.setAdapter(mDrawerMenuRecyclerViewAdapter);
+
+        // 侧滑布局
+        mLl_balance_detail_drawer = (LinearLayout) findViewById(R.id.ll_balance_detail_drawer);
     }
 
     private void initData() {
@@ -106,7 +113,7 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
                 break;
             case Constant.ASSETS_CPX:
                 mTv_balance_detail_assets_name.setText(Constant.MARK_CPX);
-                mLl_balance_detail_map.setVisibility(View.VISIBLE);
+                mLl_balance_detail_map.setVisibility(View.INVISIBLE);
                 break;
             default:
                 break;
@@ -115,8 +122,7 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
         mTv_balance_detail_assets_value.setText(mBalanceBean.getAssetsValue());
 
         //设置侧滑title
-        mTv_balance_detail_drawer_title.setText(String.valueOf(Constant.WALLET_NAME + mWalletBean
-                .getWalletName()));
+        mTv_balance_detail_drawer_title.setText(mWalletBean.getWalletName());
     }
 
     @Override
@@ -163,7 +169,8 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
         switch (position) {
             case 0:
                 CpLog.i(TAG, "扫一扫");
-                startActivity(new Intent(BalanceDetailActivity.this, CaptureActivity.class));
+                Intent intent = new Intent(BalanceDetailActivity.this, CaptureActivity.class);
+                startActivityForResult(intent, REQ_CODE);
                 break;
             case 1:
                 CpLog.i(TAG, "创建钱包");
@@ -171,6 +178,13 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
                 break;
             default:
                 break;
+        }
+        closeDrawer(mLl_balance_detail_drawer);
+    }
+
+    private void closeDrawer(View drawer) {
+        if (mDl_balance_detail.isDrawerOpen(drawer)) {
+            mDl_balance_detail.closeDrawer(drawer);
         }
     }
 
@@ -188,5 +202,33 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
         }
         ar.recycle();
         return drawerMenus;
+    }
+
+    // QR_CODE Result
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != REQ_CODE) {
+            CpLog.e(TAG, "requestCode != REQ_CODE");
+            return;
+        }
+
+        if (null == data) {
+            CpLog.e(TAG, "onActivityResult() -> data is null!");
+            return;
+        }
+
+        String qrCode = data.getStringExtra(CaptureActivity.SCAN_QRCODE_RESULT);
+        if (TextUtils.isEmpty(qrCode)) {
+            CpLog.e(TAG, "qrCode is null or empty!");
+            return;
+        }
+
+        CpLog.i(TAG, "qrCode:" + qrCode);
+        Intent intent = new Intent(BalanceDetailActivity.this, TransferActivity.class);
+        intent.putExtra(Constant.PARCELABLE_WALLET_BEAN_TRANSFER, mWalletBean);
+        intent.putExtra(Constant.PARCELABLE_BALANCE_BEAN_TRANSFER, mBalanceBean);
+        intent.putExtra(Constant.PARCELABLE_QR_CODE_TRANSFER, qrCode);
+        startActivity(intent);
     }
 }

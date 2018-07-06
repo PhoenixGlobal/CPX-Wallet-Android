@@ -4,25 +4,39 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class TransactionRecord implements Parcelable {
-    private String logoUrl;
+
+    private String walletAddress;
+    private String txType;
     private String txID;
     private String txAmount;
-    private long time;
     private int txState;
-    private String symbol;
-    private String from;
-    private String to;
+    private String txFrom;
+    private String txTo;
+    private String gasConsumed;
+    private String assetID;
+    private String assetSymbol;
+    private String assetLogoUrl;
+    private int assetDecimal;
+    private long txTime;
 
     public TransactionRecord() {
 
     }
 
-    public String getLogoUrl() {
-        return logoUrl;
+    public String getWalletAddress() {
+        return walletAddress;
     }
 
-    public void setLogoUrl(String logoUrl) {
-        this.logoUrl = logoUrl;
+    public void setWalletAddress(String walletAddress) {
+        this.walletAddress = walletAddress;
+    }
+
+    public String getTxType() {
+        return txType;
+    }
+
+    public void setTxType(String txType) {
+        this.txType = txType;
     }
 
     public String getTxID() {
@@ -41,14 +55,6 @@ public class TransactionRecord implements Parcelable {
         this.txAmount = txAmount;
     }
 
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
-
     public int getTxState() {
         return txState;
     }
@@ -57,29 +63,70 @@ public class TransactionRecord implements Parcelable {
         this.txState = txState;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public String getTxFrom() {
+        return txFrom;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setTxFrom(String txFrom) {
+        this.txFrom = txFrom;
     }
 
-    public String getFrom() {
-        return from;
+    public String getTxTo() {
+        return txTo;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setTxTo(String txTo) {
+        this.txTo = txTo;
     }
 
-    public String getTo() {
-        return to;
+    public String getGasConsumed() {
+        return gasConsumed;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setGasConsumed(String gasConsumed) {
+        this.gasConsumed = gasConsumed;
     }
+
+    public String getAssetID() {
+        return assetID;
+    }
+
+    public void setAssetID(String assetID) {
+        this.assetID = assetID;
+    }
+
+    public String getAssetSymbol() {
+        return assetSymbol;
+    }
+
+    public void setAssetSymbol(String assetSymbol) {
+        this.assetSymbol = assetSymbol;
+    }
+
+    public String getAssetLogoUrl() {
+        return assetLogoUrl;
+    }
+
+    public void setAssetLogoUrl(String assetLogoUrl) {
+        this.assetLogoUrl = assetLogoUrl;
+    }
+
+    public int getAssetDecimal() {
+        return assetDecimal;
+    }
+
+    public void setAssetDecimal(int assetDecimal) {
+        this.assetDecimal = assetDecimal;
+    }
+
+    public long getTxTime() {
+        return txTime;
+    }
+
+    public void setTxTime(long txTime) {
+        this.txTime = txTime;
+    }
+
 
     @Override
     public int describeContents() {
@@ -88,29 +135,38 @@ public class TransactionRecord implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.logoUrl);
+        dest.writeString(this.walletAddress);
+        dest.writeString(this.txType);
         dest.writeString(this.txID);
         dest.writeString(this.txAmount);
-        dest.writeLong(this.time);
         dest.writeInt(this.txState);
-        dest.writeString(this.symbol);
-        dest.writeString(this.from);
-        dest.writeString(this.to);
+        dest.writeString(this.txFrom);
+        dest.writeString(this.txTo);
+        dest.writeString(this.gasConsumed);
+        dest.writeString(this.assetID);
+        dest.writeString(this.assetSymbol);
+        dest.writeString(this.assetLogoUrl);
+        dest.writeInt(this.assetDecimal);
+        dest.writeLong(this.txTime);
     }
 
     protected TransactionRecord(Parcel in) {
-        this.logoUrl = in.readString();
+        this.walletAddress = in.readString();
+        this.txType = in.readString();
         this.txID = in.readString();
         this.txAmount = in.readString();
-        this.time = in.readLong();
         this.txState = in.readInt();
-        this.symbol = in.readString();
-        this.from = in.readString();
-        this.to = in.readString();
+        this.txFrom = in.readString();
+        this.txTo = in.readString();
+        this.gasConsumed = in.readString();
+        this.assetID = in.readString();
+        this.assetSymbol = in.readString();
+        this.assetLogoUrl = in.readString();
+        this.assetDecimal = in.readInt();
+        this.txTime = in.readLong();
     }
 
-    public static final Parcelable.Creator<TransactionRecord> CREATOR = new Parcelable
-            .Creator<TransactionRecord>() {
+    public static final Creator<TransactionRecord> CREATOR = new Creator<TransactionRecord>() {
         @Override
         public TransactionRecord createFromParcel(Parcel source) {
             return new TransactionRecord(source);
@@ -123,16 +179,41 @@ public class TransactionRecord implements Parcelable {
     };
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TransactionRecord that = (TransactionRecord) o;
+
+        if (!txID.equals(that.txID)) return false;
+        if (!txFrom.equals(that.txFrom)) return false;
+        return txTo.equals(that.txTo);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = txID.hashCode();
+        result = 31 * result + txFrom.hashCode();
+        result = 31 * result + txTo.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "TransactionRecord{" +
-                "logoUrl='" + logoUrl + '\'' +
+                "walletAddress='" + walletAddress + '\'' +
+                ", txType='" + txType + '\'' +
                 ", txID='" + txID + '\'' +
                 ", txAmount='" + txAmount + '\'' +
-                ", time=" + time +
                 ", txState=" + txState +
-                ", symbol='" + symbol + '\'' +
-                ", from='" + from + '\'' +
-                ", to='" + to + '\'' +
+                ", txFrom='" + txFrom + '\'' +
+                ", txTo='" + txTo + '\'' +
+                ", gasConsumed='" + gasConsumed + '\'' +
+                ", assetID='" + assetID + '\'' +
+                ", assetSymbol='" + assetSymbol + '\'' +
+                ", assetLogoUrl='" + assetLogoUrl + '\'' +
+                ", assetDecimal=" + assetDecimal +
+                ", txTime=" + txTime +
                 '}';
     }
 }

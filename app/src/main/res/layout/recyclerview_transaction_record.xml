@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/rl_assets_rv_item_height"
+    android:layout_height="64dp"
     android:background="@android:color/white">
 
     <ImageView
         android:id="@+id/iv_transaction_record_tx_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="13dp"
         android:scaleType="center"

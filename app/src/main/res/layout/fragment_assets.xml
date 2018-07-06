@@ -59,8 +59,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="6dp"
                     android:background="@null"
-                    android:singleLine="true"
                     android:hint="@string/et_assets_search"
+                    android:singleLine="true"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white"
                     android:textSize="@dimen/paratext_14sp" />
@@ -84,7 +84,7 @@
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/sl_assets_rv"
-            android:layout_width="320dp"
+            android:layout_width="343dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rv_assets_margin_top">

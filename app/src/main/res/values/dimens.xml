@@ -33,7 +33,7 @@
     <dimen name="fragment_assets_title_margin_top">30dp</dimen>
     <dimen name="rv_assets_margin_start">10dp</dimen>
     <dimen name="rv_assets_margin_end">10dp</dimen>
-    <dimen name="rv_assets_margin_top">-20dp</dimen>
+    <dimen name="rv_assets_margin_top">-25dp</dimen>
     <dimen name="tv_assets_unit_size">16sp</dimen>
     <dimen name="tv_assets_cancel_margin_end">30dp</dimen>
     <dimen name="et_assets_search_margin_bottom">27dp</dimen>
@@ -42,11 +42,11 @@
     <dimen name="v_assets_rv_item_margin_end">120dp</dimen>
     <dimen name="tv_assets_rv_item_balance_margin_end">50dp</dimen>
     <dimen name="tv_assets_rv_item_balance_margin_top">11dp</dimen>
-    <dimen name="cv_assets_rv_item_bg_corner">2dp</dimen>
+    <dimen name="cv_assets_rv_item_bg_corner">6dp</dimen>
     <dimen name="tv_assets_rv_item_unit_margin_end">20dp</dimen>
     <dimen name="tv_assets_rv_item_balance_size">20sp</dimen>
     <dimen name="tv_assets_rv_item_wallet_name_size">16sp</dimen>
-    <dimen name="rl_assets_rv_item_height">64dp</dimen>
+    <dimen name="rl_assets_rv_item_height">85dp</dimen>
     <dimen name="ll_assets_rv_item_padding">20dp</dimen>
     <dimen name="bt_wallet_detail_tx_width">136dp</dimen>
     <dimen name="bt_wallet_detail_tx_height">33dp</dimen>
@@ -80,4 +80,6 @@
     <dimen name="paratext_14sp">14sp</dimen>
     <dimen name="detail_12sp">12sp</dimen>
     <dimen name="title_small_16sp">16sp</dimen>
+    <dimen name="card_title">20sp</dimen>
+    <dimen name="card_title_big">22sp</dimen>
 </resources>

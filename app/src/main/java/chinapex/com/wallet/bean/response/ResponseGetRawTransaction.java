@@ -81,7 +81,7 @@ public class ResponseGetRawTransaction {
         private String sys_fee;
         private String net_fee;
         private String blockhash;
-        private int confirmations;
+        private long confirmations;
         private int blocktime;
         private List<?> attributes;
         private List<VinBean> vin;
@@ -144,11 +144,11 @@ public class ResponseGetRawTransaction {
             this.blockhash = blockhash;
         }
 
-        public int getConfirmations() {
+        public long getConfirmations() {
             return confirmations;
         }
 
-        public void setConfirmations(int confirmations) {
+        public void setConfirmations(long confirmations) {
             this.confirmations = confirmations;
         }
 

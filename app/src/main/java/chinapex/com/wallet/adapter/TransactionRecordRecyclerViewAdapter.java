@@ -2,6 +2,7 @@ package chinapex.com.wallet.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,26 +90,56 @@ public class TransactionRecordRecyclerViewAdapter extends RecyclerView
         // TODO: 2018/6/21 0021 logoUrl
         holder.txID.setText(transactionRecord.getTxID());
         holder.txAmount.setText(transactionRecord.getTxAmount());
-        holder.txTime.setText(PhoneUtils.getFormatTime(transactionRecord.getTime()));
+        holder.txTime.setText(PhoneUtils.getFormatTime(transactionRecord.getTxTime()));
 
         switch (transactionRecord.getTxState()) {
             case Constant.TRANSACTION_STATE_FAIL:
                 holder.txState.setText(Constant.TRANSACTION_STATE_FAIL_TEXT);
                 holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources()
                         .getColor(R.color.c_E16A67));
+                holder.txTime.setVisibility(View.INVISIBLE);
                 break;
             case Constant.TRANSACTION_STATE_SUCCESS:
                 holder.txState.setText(Constant.TRANSACTION_STATE_SUCCESS_TEXT);
                 holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources()
                         .getColor(R.color.c_54CA80));
+                holder.txTime.setVisibility(View.VISIBLE);
                 break;
             case Constant.TRANSACTION_STATE_CONFIRMING:
                 holder.txState.setText(Constant.TRANSACTION_STATE_CONFIRMING_TEXT);
                 holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources()
                         .getColor(R.color.colorPrimary));
+                holder.txTime.setVisibility(View.VISIBLE);
+                break;
+            case Constant.TRANSACTION_STATE_PACKAGING:
+                holder.txState.setText(Constant.TRANSACTION_STATE_PACKAGING_TEXT);
+                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources()
+                        .getColor(R.color.c_F5A623));
+                holder.txTime.setVisibility(View.INVISIBLE);
                 break;
             default:
                 break;
+        }
+
+        // 临时logo填充，后期完善逻辑移除
+        String assetID = transactionRecord.getAssetID();
+        if (!TextUtils.isEmpty(assetID)) {
+            switch (assetID) {
+                case Constant.ASSETS_CPX:
+                    holder.txLogo.setImageDrawable(ApexWalletApplication.getInstance().getResources()
+                            .getDrawable(R.drawable.logo_nep5_cpx));
+                    break;
+                case Constant.ASSETS_NEO:
+                    holder.txLogo.setImageDrawable(ApexWalletApplication.getInstance().getResources()
+                            .getDrawable(R.drawable.logo_global_neo));
+                    break;
+                case Constant.ASSETS_NEO_GAS:
+                    holder.txLogo.setImageDrawable(ApexWalletApplication.getInstance().getResources()
+                            .getDrawable(R.drawable.logo_global_gas));
+                    break;
+                default:
+                    break;
+            }
         }
 
         holder.itemView.setTag(position);

@@ -53,6 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="8dp"
+        android:ellipsize="middle"
+        android:ems="10"
+        android:singleLine="true"
         android:text="@string/tv_gathering_wallet_name"
         android:textColor="@color/c_333333"
         android:textSize="@dimen/tv_gathering_wallet_name" />

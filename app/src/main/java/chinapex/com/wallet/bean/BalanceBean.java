@@ -12,6 +12,8 @@ public class BalanceBean implements Parcelable {
     private int mapState;
     // 当前资产
     private String assetsID;
+    private String assetType;
+    private int assetDecimal;
     private String assetsValue;
     // 人民币
     private String cny;
@@ -26,6 +28,9 @@ public class BalanceBean implements Parcelable {
         return mapState;
     }
 
+    public BalanceBean() {
+    }
+
     public void setMapState(int mapState) {
         this.mapState = mapState;
     }
@@ -36,6 +41,22 @@ public class BalanceBean implements Parcelable {
 
     public void setAssetsID(String assetsID) {
         this.assetsID = assetsID;
+    }
+
+    public String getAssetType() {
+        return assetType;
+    }
+
+    public void setAssetType(String assetType) {
+        this.assetType = assetType;
+    }
+
+    public int getAssetDecimal() {
+        return assetDecimal;
+    }
+
+    public void setAssetDecimal(int assetDecimal) {
+        this.assetDecimal = assetDecimal;
     }
 
     public String getAssetsValue() {
@@ -86,7 +107,6 @@ public class BalanceBean implements Parcelable {
         this.advanceDecline = advanceDecline;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -96,6 +116,8 @@ public class BalanceBean implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.mapState);
         dest.writeString(this.assetsID);
+        dest.writeString(this.assetType);
+        dest.writeInt(this.assetDecimal);
         dest.writeString(this.assetsValue);
         dest.writeString(this.cny);
         dest.writeString(this.cnyValue);
@@ -104,12 +126,11 @@ public class BalanceBean implements Parcelable {
         dest.writeInt(this.advanceDecline);
     }
 
-    public BalanceBean() {
-    }
-
     protected BalanceBean(Parcel in) {
         this.mapState = in.readInt();
         this.assetsID = in.readString();
+        this.assetType = in.readString();
+        this.assetDecimal = in.readInt();
         this.assetsValue = in.readString();
         this.cny = in.readString();
         this.cnyValue = in.readString();
@@ -118,8 +139,7 @@ public class BalanceBean implements Parcelable {
         this.advanceDecline = in.readInt();
     }
 
-    public static final Parcelable.Creator<BalanceBean> CREATOR = new Parcelable
-            .Creator<BalanceBean>() {
+    public static final Creator<BalanceBean> CREATOR = new Creator<BalanceBean>() {
         @Override
         public BalanceBean createFromParcel(Parcel source) {
             return new BalanceBean(source);

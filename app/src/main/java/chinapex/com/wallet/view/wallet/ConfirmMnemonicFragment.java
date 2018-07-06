@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.adapter.BackupClickMnemonicAdapter;
@@ -27,6 +30,7 @@ import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.utils.DensityUtil;
 import chinapex.com.wallet.utils.SharedPreferencesUtils;
 import chinapex.com.wallet.view.MainActivity;
 
@@ -46,14 +50,13 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
     private BackupShowMnemonicAdapter mBackupShowMnemonicAdapter;
     private ArrayList<MnemonicState> mMnemonicStatesShow;
     private ArrayList<MnemonicState> mMnemonicStatesClick;
+    private ArrayList<MnemonicState> mFinalRightMnemonics;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
             savedInstanceState) {
-        View fragment_verify_mnemonic = inflater.inflate(R.layout.fragment_confirm_mnemonic,
-                container, false);
-        return fragment_verify_mnemonic;
+        return inflater.inflate(R.layout.fragment_confirm_mnemonic, container, false);
     }
 
     @Override
@@ -62,7 +65,6 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
 
         initView(view);
         initData();
-
     }
 
     private void initView(View view) {
@@ -88,21 +90,28 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
         }
         String[] backupMnemonics = backupMnemonic.split(" ");
         mMnemonicStatesClick = new ArrayList<>();
+        mFinalRightMnemonics = new ArrayList<>();
         for (int i = 0; i < backupMnemonics.length; i++) {
             MnemonicState mnemonicState = new MnemonicState();
             mnemonicState.setMnemonic(backupMnemonics[i]);
             mnemonicState.setSelected(false);
+            mFinalRightMnemonics.add(mnemonicState);
             mMnemonicStatesClick.add(mnemonicState);
         }
+
+        // 打乱助记词
+        Collections.shuffle(mMnemonicStatesClick);
+
         mBackupClickMnemonicAdapter = new BackupClickMnemonicAdapter(mMnemonicStatesClick);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(ApexWalletApplication
                 .getInstance());
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
         mRv_confirm_mnemonic_click.setLayoutManager(layoutManager);
         mRv_confirm_mnemonic_click.setAdapter(mBackupClickMnemonicAdapter);
-        int spaceClick = 10;
-        mRv_confirm_mnemonic_click.addItemDecoration(new SpacesItemDecoration(spaceClick));
+        int space = DensityUtil.dip2px(getActivity(), 5);
+        mRv_confirm_mnemonic_click.addItemDecoration(new SpacesItemDecoration(space));
         mBackupClickMnemonicAdapter.setOnItemClickListener(this);
 
         // 设置展示的助记词
@@ -114,24 +123,9 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
         layoutManagerShow.setJustifyContent(JustifyContent.FLEX_START);
         mRv_confirm_mnemonic_show.setLayoutManager(layoutManagerShow);
         mRv_confirm_mnemonic_show.setAdapter(mBackupShowMnemonicAdapter);
-        int spaceShow = 10;
-        mRv_confirm_mnemonic_show.addItemDecoration(new SpacesItemDecoration(spaceShow));
+        mRv_confirm_mnemonic_show.addItemDecoration(new SpacesItemDecoration(space));
         mBackupShowMnemonicAdapter.setOnItemClickShowListener(this);
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bt_confirm_mnemonic_confirm:
-                // TODO: 2018/6/10 校验助记词顺序是否正确，正确置为已备份
-
-                updateWalletBackupState();
-                isFirstEnter();
-                break;
-            default:
-                break;
-        }
     }
 
     //展示助记词的回调
@@ -158,6 +152,52 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
             mMnemonicStatesShow.remove(mnemonicState);
         }
         mBackupShowMnemonicAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_confirm_mnemonic_confirm:
+                if (!checkMnemonicIsRight()) {
+                    CpLog.w(TAG, "checkMnemonicIsRight is false!");
+                    Toast.makeText(getActivity(), "助记词不正确！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                updateWalletBackupState();
+                isFirstEnter();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private boolean checkMnemonicIsRight() {
+        if (null == mFinalRightMnemonics || mFinalRightMnemonics.isEmpty()) {
+            CpLog.w(TAG, "mFinalRightMnemonics is null or empty!");
+            return false;
+        }
+
+        if (null == mMnemonicStatesShow || mMnemonicStatesShow.isEmpty()) {
+            CpLog.w(TAG, "mMnemonicStatesShow is null or empty!");
+            return false;
+        }
+
+        if (mFinalRightMnemonics.size() != mMnemonicStatesShow.size()) {
+            CpLog.w(TAG, "mFinalRightMnemonics and mMnemonicStatesShow size is not same!");
+            return false;
+        }
+
+        for (int i = 0; i < mFinalRightMnemonics.size(); i++) {
+            MnemonicState mnemonicFinal = mFinalRightMnemonics.get(i);
+            MnemonicState mnemonicShow = mMnemonicStatesShow.get(i);
+            if (!mnemonicFinal.equals(mnemonicShow)) {
+                CpLog.w(TAG, "mnemonics out of order!");
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private void updateWalletBackupState() {
