@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -22,6 +23,7 @@ import chinapex.com.wallet.R;
 import chinapex.com.wallet.adapter.BackupClickMnemonicAdapter;
 import chinapex.com.wallet.adapter.BackupShowMnemonicAdapter;
 import chinapex.com.wallet.adapter.SpacesItemDecoration;
+import chinapex.com.wallet.adapter.SpacesItemDecorationHorizontal;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.MnemonicState;
 import chinapex.com.wallet.bean.WalletBean;
@@ -62,7 +64,6 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initView(view);
         initData();
     }
@@ -101,7 +102,6 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
 
         // 打乱助记词
         Collections.shuffle(mMnemonicStatesClick);
-
         mBackupClickMnemonicAdapter = new BackupClickMnemonicAdapter(mMnemonicStatesClick);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(ApexWalletApplication
                 .getInstance());
@@ -110,8 +110,8 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
         layoutManager.setFlexWrap(FlexWrap.WRAP);
         mRv_confirm_mnemonic_click.setLayoutManager(layoutManager);
         mRv_confirm_mnemonic_click.setAdapter(mBackupClickMnemonicAdapter);
-        int space = DensityUtil.dip2px(getActivity(), 5);
-        mRv_confirm_mnemonic_click.addItemDecoration(new SpacesItemDecoration(space));
+        int space = DensityUtil.dip2px(getActivity(), 4);
+        mRv_confirm_mnemonic_click.addItemDecoration(new SpacesItemDecorationHorizontal(space));
         mBackupClickMnemonicAdapter.setOnItemClickListener(this);
 
         // 设置展示的助记词
@@ -121,9 +121,10 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
                 .getInstance());
         layoutManagerShow.setFlexDirection(FlexDirection.ROW);
         layoutManagerShow.setJustifyContent(JustifyContent.FLEX_START);
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
         mRv_confirm_mnemonic_show.setLayoutManager(layoutManagerShow);
         mRv_confirm_mnemonic_show.setAdapter(mBackupShowMnemonicAdapter);
-        mRv_confirm_mnemonic_show.addItemDecoration(new SpacesItemDecoration(space));
+        mRv_confirm_mnemonic_show.addItemDecoration(new SpacesItemDecorationHorizontal(space));
         mBackupShowMnemonicAdapter.setOnItemClickShowListener(this);
 
     }

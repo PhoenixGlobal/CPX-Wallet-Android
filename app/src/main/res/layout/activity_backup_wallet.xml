@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/main_tv_title_margin_top"
-            android:text="@string/tb_title_backup"
+            android:text="@string/backup_wallet"
             android:textColor="@android:color/white"
             android:textSize="@dimen/tb_title_size" />
     </android.support.v7.widget.Toolbar>

@@ -1,89 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dl_assets_overview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="chinapex.com.wallet.view.assets.AssetsOverviewActivity">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="133dp"
+        android:background="@drawable/tb_bg">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="133dp"
-            android:background="@drawable/tb_bg">
-
-            <TextView
-                android:id="@+id/tv_assets_overview_wallet_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
-                android:text="Wallet 0x233400000000000000000"
-                android:gravity="center_horizontal"
-                android:singleLine="true"
-                android:ems="6"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/tb_title_size" />
-
-            <TextView
-                android:id="@+id/tv_assets_overview_wallet_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_assets_overview_wallet_name"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="14dp"
-                android:singleLine="true"
-                android:text="0x2334dwq212lkdjbholiuenkgjhbkjh342023"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
-
-            <ImageButton
-                android:id="@+id/ib_assets_overview_ellipsis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="13dp"
-                android:layout_marginTop="35dp"
-                android:background="@null"
-                android:src="@drawable/icon_ellipsis" />
-        </RelativeLayout>
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/sl_assets_overview_rv"
-            android:layout_width="343dp"
-            android:layout_gravity="center_horizontal"
+        <TextView
+            android:id="@+id/tv_assets_overview_wallet_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-26dp">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:ems="6"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:text="Wallet 0x233400000000000000000"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tb_title_size" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_assets_overview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_assets_overview_wallet_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_assets_overview_wallet_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:singleLine="true"
+            android:text="0x2334dwq212lkdjbholiuenkgjhbkjh342023"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
 
-            </android.support.v7.widget.RecyclerView>
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/ib_assets_overview_ellipsis"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:src="@drawable/icon_add_assets_round" />
+    </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_assets_overview_drawer"
-        android:layout_width="@dimen/ll_wallet_detail_drawer_width"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:background="@android:color/white"
-        android:orientation="vertical">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sl_assets_overview_rv"
+        android:layout_width="343dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-26dp">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_assets_overview_drawer_menu"
+            android:id="@+id/rv_assets_overview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="36dp"
-            android:divider="@null">
+            android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
-
-    </LinearLayout>
-</android.support.v4.widget.DrawerLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

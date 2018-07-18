@@ -36,7 +36,6 @@ import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.PhoneUtils;
 import chinapex.com.wallet.utils.ToastUtils;
-import chinapex.com.wallet.view.MeSkipActivity;
 import chinapex.com.wallet.view.dialog.SwitchWalletDialog;
 
 /**
@@ -57,7 +56,7 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
     private RecyclerView mRv_transaction_record;
     private List<TransactionRecord> mTransactionRecords;
     private List<TransactionRecord> mSearchTxRecords;
-    private TransactionRecordRecyclerViewAdapter mTransactionRecordRecyclerViewAdapter;
+    private TransactionRecordRecyclerViewAdapter mTxRecyclerViewAdapter;
     private EditText mEt_tx_records_search;
     private TextView mTv_tx_records_cancel;
 
@@ -98,10 +97,10 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
                 .getInstance(), LinearLayoutManager.VERTICAL, false));
         mTransactionRecords = new ArrayList<>();
         mSearchTxRecords = new ArrayList<>();
-        mTransactionRecordRecyclerViewAdapter = new TransactionRecordRecyclerViewAdapter
+        mTxRecyclerViewAdapter = new TransactionRecordRecyclerViewAdapter
                 (mTransactionRecords);
-        mTransactionRecordRecyclerViewAdapter.setOnItemClickListener(this);
-        mRv_transaction_record.setAdapter(mTransactionRecordRecyclerViewAdapter);
+        mTxRecyclerViewAdapter.setOnItemClickListener(this);
+        mRv_transaction_record.setAdapter(mTxRecyclerViewAdapter);
 
         mIb_me_transaction_record_switch.setOnClickListener(this);
         mSl_transaction_record.setColorSchemeColors(this.getActivity().getResources().getColor(R
@@ -113,8 +112,8 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
     }
 
     private void initData() {
-        MeSkipActivity meSkipActivity = (MeSkipActivity) getActivity();
-        mCurrentClickedWalletBean = meSkipActivity.getWalletBean();
+        Me3Activity me3Activity = (Me3Activity) getActivity();
+        mCurrentClickedWalletBean = me3Activity.getWalletBean();
         if (null == mCurrentClickedWalletBean) {
             CpLog.e(TAG, "currentClickedWalletBean is null!");
             return;
@@ -127,39 +126,46 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
 
     private void loadTxsFromDb() {
         String address = mTv_me_transaction_record_address.getText().toString().trim();
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                int preClearSize = mSearchTxRecords.size();
+                mTransactionRecords.clear();
+                mSearchTxRecords.clear();
+                mTxRecyclerViewAdapter.notifyItemRangeRemoved(0, preClearSize);
+            }
+        });
         TaskController.getInstance().submit(new LoadTransacitonRecord(address, this));
     }
 
     @Override
-    public void loadTransactionRecord(List<TransactionRecord> transactionRecords) {
+    public void loadTransactionRecord(final List<TransactionRecord> transactionRecords) {
         if (null == transactionRecords || transactionRecords.isEmpty()) {
             CpLog.w(TAG, "loadTransactionRecord() -> transactionRecords is null or empty!");
             return;
         }
 
-        mTransactionRecords.clear();
-        mTransactionRecords.addAll(transactionRecords);
-        mSearchTxRecords.clear();
-        mSearchTxRecords.addAll(transactionRecords);
-
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 CpLog.i(TAG, "loadTransactionRecord ok!");
-                mTransactionRecordRecyclerViewAdapter.notifyDataSetChanged();
-            }
-        });
 
-        if (mSl_transaction_record.isRefreshing()) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+                int preClearSize = mTransactionRecords.size();
+                mTransactionRecords.clear();
+                mSearchTxRecords.clear();
+                mTxRecyclerViewAdapter.notifyItemRangeRemoved(0, preClearSize);
+
+                mTransactionRecords.addAll(transactionRecords);
+                mSearchTxRecords.addAll(transactionRecords);
+                mTxRecyclerViewAdapter.notifyItemRangeInserted(0, transactionRecords.size());
+
+                if (mSl_transaction_record.isRefreshing()) {
                     mSl_transaction_record.setRefreshing(false);
                 }
-            });
-        }
 
-        mEt_tx_records_search.getText().clear();
+                mEt_tx_records_search.getText().clear();
+            }
+        });
     }
 
     private void incrementalUpdateTxDbFromNet() {
@@ -277,7 +283,7 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mTransactionRecordRecyclerViewAdapter.notifyDataSetChanged();
+                mTxRecyclerViewAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -286,7 +292,6 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
     public void onDestroy() {
         super.onDestroy();
         ApexListeners.getInstance().removeOnTxStateUpdateListener(this);
-        CpLog.w(TAG, "onDestroy");
     }
 
     @Override
@@ -306,7 +311,7 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
 
         if (TextUtils.isEmpty(s)) {
             CpLog.w(TAG, "onTextChanged() -> is empty!");
-            mTransactionRecordRecyclerViewAdapter.notifyDataSetChanged();
+            mTxRecyclerViewAdapter.notifyDataSetChanged();
             return;
         }
 
@@ -323,7 +328,7 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
             }
         }
 
-        mTransactionRecordRecyclerViewAdapter.notifyDataSetChanged();
+        mTxRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override

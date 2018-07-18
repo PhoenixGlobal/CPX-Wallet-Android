@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="18dp"
-            android:text="@string/tv_dialog_pwd_title"
+            android:text="@string/input_pwd"
             android:textColor="@color/c_030303"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -26,7 +26,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"
             android:background="@android:color/white"
-            android:hint="@string/et_dialog_pwd_hint"
+            android:hint="@string/pwd_hint"
             android:inputType="textPassword"
             android:textColorHint="#C7C7CD"
             android:textSize="12sp" />
@@ -52,7 +52,8 @@
             android:layout_height="39dp"
             android:layout_weight="1"
             android:background="@null"
-            android:text="@string/bt_dialog_pwd_cancel"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
             android:textColor="#007AFF"
             android:textSize="12sp" />
 
@@ -67,7 +68,8 @@
             android:layout_height="39dp"
             android:layout_weight="1"
             android:background="@null"
-            android:text="@string/bt_dialog_pwd_confirm"
+            android:text="@string/confirm_pwd"
+            android:textAllCaps="false"
             android:textColor="#E16A67"
             android:textSize="12sp" />
 

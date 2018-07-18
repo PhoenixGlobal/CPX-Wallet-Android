@@ -8,9 +8,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="@string/tv_confirm_mnemonic"
+        android:text="@string/confirm_mnemonic"
         android:textColor="@color/c_666666"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -19,33 +19,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/tv_confirm_mnemonic_content"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:text="@string/confirm_mnemonic_content"
         android:textColor="@color/c_666666"
         android:textSize="14sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_confirm_mnemonic_show"
+    <RelativeLayout
         android:layout_width="330dp"
-        android:layout_height="175dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="195dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/shape_bg_copy_mnemonic"
-        android:overScrollMode="never"
-        android:padding="5dp" />
+        android:padding="5dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_confirm_mnemonic_click"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_confirm_mnemonic_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="330dp"
-        android:layout_height="175dp"
-        android:layout_marginTop="20dp"
-        android:overScrollMode="never" />
+        android:layout_height="195dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_confirm_mnemonic_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/bt_confirm_mnemonic_confirm"
         android:layout_width="293dp"
         android:layout_height="39dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape_new_visitor_bt_bg"
-        android:text="@string/bt_confirm_mnemonic_confirm"
+        android:text="@string/confirm"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
 

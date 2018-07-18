@@ -1,4 +1,4 @@
-package chinapex.com.wallet.view;
+package chinapex.com.wallet.view.me;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -15,9 +15,9 @@ import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.FragmentFactory;
 
-public class MeSkipActivity extends BaseActivity implements OnItemDeleteListener {
+public class Me3Activity extends BaseActivity implements OnItemDeleteListener {
 
-    private static final String TAG = MeSkipActivity.class.getSimpleName();
+    private static final String TAG = Me3Activity.class.getSimpleName();
     private WalletBean mWalletBean;
 
     @Override
@@ -30,6 +30,7 @@ public class MeSkipActivity extends BaseActivity implements OnItemDeleteListener
     }
 
     private void initView() {
+
     }
 
     private void initData() {
@@ -63,7 +64,7 @@ public class MeSkipActivity extends BaseActivity implements OnItemDeleteListener
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         BaseFragment fragment = FragmentFactory.getFragment(fragmentTag);
         if (!fragment.isAdded()) {
-            fragmentTransaction.add(R.id.fl_me_skip, fragment, fragmentTag);
+            fragmentTransaction.add(R.id.fl_me3, fragment, fragmentTag);
         }
         fragmentTransaction.show(fragment).commit();
     }

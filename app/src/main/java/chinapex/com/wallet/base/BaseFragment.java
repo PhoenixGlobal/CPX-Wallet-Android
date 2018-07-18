@@ -50,7 +50,7 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public void startActivityBundle(Class cls, boolean isFinish, String key, String value) {
+    public void startActivityStringExtra(Class cls, boolean isFinish, String key, String value) {
         Intent intent = new Intent(ApexWalletApplication.getInstance(), cls);
         intent.putExtra(key, value);
         startActivity(intent);

@@ -44,7 +44,6 @@ public class GetUtxos implements Runnable, INetCallback {
         }
 
         String utxos = GsonUtils.toJsonStr(responseGetUtxos.getResult());
-        CpLog.i(TAG, "utxos:" + utxos);
         mIGetUtxosCallback.getUtxos(utxos);
     }
 

@@ -9,6 +9,9 @@ public class Constant {
     public static final String IS_FIRST_ENTER_APP = "isFirstEnterApp";
     public static final String IS_FIRST_ENTER_MAIN = "isFirstEnterMain";
 
+    // language settings
+    public static final String CURRENT_LANGUAGE = "currentLanguage";
+
     // net
     public static final long CONNECT_TIMEOUT = 5;
     public static final long READ_TIMEOUT = 5;
@@ -17,27 +20,23 @@ public class Constant {
     public static final int NET_SUCCESS = 1;
     public static final int NET_BODY_NULL = 0;
 
-    // neo测试网ip
-//    public static final String HOSTNAME_VERIFIER = "40.125.171.0";
-//    public static final String URL_CLI = "http://40.125.171.0:20332";
-//    public static final String URL_UTXOS = "http://40.125.171.0:8083/utxos/";
-
-    // neo测试网域名
-//    public static final String HOSTNAME_VERIFIER = "dev.chinapex.com.cn";
-//    public static final String URL_CLI = "http://dev.chinapex.com.cn:10086/neo-cli/";
-//    public static final String URL_UTXOS = "http://dev.chinapex.com.cn:10086/tool/utxos/";
-
     // neo正式网
     public static final String HOSTNAME_VERIFIER = "tracker.chinapex.com.cn";
     public static final String URL_CLI = "https://tracker.chinapex.com.cn/neo-cli/";
     public static final String URL_UTXOS = "https://tracker.chinapex.com.cn/tool/utxos/";
+    public static final String URL_ASSETS = "https://tracker.chinapex.com.cn/tool/assets";
+
+    // ApexGlobalTask
+    public static final long ASSETS_POLLING_TIME = 10 * 1000;
+    public static final String UPDATE_ASSETS_OK = "updateAssetsOk";
+
 
     // 交易记录
     public static final String URL_TRANSACTION_HISTORY = "https://tracker.chinapex.com" +
             ".cn/tool/transaction-history/";
     public static final long TX_POLLING_TIME = 20 * 1000;
     public static final long TX_CONFIRM_EXCEPTION = -1;
-    public static final long TX_CONFIRM_ONE = 1;
+    public static final long TX_UN_CONFIRM = 0;
     public static final long TX_CONFIRM_OK = 6;
     public static final long NO_NEED_MODIFY_TX_TIME = -2;
 
@@ -64,6 +63,9 @@ public class Constant {
     // me
     public static final String ME_MANAGER_DETAIL_BUNDLE = "meManagerDetailBundle";
     public static final String ME_SKIP_ACTIVITY_FRAGMENT_TAG = "meSkipActivityFragmentTag";
+    public static final String ME_2_SHOULD_BE_SHOW = "me2ShouldBeShow";
+    public static final String ME_2_SHOULD_BE_SHOW_MANAGE_WALLET = "me2ShouldBeShowManageWallet";
+    public static final String ME_2_SHOULD_BE_SHOW_TX_RECORDS = "me2ShouldBeShowTxRecords";
     public static final String PARCELABLE_WALLET_BEAN_MANAGE_DETAIL =
             "parcelableWalletBeanManageDetail";
 
@@ -101,13 +103,31 @@ public class Constant {
             "0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7";
     public static final String ASSETS_CPX = "0x45d493a6f73fa5f404244a5fb8472fc014ca5885";
 
+    // tmp 后台更新后删除
+    public static final String ASSETS_APH = "0xa0777c3ce2b169d4a23bcba4565e3225a0122d95";
+    public static final String ASSETS_AVA = "0xde2ed49b691e76754c20fe619d891b78ef58e537";
+    public static final String ASSETS_DBC = "0xb951ecbbc5fe37a9c280a76cb0ce0014827294cf";
+    public static final String ASSETS_EXT = "0xe8f98440ad0d7a6e76d84fb1c3d3f8a16e162e97";
+    public static final String ASSETS_LRN = "0x06fa8be9b6609d963e8fc63977b9f8dc5f10895f";
+    public static final String ASSETS_NKN = "0xc36aee199dbba6c3f439983657558cfb67629599";
+    public static final String ASSETS_ONT = "0xceab719b8baa2310f232ee0d277c061704541cfb";
+    public static final String ASSETS_PKC = "0xaf7c7328eee5a275a3bcaee2bf0cf662b5e739be";
+    public static final String ASSETS_RPX = "0xecc6b20d3ccac1ee9ef109af5a7cdb85706b1df9";
+    public static final String ASSETS_SOUL = "0xed07cffad18f1308db51920d99a2af60ac66a7b3";
+    public static final String ASSETS_SWTH = "0xab38352559b8b203bde5fddfa0b07d8b2525e132";
+    public static final String ASSETS_TKY = "0x132947096727c84c7f9e076c90f08fec3bc17f18";
+    public static final String ASSETS_ZPT = "0xac116d4b8d4ca55e6b6d4ecce2192039b51cccc5";
+
+
     // asset type
     public static final String ASSET_TYPE_GLOBAL = "GLOBAL";
     public static final String ASSET_TYPE_NEP5 = "NEP5";
+    public static final String ASSET_TYPE_UTILITY = "UtilityToken";
+    public static final String ASSET_TYPE_GOVERNING = "GoverningToken";
 
-    public static final String MARK_NEO = "NEO";
-    public static final String MARK_NEO_GAS = "GAS";
-    public static final String MARK_CPX = "CPX";
+    public static final String SYMBOL_NEO = "NEO";
+    public static final String SYMBOL_NEO_GAS = "GAS";
+    public static final String SYMBOL_CPX = "CPX";
 
     public static final String UNIT_NEO = "neo";
     public static final String UNIT_NEO_GAS = "gas";
@@ -195,6 +215,27 @@ public class Constant {
             + FIELD_ASSET_SYMBOL + " text, "
             + FIELD_ASSET_LOGO_URL + " text, "
             + FIELD_ASSET_DECIMAL + " integer, "
+            + FIELD_CREATE_TIME + " integer)";
+
+    // table assets
+    public static final String TABLE_ASSETS = "assets";
+
+    public static final String FIELD_ASSET_TYPE = "asset_type";
+    public static final String FIELD_ASSET_PRECISION = "asset_precision";
+    public static final String FIELD_ASSET_NAME = "asset_name";
+    public static final String FIELD_ASSET_IMAGE_URL = "asset_image_url";
+    public static final String FIELD_ASSET_HEX_HASH = "asset_hex_hash";
+    public static final String FIELD_ASSET_HASH = "asset_hash";
+
+    public static final String SQL_CREATE_ASSETS = "create table " + TABLE_ASSETS
+            + " (" + FIELD_ID + " integer primary key autoincrement, "
+            + FIELD_ASSET_TYPE + " text, "
+            + FIELD_ASSET_SYMBOL + " text, "
+            + FIELD_ASSET_PRECISION + " text, "
+            + FIELD_ASSET_NAME + " text, "
+            + FIELD_ASSET_IMAGE_URL + " text, "
+            + FIELD_ASSET_HEX_HASH + " text, "
+            + FIELD_ASSET_HASH + " text, "
             + FIELD_CREATE_TIME + " integer)";
 
 }

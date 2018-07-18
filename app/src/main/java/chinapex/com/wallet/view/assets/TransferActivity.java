@@ -13,42 +13,37 @@ import android.widget.Toast;
 import com.google.zxing.activity.CaptureActivity;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.concurrent.ScheduledFuture;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.AssertTxBean;
+import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.Nep5TxBean;
 import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICreateAssertTxCallback;
 import chinapex.com.wallet.executor.callback.ICreateNep5TxCallback;
-import chinapex.com.wallet.executor.callback.IGetTransactionHistoryCallback;
 import chinapex.com.wallet.executor.callback.IGetUtxosCallback;
 import chinapex.com.wallet.executor.callback.ISendRawTransactionCallback;
-import chinapex.com.wallet.executor.callback.IUpdateTransacitonStateCallback;
 import chinapex.com.wallet.executor.runnable.CreateAssertTx;
 import chinapex.com.wallet.executor.runnable.CreateNep5Tx;
-import chinapex.com.wallet.executor.runnable.GetTransactionHistory;
 import chinapex.com.wallet.executor.runnable.GetUtxos;
 import chinapex.com.wallet.executor.runnable.SendRawTransaction;
-import chinapex.com.wallet.executor.runnable.UpdateTransacitonState;
+import chinapex.com.wallet.global.ApexGlobalTask;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.dialog.TransferPwdDialog;
 import neomobile.Tx;
 import neomobile.Wallet;
 
 public class TransferActivity extends BaseActivity implements View.OnClickListener,
         IGetUtxosCallback, ISendRawTransactionCallback, ICreateAssertTxCallback,
-        TransferPwdDialog.OnCheckPwdListener, ICreateNep5TxCallback,
-        IUpdateTransacitonStateCallback, IGetTransactionHistoryCallback {
+        TransferPwdDialog.OnCheckPwdListener, ICreateNep5TxCallback {
 
     private static final String TAG = TransferActivity.class.getSimpleName();
     private WalletBean mWalletBean;
@@ -61,7 +56,6 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     private EditText mEt_transfer_to_wallet_addr;
     private TextView mTv_transfer_unit;
     private String mOrder;
-    private ScheduledFuture mScheduledFuture;
     private ImageButton mIb_transfer_scan;
     private final static int REQ_CODE = 1029;
 
@@ -112,17 +106,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             return;
         }
 
-        switch (mBalanceBean.getAssetsID()) {
-            case Constant.ASSETS_NEO:
-                mTv_transfer_unit.setText(Constant.UNIT_NEO);
-                break;
-            case Constant.ASSETS_NEO_GAS:
-                mTv_transfer_unit.setText(Constant.UNIT_NEO_GAS);
-                break;
-            case Constant.ASSETS_CPX:
-                mTv_transfer_unit.setText(Constant.UNIT_CPX);
-                break;
-        }
+        mTv_transfer_unit.setText(mBalanceBean.getAssetSymbol());
 
         String qrCode = intent.getStringExtra(Constant.PARCELABLE_QR_CODE_TRANSFER);
         if (TextUtils.isEmpty(qrCode)) {
@@ -137,6 +121,22 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_transfer_send:
+                String addressFrom = mTv_transfer_from_wallet_addr.getText().toString().trim();
+                String addressTo = mEt_transfer_to_wallet_addr.getText().toString().trim();
+                if (TextUtils.isEmpty(addressFrom) || TextUtils.isEmpty(addressTo)) {
+                    CpLog.e(TAG, "addressFrom or addressTo is null or empty!");
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.address_cannot_be_empty));
+                    return;
+                }
+
+                if (addressFrom.equals(addressTo)) {
+                    CpLog.e(TAG, "addressFrom equals addressTo!");
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.address_cannot_be_same));
+                    return;
+                }
+
                 String balance = mBalanceBean.getAssetsValue();
                 String amount = mEt_transfer_amount.getText().toString().trim();
                 try {
@@ -152,7 +152,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                     return;
                 }
 
-                showDeleteWalletPwdDialog();
+                showTransferPwdDialog();
                 break;
             case R.id.ib_transfer_scan:
                 Intent intent = new Intent(TransferActivity.this, CaptureActivity.class);
@@ -163,7 +163,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    public void showDeleteWalletPwdDialog() {
+    public void showTransferPwdDialog() {
         TransferPwdDialog transferPwdDialog = TransferPwdDialog.newInstance();
         transferPwdDialog.setCurrentWalletBean(mWalletBean);
         transferPwdDialog.setOnCheckPwdListener(this);
@@ -202,8 +202,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(TransferActivity.this, "utxos is empty！", Toast
-                            .LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast("utxos is empty!");
                 }
             });
             return;
@@ -299,30 +298,20 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         transactionRecord.setWalletAddress(mWalletFrom.address());
         transactionRecord.setTxAmount(String.valueOf("-" + mEt_transfer_amount.getText().toString
                 ().trim()));
-        String symbol = mTv_transfer_unit.getText().toString().trim();
-        transactionRecord.setAssetSymbol(TextUtils.isEmpty(symbol) ? "" : symbol.toUpperCase());
         transactionRecord.setTxFrom(mWalletFrom.address());
         transactionRecord.setTxTo(mEt_transfer_to_wallet_addr.getText().toString().trim());
         transactionRecord.setTxTime(0);
         transactionRecord.setTxID(mOrder);
-        // TODO: 2018/6/28 0028 logoUrl
-        transactionRecord.setAssetLogoUrl("");
 
-        // 临时logo逻辑，后续完善移除
-        switch (symbol) {
-            case Constant.UNIT_CPX:
-                transactionRecord.setAssetID(Constant.ASSETS_CPX);
-                break;
-            case Constant.UNIT_NEO:
-                transactionRecord.setAssetID(Constant.ASSETS_NEO);
-                break;
-            case Constant.UNIT_NEO_GAS:
-                transactionRecord.setAssetID(Constant.ASSETS_NEO_GAS);
-                break;
-            default:
-                transactionRecord.setAssetID("");
-                break;
+        AssetBean assetBean = apexWalletDbDao.queryAssetByHash(mBalanceBean.getAssetsID());
+        if (null == assetBean) {
+            CpLog.e(TAG, "assetBean is null!");
+            return;
         }
+
+        transactionRecord.setAssetID(mBalanceBean.getAssetsID());
+        transactionRecord.setAssetLogoUrl(assetBean.getImageUrl());
+        transactionRecord.setAssetSymbol(assetBean.getSymbol());
 
         if (isSuccess) {
             transactionRecord.setTxState(Constant.TRANSACTION_STATE_PACKAGING);
@@ -337,64 +326,16 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void run() {
                 if (isSuccess) {
-                    Toast.makeText(TransferActivity.this, "交易广播成功!", Toast.LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast("交易广播成功!");
                 } else {
-                    Toast.makeText(TransferActivity.this, "交易广播失败！", Toast.LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast("交易广播失败!");
                 }
             }
         });
 
-        if (!isSuccess) {
-            CpLog.e(TAG, "send fail! no need polling!");
-            finish();
-            return;
-        }
-
         // start polling
-        mScheduledFuture = TaskController.getInstance().schedule(new UpdateTransacitonState
-                (mOrder, this), 0, Constant.TX_POLLING_TIME);
+        ApexGlobalTask.getInstance().startPolling(mOrder, mWalletFrom.address());
         finish();
-    }
-
-    @Override
-    public void updateTransacitonState(long confirmations) {
-        if (null == mScheduledFuture) {
-            CpLog.e(TAG, "mScheduledFuture is null!");
-            return;
-        }
-
-        if (Constant.TX_CONFIRM_EXCEPTION == confirmations) {
-            CpLog.e(TAG, "TX_CONFIRM_EXCEPTION");
-            // TODO: 2018/7/3 0003 网络异常的逻辑处理
-//            mScheduledFuture.cancel(false);
-            return;
-        }
-
-        if (Constant.TX_CONFIRM_ONE <= confirmations && confirmations < Constant.TX_CONFIRM_OK) {
-            TaskController.getInstance().submit(new GetTransactionHistory(mWalletFrom.address(),
-                    this));
-            return;
-        }
-
-        if (Constant.TX_CONFIRM_OK <= confirmations) {
-            CpLog.i(TAG, "TX_CONFIRM_OK");
-            mScheduledFuture.cancel(false);
-            ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                    .getInstance());
-            if (null == apexWalletDbDao) {
-                CpLog.e(TAG, "apexWalletDbDao is null!");
-                return;
-            }
-
-            apexWalletDbDao.updateTxState(mOrder, Constant.TRANSACTION_STATE_SUCCESS);
-            ApexListeners.getInstance().notifyTxStateUpdate(mOrder, Constant
-                    .TRANSACTION_STATE_SUCCESS, Constant.NO_NEED_MODIFY_TX_TIME);
-        }
-    }
-
-    @Override
-    public void getTransactionHistory(List<TransactionRecord> transactionRecords) {
-
     }
 
     // QR_CODE Result

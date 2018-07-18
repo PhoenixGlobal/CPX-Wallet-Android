@@ -12,23 +12,16 @@ public class BalanceBean implements Parcelable {
     private int mapState;
     // 当前资产
     private String assetsID;
+    private String assetSymbol;
     private String assetType;
     private int assetDecimal;
     private String assetsValue;
-    // 人民币
-    private String cny;
-    private String cnyValue;
-    // 美元
-    private String usd;
-    private String usdValue;
-    //涨跌幅比率
-    private int advanceDecline;
+
+    public BalanceBean() {
+    }
 
     public int getMapState() {
         return mapState;
-    }
-
-    public BalanceBean() {
     }
 
     public void setMapState(int mapState) {
@@ -41,6 +34,14 @@ public class BalanceBean implements Parcelable {
 
     public void setAssetsID(String assetsID) {
         this.assetsID = assetsID;
+    }
+
+    public String getAssetSymbol() {
+        return assetSymbol;
+    }
+
+    public void setAssetSymbol(String assetSymbol) {
+        this.assetSymbol = assetSymbol;
     }
 
     public String getAssetType() {
@@ -67,45 +68,6 @@ public class BalanceBean implements Parcelable {
         this.assetsValue = assetsValue;
     }
 
-    public String getCny() {
-        return cny;
-    }
-
-    public void setCny(String cny) {
-        this.cny = cny;
-    }
-
-    public String getCnyValue() {
-        return cnyValue;
-    }
-
-    public void setCnyValue(String cnyValue) {
-        this.cnyValue = cnyValue;
-    }
-
-    public String getUsd() {
-        return usd;
-    }
-
-    public void setUsd(String usd) {
-        this.usd = usd;
-    }
-
-    public String getUsdValue() {
-        return usdValue;
-    }
-
-    public void setUsdValue(String usdValue) {
-        this.usdValue = usdValue;
-    }
-
-    public int getAdvanceDecline() {
-        return advanceDecline;
-    }
-
-    public void setAdvanceDecline(int advanceDecline) {
-        this.advanceDecline = advanceDecline;
-    }
 
     @Override
     public int describeContents() {
@@ -116,27 +78,19 @@ public class BalanceBean implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.mapState);
         dest.writeString(this.assetsID);
+        dest.writeString(this.assetSymbol);
         dest.writeString(this.assetType);
         dest.writeInt(this.assetDecimal);
         dest.writeString(this.assetsValue);
-        dest.writeString(this.cny);
-        dest.writeString(this.cnyValue);
-        dest.writeString(this.usd);
-        dest.writeString(this.usdValue);
-        dest.writeInt(this.advanceDecline);
     }
 
     protected BalanceBean(Parcel in) {
         this.mapState = in.readInt();
         this.assetsID = in.readString();
+        this.assetSymbol = in.readString();
         this.assetType = in.readString();
         this.assetDecimal = in.readInt();
         this.assetsValue = in.readString();
-        this.cny = in.readString();
-        this.cnyValue = in.readString();
-        this.usd = in.readString();
-        this.usdValue = in.readString();
-        this.advanceDecline = in.readInt();
     }
 
     public static final Creator<BalanceBean> CREATOR = new Creator<BalanceBean>() {

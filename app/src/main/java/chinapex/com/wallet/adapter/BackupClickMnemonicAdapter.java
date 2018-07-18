@@ -85,11 +85,9 @@ public class BackupClickMnemonicAdapter extends RecyclerView.Adapter<BackupClick
     class BackupClickMnemonicAdapterHolder extends RecyclerView.ViewHolder {
         TextView clickMnemonic;
 
-
         BackupClickMnemonicAdapterHolder(View itemView) {
             super(itemView);
             clickMnemonic = itemView.findViewById(R.id.tv_recyclerview_backup_click_mnemonic);
-
         }
     }
 }

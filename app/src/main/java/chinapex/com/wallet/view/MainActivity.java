@@ -14,7 +14,6 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.base.BaseFragment;
-import chinapex.com.wallet.global.ApexCache;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.FragmentFactory;

@@ -26,6 +26,7 @@
     <dimen name="main_tv_title_margin_top">30dp</dimen>
 
 
+
     <!--override BottomNavigationBar dimens-->
     <dimen name="fixed_height_bottom_padding">5dp</dimen>
 
@@ -82,4 +83,12 @@
     <dimen name="title_small_16sp">16sp</dimen>
     <dimen name="card_title">20sp</dimen>
     <dimen name="card_title_big">22sp</dimen>
+
+    <!--language settings-->
+    <dimen name="fragment_me_between">5dp</dimen>
+    <dimen name="fragment_me_margin_start">15dp</dimen>
+    <dimen name="fragment_me_margin_end">20dp</dimen>
+    <dimen name="fragment_me_subhead">14sp</dimen>
+    <dimen name="activity_create_wallet_underline_width">90dp</dimen>
+    <dimen name="dialog_add_assets_margin_start">5dp</dimen>
 </resources>

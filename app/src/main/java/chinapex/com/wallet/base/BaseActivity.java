@@ -50,8 +50,11 @@ public class BaseActivity extends AppCompatActivity {
                     CpLog.e(TAG, "onCreate() -> ClassNotFoundException:" + e.getMessage());
                 }
             }
-            getWindow().getDecorView().setSystemUiVisibility(View
-                    .SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                getWindow().getDecorView().setSystemUiVisibility(View
+                        .SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }
         }
 
     }
@@ -64,7 +67,8 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void startActivityParcelable(Class cls, boolean isFinish, String parcelableKey, Parcelable parcelable) {
+    public void startActivityParcelable(Class cls, boolean isFinish, String parcelableKey,
+                                        Parcelable parcelable) {
         if (null == parcelable || TextUtils.isEmpty(parcelableKey)) {
             CpLog.e(TAG, "parcelable or parcelableKey is null!");
             return;
@@ -78,7 +82,8 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void startActivityParcelables(Class cls, boolean isFinish, HashMap<String, Parcelable> parcelables) {
+    public void startActivityParcelables(Class cls, boolean isFinish, HashMap<String, Parcelable>
+            parcelables) {
         if (null == parcelables || parcelables.isEmpty()) {
             CpLog.e(TAG, "parcelables is null!");
             return;
@@ -98,6 +103,20 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
         if (isFinish) {
             this.finish();
+        }
+    }
+
+    public void startActivityBundle(Class cls, boolean isFinish, String bundleKey, String key,
+                                    String value, String
+                                            parcelableKey, Parcelable parcelable) {
+        Intent intent = new Intent(ApexWalletApplication.getInstance(), cls);
+        Bundle bundle = new Bundle();
+        bundle.putString(key, value);
+        bundle.putParcelable(parcelableKey, parcelable);
+        intent.putExtra(bundleKey, bundle);
+        startActivity(intent);
+        if (isFinish) {
+            finish();
         }
     }
 

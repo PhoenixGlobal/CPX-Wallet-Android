@@ -31,6 +31,7 @@ import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.DrawerMenu;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.changelistener.ApexListeners;
+import chinapex.com.wallet.changelistener.OnAssetsUpdateListener;
 import chinapex.com.wallet.changelistener.OnItemAddListener;
 import chinapex.com.wallet.changelistener.OnItemDeleteListener;
 import chinapex.com.wallet.changelistener.OnItemNameUpdateListener;
@@ -50,7 +51,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, AssetsRecyclerViewAdapter
         .OnItemLongClickListener, OnItemDeleteListener, OnItemAddListener, DrawerLayout
         .DrawerListener, DrawerMenuRecyclerViewAdapter.DrawerMenuOnItemClickListener, View
-        .OnClickListener, OnItemNameUpdateListener, TextWatcher {
+        .OnClickListener, OnItemNameUpdateListener, TextWatcher, OnAssetsUpdateListener {
 
     private static final String TAG = AssetsFragment.class.getSimpleName();
     private RecyclerView mRv_assets;
@@ -134,6 +135,8 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         ApexListeners.getInstance().addOnItemDeleteListener(this);
         ApexListeners.getInstance().addOnItemAddListener(this);
         ApexListeners.getInstance().addOnItemNameUpdateListener(this);
+        ApexListeners.getInstance().addOnAssetsUpdateListener(this);
+
         mSearchTmpWalletBeans = new ArrayList<>();
         mSearchTmpWalletBeans.addAll(mWalletBeans);
     }
@@ -323,6 +326,33 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     }
 
     @Override
+    public void onAssetsUpdate(WalletBean walletBean) {
+        if (null == walletBean) {
+            CpLog.e(TAG, "walletBean is null!");
+            return;
+        }
+
+        if (null == mWalletBeans || mWalletBeans.isEmpty()) {
+            CpLog.e(TAG, "mWalletBeans is null or empty!");
+            return;
+        }
+
+        for (WalletBean walletBeanTmp : mWalletBeans) {
+            if (null == walletBeanTmp) {
+                CpLog.e(TAG, "walletBeanTmp is null!");
+                continue;
+            }
+
+            if (walletBeanTmp.equals(walletBean)) {
+                walletBeanTmp.setAssetsNep5Json(walletBean.getAssetsNep5Json());
+                walletBeanTmp.setAssetsJson(walletBean.getAssetsJson());
+            }
+        }
+
+        mAssetsRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }
 
@@ -369,6 +399,8 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         ApexListeners.getInstance().removeOnItemDeleteListener(this);
         ApexListeners.getInstance().removeOnItemAddListener(this);
         ApexListeners.getInstance().removeOnItemNameUpdateListener(this);
+        ApexListeners.getInstance().removeOnAssetsUpdateListener(this);
     }
+
 
 }

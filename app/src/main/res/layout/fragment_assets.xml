@@ -20,17 +20,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
-                android:text="@string/tb_title_main"
+                android:text="@string/asset"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/tb_title_size" />
 
             <ImageButton
                 android:id="@+id/ib_assets_ellipsis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="13dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="10dp"
                 android:background="@null"
                 android:src="@drawable/icon_ellipsis" />
 
@@ -59,7 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="6dp"
                     android:background="@null"
-                    android:hint="@string/et_assets_search"
+                    android:hint="@string/search_wallet_address"
                     android:singleLine="true"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white"
@@ -74,8 +73,8 @@
                 android:layout_alignBottom="@+id/ll_assets_search"
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="5dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/tv_assets_search_cancel"
+                android:layout_marginEnd="10dp"
+                android:text="@string/cancel"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/paratext_14sp" />
 
@@ -85,8 +84,8 @@
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/sl_assets_rv"
             android:layout_width="343dp"
-            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/rv_assets_margin_top">
 
             <android.support.v7.widget.RecyclerView

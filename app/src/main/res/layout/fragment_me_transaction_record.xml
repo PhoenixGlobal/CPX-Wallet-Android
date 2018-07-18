@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
-            android:text="@string/tv_me_manager_detail_title"
+            android:text="@string/wallet_name"
             android:gravity="center_horizontal"
             android:singleLine="true"
             android:ems="6"
@@ -40,7 +40,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:singleLine="true"
-            android:text="@string/tv_manager_detail_address"
+            android:text="@string/wallet_address"
             android:textColor="@android:color/white"
             android:textSize="@dimen/paratext_14sp" />
 
@@ -68,7 +68,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="9dp"
                 android:background="@null"
-                android:hint="@string/et_me_transaction_record_search"
+                android:hint="@string/search_tx_id"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 android:textSize="@dimen/paratext_14sp" />
@@ -83,8 +83,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="13dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/tv_me_transaction_record_cancel"
+            android:layout_marginEnd="15dp"
+            android:text="@string/cancel"
             android:textColor="@android:color/white"
             android:textSize="@dimen/paratext_14sp" />
 

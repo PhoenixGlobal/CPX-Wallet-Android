@@ -42,10 +42,11 @@
         <!-- 主activity -->
         <activity
             android:name=".view.MainActivity"
+            android:alwaysRetainTaskState="true"
             android:screenOrientation="portrait" />
         <!-- 跳转activity -->
         <activity
-            android:name=".view.MeSkipActivity"
+            android:name=".view.me.Me3Activity"
             android:screenOrientation="portrait" />
         <!-- 新建钱包 -->
         <activity
@@ -58,6 +59,7 @@
         <!-- 备份 -->
         <activity
             android:name=".view.wallet.BackupWalletActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 资产概览 -->
         <activity
@@ -79,8 +81,18 @@
         <activity
             android:name=".view.wallet.ExportKeystoreActivity"
             android:screenOrientation="portrait" />
-        <!--交易记录明细-->
-        <activity android:name=".view.me.TransactionDetailActivity" />
+        <!-- 交易记录明细 -->
+        <activity
+            android:name=".view.me.TransactionDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- Me的二级activity -->
+        <activity
+            android:name=".view.me.Me2Activity"
+            android:screenOrientation="portrait" />
+        <!--语言设置-->
+        <activity
+            android:name=".view.me.MeLanguageSettingsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

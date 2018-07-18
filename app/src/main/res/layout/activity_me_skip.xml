@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MeSkipActivity">
+    tools:context=".view.me.Me3Activity">
 
     <FrameLayout
-        android:id="@+id/fl_me_skip"
+        android:id="@+id/fl_me3"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

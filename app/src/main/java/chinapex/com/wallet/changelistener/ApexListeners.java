@@ -3,7 +3,6 @@ package chinapex.com.wallet.changelistener;
 import java.util.ArrayList;
 import java.util.List;
 
-import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -25,6 +24,8 @@ public class ApexListeners {
 
     private List<OnTxStateUpdateListener> mOnTxStateUpdateListeners;
 
+    private List<OnAssetsUpdateListener> mOnAssetsUpdateListeners;
+
     private ApexListeners() {
 
     }
@@ -43,24 +44,23 @@ public class ApexListeners {
         mOnItemStateUpdateListeners = new ArrayList<>();
         mOnItemNameUpdateListeners = new ArrayList<>();
         mOnTxStateUpdateListeners = new ArrayList<>();
+        mOnAssetsUpdateListeners = new ArrayList<>();
     }
 
     public void onDestroy() {
-        if (null == mOnItemDeleteListeners) {
-            CpLog.e(TAG, "onDestroy() -> mOnItemDeleteListeners is null!");
-            return;
-        }
-
         mOnItemDeleteListeners.clear();
         mOnItemAddListeners.clear();
         mOnItemStateUpdateListeners.clear();
         mOnItemNameUpdateListeners.clear();
         mOnTxStateUpdateListeners.clear();
+        mOnAssetsUpdateListeners.clear();
+
         mOnItemDeleteListeners = null;
         mOnItemAddListeners = null;
         mOnItemStateUpdateListeners = null;
         mOnItemNameUpdateListeners = null;
         mOnTxStateUpdateListeners = null;
+        mOnAssetsUpdateListeners = null;
     }
 
 
@@ -155,6 +155,24 @@ public class ApexListeners {
         mOnTxStateUpdateListeners.remove(onTxStateUpdateListener);
     }
 
+    public void addOnAssetsUpdateListener(OnAssetsUpdateListener onAssetsUpdateListener) {
+        if (null == mOnAssetsUpdateListeners || null == onAssetsUpdateListener) {
+            CpLog.e(TAG, "1:mOnAssetsUpdateListeners or onAssetsUpdateListener is null!");
+            return;
+        }
+
+        mOnAssetsUpdateListeners.add(onAssetsUpdateListener);
+    }
+
+    public void removeOnAssetsUpdateListener(OnAssetsUpdateListener onAssetsUpdateListener) {
+        if (null == mOnAssetsUpdateListeners || null == onAssetsUpdateListener) {
+            CpLog.e(TAG, "0:mOnAssetsUpdateListeners or onAssetsUpdateListener is null!");
+            return;
+        }
+
+        mOnAssetsUpdateListeners.remove(onAssetsUpdateListener);
+    }
+
     public void notifyItemDelete(WalletBean walletBean) {
         if (null == mOnItemDeleteListeners) {
             CpLog.e(TAG, "mOnItemDeleteListeners is null!");
@@ -232,6 +250,22 @@ public class ApexListeners {
             }
 
             onTxStateUpdateListener.onTxStateUpdate(txID, state, txTime);
+        }
+    }
+
+    public void notifyAssetsUpdate(WalletBean walletBean) {
+        if (null == mOnAssetsUpdateListeners) {
+            CpLog.e(TAG, "mOnAssetsUpdateListeners is null!");
+            return;
+        }
+
+        for (OnAssetsUpdateListener onAssetsUpdateListener : mOnAssetsUpdateListeners) {
+            if (null == onAssetsUpdateListener) {
+                CpLog.e(TAG, "onAssetsUpdateListener is null!");
+                continue;
+            }
+
+            onAssetsUpdateListener.onAssetsUpdate(walletBean);
         }
     }
 }

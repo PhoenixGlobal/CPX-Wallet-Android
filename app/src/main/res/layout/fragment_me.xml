@@ -6,61 +6,70 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="106dp"
+        android:layout_height="133dp"
         android:background="@drawable/tb_bg">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:text="@string/me_title"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:text="@string/me"
             android:textColor="@android:color/white"
             android:textSize="@dimen/tv_me_title_size" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
+
+        <ImageButton
+            android:id="@+id/ib_me_manage_wallet"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal"
-            android:padding="4dp">
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="@dimen/fragment_me_margin_start"
+            android:background="@null"
+            android:src="@drawable/icon_manage_wallet" />
 
-            <Button
-                android:id="@+id/bt_me_manage_wallet"
-                android:layout_width="162dp"
-                android:layout_height="30dp"
-                android:background="@drawable/shape_white_bt_bg"
-                android:text="@string/bt_me_manage_wallet"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tv_me_manage_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/ib_me_manage_wallet"
+            android:layout_marginStart="@dimen/fragment_me_between"
+            android:layout_toEndOf="@+id/ib_me_manage_wallet"
+            android:gravity="center"
+            android:text="@string/manage_wallets"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/fragment_me_subhead" />
 
-            <Button
-                android:id="@+id/bt_me_transaction_record"
-                android:layout_width="162dp"
-                android:layout_height="30dp"
-                android:background="@null"
-                android:layout_alignParentEnd="true"
-                android:text="@string/bt_me_transactions"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+        <ImageButton
+            android:id="@+id/ib_me_tx_records"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/ib_me_manage_wallet"
+            android:layout_marginEnd="@dimen/fragment_me_between"
+            android:layout_toStartOf="@+id/tv_me_tx_records"
+            android:background="@null"
+            android:src="@drawable/icon_tx_records" />
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_me_tx_records"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="@dimen/fragment_me_margin_end"
+            android:gravity="center"
+            android:text="@string/transaction_records"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/fragment_me_subhead" />
+
     </RelativeLayout>
 
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/sl_me"
-        android:layout_width="343dp"
-        android:layout_gravity="center_horizontal"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_me"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_me"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:overScrollMode="never" />
 
 </LinearLayout>

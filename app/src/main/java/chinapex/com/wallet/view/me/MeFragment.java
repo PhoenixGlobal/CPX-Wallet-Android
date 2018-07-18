@@ -1,61 +1,42 @@
 package chinapex.com.wallet.view.me;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import chinapex.com.wallet.R;
-import chinapex.com.wallet.adapter.MeRecyclerViewAdapter;
-import chinapex.com.wallet.adapter.SpacesItemDecoration;
+import chinapex.com.wallet.adapter.MeFunctionRecyclerViewAdapter;
+import chinapex.com.wallet.adapter.SpacesItemDecorationTopBottom;
 import chinapex.com.wallet.base.BaseFragment;
-import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.changelistener.ApexListeners;
-import chinapex.com.wallet.changelistener.OnItemAddListener;
-import chinapex.com.wallet.changelistener.OnItemDeleteListener;
-import chinapex.com.wallet.changelistener.OnItemNameUpdateListener;
-import chinapex.com.wallet.changelistener.OnItemStateUpdateListener;
-import chinapex.com.wallet.global.ApexWalletApplication;
+import chinapex.com.wallet.bean.MeFunction;
 import chinapex.com.wallet.global.Constant;
-import chinapex.com.wallet.model.ApexWalletDbDao;
-import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
-import chinapex.com.wallet.view.MeSkipActivity;
 
 /**
- * Created by SteelCabbage on 2018/5/21 0021.
+ * Created by SteelCabbage on 2018/7/11 0011 16:48.
+ * E-Mail：liuyi_61@163.com
  */
 
-public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
-        .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener,
-        OnItemDeleteListener, OnItemAddListener, OnItemStateUpdateListener,
-        OnItemNameUpdateListener {
+public class MeFragment extends BaseFragment implements View.OnClickListener,
+        MeFunctionRecyclerViewAdapter.OnItemClickListener {
+    public static final String TAG = MeFragment.class.getSimpleName();
+    private MeFunctionRecyclerViewAdapter mMeFunctionRecyclerViewAdapter;
 
-    private static final String TAG = MeFragment.class.getSimpleName();
-    private RecyclerView mRv_me;
-    private MeRecyclerViewAdapter mMeRecyclerViewAdapter;
-    private List<WalletBean> mWalletBeans;
-    private SwipeRefreshLayout mSl_me;
-    private Button mBt_me_manage_wallet;
-    private Button mBt_me_transaction_record;
-    private boolean mIsTransactionRecordState;
-    private WalletBean mCurrentClickedWalletBean;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
             savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_me, container, false);
     }
 
@@ -64,243 +45,79 @@ public class MeFragment extends BaseFragment implements MeRecyclerViewAdapter
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
-        initData();
     }
 
     private void initView(View view) {
-        mRv_me = view.findViewById(R.id.rv_me);
-        mSl_me = view.findViewById(R.id.sl_me);
-        mBt_me_manage_wallet = view.findViewById(R.id.bt_me_manage_wallet);
-        mBt_me_transaction_record = view.findViewById(R.id.bt_me_transaction_record);
+        ImageButton ib_me_manage_wallet = view.findViewById(R.id.ib_me_manage_wallet);
+        TextView tv_me_manage_wallet = view.findViewById(R.id.tv_me_manage_wallet);
+        ImageButton ib_me_tx_records = view.findViewById(R.id.ib_me_tx_records);
+        TextView tv_me_tx_records = view.findViewById(R.id.tv_me_tx_records);
+        RecyclerView rv_me = view.findViewById(R.id.rv_me);
+        rv_me.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager
+                .VERTICAL, false));
+        int space = DensityUtil.dip2px(getActivity(), 15);
+        rv_me.addItemDecoration(new SpacesItemDecorationTopBottom(space));
 
-        mRv_me.setLayoutManager(new LinearLayoutManager(ApexWalletApplication.getInstance(),
-                LinearLayoutManager.VERTICAL, false));
-        mWalletBeans = initWalletBeans();
-        mMeRecyclerViewAdapter = new MeRecyclerViewAdapter(mWalletBeans);
-        mMeRecyclerViewAdapter.setOnItemClickListener(this);
+        mMeFunctionRecyclerViewAdapter = new MeFunctionRecyclerViewAdapter(getAssetsMenus());
+        mMeFunctionRecyclerViewAdapter.setOnItemClickListener(this);
+        rv_me.setAdapter(mMeFunctionRecyclerViewAdapter);
 
-        int space = DensityUtil.dip2px(getActivity(), 8);
-        mRv_me.addItemDecoration(new SpacesItemDecoration(space));
-
-        mRv_me.setAdapter(mMeRecyclerViewAdapter);
-
-        mSl_me.setColorSchemeColors(this.getActivity().getResources().getColor(R.color
-                .colorPrimary));
-        mSl_me.setOnRefreshListener(this);
-
-        mBt_me_manage_wallet.setOnClickListener(this);
-        mBt_me_transaction_record.setOnClickListener(this);
+        ib_me_manage_wallet.setOnClickListener(this);
+        tv_me_manage_wallet.setOnClickListener(this);
+        ib_me_tx_records.setOnClickListener(this);
+        tv_me_tx_records.setOnClickListener(this);
     }
 
-    private void initData() {
-        ApexListeners.getInstance().addOnItemDeleteListener(this);
-        ApexListeners.getInstance().addOnItemAddListener(this);
-        ApexListeners.getInstance().addOnItemStateUpdateListener(this);
-        ApexListeners.getInstance().addOnItemNameUpdateListener(this);
-    }
+    private List<MeFunction> getAssetsMenus() {
+        ArrayList<MeFunction> meFunctions = new ArrayList<>();
+        //drawable数组要用TypedArray获取
+        TypedArray ar = getResources().obtainTypedArray(R.array.me_function_icons);
+        String[] menuTexts = getResources().getStringArray(R.array.me_function_texts);
 
-    @Override
-    public void onItemClick(int position) {
-        mCurrentClickedWalletBean = mWalletBeans.get(position);
-        if (null == mCurrentClickedWalletBean) {
-            CpLog.e(TAG, "mCurrentClickedWalletBean is null!");
-            return;
+        for (int i = 0; i < ar.length(); i++) {
+            MeFunction meFunction = new MeFunction();
+            meFunction.setFunctionIcon(ar.getResourceId(i, 0));
+            meFunction.setFunctionText(menuTexts[i]);
+            meFunctions.add(meFunction);
         }
-
-        if (mIsTransactionRecordState) {
-            toMeTransactionRecordFragment();
-        } else {
-            toMeManagerDetailFragment();
-        }
-
+        ar.recycle();
+        return meFunctions;
     }
 
-    @Override
-    public void onRefresh() {
-        // 预留后续刷新功能
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mSl_me.setRefreshing(false);
-            }
-        });
-    }
-
-    private List<WalletBean> initWalletBeans() {
-        List<WalletBean> walletBeans = new ArrayList<>();
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
-        if (null == apexWalletDbDao) {
-            CpLog.e(TAG, "apexWalletDbDao is null!");
-            return walletBeans;
-        }
-
-        walletBeans.addAll(apexWalletDbDao.queryWalletBeans(Constant.TABLE_APEX_WALLET));
-        return walletBeans;
-    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            // 管理钱包
-            case R.id.bt_me_manage_wallet:
-                manageWalletIsSelected();
+            case R.id.ib_me_manage_wallet:
+            case R.id.tv_me_manage_wallet:
+                startActivityStringExtra(Me2Activity.class, false, Constant
+                        .ME_2_SHOULD_BE_SHOW, Constant.ME_2_SHOULD_BE_SHOW_MANAGE_WALLET);
                 break;
-            // 交易记录
-            case R.id.bt_me_transaction_record:
-                transactionRecordIsSelected();
+            case R.id.ib_me_tx_records:
+            case R.id.tv_me_tx_records:
+                startActivityStringExtra(Me2Activity.class, false, Constant
+                        .ME_2_SHOULD_BE_SHOW, Constant.ME_2_SHOULD_BE_SHOW_TX_RECORDS);
+                break;
+            default:
                 break;
         }
     }
 
-    private void manageWalletIsSelected() {
-        mBt_me_manage_wallet.setBackgroundResource(R.drawable.shape_white_bt_bg);
-        mBt_me_manage_wallet.setTextColor(ApexWalletApplication.getInstance().getResources()
-                .getColor(R.color
-                        .colorPrimary));
-
-//                mBt_me_transaction_record.setBackgroundResource(0);
-        // 为适配小米4，否则button会有边框背景
-        mBt_me_transaction_record.setBackground(new ColorDrawable(0));
-        mBt_me_transaction_record.setTextColor(Color.WHITE);
-
-        mIsTransactionRecordState = false;
-
-        for (WalletBean walletBean : mWalletBeans) {
-            walletBean.setSelectedTag(Constant.SELECTED_TAG_MANAGER_WALLET);
-        }
-
-        mMeRecyclerViewAdapter.notifyDataSetChanged();
-    }
-
-    private void transactionRecordIsSelected() {
-        mBt_me_transaction_record.setBackgroundResource(R.drawable.shape_white_bt_bg);
-        mBt_me_transaction_record.setTextColor(ApexWalletApplication.getInstance().getResources()
-                .getColor(R.color
-                        .colorPrimary));
-
-//                mBt_me_manage_wallet.setBackgroundResource(0);
-        // 为适配小米4，否则button会有边框背景
-        mBt_me_manage_wallet.setBackground(new ColorDrawable(0));
-        mBt_me_manage_wallet.setTextColor(Color.WHITE);
-
-        mIsTransactionRecordState = true;
-
-        for (WalletBean walletBean : mWalletBeans) {
-            walletBean.setSelectedTag(Constant.SELECTED_TAG_TRANSACTION_RECORED);
-        }
-
-        mMeRecyclerViewAdapter.notifyDataSetChanged();
-    }
-
-    private void toMeManagerDetailFragment() {
-        startActivityBundle(MeSkipActivity.class, false, Constant.ME_MANAGER_DETAIL_BUNDLE, Constant
-                .ME_SKIP_ACTIVITY_FRAGMENT_TAG, Constant.FRAGMENT_TAG_ME_MANAGE_DETAIL, Constant
-                .PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWalletBean);
-    }
-
-    private void toMeTransactionRecordFragment() {
-        startActivityBundle(MeSkipActivity.class, false, Constant.ME_MANAGER_DETAIL_BUNDLE, Constant
-                        .ME_SKIP_ACTIVITY_FRAGMENT_TAG, Constant.FRAGMENT_TAG_ME_TRANSACTION_RECORD,
-                Constant
-                        .PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWalletBean);
-    }
-
-    // 删除钱包时回调
     @Override
-    public void onItemDelete(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "onItemDelete() -> walletBean is null!");
-            return;
+    public void onItemClick(int position) {
+        switch (position) {
+            case 0:
+                // 个人画像
+                break;
+            case 1:
+                // 语言设置
+                startActivity(MeLanguageSettingsActivity.class, false);
+                break;
+            case 2:
+                // 关于我们
+                break;
+            default:
+                break;
         }
-
-        if (!mWalletBeans.contains(walletBean)) {
-            CpLog.e(TAG, "onItemDelete() -> this wallet not exist!");
-            return;
-        }
-
-        mWalletBeans.remove(walletBean);
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mMeRecyclerViewAdapter.notifyDataSetChanged();
-            }
-        });
     }
-
-    // 新增钱包时回调
-    @Override
-    public void onItemAdd(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "onItemAdd() -> walletBean is null!");
-            return;
-        }
-
-        if (mWalletBeans.contains(walletBean)) {
-            CpLog.e(TAG, "onItemAdd() -> this wallet has existed!");
-            return;
-        }
-
-        mWalletBeans.add(walletBean);
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mMeRecyclerViewAdapter.notifyDataSetChanged();
-            }
-        });
-    }
-
-    // 备份钱包后回调
-    @Override
-    public void OnItemStateUpdate(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "walletBean is null!");
-            return;
-        }
-
-        for (WalletBean walletBeanTmp : mWalletBeans) {
-            if (null == walletBeanTmp) {
-                CpLog.e(TAG, "walletBeanTmp is null!");
-                continue;
-            }
-
-            if (walletBeanTmp.equals(walletBean)) {
-                walletBeanTmp.setBackupState(walletBean.getBackupState());
-            }
-        }
-
-        mMeRecyclerViewAdapter.notifyDataSetChanged();
-    }
-
-    // 修改钱包名称回调
-    @Override
-    public void OnItemNameUpdate(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "walletBean is null!");
-            return;
-        }
-
-        for (WalletBean walletBeanTmp : mWalletBeans) {
-            if (null == walletBeanTmp) {
-                CpLog.e(TAG, "walletBeanTmp is null!");
-                continue;
-            }
-
-            if (walletBeanTmp.equals(walletBean)) {
-                walletBeanTmp.setWalletName(walletBean.getWalletName());
-            }
-        }
-
-        mMeRecyclerViewAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ApexListeners.getInstance().removeOnItemDeleteListener(this);
-        ApexListeners.getInstance().removeOnItemAddListener(this);
-        ApexListeners.getInstance().removeOnItemStateUpdateListener(this);
-        ApexListeners.getInstance().removeOnItemNameUpdateListener(this);
-    }
-
 }

@@ -23,6 +23,7 @@ import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
+import chinapex.com.wallet.utils.SharedPreferencesUtils;
 import neomobile.Wallet;
 
 /**
@@ -136,8 +137,12 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
             return;
         }
 
+        String walletAddress = mCurrentWalletBean.getWalletAddr();
         apexWalletDbDao.deleteByWalletNameAndAddr(Constant.TABLE_APEX_WALLET, mCurrentWalletBean
-                .getWalletName(), mCurrentWalletBean.getWalletAddr());
+                .getWalletName(), walletAddress);
+        apexWalletDbDao.delTxsByAddress(Constant.TABLE_TRANSACTION_RECORD, walletAddress);
+        apexWalletDbDao.delTxsByAddress(Constant.TABLE_TX_CACHE, walletAddress);
+        SharedPreferencesUtils.remove(ApexWalletApplication.getInstance(), walletAddress);
 
         ApexListeners.getInstance().notifyItemDelete(mCurrentWalletBean);
         dismiss();

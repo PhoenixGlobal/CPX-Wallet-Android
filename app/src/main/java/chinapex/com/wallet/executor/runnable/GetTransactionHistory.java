@@ -118,6 +118,7 @@ public class GetTransactionHistory implements Runnable, INetCallback {
             String txID = resultBean.getTxid();
             String txType = resultBean.getType();
             long txTime = resultBean.getTime();
+            String assetId = resultBean.getAssetId();
             if (txCacheByAddress.containsKey(txID)) {
                 transactionRecord.setTxState(Constant.TRANSACTION_STATE_CONFIRMING);
                 ApexListeners.getInstance().notifyTxStateUpdate(txID, Constant
@@ -147,15 +148,27 @@ public class GetTransactionHistory implements Runnable, INetCallback {
             transactionRecord.setTxTo(resultBean.getTo());
             transactionRecord.setGasConsumed(null == resultBean.getGas_consumed() ? "0" : (String)
                     resultBean.getGas_consumed());
-            transactionRecord.setAssetID(resultBean.getAssetId());
-            transactionRecord.setAssetSymbol(resultBean.getSymbol());
+            transactionRecord.setAssetID(assetId);
+            switch (assetId) {
+                case Constant.ASSETS_NEO_GAS:
+                    transactionRecord.setAssetSymbol(Constant.SYMBOL_NEO_GAS);
+                    break;
+                default:
+                    transactionRecord.setAssetSymbol(resultBean.getSymbol());
+                    break;
+
+            }
             transactionRecord.setAssetLogoUrl(resultBean.getImageURL());
             transactionRecord.setAssetDecimal(null == resultBean.getDecimal() ? 0 : Integer
                     .valueOf((String) resultBean.getDecimal()));
             transactionRecord.setTxTime(txTime);
 
-            apexWalletDbDao.insertTxRecord(Constant.TABLE_TRANSACTION_RECORD, transactionRecord);
-            transactionRecords.add(transactionRecord);
+            List<TransactionRecord> txsByTxIdAndAddress = apexWalletDbDao.queryTxByTxIdAndAddress
+                    (Constant.TABLE_TRANSACTION_RECORD, txID, mAddress);
+            if (null == txsByTxIdAndAddress || txsByTxIdAndAddress.isEmpty()) {
+                apexWalletDbDao.insertTxRecord(Constant.TABLE_TRANSACTION_RECORD, transactionRecord);
+                transactionRecords.add(transactionRecord);
+            }
         }
 
         mIGetTransactionHistoryCallback.getTransactionHistory(transactionRecords);

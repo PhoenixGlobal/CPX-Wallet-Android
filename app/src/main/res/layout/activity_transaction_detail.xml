@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="@string/transaction_detail_title"
+        android:text="@string/transaction_detail"
         android:textColor="@color/c_333333"
         android:textSize="@dimen/title_18sp" />
 

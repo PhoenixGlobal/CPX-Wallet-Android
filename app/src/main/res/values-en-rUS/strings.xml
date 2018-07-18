@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Apex</string>
+    <string name="create_wallet">Create Wallet</string>
+    <string name="import_wallet">Import Wallet</string>
+    <string name="security">• It is very important that the password is used to encrypt the private key and transaction authorization. Please do not set it too simple.\n\n• Apex Wallet does not store passwords and cannot retrieve them for you. Please keep in mind.</string>
+    <string name="wallet_name">Wallet Name</string>
+    <string name="password">Password(at least 6 characters)</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="i_have_read_terms">I have read and agree to </string>
+    <string name="privacy_terms">the Service and Privacy Policy</string>
+    <string name="confirm">Confirm</string>
+    <string name="asset">Asset</string>
+    <string name="search_wallet_address">search wallet address</string>
+    <string name="cancel">Cancel</string>
+    <string name="wallet_address">Wallet address</string>
+    <string name="transfer">Transfer</string>
+    <string name="receive">Receive</string>
+    <string name="from">From</string>
+    <string name="payer">Payer</string>
+    <string name="payee">Payee</string>
+    <string name="to">To</string>
+    <string name="send">Send</string>
+    <string name="transfer_amount">Amount</string>
+    <string name="me">Me</string>
+    <string name="manage_wallets">Manage Wallets</string>
+    <string name="transaction_records">Transaction Records</string>
+    <string name="your_wallet_and_address">Your wallet/address</string>
+    <string name="copy_payee_address">Copy wallet address</string>
+    <string name="backup_wallet">Backup Wallet</string>
+    <string name="backup_detail">Export [mnemonics] and keep it in a safe place, do not save on the internet, then begin using with transfer small assets.</string>
+    <string name="copy_mnemonic">Transcribe your wallet mnemonic</string>
+    <string name="copy_mnemonic_detail">The mnemonic is used to recover the wallet or repeat the wallet password, copy it to the paper accurately, and store it in a safe place that only you know.</string>
+    <string name="next_step">Next step</string>
+    <string name="copy_mnemonic_attention">Do not take screenshots,  someone will have fully accecss to your assets ,if it gets your mnemonic! Please copy the mnemonic, then store it at a safe place.</string>
+    <string name="confirm_mnemonic">Confirm your mnemonic</string>
+    <string name="confirm_mnemonic_content">Please click on the mnemonic, make sure that you backup correctly.</string>
+    <string name="please_backup">Please backup</string>
+    <string name="backup_mnemonic">Backup mnemonic</string>
+    <string name="delete_wallet">Delete wallet</string>
+    <string name="search_tx_id">Search the transaction number</string>
+    <string name="input_pwd">Please input your password</string>
+    <string name="be_careful">Attention! Delete Wallet Can Not Be Revoked</string>
+    <string name="confirm_pwd">Confirm</string>
+    <string name="pwd_hint">Password</string>
+    <string name="mnemonic">Mnemonic</string>
+    <string name="keystore">Keystore</string>
+    <string name="keystore_notice">Input Keystore Text Here</string>
+    <string name="keystore_content">Keystore text content</string>
+    <string name="keystore_note">Please copy and paste the Keystore file and save it somewhere safe and offline.Do not save to email, notepad, network disk, chat tools, etc., very dangerous</string>
+    <string name="keystore_offline_save">Saved offline</string>
+    <string name="transfer_no_net">Do not use network transmission</string>
+    <string name="keystore_transfer_no_net">Please do not transfer Keystore files through network tools. Once acquired by hackers, irreparable asset loss will be caused.Offline transmission is recommended.</string>
+    <string name="strongbox_save">Store to password vault</string>
+    <string name="online_save">If you want to save online, it is recommended to use password storage software such as 1Password, which has a higher security level, to save the Keystore.</string>
+    <string name="export_keystore">Export keystore</string>
+    <string name="copy_keystore">Copy keystore</string>
+    <string name="transaction_detail">Transaction details</string>
+    <string name="search_asset">Search asset</string>
+    <string name="save">save</string>
+    <string name="mnemonic_separated_by_spaces">Mnemonic words, separated by Spaces</string>
+    <string name="start_import">Start import</string>
+    <string name="keystore_pwd">Keystore password</string>
+    <string name="scan">scan</string>
+
+    <!--Me页面，功能菜单文字-->
+    <string name="personal_portrait">Profile</string>
+    <string name="language_settings">Language</string>
+    <string name="about_us">About Us</string>
+
+    <!--Toast content-->
+    <string name="address_cannot_be_empty">The address cannot be empty</string>
+    <string name="address_cannot_be_same">Payment address cannot be the same</string>
+    <string name="wallet_name_save_success">Wallet name saved successfully</string>
+
+    <!--语言-->
+    <string name="language_zh_cn">简体中文</string>
+    <string name="language_en_US">English(U.S)</string>
+
+
+</resources>

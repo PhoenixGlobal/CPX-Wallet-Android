@@ -15,7 +15,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/shape_import_wallet_tv_bg"
         android:gravity="top|start"
-        android:hint="助记词，按空格分割"
+        android:hint="@string/mnemonic_separated_by_spaces"
         android:paddingBottom="8dp"
         android:paddingEnd="13dp"
         android:paddingStart="13dp"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="16"
-            android:hint="@string/create_wallet_et_pwd"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textSize="@dimen/et_create_wallet_font_size" />
     </android.support.design.widget.TextInputLayout>
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="16"
-            android:hint="@string/create_wallet_et_repeat_pwd"
+            android:hint="@string/repeat_password"
             android:inputType="textPassword"
             android:textSize="@dimen/et_create_wallet_font_size" />
     </android.support.design.widget.TextInputLayout>
@@ -74,7 +74,7 @@
             android:id="@+id/tv_import_wallet_privacy_have_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_wallet_rb_read"
+            android:text="@string/i_have_read_terms"
             android:textSize="@dimen/create_wallet_rb_text_size" />
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/create_wallet_tv_margin_start"
-            android:text="@string/create_wallet_tv_privacy"
+            android:text="@string/privacy_terms"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/create_wallet_rb_text_size" />
     </LinearLayout>
@@ -94,7 +94,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="75dp"
         android:background="@drawable/shape_import_wallet_bt_bg_def"
-        android:text="开始导入"
+        android:text="@string/start_import"
+        android:textAllCaps="false"
         android:textColor="@color/c_666666"
         android:textSize="14sp" />
 </LinearLayout>

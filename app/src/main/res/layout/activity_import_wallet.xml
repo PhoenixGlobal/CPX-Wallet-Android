@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:text="@string/tv_title_import"
+            android:text="@string/import_wallet"
             android:textColor="@android:color/white"
             android:textSize="@dimen/tv_me_title_size" />
 
@@ -32,7 +32,8 @@
                 android:layout_width="162dp"
                 android:layout_height="30dp"
                 android:background="@drawable/shape_white_bt_bg"
-                android:text="@string/bt_import_wallet_mnemonic"
+                android:text="@string/mnemonic"
+                android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
 
@@ -40,9 +41,9 @@
                 android:id="@+id/bt_import_wallet_keystore"
                 android:layout_width="162dp"
                 android:layout_height="30dp"
-                android:background="@null"
                 android:layout_alignParentEnd="true"
-                android:text="@string/bt_import_wallet_keystore"
+                android:background="@null"
+                android:text="@string/keystore"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />

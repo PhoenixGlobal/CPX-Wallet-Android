@@ -22,7 +22,6 @@ import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.PhoneUtils;
 import chinapex.com.wallet.utils.ToastUtils;
-import chinapex.com.wallet.view.MeSkipActivity;
 import chinapex.com.wallet.view.dialog.BackupWalletPwdDialog;
 import chinapex.com.wallet.view.dialog.DeleteWalletPwdDialog;
 import chinapex.com.wallet.view.dialog.ExportKeystorePwdDialog;
@@ -80,8 +79,8 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
     }
 
     private void initData() {
-        MeSkipActivity meSkipActivity = (MeSkipActivity) getActivity();
-        mCurrentClickedWalletBean = meSkipActivity.getWalletBean();
+        Me3Activity me3Activity = (Me3Activity) getActivity();
+        mCurrentClickedWalletBean = me3Activity.getWalletBean();
         if (null == mCurrentClickedWalletBean) {
             CpLog.e(TAG, "currentClickedWalletBean is null!");
             return;
@@ -134,7 +133,8 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
         mTv_me_manager_detail_title.setText(newWalletName);
         mCurrentClickedWalletBean.setWalletName(newWalletName);
         ApexListeners.getInstance().notifyItemNameUpdate(mCurrentClickedWalletBean);
-        Toast.makeText(getActivity(), "钱包名称保存成功", Toast.LENGTH_SHORT).show();
+        ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                .getString(R.string.wallet_name_save_success));
     }
 
     public void showDeleteWalletPwdDialog() {

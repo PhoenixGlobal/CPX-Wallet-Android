@@ -22,7 +22,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/new_visitor_bt_margin_top"
         android:background="@drawable/shape_new_visitor_bt_bg"
-        android:text="@string/new_visitor_create_wallet"
+        android:text="@string/create_wallet"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="12sp" />
 
@@ -33,7 +34,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/new_visitor_bt_between_space"
         android:background="@drawable/shape_new_visitor_bt_bg"
-        android:text="@string/new_visitor_import_wallet"
+        android:text="@string/import_wallet"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="12sp" />
 

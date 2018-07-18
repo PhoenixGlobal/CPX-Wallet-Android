@@ -28,7 +28,7 @@
                 android:ellipsize="end"
                 android:ems="6"
                 android:singleLine="true"
-                android:text="@string/assets_rv_item_wallet_name"
+                android:text="@string/wallet_name"
                 android:textColor="@color/c_333333"
                 android:textSize="@dimen/card_title" />
 
@@ -40,7 +40,7 @@
                 android:ems="10"
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
-                android:text="@string/assets_rv_item_wallet_addr"
+                android:text="@string/wallet_address"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/paratext_14sp" />
         </LinearLayout>
@@ -54,7 +54,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/shape_bg_me_item_backup"
             android:padding="3dp"
-            android:text="@string/tv_me_item_backup"
+            android:text="@string/please_backup"
             android:textColor="#B3D38D"
             android:textSize="12sp" />
 

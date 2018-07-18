@@ -23,7 +23,7 @@
                 android:id="@+id/tv_assets_rv_item_wallet_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/assets_rv_item_wallet_name"
+                android:text="@string/wallet_name"
                 android:singleLine="true"
                 android:ems="6"
                 android:textColor="@color/c_333333"
@@ -37,7 +37,7 @@
                 android:ems="12"
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
-                android:text="@string/assets_rv_item_wallet_addr"
+                android:text="@string/wallet_address"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/paratext_14sp" />
         </LinearLayout>

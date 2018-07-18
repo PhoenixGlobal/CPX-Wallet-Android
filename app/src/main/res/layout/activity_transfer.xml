@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/main_tv_title_margin_top"
-            android:text="@string/tb_title_transfer"
+            android:text="@string/transfer"
             android:textColor="@android:color/white"
             android:textSize="@dimen/tb_title_size" />
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:layout_marginTop="@dimen/tv_transfer_from_margin_top"
-        android:text="@string/tv_transfer_from_content"
+        android:text="@string/from"
         android:textColor="@color/c_999999"
         android:textSize="@dimen/tv_transfer_from_font_size" />
 
@@ -50,7 +50,7 @@
         android:ellipsize="middle"
         android:ems="10"
         android:singleLine="true"
-        android:text="@string/tv_transfer_from_wallet_name"
+        android:text="@string/payer"
         android:textColor="@color/c_333333"
         android:textSize="@dimen/tv_transfer_from_wallet_name_font_size" />
 
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
-        android:text="@string/tv_transfer_from_wallet_addr"
+        android:text="@string/wallet_address"
         android:textColor="@android:color/black"
         android:textIsSelectable="true"
         android:textSize="@dimen/tv_transfer_from_wallet_addr_font_size" />
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:layout_marginTop="10dp"
-        android:text="@string/tv_transfer_to_content"
+        android:text="@string/to"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/tv_transfer_from_font_size" />
 
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:background="@null"
-        android:hint="@string/tv_transfer_to_wallet_addr"
+        android:hint="@string/payee"
         android:textColor="@android:color/black"
         android:textSize="@dimen/tv_transfer_from_wallet_addr_font_size" />
 
@@ -109,7 +109,7 @@
             android:layout_marginStart="51dp"
             android:layout_marginTop="5dp"
             android:ems="15"
-            android:hint="@string/et_transfer_amount"
+            android:hint="@string/transfer_amount"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:textSize="14sp" />
@@ -137,7 +137,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="158dp"
         android:background="@drawable/shape_balance_detail_bt_bg"
-        android:text="@string/bt_transfer_send"
+        android:text="@string/send"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
 
