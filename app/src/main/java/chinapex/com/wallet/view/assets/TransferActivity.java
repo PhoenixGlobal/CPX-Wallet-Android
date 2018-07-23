@@ -143,12 +143,14 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                     BigDecimal balanceBigDecimal = new BigDecimal(balance);
                     BigDecimal amountBigDecimal = new BigDecimal(amount);
                     if (amountBigDecimal.compareTo(balanceBigDecimal) == 1) {
-                        Toast.makeText(TransferActivity.this, "余额不足！", Toast.LENGTH_SHORT).show();
+                        ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                                .getResources().getString(R.string.insufficient_balance));
                         return;
                     }
                 } catch (NumberFormatException e) {
                     CpLog.e(TAG, "NumberFormatException: " + e.getMessage());
-                    Toast.makeText(TransferActivity.this, "非法输入！", Toast.LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.illegal_input));
                     return;
                 }
 
@@ -202,7 +204,8 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ToastUtils.getInstance().showToast("utxos is empty!");
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.generate_utxo_failed));
                 }
             });
             return;
@@ -238,8 +241,8 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(TransferActivity.this, "交易创建失败，请校验输入参数！", Toast.LENGTH_SHORT)
-                            .show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.transaction_creation_failed));
                 }
             });
             return;
@@ -261,8 +264,8 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(TransferActivity.this, "交易创建失败，请校验输入参数！", Toast.LENGTH_SHORT)
-                            .show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.transaction_creation_failed));
                 }
             });
             return;
@@ -287,7 +290,8 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(TransferActivity.this, "数据库异常！", Toast.LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.db_exception));
                     finish();
                 }
             });
@@ -326,9 +330,11 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void run() {
                 if (isSuccess) {
-                    ToastUtils.getInstance().showToast("交易广播成功!");
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.transaction_broadcast_successful));
                 } else {
-                    ToastUtils.getInstance().showToast("交易广播失败!");
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.transaction_broadcast_failed));
                 }
             }
         });

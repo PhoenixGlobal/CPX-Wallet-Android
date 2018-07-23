@@ -203,7 +203,8 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
             case R.id.tv_me_transaction_record_address:
                 String copyAddr = mTv_me_transaction_record_address.getText().toString().trim();
                 PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), copyAddr);
-                ToastUtils.getInstance().showToast("钱包地址已复制");
+                ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                        .getResources().getString(R.string.wallet_address_copied));
                 break;
             default:
                 break;

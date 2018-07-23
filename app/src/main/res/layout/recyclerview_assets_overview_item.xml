@@ -33,13 +33,14 @@
 
         <Button
             android:id="@+id/bt_assets_overview_map"
-            android:layout_width="63dp"
+            android:layout_width="wrap_content"
             android:layout_height="16dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/tv_assets_overview_assets_name"
             android:background="@drawable/shape_assets_overview_map_def"
-            android:text="一键映射"
+            android:text="@string/a_key_mapping"
+            android:textAllCaps="false"
             android:textColor="@color/c_999999"
             android:textSize="12sp" />
 

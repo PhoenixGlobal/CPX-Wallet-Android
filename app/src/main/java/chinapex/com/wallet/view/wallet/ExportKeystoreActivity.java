@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
@@ -14,6 +13,7 @@ import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.PhoneUtils;
+import chinapex.com.wallet.utils.ToastUtils;
 
 public class ExportKeystoreActivity extends BaseActivity implements View.OnClickListener {
 
@@ -59,8 +59,8 @@ public class ExportKeystoreActivity extends BaseActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.bt_export_wallet_keystore:
                 PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), mKeystore);
-                Toast.makeText(ApexWalletApplication.getInstance(), "keystore已复制到剪切板", Toast
-                        .LENGTH_SHORT).show();
+                ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                        .getResources().getString(R.string.keystore_copied));
                 break;
             default:
                 break;

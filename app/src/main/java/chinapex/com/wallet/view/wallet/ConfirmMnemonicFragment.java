@@ -34,6 +34,7 @@ import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
 import chinapex.com.wallet.utils.SharedPreferencesUtils;
+import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.MainActivity;
 
 /**
@@ -161,7 +162,8 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
             case R.id.bt_confirm_mnemonic_confirm:
                 if (!checkMnemonicIsRight()) {
                     CpLog.w(TAG, "checkMnemonicIsRight is false!");
-                    Toast.makeText(getActivity(), "助记词不正确！", Toast.LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.mnemonic_incorrect));
                     return;
                 }
 

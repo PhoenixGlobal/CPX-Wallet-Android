@@ -29,6 +29,7 @@ import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
 import chinapex.com.wallet.utils.SharedPreferencesUtils;
+import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.MainActivity;
 import neomobile.Wallet;
 
@@ -126,13 +127,15 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         String pwd = mEt_import_wallet_keystore_pwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(pwd)) {
-            Toast.makeText(getActivity(), "不能为空！", Toast.LENGTH_LONG).show();
-            CpLog.w(TAG, "wallet_name or wallet_pwd or repeat_pwd is null!");
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.pwd_can_not_be_empty));
+            CpLog.w(TAG, "pwd is null!");
             return false;
         }
 
         if (!mIsAgreePrivacy) {
-            Toast.makeText(getActivity(), "请先仔细阅读隐私条款", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.read_privacy_policy_first));
             return false;
         }
 
@@ -146,8 +149,8 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ImportKeystoreFragment.this.getActivity(), "Keystore导入失败", Toast
-                            .LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.keystore_import_failed));
                 }
             });
             return;
@@ -168,7 +171,8 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(), "重复导入，此钱包已存在", Toast.LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.wallet_exist));
                 }
             });
             return;

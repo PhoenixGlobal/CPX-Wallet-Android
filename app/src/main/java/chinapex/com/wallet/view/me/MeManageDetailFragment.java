@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseFragment;
@@ -112,7 +111,8 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
             case R.id.tv_me_manager_detail_address:
                 String copyAddr = mTv_me_manager_detail_address.getText().toString().trim();
                 PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), copyAddr);
-                ToastUtils.getInstance().showToast("钱包地址已复制");
+                ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                        .getResources().getString(R.string.wallet_address_copied));
                 break;
             default:
                 break;

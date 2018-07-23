@@ -440,7 +440,8 @@ public class AssetsOverviewActivity extends BaseActivity implements
             case R.id.tv_assets_overview_wallet_address:
                 String copyAddr = mTv_assets_overview_wallet_address.getText().toString().trim();
                 PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), copyAddr);
-                ToastUtils.getInstance().showToast("钱包地址已复制");
+                ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                        .getResources().getString(R.string.wallet_address_copied));
             default:
                 break;
         }

@@ -61,6 +61,17 @@
     <string name="start_import">开始导入</string>
     <string name="keystore_pwd">Keystore密码</string>
     <string name="scan">扫一扫</string>
+    <string name="tx_failed">交易失败</string>
+    <string name="tx_successful">交易成功</string>
+    <string name="tx_confirming">交易确认中</string>
+    <string name="tx_blocking">交易打包中</string>
+    <string name="wallet_from">付款钱包地址</string>
+    <string name="wallet_to">收款钱包地址</string>
+    <string name="transaction_time">交易时间</string>
+    <string name="transaction_id">交易单号</string>
+    <string name="a_key_mapping">一键映射</string>
+    <string name="add_assets">添加资产</string>
+
 
     <!--Me页面，功能菜单文字-->
     <string name="personal_portrait">个人画像</string>
@@ -71,11 +82,32 @@
     <string name="address_cannot_be_empty">地址不能为空！</string>
     <string name="address_cannot_be_same">收付款地址不能相同！</string>
     <string name="wallet_name_save_success">钱包名称保存成功</string>
+    <string name="payment_address_copied">付款钱包地址已复制</string>
+    <string name="payee_address_copied">收款钱包地址已复制</string>
+    <string name="tx_id_copied">交易单号已复制</string>
+    <string name="wallet_address_copied">钱包地址已复制</string>
+    <string name="transaction_broadcast_successful">交易广播成功</string>
+    <string name="transaction_broadcast_failed">交易广播失败</string>
+    <string name="transaction_creation_failed">交易创建失败，请校验输入参数！</string>
+    <string name="db_exception">数据库异常！</string>
+    <string name="wallet_copied_share">钱包地址已复制</string>
+    <string name="insufficient_balance">余额不足</string>
+    <string name="illegal_input">非法输入</string>
+    <string name="generate_utxo_failed">获取utxo失败,请检查网络状态</string>
+    <string name="pwd_must_not_be_less_than_6_bits">密码不能少于6位</string>
+    <string name="wallet_name_can_not_be_empty">钱包名不能为空</string>
+    <string name="pwd_can_not_be_empty">密码不能为空</string>
+    <string name="inconsistent_password">密码不一致</string>
+    <string name="read_privacy_policy_first">请先仔细阅读隐私条款</string>
+    <string name="keystore_import_failed">Keystore导入失败</string>
+    <string name="mnemonic_import_failed">助记词导入失败</string>
+    <string name="wallet_exist">钱包已存在</string>
+    <string name="keystore_copied">keystore已复制到剪切板</string>
+    <string name="mnemonic_incorrect">助记词不正确</string>
 
     <!--语言-->
     <string name="language_zh_cn">简体中文</string>
     <string name="language_en_US">English(U.S)</string>
-
 
 
 </resources>

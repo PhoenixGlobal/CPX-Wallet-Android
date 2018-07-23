@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/main_tv_title_margin_top"
-        android:text="添加资产"
+        android:text="@string/add_assets"
         android:textColor="@color/c_333333"
         android:textSize="@dimen/tb_title_size" />
 

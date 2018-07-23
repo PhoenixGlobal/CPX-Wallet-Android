@@ -24,7 +24,7 @@
         android:singleLine="true"
         android:text="+10002.00000001"
         android:textColor="@color/c_333333"
-        android:textSize="@dimen/title_small_16sp" />
+        android:textSize="@dimen/title_18sp" />
 
     <TextView
         android:id="@+id/tv_transaction_detail_unit"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="15dp"
-        android:text="付款钱包地址"
+        android:text="@string/wallet_from"
         android:textColor="@color/c_999999"
         android:textSize="@dimen/paratext_14sp" />
 
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:text="收款钱包地址"
+        android:text="@string/wallet_to"
         android:textColor="@color/c_999999"
         android:textSize="@dimen/paratext_14sp" />
 
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:text="交易时间"
+        android:text="@string/transaction_time"
         android:textColor="@color/c_999999"
         android:textSize="@dimen/paratext_14sp" />
 
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:text="交易单号"
+        android:text="@string/transaction_id"
         android:textColor="@color/c_999999"
         android:textSize="@dimen/paratext_14sp" />
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
@@ -63,7 +62,8 @@ public class TransactionDetailActivity extends BaseActivity implements View.OnCl
         }
 
         mTv_transaction_detail_amount.setText(mTransactionRecord.getTxAmount());
-        mTv_transaction_detail_unit.setText(String.valueOf("转账金额 (" + mTransactionRecord
+        mTv_transaction_detail_unit.setText(String.valueOf(ApexWalletApplication.getInstance()
+                .getResources().getString(R.string.transfer_amount) + " (" + mTransactionRecord
                 .getAssetSymbol() + ")"));
         mTv_transaction_detail_from.setText(mTransactionRecord.getTxFrom());
         mTv_transaction_detail_to.setText(mTransactionRecord.getTxTo());
@@ -77,15 +77,18 @@ public class TransactionDetailActivity extends BaseActivity implements View.OnCl
         switch (v.getId()) {
             case R.id.tv_transaction_detail_from:
                 String from = mTv_transaction_detail_from.getText().toString().trim();
-                copy2Clipboard(from, "付款钱包地址已复制");
+                copy2Clipboard(from, ApexWalletApplication.getInstance().getResources().getString
+                        (R.string.payment_address_copied));
                 break;
             case R.id.tv_transaction_detail_to:
                 String to = mTv_transaction_detail_to.getText().toString().trim();
-                copy2Clipboard(to, "收款钱包地址已复制");
+                copy2Clipboard(to, ApexWalletApplication.getInstance().getResources().getString
+                        (R.string.payee_address_copied));
                 break;
             case R.id.tv_transaction_detail_tx_id:
-                String txid = mTv_transaction_detail_tx_id.getText().toString().trim();
-                copy2Clipboard(txid, "交易单号已复制");
+                String txId = mTv_transaction_detail_tx_id.getText().toString().trim();
+                copy2Clipboard(txId, ApexWalletApplication.getInstance().getResources().getString
+                        (R.string.tx_id_copied));
                 break;
             default:
                 break;

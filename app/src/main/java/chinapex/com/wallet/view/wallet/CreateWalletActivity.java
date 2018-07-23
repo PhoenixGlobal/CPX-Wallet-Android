@@ -21,6 +21,7 @@ import chinapex.com.wallet.executor.runnable.CreateWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.utils.ToastUtils;
 import neomobile.Wallet;
 
 public class CreateWalletActivity extends BaseActivity implements View.OnClickListener,
@@ -73,7 +74,8 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() <= 0) {
                     //设置错误提示信息
-                    showError(mTl_create_wallet_name, "用户名不能为空");
+                    showError(mTl_create_wallet_name, ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.wallet_name_can_not_be_empty));
                 } else {
                     //关闭错误提示
                     mTl_create_wallet_name.setErrorEnabled(false);
@@ -86,7 +88,8 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() < 6) {
                     //设置错误提示信息
-                    showError(mTl_create_wallet_pwd, "密码不能少于6位");
+                    showError(mTl_create_wallet_pwd, ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.pwd_must_not_be_less_than_6_bits));
                 } else {
                     //关闭错误提示
                     mTl_create_wallet_pwd.setErrorEnabled(false);
@@ -103,9 +106,11 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
 
                 if (s.length() < 6) {
                     //设置错误提示信息
-                    showError(mTl_create_wallet_repeat_pwd, "密码不能少于6位");
+                    showError(mTl_create_wallet_repeat_pwd, ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.pwd_must_not_be_less_than_6_bits));
                 } else if (TextUtils.isEmpty(repeatPwd) || !repeatPwd.equals(pwd)) {
-                    showError(mTl_create_wallet_repeat_pwd, "密码不一致");
+                    showError(mTl_create_wallet_repeat_pwd, ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.inconsistent_password));
                 } else {
                     //关闭错误提示
                     mTl_create_wallet_repeat_pwd.setErrorEnabled(false);
@@ -166,31 +171,36 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         String repeat_pwd = mEt_create_wallet_repeat_pwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(wallet_name)) {
-            Toast.makeText(this, "钱包名不能为空！", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.wallet_name_can_not_be_empty));
             CpLog.w(TAG, "wallet_name is null!");
             return false;
         }
 
         if (TextUtils.isEmpty(wallet_pwd) || TextUtils.isEmpty(repeat_pwd)) {
-            Toast.makeText(this, "密码不能为空！", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.pwd_can_not_be_empty));
             CpLog.w(TAG, "wallet_pwd or repeat_pwd is null!");
             return false;
         }
 
         if (!wallet_pwd.equals(repeat_pwd)) {
-            Toast.makeText(this, "密码不一致", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.inconsistent_password));
             CpLog.w(TAG, "wallet_pwd and repeat_pwd is not same!");
             return false;
         }
 
         if (repeat_pwd.length() < 6) {
-            Toast.makeText(this, "密码不能少于6个字！", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.pwd_must_not_be_less_than_6_bits));
             CpLog.w(TAG, "repeat_pwd.length() < 6!");
             return false;
         }
 
         if (!mIsAgreePrivacy) {
-            Toast.makeText(this, "请先仔细阅读隐私条款", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.read_privacy_policy_first));
             return false;
         }
 
@@ -212,7 +222,6 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void newWallet(Wallet wallet) {
-        CpLog.i(TAG, "0000000000000000000000000000");
         if (null == wallet) {
             CpLog.e(TAG, "wallet is null！");
             return;

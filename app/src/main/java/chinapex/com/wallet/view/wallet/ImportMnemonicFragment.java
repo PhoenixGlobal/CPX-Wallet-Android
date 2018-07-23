@@ -29,6 +29,7 @@ import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
 import chinapex.com.wallet.utils.SharedPreferencesUtils;
+import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.MainActivity;
 import neomobile.Wallet;
 
@@ -89,7 +90,8 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() < 6) {
                     //设置错误提示信息
-                    showError(mTl_import_wallet_pwd, "密码不能少于6位");
+                    showError(mTl_import_wallet_pwd, ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.pwd_must_not_be_less_than_6_bits));
                 } else {
                     //关闭错误提示
                     mTl_import_wallet_pwd.setErrorEnabled(false);
@@ -106,9 +108,11 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
 
                 if (s.length() < 6) {
                     //设置错误提示信息
-                    showError(mTl_import_wallet_repeat_pwd, "密码不能少于6位");
+                    showError(mTl_import_wallet_repeat_pwd, ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.pwd_must_not_be_less_than_6_bits));
                 } else if (TextUtils.isEmpty(repeatPwd) || !repeatPwd.equals(pwd)) {
-                    showError(mTl_import_wallet_repeat_pwd, "密码不一致");
+                    showError(mTl_import_wallet_repeat_pwd, ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.inconsistent_password));
                 } else {
                     //关闭错误提示
                     mTl_import_wallet_repeat_pwd.setErrorEnabled(false);
@@ -167,25 +171,29 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
         String repeat_pwd = mEt_import_wallet_repeat_pwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(wallet_pwd) || TextUtils.isEmpty(repeat_pwd)) {
-            Toast.makeText(getActivity(), "密码不能为空！", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.pwd_can_not_be_empty));
             CpLog.w(TAG, "wallet_name or wallet_pwd or repeat_pwd is null!");
             return false;
         }
 
         if (!wallet_pwd.equals(repeat_pwd)) {
-            Toast.makeText(getActivity(), "密码不一致", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.inconsistent_password));
             CpLog.w(TAG, "wallet_pwd and repeat_pwd is not same!");
             return false;
         }
 
         if (repeat_pwd.length() < 6) {
-            Toast.makeText(getActivity(), "密码不能少于6个字！", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.pwd_must_not_be_less_than_6_bits));
             CpLog.w(TAG, "repeat_pwd.length() < 6!");
             return false;
         }
 
         if (!mIsAgreePrivacy) {
-            Toast.makeText(getActivity(), "请先仔细阅读隐私条款", Toast.LENGTH_LONG).show();
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string.read_privacy_policy_first));
             return false;
         }
 
@@ -212,8 +220,8 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ImportMnemonicFragment.this.getActivity(), "助记词导入失败", Toast
-                            .LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.mnemonic_import_failed));
                 }
             });
             return;
@@ -234,7 +242,8 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(), "重复导入，此钱包已存在", Toast.LENGTH_SHORT).show();
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string.wallet_exist));
                 }
             });
             return;
