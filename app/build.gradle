@@ -7,7 +7,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 27
         versionCode 1
-        versionName "0.1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -34,4 +34,18 @@ dependencies {
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
     implementation 'com.google.android:flexbox:1.0.0'
     implementation 'com.github.open-android:Zxing:v1.0.3'
+
+    // select
+    implementation('cn.qqtheme.framework:WheelPicker:latest.release') {
+        exclude group: 'com.android.support'
+    }
+    implementation('cn.qqtheme.framework:FilePicker:latest.release') {
+        exclude group: 'com.android.support'
+    }
+    implementation('cn.qqtheme.framework:ColorPicker:latest.release') {
+        exclude group: 'com.android.support'
+    }
+
+    // 加载圈
+    implementation 'com.tt:whorlviewlibrary:1.0.3'
 }
