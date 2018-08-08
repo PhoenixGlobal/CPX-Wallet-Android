@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:background="@drawable/shape_bg_dialog_whorl_view">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.tt.whorlviewlibrary.WhorlView
+            android:id="@+id/wl_common_portrait"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            app:whorlview_circle_colors="#ABCDFF_#4c8efa_#B3D2FF"
+            app:whorlview_circle_speed="270"
+            app:whorlview_parallax="fast"
+            app:whorlview_strokeWidth="10"
+            app:whorlview_sweepAngle="250" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/to_dht_cloud"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

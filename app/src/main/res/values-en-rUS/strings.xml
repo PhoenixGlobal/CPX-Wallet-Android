@@ -1,0 +1,132 @@
+<resources>
+    <string name="app_name">APEX Wallet</string>
+    <string name="create_wallet">Create Wallet</string>
+    <string name="import_wallet">Import Wallet</string>
+    <string name="security">• It is very important that the password is used to encrypt the private key and transaction authorization. Please do not set it too simple.\n\n• Apex Wallet does not store passwords and cannot retrieve them for you. Please keep in mind.</string>
+    <string name="wallet_name">Wallet Name</string>
+    <string name="password">Password (At Least 6 Characters)</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="i_have_read_terms">I Agree to the </string>
+    <string name="privacy_terms">Service and Privacy Policy</string>
+    <string name="confirm">Confirm</string>
+    <string name="asset">Assets</string>
+    <string name="search_wallet_address">Search Wallet Address</string>
+    <string name="cancel">Cancel</string>
+    <string name="wallet_address">Wallet Address</string>
+    <string name="transfer">Transfer</string>
+    <string name="receive">Receive</string>
+    <string name="from">From</string>
+    <string name="payer">Payer</string>
+    <string name="payee">Payee</string>
+    <string name="to">To</string>
+    <string name="send">Send</string>
+    <string name="transfer_amount">Amount</string>
+    <string name="me">Me</string>
+    <string name="manage_wallets">Manage Wallets</string>
+    <string name="transaction_records">Transaction Records</string>
+    <string name="your_wallet_and_address">Your wallet/address</string>
+    <string name="copy_payee_address">Copy wallet address</string>
+    <string name="backup_wallet">Backup Wallet</string>
+    <string name="backup_detail">Export mnemonics and keep it in a safe place, do not save on the internet. then start using and testing with small amount of assets</string>
+    <string name="copy_mnemonic">Copy Your Mnemonic</string>
+    <string name="copy_mnemonic_detail">The mnemonic is used to recover the wallet or repeat the wallet password, copy it to the paper accurately, and store it in a safe place that only you know.</string>
+    <string name="next_step">Next</string>
+    <string name="copy_mnemonic_attention">Do not take screenshots,  someone will have fully accecss to your assets ,if it gets your mnemonic! Please copy the mnemonic, then store it at a safe place.</string>
+    <string name="confirm_mnemonic">Confirm your mnemonic</string>
+    <string name="confirm_mnemonic_content">Please click on the mnemonic, make sure that you backup correctly.</string>
+    <string name="please_backup">Please Backup</string>
+    <string name="backup_mnemonic">Backup Mnemonic</string>
+    <string name="delete_wallet">Delete wallet</string>
+    <string name="search_tx_id">Search The Transaction Number</string>
+    <string name="input_pwd">Please input your password</string>
+    <string name="be_careful">Attention! Delete Wallet Can Not Be Revoked</string>
+    <string name="confirm_pwd">Confirm</string>
+    <string name="pwd_hint">Password</string>
+    <string name="mnemonic">Mnemonics</string>
+    <string name="keystore">Keystore</string>
+    <string name="keystore_notice">Input Keystore Text Here</string>
+    <string name="keystore_content">Keystore text content</string>
+    <string name="keystore_note">Please store the Keystore to a safe offline location or device such as a USB drive. Never store or upload it to the internet.</string>
+    <string name="keystore_offline_save">Store Offline</string>
+    <string name="transfer_no_net">Don\'t Transfer via internet Tools</string>
+    <string name="keystore_transfer_no_net">Don\'t use Email/Cloud Storage/Notepad/IM tools to transfer Keystore . It easily gets hacked and result in loss.</string>
+    <string name="strongbox_save">Store to Password Vault</string>
+    <string name="online_save">If you like to store online please make sure to use password vault apps , like 1Password.</string>
+    <string name="export_keystore">Export keystore</string>
+    <string name="copy_keystore">Copy keystore</string>
+    <string name="transaction_detail">Transaction Details</string>
+    <string name="search_asset">Search asset</string>
+    <string name="save">Save</string>
+    <string name="mnemonic_separated_by_spaces">Mnemonic words, separated by Spaces</string>
+    <string name="start_import">Import</string>
+    <string name="keystore_pwd">Keystore password</string>
+    <string name="scan">scan</string>
+    <string name="tx_failed">failed</string>
+    <string name="tx_successful">successful</string>
+    <string name="tx_confirming">confirming</string>
+    <string name="tx_blocking">blocking</string>
+    <string name="wallet_from">From</string>
+    <string name="wallet_to">To</string>
+    <string name="transaction_time">Transaction Time</string>
+    <string name="transaction_id">Transaction ID</string>
+    <string name="a_key_mapping">Pre-Mainnet</string>
+    <string name="add_assets">Add Assets</string>
+    <string name="portrait_empty_content">Please create wallet\nthat we could distribute our rewards.</string>
+    <string name="year">year</string>
+    <string name="month">month</string>
+    <string name="day">day</string>
+    <string name="example_address">Example：China ShangHai</string>
+    <string name="place_of_residence">Place Of Residence</string>
+    <string name="enterprise_key">Enterprise Key</string>
+    <string name="to_dht_cloud">Saving Data To DHT Cloud</string>
+    <string name="available_amount">Amount ( Available: </string>
+    <string name="amount_all">All</string>
+    <string name="dialog_amount">Amount : </string>
+    <string name="change_wallet">Change Wallet</string>
+    <string name="choose_wallet">Choose Wallet</string>
+    <string name="data_empty">Data Empty</string>
+    <string name="empty_wallet">Please Click The Upper Right Corner\nTo Have Your Wallet</string>
+
+    <!--Me页面，功能菜单文字-->
+    <string name="personal_portrait">Profile</string>
+    <string name="language_settings">Language</string>
+    <string name="about_us">About Us</string>
+
+    <!--Toast content-->
+    <string name="address_cannot_be_empty">The address cannot be empty</string>
+    <string name="address_cannot_be_same">Payment address cannot be the same</string>
+    <string name="wallet_name_save_success">Wallet name saved successfully</string>
+    <string name="payment_address_copied">payment address has copied</string>
+    <string name="payee_address_copied">payee address has copied</string>
+    <string name="tx_id_copied">transaction id has copied</string>
+    <string name="wallet_address_copied">wallet address copy successful</string>
+    <string name="transaction_broadcast_successful">Transaction broadcast successful</string>
+    <string name="transaction_broadcast_failed">Transaction broadcast failed</string>
+    <string name="transaction_creation_failed">Transaction creation failed, please verify the input parameters!</string>
+    <string name="db_exception">Database exception!</string>
+    <string name="wallet_copied_share">Copy success,you can send it to friends</string>
+    <string name="insufficient_balance">Insufficient balance</string>
+    <string name="illegal_input">Illegal input</string>
+    <string name="generate_utxo_failed">Generate UTXO Failed, Please Check Network Status</string>
+    <string name="pwd_must_not_be_less_than_6_bits">Password must not be less than 6 bits</string>
+    <string name="wallet_name_can_not_be_empty">Wallet name can not be empty</string>
+    <string name="pwd_can_not_be_empty">Password can not be empty</string>
+    <string name="inconsistent_password">Passwords do not match</string>
+    <string name="read_privacy_policy_first">Please read the privacy policy carefully first</string>
+    <string name="keystore_import_failed">The Keystore import failed</string>
+    <string name="mnemonic_import_failed">Mnemonic import failed</string>
+    <string name="wallet_exist">Wallet Exist</string>
+    <string name="keystore_copied">The keystore has been copied to the clipboard</string>
+    <string name="mnemonic_incorrect">The mnemonic is incorrect</string>
+    <string name="password_incorrect">Password Incorrect!</string>
+
+    <!--语言-->
+    <string name="language_zh_cn">简体中文</string>
+    <string name="language_en_US">English(U.S)</string>
+
+    <!--画像类型-->
+    <string name="portrait_type_common">Basic</string>
+    <string name="portrait_type_enterprise">Enterprise</string>
+
+
+</resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.assets.AssetsOverviewActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:background="@drawable/tb_bg">
+
+        <TextView
+            android:id="@+id/tv_assets_overview_wallet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:ems="6"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:text="Wallet 0x233400000000000000000"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tb_title_size" />
+
+        <TextView
+            android:id="@+id/tv_assets_overview_wallet_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_assets_overview_wallet_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:singleLine="true"
+            android:text="0x2334dwq212lkdjbholiuenkgjhbkjh342023"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/ib_assets_overview_ellipsis"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:src="@drawable/icon_add_assets_round" />
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sl_assets_overview_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-26dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_assets_overview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

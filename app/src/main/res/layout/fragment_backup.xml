@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:background="@drawable/icon_safety_shield"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/backup_wallet"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:text="@string/backup_detail"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/bt_backup"
+        android:layout_width="293dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="188dp"
+        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:text="@string/backup_wallet"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+</LinearLayout>

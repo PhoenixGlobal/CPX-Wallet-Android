@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_portrait_empty"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/tb_bg">
+
+        <TextView
+            android:id="@+id/tv_portrait_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/personal_portrait"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/title_18sp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_portrait_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_portrait_empty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/portrait_empty" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_portrait_empty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/portrait_empty_content"
+        android:textSize="@dimen/title_small_16sp" />
+
+    <Button
+        android:id="@+id/bt_portrait_create_wallet"
+        android:layout_width="330dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:text="@string/create_wallet"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/paratext_14sp" />
+
+</RelativeLayout>

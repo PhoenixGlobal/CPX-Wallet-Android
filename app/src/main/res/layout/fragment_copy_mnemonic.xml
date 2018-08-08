@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/copy_mnemonic"
+        android:textColor="@color/c_666666"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="295dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/copy_mnemonic_detail"
+        android:textColor="@color/c_666666"
+        android:textSize="14sp" />
+
+    <android.support.v7.widget.CardView
+        cardCornerRadius="@dimen/cv_assets_rv_item_bg_corner"
+        cardElevation="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp">
+
+        <TextView
+            android:id="@+id/tv_copy_mnemonic"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_copy_mnemonic"
+            android:padding="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/icon_attention"
+            android:scaleType="center" />
+
+        <TextView
+            android:layout_width="289dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="@string/copy_mnemonic_attention"
+            android:textColor="@color/c_666666"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_copy_mnemonic_next"
+        android:layout_width="293dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:text="@string/next_step"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+
+</LinearLayout>

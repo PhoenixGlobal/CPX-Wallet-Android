@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:background="@drawable/tb_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:text="@string/me"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tv_me_title_size" />
+
+
+        <ImageButton
+            android:id="@+id/ib_me_manage_wallet"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="@dimen/fragment_me_margin_start"
+            android:background="@null"
+            android:src="@drawable/icon_manage_wallet" />
+
+        <TextView
+            android:id="@+id/tv_me_manage_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/ib_me_manage_wallet"
+            android:layout_marginStart="@dimen/fragment_me_between"
+            android:layout_toEndOf="@+id/ib_me_manage_wallet"
+            android:gravity="center"
+            android:text="@string/manage_wallets"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/fragment_me_subhead" />
+
+        <ImageButton
+            android:id="@+id/ib_me_tx_records"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/ib_me_manage_wallet"
+            android:layout_marginEnd="@dimen/fragment_me_between"
+            android:layout_toStartOf="@+id/tv_me_tx_records"
+            android:background="@null"
+            android:src="@drawable/icon_tx_records" />
+
+        <TextView
+            android:id="@+id/tv_me_tx_records"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="@dimen/fragment_me_margin_end"
+            android:gravity="center"
+            android:text="@string/transaction_records"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/fragment_me_subhead" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_me"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
+
+</LinearLayout>

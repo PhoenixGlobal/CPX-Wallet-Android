@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="chinapex.com.wallet">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 扫一扫相关权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <application
+        android:name=".global.ApexWalletApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_app"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 启动页 -->
+        <activity
+            android:name=".view.BootPageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.MyTranslucentNavigation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 新用户 -->
+        <activity
+            android:name=".view.NewVisitorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.MyTranslucentNavigation" />
+        <!-- 主activity -->
+        <activity
+            android:name=".view.MainActivity"
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait" />
+        <!-- 跳转activity -->
+        <activity
+            android:name=".view.me.Me3Activity"
+            android:screenOrientation="portrait" />
+        <!-- 新建钱包 -->
+        <activity
+            android:name=".view.wallet.CreateWalletActivity"
+            android:screenOrientation="portrait" />
+        <!-- 导入钱包 -->
+        <activity
+            android:name=".view.wallet.ImportWalletActivity"
+            android:screenOrientation="portrait" />
+        <!-- 备份 -->
+        <activity
+            android:name=".view.wallet.BackupWalletActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 资产概览 -->
+        <activity
+            android:name=".view.assets.AssetsOverviewActivity"
+            android:screenOrientation="portrait" />
+        <!-- 余额明细 -->
+        <activity
+            android:name=".view.assets.BalanceDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- 转账 -->
+        <activity
+            android:name=".view.assets.TransferActivity"
+            android:screenOrientation="portrait" />
+        <!-- 收款 -->
+        <activity
+            android:name=".view.assets.GatheringActivity"
+            android:screenOrientation="portrait" />
+        <!-- 导出Keystore -->
+        <activity
+            android:name=".view.wallet.ExportKeystoreActivity"
+            android:screenOrientation="portrait" />
+        <!-- 交易记录明细 -->
+        <activity
+            android:name=".view.me.TransactionDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- Me的二级activity -->
+        <activity
+            android:name=".view.me.Me2Activity"
+            android:screenOrientation="portrait" />
+        <!-- 语言设置 -->
+        <activity
+            android:name=".view.me.MeLanguageSettingsActivity"
+            android:screenOrientation="portrait" />
+        <!-- 用户画像 -->
+        <activity
+            android:name=".view.me.portrait.MePortraitEmptyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.me.portrait.MePortraitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.me.portrait.TypeInputActivity"
+            android:screenOrientation="portrait" />
+        <!--服务与隐私条款-->
+        <activity
+            android:name=".view.wallet.PrivacyActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

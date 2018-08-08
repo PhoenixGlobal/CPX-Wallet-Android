@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ImageButton
+        android:id="@+id/ib_switch_wallet2_back"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:src="@drawable/icon_arrows_left" />
+
+    <TextView
+        android:id="@+id/tv_switch_wallet2_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/main_tv_title_margin_top"
+        android:text="@string/choose_wallet"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/tb_title_size" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_dialog_switch_wallet2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_switch_wallet2_title"
+        android:layout_marginTop="20dp"
+        android:overScrollMode="never" />
+
+</RelativeLayout>

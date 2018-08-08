@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/rl_assets_rv_item_height"
+    android:background="@drawable/shape_card_white"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_assets_rv_item_wallet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="6"
+            android:singleLine="true"
+            android:text="@string/wallet_name"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/card_title" />
+
+        <TextView
+            android:id="@+id/tv_assets_rv_item_wallet_addr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="middle"
+            android:ems="12"
+            android:singleLine="true"
+            android:text="@string/wallet_address"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/paratext_14sp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@null"
+        android:src="@drawable/icon_arrows" />
+
+</RelativeLayout>

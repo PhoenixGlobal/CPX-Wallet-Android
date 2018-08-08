@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.assets.TransferActivity">
+
+    <RelativeLayout
+        android:id="@+id/tb_transfer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tb_bg_narrow_height"
+        android:background="@drawable/tb_bg_narrow">
+
+        <TextView
+            android:id="@+id/tv_transfer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/main_tv_title_margin_top"
+            android:text="@string/transfer"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tb_title_size" />
+
+        <ImageButton
+            android:id="@+id/ib_transfer_scan"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/tv_transfer_title"
+            android:layout_marginEnd="15dp"
+            android:background="@null"
+            android:src="@drawable/icon_scan_qr_code" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
+        android:layout_marginTop="30dp"
+        android:text="@string/to"
+        android:textColor="@color/c_979797"
+        android:textSize="@dimen/tv_transfer_from_font_size" />
+
+    <EditText
+        android:id="@+id/et_transfer_to_wallet_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
+        android:background="@null"
+        android:hint="@string/payee"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/tv_transfer_from_wallet_addr_font_size" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/c_DDDDDD" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
+            android:singleLine="true"
+            android:text="@string/available_amount"
+            android:textColor="@color/c_999999"
+            android:textSize="@dimen/title_small_16sp" />
+
+        <TextView
+            android:id="@+id/tv_available_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="0.00000008"
+            android:textColor="@color/c_E16A67"
+            android:textSize="@dimen/title_small_16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" )"
+            android:textSize="@dimen/title_small_16sp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_transfer_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="15"
+            android:hint="@string/transfer_amount"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_amount_all"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/amount_all"
+            android:textColor="@color/c_1253BF"
+            android:textSize="@dimen/paratext_14sp" />
+
+        <TextView
+            android:id="@+id/tv_transfer_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="cpx"
+            android:textColor="@color/c_333333"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/c_DDDDDD" />
+
+    <Button
+        android:id="@+id/bt_transfer_send"
+        android:layout_width="267dp"
+        android:layout_height="33dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="158dp"
+        android:background="@drawable/shape_balance_detail_bt_bg"
+        android:text="@string/send"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+
+</LinearLayout>

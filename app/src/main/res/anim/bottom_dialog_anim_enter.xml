@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--由下到上-->
+    <!--<translate-->
+    <!--android:duration="@android:integer/config_longAnimTime"-->
+    <!--android:fromYDelta="100%p"-->
+    <!--android:interpolator="@android:anim/accelerate_interpolator"-->
+    <!--android:toYDelta="0%p" />-->
+
+    <!--由左到右-->
+    <translate
+        android:duration="@android:integer/config_longAnimTime"
+        android:fromXDelta="100%p"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:toXDelta="0%p" />
+
+    <!--<alpha-->
+    <!--android:duration="@android:integer/config_mediumAnimTime"-->
+    <!--android:fromAlpha="0.0"-->
+    <!--android:toAlpha="1.0" />-->
+</set>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_import_wallet_mnemonic"
+        android:layout_width="match_parent"
+        android:layout_height="101dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_import_wallet_tv_bg"
+        android:gravity="top|start"
+        android:hint="@string/mnemonic_separated_by_spaces"
+        android:paddingBottom="8dp"
+        android:paddingEnd="13dp"
+        android:paddingStart="13dp"
+        android:paddingTop="8dp"
+        android:textSize="14sp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tl_import_wallet_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp">
+
+        <EditText
+            android:id="@+id/et_import_wallet_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="16"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/et_create_wallet_font_size" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tl_import_wallet_repeat_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp">
+
+        <EditText
+            android:id="@+id/et_import_wallet_repeat_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="16"
+            android:hint="@string/repeat_password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/et_create_wallet_font_size" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:orientation="horizontal"
+        android:paddingStart="20dp">
+
+        <ImageButton
+            android:id="@+id/ib_import_wallet_privacy_point"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@null"
+            android:src="@drawable/icon_privacy_def" />
+
+        <TextView
+            android:id="@+id/tv_import_wallet_privacy_have_read"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/i_have_read_terms"
+            android:textSize="@dimen/create_wallet_rb_text_size" />
+
+        <TextView
+            android:id="@+id/tv_import_wallet_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/create_wallet_tv_margin_start"
+            android:gravity="center_vertical"
+            android:text="@string/privacy_terms"
+            android:textColor="@color/c_1253BF"
+            android:textSize="@dimen/create_wallet_rb_text_size" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_import_wallet_mnemonic"
+        android:layout_width="267dp"
+        android:layout_height="33dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/shape_import_wallet_bt_bg_def"
+        android:text="@string/start_import"
+        android:textAllCaps="false"
+        android:textColor="@color/c_666666"
+        android:textSize="14sp" />
+</LinearLayout>

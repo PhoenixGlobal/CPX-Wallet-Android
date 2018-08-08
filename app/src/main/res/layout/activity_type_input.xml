@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.me.portrait.TypeInputActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/tv_type_input_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="常住地"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/title_18sp" />
+
+        <TextView
+            android:id="@+id/tv_type_input_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/save"
+            android:textSize="@dimen/title_small_16sp" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_type_input_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        android:hint="@string/example_address"
+        android:inputType="text"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
+        android:singleLine="true" />
+
+</LinearLayout>

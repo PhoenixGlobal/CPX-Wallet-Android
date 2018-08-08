@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="chinapex.com.wallet.view.wallet.PrivacyActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tb_bg_narrow_height"
+        android:background="@drawable/tb_bg_narrow">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:text="@string/privacy_terms"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tv_me_title_size" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/wv_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
+
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/rl_assets_rv_item_height"
+    android:background="@drawable/shape_card_white"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp">
+
+
+    <TextView
+        android:id="@+id/tv_me_rv_item_wallet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ib_me_rv_item_arrows"
+        android:ellipsize="end"
+        android:ems="6"
+        android:singleLine="true"
+        android:text="@string/wallet_name"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/card_title" />
+
+    <TextView
+        android:id="@+id/tv_me_rv_item_wallet_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ib_me_rv_item_arrows"
+        android:ellipsize="middle"
+        android:ems="10"
+        android:singleLine="true"
+        android:text="@string/wallet_address"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_me_rv_item_backup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ib_me_rv_item_arrows"
+        android:layout_toEndOf="@+id/tv_me_rv_item_wallet_name"
+        android:background="@drawable/shape_bg_me_item_backup"
+        android:paddingBottom="3dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="3dp"
+        android:text="@string/please_backup"
+        android:textColor="#B3D38D"
+        android:textSize="12sp" />
+
+    <ImageButton
+        android:id="@+id/ib_me_rv_item_arrows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@null"
+        android:src="@drawable/icon_arrows" />
+
+</RelativeLayout>
