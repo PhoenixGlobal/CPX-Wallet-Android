@@ -7,4 +7,6 @@
     <dimen name="fragment_me_subhead">16sp</dimen>
     <dimen name="activity_create_wallet_underline_width">77dp</dimen>
     <dimen name="dialog_add_assets_margin_start">10dp</dimen>
+    <dimen name="create_margin_start">50dp</dimen>
+    <dimen name="create_margin_end">50dp</dimen>
 </resources>

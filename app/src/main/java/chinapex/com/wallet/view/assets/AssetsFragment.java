@@ -25,17 +25,21 @@ import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.adapter.AssetsRecyclerViewAdapter;
-import chinapex.com.wallet.adapter.DrawerMenuRecyclerViewAdapter;
+import chinapex.com.wallet.adapter.DrawerMenu1RecyclerViewAdapter;
+import chinapex.com.wallet.adapter.DrawerMenu2RecyclerViewAdapter;
 import chinapex.com.wallet.adapter.EmptyAdapter;
 import chinapex.com.wallet.adapter.SpacesItemDecoration;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.DrawerMenu;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.eth.EthWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
-import chinapex.com.wallet.changelistener.OnAssetsUpdateListener;
-import chinapex.com.wallet.changelistener.OnItemAddListener;
-import chinapex.com.wallet.changelistener.OnItemDeleteListener;
+import chinapex.com.wallet.changelistener.OnAssetJsonUpdateListener;
+import chinapex.com.wallet.changelistener.OnNeoDeleteListener;
 import chinapex.com.wallet.changelistener.OnItemNameUpdateListener;
+import chinapex.com.wallet.changelistener.OnNeoAddListener;
+import chinapex.com.wallet.changelistener.eth.OnEthAddListener;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -50,24 +54,31 @@ import chinapex.com.wallet.view.wallet.ImportWalletActivity;
 
 public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAdapter
         .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, AssetsRecyclerViewAdapter
-        .OnItemLongClickListener, OnItemDeleteListener, OnItemAddListener, DrawerLayout
-        .DrawerListener, DrawerMenuRecyclerViewAdapter.DrawerMenuOnItemClickListener, View
-        .OnClickListener, OnItemNameUpdateListener, TextWatcher, OnAssetsUpdateListener {
+        .OnItemLongClickListener, OnNeoDeleteListener, OnNeoAddListener, DrawerLayout
+        .DrawerListener, DrawerMenu1RecyclerViewAdapter.DrawerMenu1OnItemClickListener, View
+        .OnClickListener, OnItemNameUpdateListener, TextWatcher, OnAssetJsonUpdateListener,
+        OnEthAddListener, DrawerMenu2RecyclerViewAdapter.DrawerMenu2OnItemClickListener {
 
     private static final String TAG = AssetsFragment.class.getSimpleName();
     private RecyclerView mRv_assets;
+    private int mWalletType;
     private List<WalletBean> mWalletBeans;
+    private List<WalletBean> mSearchWalletBeans;
+    private List<WalletBean> mNeoWallets;
+    private List<WalletBean> mEthWallets;
     private SwipeRefreshLayout mSl_assets_rv;
     private AssetsRecyclerViewAdapter mAssetsRecyclerViewAdapter;
     private DrawerLayout mDl_assets;
-    private RecyclerView mRv_assets_drawer_menu;
-    private DrawerMenuRecyclerViewAdapter mDrawerMenuRecyclerViewAdapter;
+    private RecyclerView mRv_assets_drawer_menu1;
+    private RecyclerView mRv_assets_drawer_menu2;
+    private DrawerMenu1RecyclerViewAdapter mDrawerMenu1RecyclerViewAdapter;
     private ImageButton mIb_assets_ellipsis;
     private LinearLayout mLl_assets_drawer;
     private EditText mEt_assets_search;
-    private List<WalletBean> mSearchTmpWalletBeans;
     private ImageButton mIb_assets_cancel;
     private EmptyAdapter mEmptyAdapter;
+    private DrawerMenu2RecyclerViewAdapter mDrawerMenu2RecyclerViewAdapter;
+    private TextView mTv_assets_wallet_type;
 
     @Nullable
     @Override
@@ -91,6 +102,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         mSl_assets_rv = (SwipeRefreshLayout) view.findViewById(R.id.sl_assets_rv);
         mEt_assets_search = view.findViewById(R.id.et_assets_search);
         mIb_assets_cancel = view.findViewById(R.id.ib_assets_cancel);
+        mTv_assets_wallet_type = view.findViewById(R.id.tv_assets_wallet_type);
 
         // 搜索功能
         mEt_assets_search.addTextChangedListener(this);
@@ -124,26 +136,38 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
 
         // 侧滑菜单
         mDl_assets = (DrawerLayout) view.findViewById(R.id.dl_assets);
-        mRv_assets_drawer_menu = view.findViewById(R.id.rv_assets_drawer_menu);
+        mRv_assets_drawer_menu1 = view.findViewById(R.id.rv_assets_drawer_menu1);
+        mRv_assets_drawer_menu2 = view.findViewById(R.id.rv_assets_drawer_menu2);
 
         mDl_assets.addDrawerListener(this);
-        mRv_assets_drawer_menu.setLayoutManager(new LinearLayoutManager(getActivity(),
+        mRv_assets_drawer_menu1.setLayoutManager(new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL, false));
+        mRv_assets_drawer_menu2.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
 
-        mDrawerMenuRecyclerViewAdapter = new DrawerMenuRecyclerViewAdapter(getAssetsMenus());
-        mDrawerMenuRecyclerViewAdapter.setDrawerMenuOnItemClickListener(this);
-        mRv_assets_drawer_menu.setAdapter(mDrawerMenuRecyclerViewAdapter);
+        mDrawerMenu1RecyclerViewAdapter = new DrawerMenu1RecyclerViewAdapter(getDrawerMenu1());
+        mDrawerMenu2RecyclerViewAdapter = new DrawerMenu2RecyclerViewAdapter(getDrawerMenu2());
+        mDrawerMenu1RecyclerViewAdapter.setDrawerMenu1OnItemClickListener(this);
+        mDrawerMenu2RecyclerViewAdapter.setDrawerMenu2OnItemClickListener(this);
+        mRv_assets_drawer_menu1.setAdapter(mDrawerMenu1RecyclerViewAdapter);
+        mRv_assets_drawer_menu2.setAdapter(mDrawerMenu2RecyclerViewAdapter);
 
     }
 
     private void initData() {
+        // set title: wallet type
+        mTv_assets_wallet_type.setText(Constant.WALLET_TYPE_NAME_NEO);
+
+        // neo
         ApexListeners.getInstance().addOnItemDeleteListener(this);
         ApexListeners.getInstance().addOnItemAddListener(this);
         ApexListeners.getInstance().addOnItemNameUpdateListener(this);
         ApexListeners.getInstance().addOnAssetsUpdateListener(this);
+        // eth
+        ApexListeners.getInstance().addOnEthAddListener(this);
 
-        mSearchTmpWalletBeans = new ArrayList<>();
-        mSearchTmpWalletBeans.addAll(mWalletBeans);
+        mSearchWalletBeans = new ArrayList<>();
+        mSearchWalletBeans.addAll(mWalletBeans);
     }
 
     @Override
@@ -159,16 +183,20 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     }
 
     private List<WalletBean> getData() {
-        List<WalletBean> walletBeans = new ArrayList<>();
+        mWalletBeans = new ArrayList<>();
+        mNeoWallets = new ArrayList<>();
+        mEthWallets = new ArrayList<>();
         ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
                 .getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null！");
-            return walletBeans;
+            return mWalletBeans;
         }
 
-        walletBeans.addAll(apexWalletDbDao.queryWalletBeans(Constant.TABLE_APEX_WALLET));
-        return walletBeans;
+        mNeoWallets.addAll(apexWalletDbDao.queryWallets(Constant.TABLE_NEO_WALLET));
+        mEthWallets.addAll(apexWalletDbDao.queryWallets(Constant.TABLE_ETH_WALLET));
+        mWalletBeans.addAll(mNeoWallets);
+        return mWalletBeans;
     }
 
 
@@ -184,37 +212,75 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     }
 
     @Override
-    public void onItemDelete(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "onItemDelete() -> walletBean is null!");
+    public void onNeoDelete(NeoWallet neoWallet) {
+        if (null == neoWallet) {
+            CpLog.e(TAG, "onNeoDelete() -> neoWallet is null!");
             return;
         }
 
-        if (!mWalletBeans.contains(walletBean)) {
-            CpLog.e(TAG, "onItemDelete() -> this wallet not exist!");
+        if (!mWalletBeans.contains(neoWallet)) {
+            CpLog.e(TAG, "onNeoDelete() -> this wallet not exist!");
             return;
         }
-        mWalletBeans.remove(walletBean);
-        mSearchTmpWalletBeans.remove(walletBean);
+        mWalletBeans.remove(neoWallet);
+        mSearchWalletBeans.remove(neoWallet);
         mAssetsRecyclerViewAdapter.notifyDataSetChanged();
         mEmptyAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onItemAdd(WalletBean walletBean) {
-        CpLog.i(TAG, "onItemAdd");
-        if (null == walletBean) {
-            CpLog.e(TAG, "onItemAdd() -> walletBean is null!");
+    public void onNeoAdd(NeoWallet neoWallet) {
+        if (null == neoWallet) {
+            CpLog.e(TAG, "onNeoAdd() -> neoWallet is null!");
             return;
         }
 
-        if (mWalletBeans.contains(walletBean)) {
-            CpLog.e(TAG, "onItemAdd() -> this wallet has existed!");
+        if (mNeoWallets.contains(neoWallet)) {
+            CpLog.e(TAG, "onNeoAdd() -> this wallet has existed!");
             return;
         }
 
-        mWalletBeans.add(walletBean);
-        mSearchTmpWalletBeans.add(walletBean);
+        mNeoWallets.add(neoWallet);
+
+        if (mWalletType != Constant.WALLET_TYPE_NEO) {
+            CpLog.w(TAG, "mWalletType:" + mWalletType + ",no need to update UI!");
+            return;
+        }
+
+        mWalletBeans.add(neoWallet);
+        mSearchWalletBeans.add(neoWallet);
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mAssetsRecyclerViewAdapter.notifyDataSetChanged();
+                mEmptyAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
+    public void onEthAdd(EthWallet ethWallet) {
+        if (null == ethWallet) {
+            CpLog.e(TAG, "onEthAdd() -> ethWallet is null!");
+            return;
+        }
+
+        if (mEthWallets.contains(ethWallet)) {
+            CpLog.e(TAG, "onEthAdd() -> this wallet has existed!");
+            return;
+        }
+
+        mEthWallets.add(ethWallet);
+
+        if (mWalletType != Constant.WALLET_TYPE_ETH) {
+            CpLog.w(TAG, "mWalletType:" + mWalletType + ",no need to update UI!");
+            return;
+        }
+
+        mWalletBeans.add(ethWallet);
+        mSearchWalletBeans.add(ethWallet);
+
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -244,11 +310,27 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
 
     }
 
-    private List<DrawerMenu> getAssetsMenus() {
+    private List<DrawerMenu> getDrawerMenu1() {
         ArrayList<DrawerMenu> drawerMenus = new ArrayList<>();
         //drawable数组要用TypedArray获取
-        TypedArray ar = getResources().obtainTypedArray(R.array.assets_drawer_icons);
-        String[] menuTexts = getResources().getStringArray(R.array.assets_drawer_texts);
+        TypedArray ar = getResources().obtainTypedArray(R.array.assets_drawer1_icons);
+        String[] menuTexts = getResources().getStringArray(R.array.assets_drawer1_texts);
+
+        for (int i = 0; i < ar.length(); i++) {
+            DrawerMenu drawerMenu = new DrawerMenu();
+            drawerMenu.setMenuIcon(ar.getResourceId(i, 0));
+            drawerMenu.setMenuText(menuTexts[i]);
+            drawerMenus.add(drawerMenu);
+        }
+        ar.recycle();
+        return drawerMenus;
+    }
+
+    private List<DrawerMenu> getDrawerMenu2() {
+        ArrayList<DrawerMenu> drawerMenus = new ArrayList<>();
+        //drawable数组要用TypedArray获取
+        TypedArray ar = getResources().obtainTypedArray(R.array.assets_drawer2_icons);
+        String[] menuTexts = getResources().getStringArray(R.array.assets_drawer2_texts);
 
         for (int i = 0; i < ar.length(); i++) {
             DrawerMenu drawerMenu = new DrawerMenu();
@@ -261,7 +343,29 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     }
 
     @Override
-    public void drawerMenuOnItemClick(int position) {
+    public void drawerMenu1OnItemClick(int position) {
+        switch (position) {
+            case 0:
+                // neo
+                mWalletType = Constant.WALLET_TYPE_NEO;
+                mTv_assets_wallet_type.setText(Constant.WALLET_TYPE_NAME_NEO);
+
+                changeWalletType(mNeoWallets);
+                break;
+            case 1:
+                // eth
+                mWalletType = Constant.WALLET_TYPE_ETH;
+                mTv_assets_wallet_type.setText(Constant.WALLET_TYPE_NAME_ETH);
+
+                changeWalletType(mEthWallets);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void drawerMenu2OnItemClick(int position) {
         switch (position) {
             case 0:
                 // 创建钱包
@@ -275,6 +379,25 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
                 break;
         }
         closeDrawer(mLl_assets_drawer);
+    }
+
+    private void changeWalletType(List<? extends WalletBean> walletBeans) {
+        if (null == walletBeans || walletBeans.isEmpty()) {
+            CpLog.e(TAG, "walletBeans is null or empty!");
+            return;
+        }
+
+        int preClearSize = walletBeans.size();
+        mWalletBeans.clear();
+        mSearchWalletBeans.clear();
+        mAssetsRecyclerViewAdapter.notifyItemRangeRemoved(0, preClearSize);
+        mEmptyAdapter.notifyDataSetChanged();
+
+        mWalletBeans.addAll(walletBeans);
+        mSearchWalletBeans.addAll(walletBeans);
+        mAssetsRecyclerViewAdapter.notifyItemRangeInserted(0, walletBeans.size());
+        mEmptyAdapter.notifyDataSetChanged();
+        mEt_assets_search.getText().clear();
     }
 
     @Override
@@ -304,9 +427,9 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     }
 
     @Override
-    public void OnItemNameUpdate(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "walletBean is null!");
+    public void OnItemNameUpdate(NeoWallet neoWallet) {
+        if (null == neoWallet) {
+            CpLog.e(TAG, "neoWallet is null!");
             return;
         }
 
@@ -316,16 +439,16 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
                 continue;
             }
 
-            if (walletBeanTmp.equals(walletBean)) {
-                walletBeanTmp.setWalletName(walletBean.getWalletName());
-                WalletBean searchTmpWalletBean = mSearchTmpWalletBeans.get(mWalletBeans.indexOf
+            if (walletBeanTmp.equals(neoWallet)) {
+                walletBeanTmp.setName(neoWallet.getName());
+                WalletBean searchTmpWallet = mSearchWalletBeans.get(mWalletBeans.indexOf
                         (walletBeanTmp));
-                if (null == searchTmpWalletBean) {
-                    CpLog.e(TAG, "searchTmpWalletBean is null!");
+                if (null == searchTmpWallet) {
+                    CpLog.e(TAG, "searchTmpWallet is null!");
                     continue;
                 }
 
-                searchTmpWalletBean.setWalletName(walletBean.getWalletName());
+                searchTmpWallet.setName(neoWallet.getName());
             }
         }
 
@@ -334,7 +457,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     }
 
     @Override
-    public void onAssetsUpdate(WalletBean walletBean) {
+    public void onAssetJsonUpdate(WalletBean walletBean) {
         if (null == walletBean) {
             CpLog.e(TAG, "walletBean is null!");
             return;
@@ -352,8 +475,8 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
             }
 
             if (walletBeanTmp.equals(walletBean)) {
-                walletBeanTmp.setAssetsNep5Json(walletBean.getAssetsNep5Json());
-                walletBeanTmp.setAssetsJson(walletBean.getAssetsJson());
+                walletBeanTmp.setColorAssetJson(walletBean.getColorAssetJson());
+                walletBeanTmp.setAssetJson(walletBean.getAssetJson());
             }
         }
 
@@ -367,13 +490,8 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-//        if (null == mSearchTmpWalletBeans || mSearchTmpWalletBeans.isEmpty()) {
-//            CpLog.e(TAG, "mWalletBeans is null or empty!");
-//            return;
-//        }
-
         mWalletBeans.clear();
-        mWalletBeans.addAll(mSearchTmpWalletBeans);
+        mWalletBeans.addAll(mSearchWalletBeans);
 
         if (TextUtils.isEmpty(s)) {
             CpLog.w(TAG, "onTextChanged() -> is empty!");
@@ -392,7 +510,7 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
                 continue;
             }
 
-            if (!walletBean.getWalletAddr().contains(s)) {
+            if (!walletBean.getAddress().contains(s)) {
                 iterator.remove();
             }
         }
@@ -413,6 +531,9 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         ApexListeners.getInstance().removeOnItemAddListener(this);
         ApexListeners.getInstance().removeOnItemNameUpdateListener(this);
         ApexListeners.getInstance().removeOnAssetsUpdateListener(this);
+
+        // eth
+        ApexListeners.getInstance().removeOnEthAddListener(this);
     }
 
 

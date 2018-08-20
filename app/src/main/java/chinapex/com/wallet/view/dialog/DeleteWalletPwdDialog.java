@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import chinapex.com.wallet.R;
-import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
@@ -34,7 +34,7 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
         IFromKeystoreToWalletCallback {
 
     private static final String TAG = DeleteWalletPwdDialog.class.getSimpleName();
-    private WalletBean mCurrentWalletBean;
+    private NeoWallet mCurrentNeoWallet;
     private Button mBt_dialog_pwd_del_cancel;
     private Button mBt_dialog_pwd_del_confirm;
     private EditText mEt_dialog_pwd_del;
@@ -43,8 +43,8 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
         return new DeleteWalletPwdDialog();
     }
 
-    public void setCurrentWalletBean(WalletBean currentWalletBean) {
-        mCurrentWalletBean = currentWalletBean;
+    public void setCurrentNeoWallet(NeoWallet currentNeoWallet) {
+        mCurrentNeoWallet = currentNeoWallet;
     }
 
 
@@ -102,7 +102,7 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
                 break;
             case R.id.bt_dialog_pwd_del_confirm:
                 String pwd = mEt_dialog_pwd_del.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean
+                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentNeoWallet
                         .getKeyStore(), pwd, this));
                 break;
         }
@@ -126,8 +126,8 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
     }
 
     private void deleteWalletByNameAndAddr() {
-        if (null == mCurrentWalletBean) {
-            CpLog.e(TAG, "mCurrentWalletBean is null!");
+        if (null == mCurrentNeoWallet) {
+            CpLog.e(TAG, "mCurrentNeoWallet is null!");
             return;
         }
 
@@ -138,14 +138,14 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
             return;
         }
 
-        String walletAddress = mCurrentWalletBean.getWalletAddr();
-        apexWalletDbDao.deleteByWalletNameAndAddr(Constant.TABLE_APEX_WALLET, mCurrentWalletBean
-                .getWalletName(), walletAddress);
+        String walletAddress = mCurrentNeoWallet.getAddress();
+        apexWalletDbDao.deleteByWalletNameAndAddr(Constant.TABLE_NEO_WALLET, mCurrentNeoWallet
+                .getName(), walletAddress);
         apexWalletDbDao.delTxsByAddress(Constant.TABLE_TRANSACTION_RECORD, walletAddress);
         apexWalletDbDao.delTxsByAddress(Constant.TABLE_TX_CACHE, walletAddress);
         SharedPreferencesUtils.remove(ApexWalletApplication.getInstance(), walletAddress);
 
-        ApexListeners.getInstance().notifyItemDelete(mCurrentWalletBean);
+        ApexListeners.getInstance().notifyItemDelete(mCurrentNeoWallet);
         dismiss();
     }
 }

@@ -84,29 +84,32 @@ public class GetNep5Balance implements Runnable, INetCallback {
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
+        HashMap<String, BalanceBean> balanceBeans = new HashMap<>();
+
         ResponseGetNep5Balance responseGetNep5Balance = GsonUtils.json2Bean(result,
                 ResponseGetNep5Balance.class);
         if (null == responseGetNep5Balance) {
             CpLog.e(TAG, "responseGetNep5Balance is null!");
-            mIGetNep5BalanceCallback.getNep5Balance(null);
+            balanceBeans.put(mAssetID, null);
+            mIGetNep5BalanceCallback.getNep5Balance(balanceBeans);
             return;
         }
 
         ResponseGetNep5Balance.ResultBean resultBean = responseGetNep5Balance.getResult();
         if (null == resultBean) {
             CpLog.e(TAG, "resultBean is null!");
-            mIGetNep5BalanceCallback.getNep5Balance(null);
+            balanceBeans.put(mAssetID, null);
+            mIGetNep5BalanceCallback.getNep5Balance(balanceBeans);
             return;
         }
 
         List<ResponseGetNep5Balance.ResultBean.StackBean> stackBeans = resultBean.getStack();
         if (null == stackBeans || stackBeans.isEmpty()) {
             CpLog.e(TAG, "stackBeans is null or empty!");
-            mIGetNep5BalanceCallback.getNep5Balance(null);
+            balanceBeans.put(mAssetID, null);
+            mIGetNep5BalanceCallback.getNep5Balance(balanceBeans);
             return;
         }
-
-        HashMap<String, BalanceBean> balanceBeans = new HashMap<>();
 
         for (ResponseGetNep5Balance.ResultBean.StackBean stackBean : stackBeans) {
             if (null == stackBean) {
@@ -144,6 +147,8 @@ public class GetNep5Balance implements Runnable, INetCallback {
     @Override
     public void onFailed(int failedCode, String msg) {
         CpLog.e(TAG, "onFailed() -> msg:" + msg);
-        mIGetNep5BalanceCallback.getNep5Balance(null);
+        HashMap<String, BalanceBean> balanceBeans = new HashMap<>();
+        balanceBeans.put(mAssetID, null);
+        mIGetNep5BalanceCallback.getNep5Balance(balanceBeans);
     }
 }

@@ -2,11 +2,7 @@ package chinapex.com.wallet.executor.runnable;
 
 import android.text.TextUtils;
 
-import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
-import chinapex.com.wallet.global.ApexWalletApplication;
-import chinapex.com.wallet.global.Constant;
-import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 import neomobile.Neomobile;
 import neomobile.Wallet;

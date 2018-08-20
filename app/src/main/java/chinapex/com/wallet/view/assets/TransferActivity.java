@@ -18,9 +18,9 @@ import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.AssertTxBean;
 import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.bean.Nep5TxBean;
 import chinapex.com.wallet.bean.TransactionRecord;
-import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICreateAssertTxCallback;
 import chinapex.com.wallet.executor.callback.ICreateNep5TxCallback;
@@ -45,7 +45,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         TransferPwdDialog.OnCheckPwdListener, ICreateNep5TxCallback {
 
     private static final String TAG = TransferActivity.class.getSimpleName();
-    private WalletBean mWalletBean;
+    private NeoWallet mNeoWallet;
     private BalanceBean mBalanceBean;
     private Button mBt_transfer_send;
     private Wallet mWalletFrom;
@@ -90,10 +90,10 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             return;
         }
 
-        mWalletBean = (WalletBean) intent.getParcelableExtra(Constant
+        mNeoWallet = (NeoWallet) intent.getParcelableExtra(Constant
                 .PARCELABLE_WALLET_BEAN_TRANSFER);
-        if (null == mWalletBean) {
-            CpLog.e(TAG, "mWalletBean is null!");
+        if (null == mNeoWallet) {
+            CpLog.e(TAG, "mNeoWallet is null!");
             return;
         }
 
@@ -119,7 +119,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_transfer_send:
-                String addressFrom = mWalletBean.getWalletAddr();
+                String addressFrom = mNeoWallet.getAddress();
                 String addressTo = mEt_transfer_to_wallet_addr.getText().toString().trim();
                 if (TextUtils.isEmpty(addressFrom) || TextUtils.isEmpty(addressTo)) {
                     CpLog.e(TAG, "addressFrom or addressTo is null or empty!");
@@ -169,7 +169,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
     public void showTransferPwdDialog() {
         TransferPwdDialog transferPwdDialog = TransferPwdDialog.newInstance();
-        transferPwdDialog.setCurrentWalletBean(mWalletBean);
+        transferPwdDialog.setCurrentNeoWallet(mNeoWallet);
         transferPwdDialog.setOnCheckPwdListener(this);
         transferPwdDialog.setTransferAmount(mEt_transfer_amount.getText().toString().trim());
         transferPwdDialog.setTransferUnit(mBalanceBean.getAssetSymbol().toUpperCase());

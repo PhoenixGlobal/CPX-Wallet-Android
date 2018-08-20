@@ -3,34 +3,39 @@ package chinapex.com.wallet.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class WalletBean implements Parcelable {
+/**
+ * Created by SteelCabbage on 2018/8/15 0015 10:32.
+ * E-Mail：liuyi_61@163.com
+ */
 
-    private String mWalletName;
-    private String mWalletAddr;
+public  class WalletBean implements Parcelable {
+    private String name;
+    private String address;
     private int backupState;
     private String keyStore;
-    private String assetsJson;
-    private String assetsNep5Json;
+    private String assetJson;
+    private String colorAssetJson;
     private boolean isSelected;
     private int selectedTag;
 
     public WalletBean() {
+
     }
 
-    public String getWalletName() {
-        return mWalletName;
+    public String getName() {
+        return name;
     }
 
-    public void setWalletName(String walletName) {
-        mWalletName = walletName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getWalletAddr() {
-        return mWalletAddr;
+    public String getAddress() {
+        return address;
     }
 
-    public void setWalletAddr(String walletAddr) {
-        mWalletAddr = walletAddr;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getBackupState() {
@@ -49,6 +54,22 @@ public class WalletBean implements Parcelable {
         this.keyStore = keyStore;
     }
 
+    public String getAssetJson() {
+        return assetJson;
+    }
+
+    public void setAssetJson(String assetJson) {
+        this.assetJson = assetJson;
+    }
+
+    public String getColorAssetJson() {
+        return colorAssetJson;
+    }
+
+    public void setColorAssetJson(String colorAssetJson) {
+        this.colorAssetJson = colorAssetJson;
+    }
+
     public boolean isSelected() {
         return isSelected;
     }
@@ -65,22 +86,6 @@ public class WalletBean implements Parcelable {
         this.selectedTag = selectedTag;
     }
 
-    public String getAssetsJson() {
-        return assetsJson;
-    }
-
-    public void setAssetsJson(String assetsJson) {
-        this.assetsJson = assetsJson;
-    }
-
-    public String getAssetsNep5Json() {
-        return assetsNep5Json;
-    }
-
-    public void setAssetsNep5Json(String assetsNep5Json) {
-        this.assetsNep5Json = assetsNep5Json;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,13 +93,14 @@ public class WalletBean implements Parcelable {
 
         WalletBean that = (WalletBean) o;
 
-        return mWalletAddr.equals(that.mWalletAddr);
+        return address.equals(that.address);
     }
 
     @Override
     public int hashCode() {
-        return mWalletAddr.hashCode();
+        return address.hashCode();
     }
+
 
     @Override
     public int describeContents() {
@@ -103,24 +109,25 @@ public class WalletBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.mWalletName);
-        dest.writeString(this.mWalletAddr);
+        dest.writeString(this.name);
+        dest.writeString(this.address);
         dest.writeInt(this.backupState);
         dest.writeString(this.keyStore);
-        dest.writeString(this.assetsJson);
-        dest.writeString(this.assetsNep5Json);
+        dest.writeString(this.assetJson);
+        dest.writeString(this.colorAssetJson);
     }
 
     protected WalletBean(Parcel in) {
-        this.mWalletName = in.readString();
-        this.mWalletAddr = in.readString();
+        this.name = in.readString();
+        this.address = in.readString();
         this.backupState = in.readInt();
         this.keyStore = in.readString();
-        this.assetsJson = in.readString();
-        this.assetsNep5Json = in.readString();
+        this.assetJson = in.readString();
+        this.colorAssetJson = in.readString();
     }
 
-    public static final Creator<WalletBean> CREATOR = new Creator<WalletBean>() {
+    public static final Parcelable.Creator<WalletBean> CREATOR = new Parcelable
+            .Creator<WalletBean>() {
         @Override
         public WalletBean createFromParcel(Parcel source) {
             return new WalletBean(source);
@@ -131,5 +138,4 @@ public class WalletBean implements Parcelable {
             return new WalletBean[size];
         }
     };
-
 }

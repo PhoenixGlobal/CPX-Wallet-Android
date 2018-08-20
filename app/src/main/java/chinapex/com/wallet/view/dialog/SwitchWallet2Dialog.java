@@ -22,6 +22,7 @@ import java.util.List;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.adapter.SwitchWallet2RecyclerViewAdapter;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -51,8 +52,8 @@ public class SwitchWallet2Dialog extends DialogFragment implements View.OnClickL
         mOnSelectedWalletListener = onSelectedWalletListener;
     }
 
-    public void setCurrentWalletBean(WalletBean currentWalletBean) {
-        mCurrentWalletBean = currentWalletBean;
+    public void setCurrentWallet(WalletBean currentWallet) {
+        mCurrentWalletBean = currentWallet;
     }
 
     public static SwitchWallet2Dialog newInstance() {
@@ -139,7 +140,7 @@ public class SwitchWallet2Dialog extends DialogFragment implements View.OnClickL
             return;
         }
 
-        mWalletBeans = apexWalletDbDao.queryWalletBeans(Constant.TABLE_APEX_WALLET);
+        mWalletBeans = apexWalletDbDao.queryWallets(Constant.TABLE_NEO_WALLET);
         if (null == mWalletBeans || mWalletBeans.isEmpty()) {
             CpLog.e(TAG, "mWalletBeans is null or empty!");
             return;

@@ -85,8 +85,8 @@ public class SwitchWallet2RecyclerViewAdapter extends RecyclerView
             return;
         }
 
-        holder.walletName.setText(walletBean.getWalletName());
-        holder.walletAddress.setText(walletBean.getWalletAddr());
+        holder.walletName.setText(walletBean.getName());
+        holder.walletAddress.setText(walletBean.getAddress());
         if (walletBean.isSelected()) {
             holder.checkState.setVisibility(View.VISIBLE);
         } else {

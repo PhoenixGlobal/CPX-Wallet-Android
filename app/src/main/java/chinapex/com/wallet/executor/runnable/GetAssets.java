@@ -1,6 +1,5 @@
 package chinapex.com.wallet.executor.runnable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import chinapex.com.wallet.bean.AssetBean;

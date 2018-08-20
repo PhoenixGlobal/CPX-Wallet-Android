@@ -271,11 +271,6 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-//        if (null == mSearchAssetBeans || mSearchAssetBeans.isEmpty()) {
-//            CpLog.e(TAG, "mSearchAssetBeans is null or empty!");
-//            return;
-//        }
-
         mAssetBeans.clear();
         mAssetBeans.addAll(mSearchAssetBeans);
 

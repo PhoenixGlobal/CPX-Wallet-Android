@@ -15,7 +15,7 @@
             android:background="@drawable/tb_bg">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_assets_wallet_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -107,13 +107,26 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_assets_drawer_menu"
+            android:id="@+id/rv_assets_drawer_menu1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:divider="@null"
+            android:overScrollMode="never"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/c_DDDDDD" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_assets_drawer_menu2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="37dp"
-            android:divider="@null">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:overScrollMode="never"/>
 
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

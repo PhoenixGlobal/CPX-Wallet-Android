@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import java.util.ArrayList;
 
-import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.callback.ICreateWalletCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
@@ -74,13 +74,13 @@ public class CreateWallet implements Runnable {
         ArrayList<String> assetsNep5 = new ArrayList<>();
         assetsNep5.add(Constant.ASSETS_CPX);
 
-        WalletBean walletBean = new WalletBean();
-        walletBean.setWalletName(mWalletName);
-        walletBean.setWalletAddr(wallet.address());
-        walletBean.setBackupState(Constant.BACKUP_UNFINISHED);
-        walletBean.setKeyStore(toKeyStore);
-        walletBean.setAssetsJson(GsonUtils.toJsonStr(assets));
-        walletBean.setAssetsNep5Json(GsonUtils.toJsonStr(assetsNep5));
+        NeoWallet neoWallet = new NeoWallet();
+        neoWallet.setName(mWalletName);
+        neoWallet.setAddress(wallet.address());
+        neoWallet.setBackupState(Constant.BACKUP_UNFINISHED);
+        neoWallet.setKeyStore(toKeyStore);
+        neoWallet.setAssetJson(GsonUtils.toJsonStr(assets));
+        neoWallet.setColorAssetJson(GsonUtils.toJsonStr(assetsNep5));
 
         ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
                 .getInstance());
@@ -89,8 +89,8 @@ public class CreateWallet implements Runnable {
             return;
         }
 
-        apexWalletDbDao.insert(Constant.TABLE_APEX_WALLET, walletBean);
-        ApexListeners.getInstance().notifyItemAdd(walletBean);
+        apexWalletDbDao.insert(Constant.TABLE_NEO_WALLET, neoWallet);
+        ApexListeners.getInstance().notifyNeoAdd(neoWallet);
         mICreateWalletCallback.newWallet(wallet);
     }
 }

@@ -56,21 +56,21 @@ public class GetAccountState implements Runnable, INetCallback {
                 ResponseGetAccountState.class);
         if (null == responseGetAccountState) {
             CpLog.e(TAG, "responseGetAccountState is null!");
-            mIGetAccountStateCallback.assetsBalance(null);
+            mIGetAccountStateCallback.getNeoGlobalAssetBalance(null);
             return;
         }
 
         ResponseGetAccountState.ResultBean resultBean = responseGetAccountState.getResult();
         if (null == resultBean) {
             CpLog.e(TAG, "resultBean is null!");
-            mIGetAccountStateCallback.assetsBalance(null);
+            mIGetAccountStateCallback.getNeoGlobalAssetBalance(null);
             return;
         }
 
         List<ResponseGetAccountState.ResultBean.BalancesBean> balances = resultBean.getBalances();
         if (null == balances || balances.isEmpty()) {
             CpLog.w(TAG, "balances is null or empty!");
-            mIGetAccountStateCallback.assetsBalance(null);
+            mIGetAccountStateCallback.getNeoGlobalAssetBalance(null);
             return;
         }
 
@@ -85,17 +85,17 @@ public class GetAccountState implements Runnable, INetCallback {
             balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
             balanceBean.setAssetsID(balance.getAsset());
             balanceBean.setAssetType(Constant.ASSET_TYPE_GLOBAL);
-            balanceBean.setAssetDecimal(8);
+            balanceBean.setAssetDecimal(0);
             balanceBean.setAssetsValue(balance.getValue());
             balanceBeans.put(balance.getAsset(), balanceBean);
         }
 
-        mIGetAccountStateCallback.assetsBalance(balanceBeans);
+        mIGetAccountStateCallback.getNeoGlobalAssetBalance(balanceBeans);
     }
 
     @Override
     public void onFailed(int failedCode, String msg) {
         CpLog.e(TAG, "onFailed() -> msg:" + msg);
-        mIGetAccountStateCallback.assetsBalance(null);
+        mIGetAccountStateCallback.getNeoGlobalAssetBalance(null);
     }
 }

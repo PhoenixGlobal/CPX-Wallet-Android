@@ -8,8 +8,8 @@
     <dimen name="new_visitor_bt_between_space">13dp</dimen>
     <dimen name="create_wallet_tb_height">183dp</dimen>
     <dimen name="create_wallet_tv_width">280dp</dimen>
-    <dimen name="create_wallet_tv_height">151dp</dimen>
-    <dimen name="create_wallet_tv_margin_top">-98dp</dimen>
+    <dimen name="create_wallet_tv_height">120dp</dimen>
+    <dimen name="create_wallet_tv_margin_top">-95dp</dimen>
     <dimen name="create_wallet_tv_padding">12dp</dimen>
     <dimen name="create_wallet_et_margin_top">20dp</dimen>
     <dimen name="create_wallet_tv_size">12sp</dimen>
@@ -90,4 +90,6 @@
     <dimen name="fragment_me_subhead">14sp</dimen>
     <dimen name="activity_create_wallet_underline_width">90dp</dimen>
     <dimen name="dialog_add_assets_margin_start">5dp</dimen>
+    <dimen name="create_margin_start">50dp</dimen>
+    <dimen name="create_margin_end">50dp</dimen>
 </resources>

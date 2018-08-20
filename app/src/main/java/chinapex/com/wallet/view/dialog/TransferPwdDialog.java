@@ -11,14 +11,12 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import chinapex.com.wallet.R;
-import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
 import chinapex.com.wallet.executor.runnable.FromKeystoreToWallet;
-import chinapex.com.wallet.executor.runnable.GetUtxos;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
@@ -33,7 +31,7 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
         IFromKeystoreToWalletCallback {
 
     private static final String TAG = TransferPwdDialog.class.getSimpleName();
-    private WalletBean mCurrentWalletBean;
+    private NeoWallet mCurrentNeoWallet;
 
     private Button mBt_dialog_pwd_transfer_cancel;
     private Button mBt_dialog_pwd_transfer_confirm;
@@ -56,8 +54,8 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
         mOnCheckPwdListener = onCheckPwdListener;
     }
 
-    public void setCurrentWalletBean(WalletBean currentWalletBean) {
-        mCurrentWalletBean = currentWalletBean;
+    public void setCurrentNeoWallet(NeoWallet currentNeoWallet) {
+        mCurrentNeoWallet = currentNeoWallet;
     }
 
     public void setTransferAmount(String transferAmount) {
@@ -125,7 +123,7 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
                 break;
             case R.id.bt_dialog_pwd_transfer_confirm:
                 String pwd = mEt_dialog_pwd_transfer.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean
+                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentNeoWallet
                         .getKeyStore(), pwd, this));
                 break;
         }

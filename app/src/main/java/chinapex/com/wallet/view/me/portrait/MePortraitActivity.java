@@ -16,6 +16,7 @@ import chinapex.com.wallet.adapter.viewpager.FragmentUpdateAdapter;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -35,7 +36,7 @@ public class MePortraitActivity extends BaseActivity implements View.OnClickList
     private List<BaseFragment> mBaseFragments;
     private List<String> mTitles;
     private FragmentUpdateAdapter mFragmentUpdateAdapter;
-    private WalletBean mCurrentClickedWalletBean;
+    private WalletBean mCurrentCheckedWallet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class MePortraitActivity extends BaseActivity implements View.OnClickList
             return;
         }
 
-        mWalletBeans = apexWalletDbDao.queryWalletBeans(Constant.TABLE_APEX_WALLET);
+        mWalletBeans = apexWalletDbDao.queryWallets(Constant.TABLE_NEO_WALLET);
         if (null == mWalletBeans || mWalletBeans.isEmpty()) {
             CpLog.e(TAG, "walletBeans is null or empty!");
             return;
@@ -75,8 +76,8 @@ public class MePortraitActivity extends BaseActivity implements View.OnClickList
             return;
         }
 
-        mCurrentClickedWalletBean = walletBean;
-        mTv_portrait_address.setText(walletBean.getWalletAddr());
+        mCurrentCheckedWallet = walletBean;
+        mTv_portrait_address.setText(walletBean.getAddress());
 
         mTl_portrait.setupWithViewPager(mVp_portrait);
 
@@ -122,7 +123,7 @@ public class MePortraitActivity extends BaseActivity implements View.OnClickList
 
     private void showDialog() {
         SwitchWallet2Dialog switchWallet2Dialog = SwitchWallet2Dialog.newInstance();
-        switchWallet2Dialog.setCurrentWalletBean(mCurrentClickedWalletBean);
+        switchWallet2Dialog.setCurrentWallet(mCurrentCheckedWallet);
         switchWallet2Dialog.setOnSelectedWalletListener(this);
         switchWallet2Dialog.show(getFragmentManager(), "SwitchWallet2Dialog");
     }
@@ -134,7 +135,7 @@ public class MePortraitActivity extends BaseActivity implements View.OnClickList
             return;
         }
 
-        mCurrentClickedWalletBean = walletBean;
-        mTv_portrait_address.setText(walletBean.getWalletAddr());
+        mCurrentCheckedWallet = walletBean;
+        mTv_portrait_address.setText(walletBean.getAddress());
     }
 }

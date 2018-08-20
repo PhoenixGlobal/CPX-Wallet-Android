@@ -28,9 +28,9 @@ public class TransactionDetailActivity extends BaseActivity implements View.OnCl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setBlackStatusBar(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_detail);
-
         initView();
         initData();
     }

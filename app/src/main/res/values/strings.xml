@@ -86,6 +86,7 @@
     <string name="choose_wallet">Choose Wallet</string>
     <string name="data_empty">Data Empty</string>
     <string name="empty_wallet">Please Click The Upper Right Corner\nTo Have Your Wallet</string>
+    <string name="wallet_type">Wallet Type</string>
 
     <!--Me页面，功能菜单文字-->
     <string name="personal_portrait">Profile</string>
@@ -128,5 +129,9 @@
     <string name="portrait_type_common">Basic</string>
     <string name="portrait_type_enterprise">Enterprise</string>
 
+    <!--钱包类型-->
+    <string name="create_wallet_type_neo">NEO</string>
+    <string name="create_wallet_type_eth">ETH</string>
+    <string name="select_wallet_type">Please Select The Wallet Type!</string>
 
 </resources>

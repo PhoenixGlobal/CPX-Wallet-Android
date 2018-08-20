@@ -17,7 +17,7 @@ import java.util.HashMap;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.BalanceBean;
-import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -28,7 +28,7 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
     private Button mBt_balance_detail_gathering;
     private TextView mTv_balance_detail_assets_name;
     private TextView mTv_balance_detail_assets_value;
-    private WalletBean mWalletBean;
+    private NeoWallet mNeoWallet;
     private BalanceBean mBalanceBean;
     private LinearLayout mLl_balance_detail_map;
     // QR_CODE activity请求码
@@ -70,18 +70,18 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
             return;
         }
 
-        mWalletBean = intent.getParcelableExtra(Constant.WALLET_BEAN);
+        mNeoWallet = intent.getParcelableExtra(Constant.WALLET_BEAN);
         mBalanceBean = intent.getParcelableExtra(Constant.BALANCE_BEAN);
 
-        if (null == mWalletBean || null == mBalanceBean) {
-            CpLog.e(TAG, "mWalletBean or mBalanceBean is null!");
+        if (null == mNeoWallet || null == mBalanceBean) {
+            CpLog.e(TAG, "mNeoWallet or mBalanceBean is null!");
             return;
         }
 
         mLl_balance_detail_map.setVisibility(View.INVISIBLE);
         mTv_balance_detail_assets_name.setText(mBalanceBean.getAssetSymbol());
         mTv_balance_detail_assets_value.setText(mBalanceBean.getAssetsValue());
-        mTv_balance_detail_wallet_name.setText(mWalletBean.getWalletName());
+        mTv_balance_detail_wallet_name.setText(mNeoWallet.getName());
     }
 
     @Override
@@ -89,13 +89,13 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.bt_balance_detail_transfer:
                 HashMap<String, Parcelable> hashMap = new HashMap<>();
-                hashMap.put(Constant.PARCELABLE_WALLET_BEAN_TRANSFER, mWalletBean);
+                hashMap.put(Constant.PARCELABLE_WALLET_BEAN_TRANSFER, mNeoWallet);
                 hashMap.put(Constant.PARCELABLE_BALANCE_BEAN_TRANSFER, mBalanceBean);
                 startActivityParcelables(TransferActivity.class, false, hashMap);
                 break;
             case R.id.bt_balance_detail_gathering:
                 startActivityParcelable(GatheringActivity.class, false, Constant
-                        .PARCELABLE_WALLET_BEAN_GATHERING, mWalletBean);
+                        .PARCELABLE_WALLET_BEAN_GATHERING, mNeoWallet);
                 break;
             case R.id.ib_balance_detail_scan:
                 CpLog.i(TAG, "扫一扫");
@@ -128,7 +128,7 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
         }
 
         Intent intent = new Intent(BalanceDetailActivity.this, TransferActivity.class);
-        intent.putExtra(Constant.PARCELABLE_WALLET_BEAN_TRANSFER, mWalletBean);
+        intent.putExtra(Constant.PARCELABLE_WALLET_BEAN_TRANSFER, mNeoWallet);
         intent.putExtra(Constant.PARCELABLE_BALANCE_BEAN_TRANSFER, mBalanceBean);
         intent.putExtra(Constant.PARCELABLE_QR_CODE_TRANSFER, qrCode);
         startActivity(intent);

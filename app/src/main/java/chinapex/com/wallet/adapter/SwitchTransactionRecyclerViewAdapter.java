@@ -12,8 +12,8 @@ import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
-import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
 /**
@@ -69,7 +69,7 @@ public class SwitchTransactionRecyclerViewAdapter extends RecyclerView
             return;
         }
 
-        holder.walletName.setText(walletBean.getWalletName());
+        holder.walletName.setText(walletBean.getName());
 
         if (walletBean.isSelected()) {
             holder.walletName.setBackgroundColor(ApexWalletApplication.getInstance().getResources

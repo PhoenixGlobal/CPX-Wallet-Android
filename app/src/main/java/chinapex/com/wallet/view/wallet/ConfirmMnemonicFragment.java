@@ -8,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -22,11 +20,12 @@ import java.util.Collections;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.adapter.BackupClickMnemonicAdapter;
 import chinapex.com.wallet.adapter.BackupShowMnemonicAdapter;
-import chinapex.com.wallet.adapter.SpacesItemDecoration;
 import chinapex.com.wallet.adapter.SpacesItemDecorationHorizontal;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.MnemonicState;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.eth.EthWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -223,11 +222,23 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
             return;
         }
 
-        apexWalletDbDao.updateBackupState(Constant.TABLE_APEX_WALLET, walletBean.getWalletAddr(),
-                Constant.BACKUP_FINISH);
-        walletBean.setBackupState(Constant.BACKUP_FINISH);
-
-        ApexListeners.getInstance().notifyItemStateUpdate(walletBean);
+        switch (walletBean.getClass().getSimpleName()) {
+            case "NeoWallet":
+                NeoWallet neoWallet = (NeoWallet) walletBean;
+                apexWalletDbDao.updateBackupState(Constant.TABLE_NEO_WALLET, neoWallet.getAddress(), Constant.BACKUP_FINISH);
+                neoWallet.setBackupState(Constant.BACKUP_FINISH);
+                ApexListeners.getInstance().notifyItemStateUpdate(neoWallet);
+                break;
+            case "EthWallet":
+                EthWallet ethWallet = (EthWallet) walletBean;
+                apexWalletDbDao.updateBackupState(Constant.TABLE_ETH_WALLET, ethWallet.getAddress(), Constant.BACKUP_FINISH);
+                ethWallet.setBackupState(Constant.BACKUP_FINISH);
+                ApexListeners.getInstance().notifyEthStateUpdate(ethWallet);
+                break;
+            default:
+                CpLog.e(TAG, "unknown wallet type!");
+                break;
+        }
     }
 
     private void isFirstEnter() {

@@ -7,14 +7,26 @@
         <item>@string/me</item>
     </string-array>
 
-    <!--资产页，侧滑菜单图片-->
-    <integer-array name="assets_drawer_icons">
+    <!--资产页，1侧滑菜单图片-->
+    <integer-array name="assets_drawer1_icons">
+        <item>@drawable/icon_wallet_type_neo</item>
+        <item>@drawable/icon_wallet_type_eth</item>
+    </integer-array>
+
+    <!--资产页，1侧滑菜单文字-->
+    <string-array name="assets_drawer1_texts">
+        <item>@string/create_wallet_type_neo</item>
+        <item>@string/create_wallet_type_eth</item>
+    </string-array>
+
+    <!--资产页，2侧滑菜单图片-->
+    <integer-array name="assets_drawer2_icons">
         <item>@drawable/icon_create_wallet</item>
         <item>@drawable/icon_import_wallet</item>
     </integer-array>
 
-    <!--资产页，侧滑菜单文字-->
-    <string-array name="assets_drawer_texts">
+    <!--资产页，2侧滑菜单文字-->
+    <string-array name="assets_drawer2_texts">
         <item>@string/create_wallet</item>
         <item>@string/import_wallet</item>
     </string-array>
@@ -56,5 +68,11 @@
     <string-array name="me_portrait_type">
         <item>@string/portrait_type_common</item>
         <item>@string/portrait_type_enterprise</item>
+    </string-array>
+
+    <!--createWallet Type，钱包类型-->
+    <string-array name="create_wallet_type">
+        <item>@string/create_wallet_type_neo</item>
+        <item>@string/create_wallet_type_eth</item>
     </string-array>
 </resources>

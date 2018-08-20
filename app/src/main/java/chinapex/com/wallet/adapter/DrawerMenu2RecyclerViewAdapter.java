@@ -19,33 +19,33 @@ import chinapex.com.wallet.utils.CpLog;
  * Created by SteelCabbage on 2018/5/24 0024.
  */
 
-public class DrawerMenuRecyclerViewAdapter extends RecyclerView
-        .Adapter<DrawerMenuRecyclerViewAdapter.DrawerMenuAdapterHolder>
+public class DrawerMenu2RecyclerViewAdapter extends RecyclerView
+        .Adapter<DrawerMenu2RecyclerViewAdapter.DrawerMenuAdapterHolder>
         implements View.OnClickListener {
 
-    private static final String TAG = DrawerMenuRecyclerViewAdapter.class.getSimpleName();
-    private DrawerMenuOnItemClickListener mDrawerMenuOnItemClickListener;
+    private static final String TAG = DrawerMenu2RecyclerViewAdapter.class.getSimpleName();
+    private DrawerMenu2OnItemClickListener mDrawerMenu2OnItemClickListener;
     private List<DrawerMenu> mDrawerMenuList;
 
-    public interface DrawerMenuOnItemClickListener {
-        void drawerMenuOnItemClick(int position);
+    public interface DrawerMenu2OnItemClickListener {
+        void drawerMenu2OnItemClick(int position);
     }
 
-    public DrawerMenuRecyclerViewAdapter(List<DrawerMenu> drawerMenuList) {
+    public DrawerMenu2RecyclerViewAdapter(List<DrawerMenu> drawerMenuList) {
         mDrawerMenuList = drawerMenuList;
     }
 
-    public void setDrawerMenuOnItemClickListener(DrawerMenuOnItemClickListener drawerMenuOnItemClickListener) {
-        mDrawerMenuOnItemClickListener = drawerMenuOnItemClickListener;
+    public void setDrawerMenu2OnItemClickListener(DrawerMenu2OnItemClickListener drawerMenu2OnItemClickListener) {
+        mDrawerMenu2OnItemClickListener = drawerMenu2OnItemClickListener;
     }
 
     @Override
     public void onClick(View v) {
-        if (null == mDrawerMenuOnItemClickListener) {
-            CpLog.e(TAG, "mDrawerMenuOnItemClickListener is null!");
+        if (null == mDrawerMenu2OnItemClickListener) {
+            CpLog.e(TAG, "mDrawerMenu2OnItemClickListener is null!");
             return;
         }
-        mDrawerMenuOnItemClickListener.drawerMenuOnItemClick((Integer) v.getTag());
+        mDrawerMenu2OnItemClickListener.drawerMenu2OnItemClick((Integer) v.getTag());
     }
 
     @NonNull

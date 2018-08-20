@@ -15,8 +15,9 @@ import chinapex.com.wallet.adapter.MeRecyclerViewAdapter;
 import chinapex.com.wallet.adapter.SpacesItemDecoration;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
-import chinapex.com.wallet.changelistener.OnItemDeleteListener;
+import chinapex.com.wallet.changelistener.OnNeoDeleteListener;
 import chinapex.com.wallet.changelistener.OnItemNameUpdateListener;
 import chinapex.com.wallet.changelistener.OnItemStateUpdateListener;
 import chinapex.com.wallet.global.ApexWalletApplication;
@@ -27,13 +28,13 @@ import chinapex.com.wallet.utils.DensityUtil;
 
 public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
         .OnItemClickListener, OnItemNameUpdateListener, OnItemStateUpdateListener,
-        OnItemDeleteListener {
+        OnNeoDeleteListener {
     private static final String TAG = Me2Activity.class.getSimpleName();
     private List<WalletBean> mWalletBeans;
     private RecyclerView mRv_me2;
     private MeRecyclerViewAdapter mMeRecyclerViewAdapter;
     private TextView mTv_me2_title;
-    private WalletBean mCurrentClickedWalletBean;
+    private WalletBean mCurrentClickedWallet;
     private String mShowTag;
 
     @Override
@@ -92,14 +93,13 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
 
     private List<WalletBean> initWalletBeans() {
         List<WalletBean> walletBeans = new ArrayList<>();
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return walletBeans;
         }
 
-        walletBeans.addAll(apexWalletDbDao.queryWalletBeans(Constant.TABLE_APEX_WALLET));
+        walletBeans.addAll(apexWalletDbDao.queryWallets(Constant.TABLE_NEO_WALLET));
         if (walletBeans.isEmpty()) {
             CpLog.w(TAG, "local have no wallet");
             return walletBeans;
@@ -128,9 +128,9 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
 
     @Override
     public void onItemClick(int position) {
-        mCurrentClickedWalletBean = mWalletBeans.get(position);
-        if (null == mCurrentClickedWalletBean) {
-            CpLog.e(TAG, "mCurrentClickedWalletBean is null!");
+        mCurrentClickedWallet = mWalletBeans.get(position);
+        if (null == mCurrentClickedWallet) {
+            CpLog.e(TAG, "mCurrentClickedWallet is null!");
             return;
         }
 
@@ -151,7 +151,7 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
                 false,
                 Constant.ME_MANAGER_DETAIL_BUNDLE,
                 Constant.ME_SKIP_ACTIVITY_FRAGMENT_TAG, Constant.FRAGMENT_TAG_ME_MANAGE_DETAIL,
-                Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWalletBean);
+                Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWallet);
     }
 
     private void toMeTransactionRecordFragment() {
@@ -160,14 +160,14 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
                 Constant.ME_MANAGER_DETAIL_BUNDLE,
                 Constant.ME_SKIP_ACTIVITY_FRAGMENT_TAG,
                 Constant.FRAGMENT_TAG_ME_TRANSACTION_RECORD,
-                Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWalletBean);
+                Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWallet);
     }
 
     // 备份钱包后回调
     @Override
-    public void OnItemStateUpdate(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "walletBean is null!");
+    public void OnItemStateUpdate(NeoWallet neoWallet) {
+        if (null == neoWallet) {
+            CpLog.e(TAG, "neoWallet is null!");
             return;
         }
 
@@ -177,8 +177,8 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
                 continue;
             }
 
-            if (walletBeanTmp.equals(walletBean)) {
-                walletBeanTmp.setBackupState(walletBean.getBackupState());
+            if (walletBeanTmp.equals(neoWallet)) {
+                walletBeanTmp.setBackupState(neoWallet.getBackupState());
             }
         }
 
@@ -187,18 +187,18 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
 
     // 删除钱包时回调
     @Override
-    public void onItemDelete(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "onItemDelete() -> walletBean is null!");
+    public void onNeoDelete(NeoWallet neoWallet) {
+        if (null == neoWallet) {
+            CpLog.e(TAG, "onNeoDelete() -> neoWallet is null!");
             return;
         }
 
-        if (!mWalletBeans.contains(walletBean)) {
-            CpLog.e(TAG, "onItemDelete() -> this wallet not exist!");
+        if (!mWalletBeans.contains(neoWallet)) {
+            CpLog.e(TAG, "onNeoDelete() -> this wallet not exist!");
             return;
         }
 
-        mWalletBeans.remove(walletBean);
+        mWalletBeans.remove(neoWallet);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -209,9 +209,9 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
 
     // 修改钱包名称回调
     @Override
-    public void OnItemNameUpdate(WalletBean walletBean) {
-        if (null == walletBean) {
-            CpLog.e(TAG, "walletBean is null!");
+    public void OnItemNameUpdate(NeoWallet neoWallet) {
+        if (null == neoWallet) {
+            CpLog.e(TAG, "neoWallet is null!");
             return;
         }
 
@@ -221,8 +221,8 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
                 continue;
             }
 
-            if (walletBeanTmp.equals(walletBean)) {
-                walletBeanTmp.setWalletName(walletBean.getWalletName());
+            if (walletBeanTmp.equals(neoWallet)) {
+                walletBeanTmp.setName(neoWallet.getName());
             }
         }
 

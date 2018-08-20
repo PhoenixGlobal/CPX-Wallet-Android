@@ -20,6 +20,7 @@ import chinapex.com.wallet.adapter.SpacesItemDecorationTopBottom;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.MeFunction;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -146,9 +147,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener,
             return null;
         }
 
-        List<WalletBean> walletBeans = apexWalletDbDao.queryWalletBeans(Constant.TABLE_APEX_WALLET);
+        List<WalletBean> walletBeans = apexWalletDbDao.queryWallets(Constant.TABLE_NEO_WALLET);
         if (null == walletBeans || walletBeans.isEmpty()) {
-            CpLog.e(TAG, "walletBeans is null or empty!");
+            CpLog.e(TAG, "neoWallets is null or empty!");
             return null;
         }
 

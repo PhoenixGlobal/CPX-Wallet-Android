@@ -11,6 +11,7 @@ import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -62,8 +63,8 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
             return;
         }
 
-        holder.walletName.setText(walletBean.getWalletName());
-        holder.walletAddr.setText(walletBean.getWalletAddr());
+        holder.walletName.setText(walletBean.getName());
+        holder.walletAddr.setText(walletBean.getAddress());
 
         int selectedTag = walletBean.getSelectedTag();
 

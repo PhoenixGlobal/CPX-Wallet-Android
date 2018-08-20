@@ -1,6 +1,5 @@
 package chinapex.com.wallet.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,15 +10,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
 import chinapex.com.wallet.global.ApexWalletApplication;
-import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.PhoneUtils;
 
@@ -31,6 +27,15 @@ public class BaseActivity extends AppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     /***是否显示状态栏*/
     private boolean mIsShowStatusBar = false;
+    private boolean mIsBlackStatusBar = false;
+
+    public void setShowStatusBar(boolean showStatusBar) {
+        mIsShowStatusBar = showStatusBar;
+    }
+
+    public void setBlackStatusBar(boolean blackStatusBar) {
+        mIsBlackStatusBar = blackStatusBar;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,8 +59,14 @@ public class BaseActivity extends AppCompatActivity {
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                getWindow().getDecorView().setSystemUiVisibility(View
-                        .SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                if (mIsBlackStatusBar) {
+                    getWindow().getDecorView().setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                } else {
+                    getWindow().getDecorView().setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+                }
             }
         }
 

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
+import chinapex.com.wallet.bean.eth.EthWallet;
+import chinapex.com.wallet.changelistener.eth.OnEthAddListener;
+import chinapex.com.wallet.changelistener.eth.OnEthStateUpdateListener;
 import chinapex.com.wallet.utils.CpLog;
 
 /**
@@ -14,17 +18,15 @@ public class ApexListeners {
 
     private static final String TAG = ApexListeners.class.getSimpleName();
 
-    private List<OnItemDeleteListener> mOnItemDeleteListeners;
-
-    private List<OnItemAddListener> mOnItemAddListeners;
-
+    private List<OnNeoDeleteListener> mOnNeoDeleteListeners;
+    private List<OnNeoAddListener> mOnNeoAddListeners;
     private List<OnItemStateUpdateListener> mOnItemStateUpdateListeners;
-
     private List<OnItemNameUpdateListener> mOnItemNameUpdateListeners;
-
     private List<OnTxStateUpdateListener> mOnTxStateUpdateListeners;
-
-    private List<OnAssetsUpdateListener> mOnAssetsUpdateListeners;
+    private List<OnAssetJsonUpdateListener> mOnAssetJsonUpdateListeners;
+    // eth
+    private List<OnEthAddListener> mOnEthAddListeners;
+    private List<OnEthStateUpdateListener> mOnEthStateUpdateListeners;
 
     private ApexListeners() {
 
@@ -39,65 +41,70 @@ public class ApexListeners {
     }
 
     public void doInit() {
-        mOnItemDeleteListeners = new ArrayList<>();
-        mOnItemAddListeners = new ArrayList<>();
+        mOnNeoDeleteListeners = new ArrayList<>();
+        mOnNeoAddListeners = new ArrayList<>();
         mOnItemStateUpdateListeners = new ArrayList<>();
         mOnItemNameUpdateListeners = new ArrayList<>();
         mOnTxStateUpdateListeners = new ArrayList<>();
-        mOnAssetsUpdateListeners = new ArrayList<>();
+        mOnAssetJsonUpdateListeners = new ArrayList<>();
+        mOnEthAddListeners = new ArrayList<>();
+        mOnEthStateUpdateListeners = new ArrayList<>();
     }
 
     public void onDestroy() {
-        mOnItemDeleteListeners.clear();
-        mOnItemAddListeners.clear();
+        mOnNeoDeleteListeners.clear();
+        mOnNeoAddListeners.clear();
         mOnItemStateUpdateListeners.clear();
         mOnItemNameUpdateListeners.clear();
         mOnTxStateUpdateListeners.clear();
-        mOnAssetsUpdateListeners.clear();
+        mOnAssetJsonUpdateListeners.clear();
+        mOnEthAddListeners.clear();
+        mOnEthStateUpdateListeners.clear();
 
-        mOnItemDeleteListeners = null;
-        mOnItemAddListeners = null;
+        mOnNeoDeleteListeners = null;
+        mOnNeoAddListeners = null;
         mOnItemStateUpdateListeners = null;
         mOnItemNameUpdateListeners = null;
         mOnTxStateUpdateListeners = null;
-        mOnAssetsUpdateListeners = null;
+        mOnAssetJsonUpdateListeners = null;
+        mOnEthAddListeners = null;
+        mOnEthStateUpdateListeners = null;
     }
 
-
-    public void addOnItemDeleteListener(OnItemDeleteListener onItemDeleteListener) {
-        if (null == mOnItemDeleteListeners || null == onItemDeleteListener) {
-            CpLog.e(TAG, "1:mOnItemDeleteListeners or OnItemDeleteListener is null!");
+    public void addOnItemDeleteListener(OnNeoDeleteListener onNeoDeleteListener) {
+        if (null == mOnNeoDeleteListeners || null == onNeoDeleteListener) {
+            CpLog.e(TAG, "1:mOnNeoDeleteListeners or OnNeoDeleteListener is null!");
             return;
         }
 
-        mOnItemDeleteListeners.add(onItemDeleteListener);
+        mOnNeoDeleteListeners.add(onNeoDeleteListener);
     }
 
-    public void removeOnItemDeleteListener(OnItemDeleteListener onItemDeleteListener) {
-        if (null == mOnItemDeleteListeners || null == onItemDeleteListener) {
-            CpLog.e(TAG, "0:mOnItemDeleteListeners or OnItemDeleteListener is null!");
+    public void removeOnItemDeleteListener(OnNeoDeleteListener onNeoDeleteListener) {
+        if (null == mOnNeoDeleteListeners || null == onNeoDeleteListener) {
+            CpLog.e(TAG, "0:mOnNeoDeleteListeners or OnNeoDeleteListener is null!");
             return;
         }
 
-        mOnItemDeleteListeners.remove(onItemDeleteListener);
+        mOnNeoDeleteListeners.remove(onNeoDeleteListener);
     }
 
-    public void addOnItemAddListener(OnItemAddListener onItemAddListener) {
-        if (null == mOnItemAddListeners || null == onItemAddListener) {
-            CpLog.e(TAG, "1:mOnItemAddListeners or onItemAddListener is null!");
+    public void addOnItemAddListener(OnNeoAddListener onNeoAddListener) {
+        if (null == mOnNeoAddListeners || null == onNeoAddListener) {
+            CpLog.e(TAG, "1:mOnNeoAddListeners or onNeoAddListener is null!");
             return;
         }
 
-        mOnItemAddListeners.add(onItemAddListener);
+        mOnNeoAddListeners.add(onNeoAddListener);
     }
 
-    public void removeOnItemAddListener(OnItemAddListener onItemAddListener) {
-        if (null == mOnItemAddListeners || null == onItemAddListener) {
-            CpLog.e(TAG, "0:mOnItemAddListeners or onItemAddListener is null!");
+    public void removeOnItemAddListener(OnNeoAddListener onNeoAddListener) {
+        if (null == mOnNeoAddListeners || null == onNeoAddListener) {
+            CpLog.e(TAG, "0:mOnNeoAddListeners or onNeoAddListener is null!");
             return;
         }
 
-        mOnItemAddListeners.remove(onItemAddListener);
+        mOnNeoAddListeners.remove(onNeoAddListener);
     }
 
     public void addOnItemStateUpdateListener(OnItemStateUpdateListener onItemStateUpdateListener) {
@@ -155,57 +162,93 @@ public class ApexListeners {
         mOnTxStateUpdateListeners.remove(onTxStateUpdateListener);
     }
 
-    public void addOnAssetsUpdateListener(OnAssetsUpdateListener onAssetsUpdateListener) {
-        if (null == mOnAssetsUpdateListeners || null == onAssetsUpdateListener) {
-            CpLog.e(TAG, "1:mOnAssetsUpdateListeners or onAssetsUpdateListener is null!");
+    public void addOnAssetsUpdateListener(OnAssetJsonUpdateListener onAssetJsonUpdateListener) {
+        if (null == mOnAssetJsonUpdateListeners || null == onAssetJsonUpdateListener) {
+            CpLog.e(TAG, "1:mOnAssetJsonUpdateListeners or onAssetJsonUpdateListener is null!");
             return;
         }
 
-        mOnAssetsUpdateListeners.add(onAssetsUpdateListener);
+        mOnAssetJsonUpdateListeners.add(onAssetJsonUpdateListener);
     }
 
-    public void removeOnAssetsUpdateListener(OnAssetsUpdateListener onAssetsUpdateListener) {
-        if (null == mOnAssetsUpdateListeners || null == onAssetsUpdateListener) {
-            CpLog.e(TAG, "0:mOnAssetsUpdateListeners or onAssetsUpdateListener is null!");
+    public void removeOnAssetsUpdateListener(OnAssetJsonUpdateListener onAssetJsonUpdateListener) {
+        if (null == mOnAssetJsonUpdateListeners || null == onAssetJsonUpdateListener) {
+            CpLog.e(TAG, "0:mOnAssetJsonUpdateListeners or onAssetJsonUpdateListener is null!");
             return;
         }
 
-        mOnAssetsUpdateListeners.remove(onAssetsUpdateListener);
+        mOnAssetJsonUpdateListeners.remove(onAssetJsonUpdateListener);
     }
 
-    public void notifyItemDelete(WalletBean walletBean) {
-        if (null == mOnItemDeleteListeners) {
-            CpLog.e(TAG, "mOnItemDeleteListeners is null!");
+    public void addOnEthAddListener(OnEthAddListener onEthAddListener) {
+        if (null == mOnEthAddListeners || null == onEthAddListener) {
+            CpLog.e(TAG, "1:mOnEthAddListeners or onEthAddListener is null!");
             return;
         }
 
-        for (OnItemDeleteListener onItemDeleteListener : mOnItemDeleteListeners) {
-            if (null == onItemDeleteListener) {
-                CpLog.e(TAG, "OnItemDeleteListener is null!");
+        mOnEthAddListeners.add(onEthAddListener);
+    }
+
+    public void removeOnEthAddListener(OnEthAddListener onEthAddListener) {
+        if (null == mOnEthAddListeners || null == onEthAddListener) {
+            CpLog.e(TAG, "0:mOnEthAddListeners or onEthAddListener is null!");
+            return;
+        }
+
+        mOnEthAddListeners.remove(onEthAddListener);
+    }
+
+    public void addOnEthStateUpdateListener(OnEthStateUpdateListener onEthStateUpdateListener) {
+        if (null == mOnEthStateUpdateListeners || null == onEthStateUpdateListener) {
+            CpLog.e(TAG, "1:mOnEthStateUpdateListeners or onEthStateUpdateListener is null!");
+            return;
+        }
+
+        mOnEthStateUpdateListeners.add(onEthStateUpdateListener);
+    }
+
+    public void removeOnEthStateUpdateListener(OnEthStateUpdateListener onEthStateUpdateListener) {
+        if (null == mOnEthStateUpdateListeners || null == onEthStateUpdateListener) {
+            CpLog.e(TAG, "0:mOnEthStateUpdateListeners or onEthStateUpdateListener is null!");
+            return;
+        }
+
+        mOnEthStateUpdateListeners.remove(onEthStateUpdateListener);
+    }
+
+    public void notifyItemDelete(NeoWallet neoWallet) {
+        if (null == mOnNeoDeleteListeners) {
+            CpLog.e(TAG, "mOnNeoDeleteListeners is null!");
+            return;
+        }
+
+        for (OnNeoDeleteListener onNeoDeleteListener : mOnNeoDeleteListeners) {
+            if (null == onNeoDeleteListener) {
+                CpLog.e(TAG, "OnNeoDeleteListener is null!");
                 continue;
             }
 
-            onItemDeleteListener.onItemDelete(walletBean);
+            onNeoDeleteListener.onNeoDelete(neoWallet);
         }
     }
 
-    public void notifyItemAdd(WalletBean walletBean) {
-        if (null == mOnItemAddListeners) {
-            CpLog.e(TAG, "mOnItemAddListeners is null!");
+    public void notifyNeoAdd(NeoWallet neoWallet) {
+        if (null == mOnNeoAddListeners) {
+            CpLog.e(TAG, "mOnNeoAddListeners is null!");
             return;
         }
 
-        for (OnItemAddListener onItemAddListener : mOnItemAddListeners) {
-            if (null == onItemAddListener) {
-                CpLog.e(TAG, "onItemAddListener is null!");
+        for (OnNeoAddListener onNeoAddListener : mOnNeoAddListeners) {
+            if (null == onNeoAddListener) {
+                CpLog.e(TAG, "onNeoAddListener is null!");
                 continue;
             }
 
-            onItemAddListener.onItemAdd(walletBean);
+            onNeoAddListener.onNeoAdd(neoWallet);
         }
     }
 
-    public void notifyItemStateUpdate(WalletBean walletBean) {
+    public void notifyItemStateUpdate(NeoWallet neoWallet) {
         if (null == mOnItemStateUpdateListeners) {
             CpLog.e(TAG, "mOnItemStateUpdateListeners is null!");
             return;
@@ -217,11 +260,11 @@ public class ApexListeners {
                 continue;
             }
 
-            onItemStateUpdateListener.OnItemStateUpdate(walletBean);
+            onItemStateUpdateListener.OnItemStateUpdate(neoWallet);
         }
     }
 
-    public void notifyItemNameUpdate(WalletBean walletBean) {
+    public void notifyItemNameUpdate(NeoWallet neoWallet) {
         if (null == mOnItemNameUpdateListeners) {
             CpLog.e(TAG, "mOnItemNameUpdateListeners is null!");
             return;
@@ -233,7 +276,7 @@ public class ApexListeners {
                 continue;
             }
 
-            onItemNameUpdateListener.OnItemNameUpdate(walletBean);
+            onItemNameUpdateListener.OnItemNameUpdate(neoWallet);
         }
     }
 
@@ -253,19 +296,51 @@ public class ApexListeners {
         }
     }
 
-    public void notifyAssetsUpdate(WalletBean walletBean) {
-        if (null == mOnAssetsUpdateListeners) {
-            CpLog.e(TAG, "mOnAssetsUpdateListeners is null!");
+    public void notifyAssetJsonUpdate(WalletBean walletBean) {
+        if (null == mOnAssetJsonUpdateListeners) {
+            CpLog.e(TAG, "mOnAssetJsonUpdateListeners is null!");
             return;
         }
 
-        for (OnAssetsUpdateListener onAssetsUpdateListener : mOnAssetsUpdateListeners) {
-            if (null == onAssetsUpdateListener) {
-                CpLog.e(TAG, "onAssetsUpdateListener is null!");
+        for (OnAssetJsonUpdateListener onAssetJsonUpdateListener : mOnAssetJsonUpdateListeners) {
+            if (null == onAssetJsonUpdateListener) {
+                CpLog.e(TAG, "onAssetJsonUpdateListener is null!");
                 continue;
             }
 
-            onAssetsUpdateListener.onAssetsUpdate(walletBean);
+            onAssetJsonUpdateListener.onAssetJsonUpdate(walletBean);
+        }
+    }
+
+    public void notifyEthAdd(EthWallet ethWallet) {
+        if (null == mOnEthAddListeners) {
+            CpLog.e(TAG, "mOnEthAddListeners is null!");
+            return;
+        }
+
+        for (OnEthAddListener onEthAddListener : mOnEthAddListeners) {
+            if (null == onEthAddListener) {
+                CpLog.e(TAG, "onEthAddListener is null!");
+                continue;
+            }
+
+            onEthAddListener.onEthAdd(ethWallet);
+        }
+    }
+
+    public void notifyEthStateUpdate(EthWallet ethWallet) {
+        if (null == mOnEthStateUpdateListeners) {
+            CpLog.e(TAG, "mOnEthStateUpdateListeners is null!");
+            return;
+        }
+
+        for (OnEthStateUpdateListener onEthStateUpdateListener : mOnEthStateUpdateListeners) {
+            if (null == onEthStateUpdateListener) {
+                CpLog.e(TAG, "onEthStateUpdateListener is null!");
+                continue;
+            }
+
+            onEthStateUpdateListener.onEthStateUpdate(ethWallet);
         }
     }
 }

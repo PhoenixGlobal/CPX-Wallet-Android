@@ -76,8 +76,8 @@ public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecycl
 
     @Override
     public void onBindViewHolder(@NonNull AssetsAdapterHolder holder, int position) {
-        holder.walletName.setText(mWalletBeans.get(position).getWalletName());
-        holder.walletAddr.setText(mWalletBeans.get(position).getWalletAddr());
+        holder.walletName.setText(mWalletBeans.get(position).getName());
+        holder.walletAddr.setText(mWalletBeans.get(position).getAddress());
         holder.itemView.setTag(position);
     }
 

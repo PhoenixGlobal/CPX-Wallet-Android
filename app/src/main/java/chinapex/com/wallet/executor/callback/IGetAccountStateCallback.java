@@ -9,5 +9,5 @@ import chinapex.com.wallet.bean.BalanceBean;
  * E-Mail：liuyi_61@163.com
  */
 public interface IGetAccountStateCallback {
-    void assetsBalance(Map<String, BalanceBean> balanceBeans);
+    void getNeoGlobalAssetBalance(Map<String, BalanceBean> balanceBeans);
 }

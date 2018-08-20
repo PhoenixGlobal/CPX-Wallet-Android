@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import chinapex.com.wallet.R;
-import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
 import chinapex.com.wallet.executor.runnable.FromKeystoreToWallet;
@@ -33,7 +33,7 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
         IFromKeystoreToWalletCallback {
 
     private static final String TAG = ExportKeystorePwdDialog.class.getSimpleName();
-    private WalletBean mCurrentWalletBean;
+    private NeoWallet mCurrentNeoWallet;
     private Button mBt_dialog_pwd_export_keystore_cancel;
     private Button mBt_dialog_pwd_export_keystore_confirm;
     private EditText mEt_dialog_pwd_export_keystore;
@@ -43,8 +43,8 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
         return new ExportKeystorePwdDialog();
     }
 
-    public void setCurrentWalletBean(WalletBean currentWalletBean) {
-        mCurrentWalletBean = currentWalletBean;
+    public void setCurrentNeoWallet(NeoWallet currentNeoWallet) {
+        mCurrentNeoWallet = currentNeoWallet;
     }
 
 
@@ -104,7 +104,7 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
                 break;
             case R.id.bt_dialog_pwd_export_keystore_confirm:
                 String pwd = mEt_dialog_pwd_export_keystore.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean
+                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentNeoWallet
                         .getKeyStore(), pwd, this));
                 break;
         }
@@ -126,7 +126,7 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
 
         Intent intent = new Intent(ApexWalletApplication.getInstance(), ExportKeystoreActivity
                 .class);
-        intent.putExtra(Constant.BACKUP_KEYSTORE, mCurrentWalletBean.getKeyStore());
+        intent.putExtra(Constant.BACKUP_KEYSTORE, mCurrentNeoWallet.getKeyStore());
         startActivity(intent);
         dismiss();
     }
