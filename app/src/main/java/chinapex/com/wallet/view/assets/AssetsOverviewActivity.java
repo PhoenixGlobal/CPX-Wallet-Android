@@ -22,8 +22,6 @@ import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.eth.EthWallet;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -86,15 +84,9 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
             return;
         }
 
+        // 确定钱包类型 NEO/ETH/CPX
+        mCurrentWalletType = intent.getIntExtra(Constant.PARCELABLE_WALLET_TYPE, Constant.WALLET_TYPE_NEO);
         mWalletBean = intent.getParcelableExtra(Constant.WALLET_BEAN);
-
-        if (mWalletBean instanceof NeoWallet) {
-            mCurrentWalletType = Constant.WALLET_TYPE_NEO;
-        } else if (mWalletBean instanceof EthWallet) {
-            mCurrentWalletType = Constant.WALLET_TYPE_ETH;
-        } else {
-            CpLog.e(TAG, "mWalletBean is unknown type!");
-        }
 
         mTv_assets_overview_wallet_name.setText(mWalletBean.getName());
         mTv_assets_overview_wallet_address.setText(mWalletBean.getAddress());
@@ -103,7 +95,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
                 .VERTICAL, false));
         mCurrentAssets = new ArrayList<>();
         mBalanceBeans = new ArrayList<>();
-        getBalanceBeans();
+        getDefaultAssets();
         mAssetsOverviewRecyclerViewAdapter = new AssetsOverviewRecyclerViewAdapter(mBalanceBeans);
         mAssetsOverviewRecyclerViewAdapter.setOnItemClickListener(this);
 
@@ -115,8 +107,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
     private void getBalance() {
         mIGetBalancePresenter = new GetBalancePresenter(this);
         mIGetBalancePresenter.init(mCurrentWalletType);
-        mIGetBalancePresenter.getGlobalAssetBalance(mWalletBean);
-        mIGetBalancePresenter.getColorAssetBalance(mWalletBean);
+        mIGetBalancePresenter.getAssetBalance(mWalletBean);
     }
 
     @Override
@@ -155,14 +146,15 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
             return;
         }
 
-        HashMap<String, Parcelable> parcelables = new HashMap<>();
-        parcelables.put(Constant.WALLET_BEAN, mWalletBean);
-        parcelables.put(Constant.BALANCE_BEAN, balanceBean);
-        startActivityParcelables(BalanceDetailActivity.class, false, parcelables);
+        Intent intent = new Intent(ApexWalletApplication.getInstance(), BalanceDetailActivity.class);
+        intent.putExtra(Constant.WALLET_BEAN, mWalletBean);
+        intent.putExtra(Constant.BALANCE_BEAN, balanceBean);
+        intent.putExtra(Constant.PARCELABLE_WALLET_TYPE, mCurrentWalletType);
+        startActivity(intent);
     }
 
     // 设置默认添加的资产
-    private void getBalanceBeans() {
+    private void getDefaultAssets() {
         if (null == mBalanceBeans) {
             CpLog.e(TAG, "mBalanceBeans is null!");
             return;
@@ -233,8 +225,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
             return null;
         }
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null");
             return null;
@@ -267,9 +258,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
 
     @Override
     public void onRefresh() {
-        mBalanceBeans.clear();
-        mIGetBalancePresenter.getGlobalAssetBalance(mWalletBean);
-        mIGetBalancePresenter.getColorAssetBalance(mWalletBean);
+        mIGetBalancePresenter.getAssetBalance(mWalletBean);
     }
 
     @Override
@@ -341,9 +330,28 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
 
         ApexListeners.getInstance().notifyAssetJsonUpdate(mWalletBean);
 
+        mIGetBalancePresenter.getAssetBalance(mWalletBean);
+    }
+
+    @Override
+    public void getAssetBalance(final List<BalanceBean> balanceBeans) {
+        if (null == balanceBeans || balanceBeans.isEmpty()) {
+            CpLog.e(TAG, "balanceBeans is null or emtpy!");
+            return;
+        }
+
         mBalanceBeans.clear();
-        mIGetBalancePresenter.getGlobalAssetBalance(mWalletBean);
-        mIGetBalancePresenter.getColorAssetBalance(mWalletBean);
+        mBalanceBeans.addAll(balanceBeans);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mSl_assets_overview_rv.isRefreshing()) {
+                    mSl_assets_overview_rv.setRefreshing(false);
+                }
+
+                mAssetsOverviewRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 }

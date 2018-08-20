@@ -147,20 +147,17 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
     }
 
     private void toMeManagerDetailFragment() {
-        startActivityBundle(Me3Activity.class,
-                false,
-                Constant.ME_MANAGER_DETAIL_BUNDLE,
-                Constant.ME_SKIP_ACTIVITY_FRAGMENT_TAG, Constant.FRAGMENT_TAG_ME_MANAGE_DETAIL,
-                Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWallet);
+        Intent intent = new Intent(ApexWalletApplication.getInstance(), Me3Activity.class);
+        intent.putExtra(Constant.ME_SKIP_ACTIVITY_FRAGMENT_TAG, Constant.FRAGMENT_TAG_ME_MANAGE_DETAIL);
+        intent.putExtra(Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWallet);
+        startActivity(intent);
     }
 
     private void toMeTransactionRecordFragment() {
-        startActivityBundle(Me3Activity.class,
-                false,
-                Constant.ME_MANAGER_DETAIL_BUNDLE,
-                Constant.ME_SKIP_ACTIVITY_FRAGMENT_TAG,
-                Constant.FRAGMENT_TAG_ME_TRANSACTION_RECORD,
-                Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWallet);
+        Intent intent = new Intent(ApexWalletApplication.getInstance(), Me3Activity.class);
+        intent.putExtra(Constant.ME_SKIP_ACTIVITY_FRAGMENT_TAG, Constant.FRAGMENT_TAG_ME_TRANSACTION_RECORD);
+        intent.putExtra(Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL, mCurrentClickedWallet);
+        startActivity(intent);
     }
 
     // 备份钱包后回调
@@ -187,18 +184,18 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
 
     // 删除钱包时回调
     @Override
-    public void onNeoDelete(NeoWallet neoWallet) {
-        if (null == neoWallet) {
+    public void onNeoDelete(WalletBean walletBean) {
+        if (null == walletBean) {
             CpLog.e(TAG, "onNeoDelete() -> neoWallet is null!");
             return;
         }
 
-        if (!mWalletBeans.contains(neoWallet)) {
+        if (!mWalletBeans.contains(walletBean)) {
             CpLog.e(TAG, "onNeoDelete() -> this wallet not exist!");
             return;
         }
 
-        mWalletBeans.remove(neoWallet);
+        mWalletBeans.remove(walletBean);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -209,8 +206,8 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
 
     // 修改钱包名称回调
     @Override
-    public void OnItemNameUpdate(NeoWallet neoWallet) {
-        if (null == neoWallet) {
+    public void OnItemNameUpdate(WalletBean walletBean) {
+        if (null == walletBean) {
             CpLog.e(TAG, "neoWallet is null!");
             return;
         }
@@ -221,8 +218,8 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
                 continue;
             }
 
-            if (walletBeanTmp.equals(neoWallet)) {
-                walletBeanTmp.setName(neoWallet.getName());
+            if (walletBeanTmp.equals(walletBean)) {
+                walletBeanTmp.setName(walletBean.getName());
             }
         }
 

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import chinapex.com.wallet.R;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
@@ -31,7 +32,7 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
         IFromKeystoreToWalletCallback {
 
     private static final String TAG = TransferPwdDialog.class.getSimpleName();
-    private NeoWallet mCurrentNeoWallet;
+    private WalletBean mCurrentWalletBean;
 
     private Button mBt_dialog_pwd_transfer_cancel;
     private Button mBt_dialog_pwd_transfer_confirm;
@@ -54,8 +55,8 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
         mOnCheckPwdListener = onCheckPwdListener;
     }
 
-    public void setCurrentNeoWallet(NeoWallet currentNeoWallet) {
-        mCurrentNeoWallet = currentNeoWallet;
+    public void setCurrentWallet(WalletBean currentWalletBean) {
+        mCurrentWalletBean = currentWalletBean;
     }
 
     public void setTransferAmount(String transferAmount) {
@@ -123,8 +124,7 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
                 break;
             case R.id.bt_dialog_pwd_transfer_confirm:
                 String pwd = mEt_dialog_pwd_transfer.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentNeoWallet
-                        .getKeyStore(), pwd, this));
+                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean.getKeyStore(), pwd, this));
                 break;
         }
     }

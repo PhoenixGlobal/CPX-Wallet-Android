@@ -16,6 +16,11 @@ public class GetEthBalanceModel implements IGetBalanceModel {
     }
 
     @Override
+    public void init() {
+
+    }
+
+    @Override
     public void getGlobalAssetBalance(WalletBean walletBean) {
 
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseFragment;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.changelistener.OnItemStateUpdateListener;
@@ -37,7 +38,7 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
     private TextView mTv_me_manager_detail_address;
     private Button mBt_me_manager_detail_backup;
     private Button mBt_me_manager_detail_delete;
-    private NeoWallet mCurrentClickedNeoWallet;
+    private WalletBean mCurrentWalletBean;
     private ImageButton mIb_manage_detail_export;
     private EditText mEt_me_manager_detail_bottom_wallet_name;
     private Button mBt_me_manager_detail_save;
@@ -79,18 +80,17 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
 
     private void initData() {
         Me3Activity me3Activity = (Me3Activity) getActivity();
-        mCurrentClickedNeoWallet = me3Activity.getNeoWallet();
-        if (null == mCurrentClickedNeoWallet) {
-            CpLog.e(TAG, "currentClickedWalletBean is null!");
+        mCurrentWalletBean = me3Activity.getWalletBean();
+        if (null == mCurrentWalletBean) {
+            CpLog.e(TAG, "mCurrentWalletBean is null!");
             return;
         }
 
-        mTv_me_manager_detail_title.setText(mCurrentClickedNeoWallet.getName());
-        mTv_me_manager_detail_address.setText(mCurrentClickedNeoWallet.getAddress());
-        mEt_me_manager_detail_bottom_wallet_name.setText(String.valueOf(mCurrentClickedNeoWallet
-                .getName()));
+        mTv_me_manager_detail_title.setText(mCurrentWalletBean.getName());
+        mTv_me_manager_detail_address.setText(mCurrentWalletBean.getAddress());
+        mEt_me_manager_detail_bottom_wallet_name.setText(String.valueOf(mCurrentWalletBean.getName()));
 
-        setIsShowBackupKey(mCurrentClickedNeoWallet.getBackupState());
+        setIsShowBackupKey(mCurrentWalletBean.getBackupState());
     }
 
     @Override
@@ -128,30 +128,29 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
         }
 
         String newWalletName = mEt_me_manager_detail_bottom_wallet_name.getText().toString().trim();
-        apexWalletDbDao.updateWalletName(Constant.TABLE_NEO_WALLET, mCurrentClickedNeoWallet
-                .getAddress(), newWalletName);
+        apexWalletDbDao.updateWalletName(Constant.TABLE_NEO_WALLET, mCurrentWalletBean.getAddress(), newWalletName);
         mTv_me_manager_detail_title.setText(newWalletName);
-        mCurrentClickedNeoWallet.setName(newWalletName);
-        ApexListeners.getInstance().notifyItemNameUpdate(mCurrentClickedNeoWallet);
+        mCurrentWalletBean.setName(newWalletName);
+        ApexListeners.getInstance().notifyItemNameUpdate(mCurrentWalletBean);
         ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
                 .getString(R.string.wallet_name_save_success));
     }
 
     public void showDeleteWalletPwdDialog() {
         DeleteWalletPwdDialog deleteWalletPwdDialog = DeleteWalletPwdDialog.newInstance();
-        deleteWalletPwdDialog.setCurrentNeoWallet(mCurrentClickedNeoWallet);
+        deleteWalletPwdDialog.setCurrentWalletBean(mCurrentWalletBean);
         deleteWalletPwdDialog.show(getFragmentManager(), "DeleteWalletPwdDialog");
     }
 
     public void showBackupWalletPwdDialog() {
         BackupWalletPwdDialog backupWalletPwdDialog = BackupWalletPwdDialog.newInstance();
-        backupWalletPwdDialog.setCurrentNeoWallet(mCurrentClickedNeoWallet);
+        backupWalletPwdDialog.setCurrentWalletBean(mCurrentWalletBean);
         backupWalletPwdDialog.show(getFragmentManager(), "BackupWalletPwdDialog");
     }
 
     public void showExportKeystorePwdDialog() {
         ExportKeystorePwdDialog exportKeystorePwdDialog = ExportKeystorePwdDialog.newInstance();
-        exportKeystorePwdDialog.setCurrentNeoWallet(mCurrentClickedNeoWallet);
+        exportKeystorePwdDialog.setCurrentWalletBean(mCurrentWalletBean);
         exportKeystorePwdDialog.show(getFragmentManager(), "ExportKeystorePwdDialog");
     }
 

@@ -8,6 +8,8 @@ import chinapex.com.wallet.bean.WalletBean;
  */
 
 public interface IGetBalanceModel {
+    void init();
+
     void getGlobalAssetBalance(WalletBean walletBean);
 
     void getColorAssetBalance(WalletBean walletBean);

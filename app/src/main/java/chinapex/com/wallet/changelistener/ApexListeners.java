@@ -216,7 +216,7 @@ public class ApexListeners {
         mOnEthStateUpdateListeners.remove(onEthStateUpdateListener);
     }
 
-    public void notifyItemDelete(NeoWallet neoWallet) {
+    public void notifyItemDelete(WalletBean walletBean) {
         if (null == mOnNeoDeleteListeners) {
             CpLog.e(TAG, "mOnNeoDeleteListeners is null!");
             return;
@@ -228,7 +228,7 @@ public class ApexListeners {
                 continue;
             }
 
-            onNeoDeleteListener.onNeoDelete(neoWallet);
+            onNeoDeleteListener.onNeoDelete(walletBean);
         }
     }
 
@@ -264,7 +264,7 @@ public class ApexListeners {
         }
     }
 
-    public void notifyItemNameUpdate(NeoWallet neoWallet) {
+    public void notifyItemNameUpdate(WalletBean walletBean) {
         if (null == mOnItemNameUpdateListeners) {
             CpLog.e(TAG, "mOnItemNameUpdateListeners is null!");
             return;
@@ -276,7 +276,7 @@ public class ApexListeners {
                 continue;
             }
 
-            onItemNameUpdateListener.OnItemNameUpdate(neoWallet);
+            onItemNameUpdateListener.OnItemNameUpdate(walletBean);
         }
     }
 

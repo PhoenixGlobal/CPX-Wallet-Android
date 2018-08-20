@@ -140,12 +140,56 @@
         android:layout_marginTop="24dp"
         android:background="@color/c_DDDDDD" />
 
+    <RelativeLayout
+        android:id="@+id/rl_sb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <SeekBar
+            android:id="@+id/sb_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:max="100"
+            android:progress="20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/sb_transfer"
+            android:layout_below="@+id/sb_transfer"
+            android:layout_marginTop="5dp"
+            android:text="@string/seek_bar_slow"
+            android:textSize="@dimen/paratext_14sp" />
+
+        <TextView
+            android:id="@+id/tv_transfer_gas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sb_transfer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="@dimen/paratext_14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/sb_transfer"
+            android:layout_below="@+id/sb_transfer"
+            android:layout_marginTop="5dp"
+            android:text="@string/seek_bar_fast"
+            android:textSize="@dimen/paratext_14sp" />
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/bt_transfer_send"
         android:layout_width="267dp"
         android:layout_height="33dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="158dp"
+        android:layout_marginTop="140dp"
         android:background="@drawable/shape_balance_detail_bt_bg"
         android:text="@string/send"
         android:textAllCaps="false"

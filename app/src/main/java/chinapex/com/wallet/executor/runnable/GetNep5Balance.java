@@ -77,8 +77,7 @@ public class GetNep5Balance implements Runnable, INetCallback {
 
         requestGetNep5Balance.setParams(params);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI, GsonUtils.toJsonStr
-                (requestGetNep5Balance), this);
+        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI, GsonUtils.toJsonStr(requestGetNep5Balance), this);
 
     }
 

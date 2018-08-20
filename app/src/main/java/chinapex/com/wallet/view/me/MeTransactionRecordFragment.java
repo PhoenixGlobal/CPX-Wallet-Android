@@ -118,7 +118,7 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
 
     private void initData() {
         Me3Activity me3Activity = (Me3Activity) getActivity();
-        mCurrentClickedWallet = me3Activity.getNeoWallet();
+        mCurrentClickedWallet = me3Activity.getWalletBean();
         if (null == mCurrentClickedWallet) {
             CpLog.e(TAG, "currentClickedWalletBean is null!");
             return;

@@ -13,6 +13,7 @@ import com.google.zxing.common.BitmapUtils;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -23,7 +24,7 @@ import chinapex.com.wallet.utils.ToastUtils;
 public class GatheringActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = GatheringActivity.class.getSimpleName();
-    private NeoWallet mNeoWallet;
+    private WalletBean mWalletBean;
     private TextView mTv_gathering_wallet_name;
     private TextView mTv_gathering_wallet_addr;
     private Button mBt_gathering_copy_addr;
@@ -54,17 +55,16 @@ public class GatheringActivity extends BaseActivity implements View.OnClickListe
             return;
         }
 
-        mNeoWallet = (NeoWallet) intent.getParcelableExtra(Constant
-                .PARCELABLE_WALLET_BEAN_GATHERING);
-        if (null == mNeoWallet) {
-            CpLog.e(TAG, "mNeoWallet is null!");
+        mWalletBean = intent.getParcelableExtra(Constant.PARCELABLE_WALLET_BEAN_GATHERING);
+        if (null == mWalletBean) {
+            CpLog.e(TAG, "mWalletBean is null!");
             return;
         }
-        mTv_gathering_wallet_name.setText(mNeoWallet.getName());
-        mTv_gathering_wallet_addr.setText(mNeoWallet.getAddress());
+        mTv_gathering_wallet_name.setText(mWalletBean.getName());
+        mTv_gathering_wallet_addr.setText(mWalletBean.getAddress());
 
         //生成二维码
-        String walletAddr = mNeoWallet.getAddress();
+        String walletAddr = mWalletBean.getAddress();
         Bitmap bitmap;
         try {
             bitmap = BitmapUtils.create2DCode(walletAddr);
@@ -80,8 +80,7 @@ public class GatheringActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.bt_gathering_copy_addr:
                 CpLog.i(TAG, "bt_gathering_copy_addr is click！");
-                PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), mNeoWallet
-                        .getAddress());
+                PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), mWalletBean.getAddress());
                 ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
                         .getResources().getString(R.string.wallet_copied_share));
                 break;

@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import chinapex.com.wallet.R;
-import chinapex.com.wallet.bean.neo.NeoWallet;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
 import chinapex.com.wallet.executor.runnable.FromKeystoreToWallet;
@@ -34,7 +34,7 @@ public class BackupWalletPwdDialog extends DialogFragment implements View.OnClic
         IFromKeystoreToWalletCallback {
 
     private static final String TAG = BackupWalletPwdDialog.class.getSimpleName();
-    private NeoWallet mCurrentNeoWallet;
+    private WalletBean mCurrentWalletBean;
     private Button mBt_dialog_pwd_backup_cancel;
     private Button mBt_dialog_pwd_backup_confirm;
     private EditText mEt_dialog_pwd_backup;
@@ -44,15 +44,14 @@ public class BackupWalletPwdDialog extends DialogFragment implements View.OnClic
         return new BackupWalletPwdDialog();
     }
 
-    public void setCurrentNeoWallet(NeoWallet currentNeoWallet) {
-        mCurrentNeoWallet = currentNeoWallet;
+    public void setCurrentWalletBean(WalletBean walletBean) {
+        mCurrentWalletBean = walletBean;
     }
 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
-            savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         // 去掉边框
         Window window = getDialog().getWindow();
@@ -77,8 +76,7 @@ public class BackupWalletPwdDialog extends DialogFragment implements View.OnClic
     @Override
     public void onResume() {
         super.onResume();
-        getDialog().getWindow().setLayout(DensityUtil.dip2px(getActivity(), 257), DensityUtil
-                .dip2px(getActivity(), 159));
+        getDialog().getWindow().setLayout(DensityUtil.dip2px(getActivity(), 257), DensityUtil.dip2px(getActivity(), 159));
     }
 
     private void initData() {
@@ -103,8 +101,7 @@ public class BackupWalletPwdDialog extends DialogFragment implements View.OnClic
                 break;
             case R.id.bt_dialog_pwd_backup_confirm:
                 String pwd = mEt_dialog_pwd_backup.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentNeoWallet
-                        .getKeyStore(), pwd, this));
+                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean.getKeyStore(), pwd, this));
                 break;
         }
     }
@@ -138,7 +135,7 @@ public class BackupWalletPwdDialog extends DialogFragment implements View.OnClic
 
         Intent intent = new Intent(ApexWalletApplication.getInstance(), BackupWalletActivity.class);
         intent.putExtra(Constant.BACKUP_MNEMONIC, mnemonicEnUs);
-        intent.putExtra(Constant.WALLET_BEAN, mCurrentNeoWallet);
+        intent.putExtra(Constant.WALLET_BEAN, mCurrentWalletBean);
         startActivity(intent);
         dismiss();
     }

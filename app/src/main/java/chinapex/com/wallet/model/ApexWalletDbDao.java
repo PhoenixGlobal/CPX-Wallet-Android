@@ -868,7 +868,7 @@ public class ApexWalletDbDao {
             return null;
         }
 
-        AssetBean assetBean = new AssetBean();
+        List<AssetBean> assetBeans = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
         Cursor cursor = db.query(Constant.TABLE_ASSETS, null, WHERE_CLAUSE_ASSET_HEX_HASH_EQ, new
                 String[]{assetHexHash}, null, null, null);
@@ -890,6 +890,7 @@ public class ApexWalletDbDao {
                 String assetHexHashTmp = cursor.getString(assetHexHashIndex);
                 String assetHash = cursor.getString(assetHashIndex);
 
+                AssetBean assetBean = new AssetBean();
                 assetBean.setType(assetTypeTmp);
                 assetBean.setSymbol(assetSymbol);
                 assetBean.setPrecision(assetPrecision);
@@ -897,11 +898,12 @@ public class ApexWalletDbDao {
                 assetBean.setImageUrl(assetImageUrl);
                 assetBean.setHexHash(assetHexHashTmp);
                 assetBean.setHash(assetHash);
+                assetBeans.add(assetBean);
             }
             cursor.close();
         }
         closeDatabase();
-        return assetBean;
+        return assetBeans.isEmpty() ? null : assetBeans.get(0);
     }
 
     public synchronized void insertPortraitShow(PortraitShow portraitShow) {

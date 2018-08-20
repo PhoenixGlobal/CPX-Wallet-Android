@@ -80,6 +80,7 @@ public class Constant {
     public static final String WALLET_NAME_IMPORT_DEFAULT = "Wallet";
 
     // assets
+    public static final String PARCELABLE_WALLET_TYPE = "parcelableWalletType";
     public static final String WALLET_BEAN = "walletBean";
     public static final String BALANCE_BEAN = "balanceBean";
 

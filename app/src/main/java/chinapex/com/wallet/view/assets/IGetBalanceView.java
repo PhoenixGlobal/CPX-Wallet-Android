@@ -13,4 +13,6 @@ public interface IGetBalanceView {
     void getGlobalAssetBalance(List<BalanceBean> balanceBeans);
 
     void getColorAssetBalance(List<BalanceBean> balanceBeans);
+
+    void getAssetBalance(List<BalanceBean> balanceBeans);
 }

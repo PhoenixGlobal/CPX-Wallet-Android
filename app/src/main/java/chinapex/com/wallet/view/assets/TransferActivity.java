@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.zxing.activity.CaptureActivity;
@@ -18,9 +19,9 @@ import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.AssertTxBean;
 import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.bean.Nep5TxBean;
 import chinapex.com.wallet.bean.TransactionRecord;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICreateAssertTxCallback;
 import chinapex.com.wallet.executor.callback.ICreateNep5TxCallback;
@@ -42,10 +43,10 @@ import neomobile.Wallet;
 
 public class TransferActivity extends BaseActivity implements View.OnClickListener,
         IGetUtxosCallback, ISendRawTransactionCallback, ICreateAssertTxCallback,
-        TransferPwdDialog.OnCheckPwdListener, ICreateNep5TxCallback {
+        TransferPwdDialog.OnCheckPwdListener, ICreateNep5TxCallback, SeekBar.OnSeekBarChangeListener {
 
     private static final String TAG = TransferActivity.class.getSimpleName();
-    private NeoWallet mNeoWallet;
+    private WalletBean mWalletBean;
     private BalanceBean mBalanceBean;
     private Button mBt_transfer_send;
     private Wallet mWalletFrom;
@@ -57,6 +58,9 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     private final static int REQ_CODE = 1029;
     private TextView mTv_available_amount;
     private TextView mTv_amount_all;
+    private int mCurrentWalletType;
+    private SeekBar mSb_transfer;
+    private TextView mTv_transfer_gas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +79,14 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         mIb_transfer_scan = (ImageButton) findViewById(R.id.ib_transfer_scan);
         mTv_available_amount = (TextView) findViewById(R.id.tv_available_amount);
         mTv_amount_all = (TextView) findViewById(R.id.tv_amount_all);
+        mSb_transfer = (SeekBar) findViewById(R.id.sb_transfer);
+        mTv_transfer_gas = (TextView) findViewById(R.id.tv_transfer_gas);
 
         mBt_transfer_send = (Button) findViewById(R.id.bt_transfer_send);
         mBt_transfer_send.setOnClickListener(this);
         mIb_transfer_scan.setOnClickListener(this);
         mTv_amount_all.setOnClickListener(this);
-
+        mSb_transfer.setOnSeekBarChangeListener(this);
     }
 
     private void initData() {
@@ -90,10 +96,11 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             return;
         }
 
-        mNeoWallet = (NeoWallet) intent.getParcelableExtra(Constant
-                .PARCELABLE_WALLET_BEAN_TRANSFER);
-        if (null == mNeoWallet) {
-            CpLog.e(TAG, "mNeoWallet is null!");
+        mCurrentWalletType = intent.getIntExtra(Constant.PARCELABLE_WALLET_TYPE, Constant.WALLET_TYPE_NEO);
+
+        mWalletBean = intent.getParcelableExtra(Constant.PARCELABLE_WALLET_BEAN_TRANSFER);
+        if (null == mWalletBean) {
+            CpLog.e(TAG, "mWalletBean is null!");
             return;
         }
 
@@ -105,6 +112,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
         mTv_transfer_unit.setText(mBalanceBean.getAssetSymbol().toUpperCase());
         mTv_available_amount.setText(mBalanceBean.getAssetsValue());
+        mTv_transfer_gas.setText(String.valueOf(mSb_transfer.getProgress() / 100.0 + " ether"));
 
         String qrCode = intent.getStringExtra(Constant.PARCELABLE_QR_CODE_TRANSFER);
         if (TextUtils.isEmpty(qrCode)) {
@@ -119,7 +127,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_transfer_send:
-                String addressFrom = mNeoWallet.getAddress();
+                String addressFrom = mWalletBean.getAddress();
                 String addressTo = mEt_transfer_to_wallet_addr.getText().toString().trim();
                 if (TextUtils.isEmpty(addressFrom) || TextUtils.isEmpty(addressTo)) {
                     CpLog.e(TAG, "addressFrom or addressTo is null or empty!");
@@ -169,7 +177,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
     public void showTransferPwdDialog() {
         TransferPwdDialog transferPwdDialog = TransferPwdDialog.newInstance();
-        transferPwdDialog.setCurrentNeoWallet(mNeoWallet);
+        transferPwdDialog.setCurrentWallet(mWalletBean);
         transferPwdDialog.setOnCheckPwdListener(this);
         transferPwdDialog.setTransferAmount(mEt_transfer_amount.getText().toString().trim());
         transferPwdDialog.setTransferUnit(mBalanceBean.getAssetSymbol().toUpperCase());
@@ -370,5 +378,20 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
         CpLog.i(TAG, "qrCode:" + qrCode);
         mEt_transfer_to_wallet_addr.setText(qrCode);
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        mTv_transfer_gas.setText(String.valueOf(progress / 100.0 + " ether"));
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

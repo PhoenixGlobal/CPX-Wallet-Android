@@ -271,6 +271,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         neoWallet.setAddress(wallet.address());
         neoWallet.setBackupState(Constant.BACKUP_UNFINISHED);
         Intent intent = new Intent(this, BackupWalletActivity.class);
+        intent.putExtra(Constant.PARCELABLE_WALLET_TYPE, Constant.WALLET_TYPE_NEO);
         intent.putExtra(Constant.BACKUP_MNEMONIC, mnemonicEnUs);
         intent.putExtra(Constant.WALLET_BEAN, neoWallet);
         startActivity(intent);
@@ -301,6 +302,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         ethWallet.setAddress(wallet.address());
         ethWallet.setBackupState(Constant.BACKUP_UNFINISHED);
         Intent intent = new Intent(this, BackupWalletActivity.class);
+        intent.putExtra(Constant.PARCELABLE_WALLET_TYPE, Constant.WALLET_TYPE_ETH);
         intent.putExtra(Constant.BACKUP_MNEMONIC, mnemonicEnUs);
         intent.putExtra(Constant.WALLET_BEAN, ethWallet);
         startActivity(intent);

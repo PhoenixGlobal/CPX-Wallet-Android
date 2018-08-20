@@ -95,44 +95,6 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void startActivityParcelables(Class cls, boolean isFinish, HashMap<String, Parcelable>
-            parcelables) {
-        if (null == parcelables || parcelables.isEmpty()) {
-            CpLog.e(TAG, "parcelables is null!");
-            return;
-        }
-
-        Intent intent = new Intent(ApexWalletApplication.getInstance(), cls);
-
-        for (Map.Entry<String, Parcelable> parcelableEntry : parcelables.entrySet()) {
-            if (null == parcelableEntry) {
-                CpLog.e(TAG, "parcelableEntry is null!");
-                continue;
-            }
-
-            intent.putExtra(parcelableEntry.getKey(), parcelableEntry.getValue());
-        }
-
-        startActivity(intent);
-        if (isFinish) {
-            this.finish();
-        }
-    }
-
-    public void startActivityBundle(Class cls, boolean isFinish, String bundleKey, String key,
-                                    String value, String
-                                            parcelableKey, Parcelable parcelable) {
-        Intent intent = new Intent(ApexWalletApplication.getInstance(), cls);
-        Bundle bundle = new Bundle();
-        bundle.putString(key, value);
-        bundle.putParcelable(parcelableKey, parcelable);
-        intent.putExtra(bundleKey, bundle);
-        startActivity(intent);
-        if (isFinish) {
-            finish();
-        }
-    }
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(PhoneUtils.attachBaseContext(ApexWalletApplication.getInstance()));

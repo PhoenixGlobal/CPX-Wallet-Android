@@ -39,6 +39,11 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
     }
 
     @Override
+    public void init() {
+        mColorAssetCounter = 0;
+    }
+
+    @Override
     public void getGlobalAssetBalance(WalletBean walletBean) {
         if (null == walletBean) {
             CpLog.e(TAG, "getGlobalAssetBalance() -> walletBean is null!");
@@ -182,7 +187,11 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
                 balanceBean.setAssetsValue(value.getAssetsValue());
             }
 
-            mColorAssetBalanceBeans.add(balanceBean);
+            if (Constant.ASSETS_CPX.equals(assetBean.getHexHash())) {
+                mColorAssetBalanceBeans.add(0, balanceBean);
+            } else {
+                mColorAssetBalanceBeans.add(balanceBean);
+            }
         }
 
         if (mColorAssetCounter >= mColorAssetNum) {

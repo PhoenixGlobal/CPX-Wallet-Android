@@ -166,23 +166,21 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
             return;
         }
 
-        List<AssetBean> governingAssets = apexWalletDbDao.queryAssetsByType(Constant
-                .ASSET_TYPE_GOVERNING);
+        List<AssetBean> governingAssets = apexWalletDbDao.queryAssetsByType(Constant.ASSET_TYPE_GOVERNING);
         if (null == governingAssets || governingAssets.isEmpty()) {
             CpLog.e(TAG, "governingAssets is null or empty!");
             return;
         }
 
-        mAssetBeans.addAll(governingAssets);
+        mAssetBeans.addAll(1, governingAssets);
 
-        List<AssetBean> utilityAssets = apexWalletDbDao.queryAssetsByType(Constant
-                .ASSET_TYPE_UTILITY);
+        List<AssetBean> utilityAssets = apexWalletDbDao.queryAssetsByType(Constant.ASSET_TYPE_UTILITY);
         if (null == utilityAssets || utilityAssets.isEmpty()) {
             CpLog.e(TAG, "utilityAssets is null or empty!");
             return;
         }
 
-        mAssetBeans.addAll(utilityAssets);
+        mAssetBeans.addAll(1, utilityAssets);
 
         if (null == mCurrentAssets) {
             CpLog.e(TAG, "mCurrentAssets is null!");
@@ -205,8 +203,8 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
 
         mAddAssetsRecyclerViewAdapter = new AddAssetsRecyclerViewAdapter(mAssetBeans);
         mAddAssetsRecyclerViewAdapter.setOnItemClickListener(this);
-        mRv_add_assets.setLayoutManager(new LinearLayoutManager(ApexWalletApplication.getInstance
-                (), LinearLayoutManager.VERTICAL, false));
+        mRv_add_assets.setLayoutManager(new LinearLayoutManager(ApexWalletApplication.getInstance(), LinearLayoutManager
+                .VERTICAL, false));
         mRv_add_assets.setAdapter(mAddAssetsRecyclerViewAdapter);
         mCheckedAssets = new ArrayList<>();
         mCheckedAssets.addAll(mCurrentAssets);

@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import chinapex.com.wallet.R;
-import chinapex.com.wallet.bean.neo.NeoWallet;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
 import chinapex.com.wallet.executor.runnable.FromKeystoreToWallet;
@@ -33,7 +33,7 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
         IFromKeystoreToWalletCallback {
 
     private static final String TAG = ExportKeystorePwdDialog.class.getSimpleName();
-    private NeoWallet mCurrentNeoWallet;
+    private WalletBean mCurrentWalletBean;
     private Button mBt_dialog_pwd_export_keystore_cancel;
     private Button mBt_dialog_pwd_export_keystore_confirm;
     private EditText mEt_dialog_pwd_export_keystore;
@@ -43,15 +43,14 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
         return new ExportKeystorePwdDialog();
     }
 
-    public void setCurrentNeoWallet(NeoWallet currentNeoWallet) {
-        mCurrentNeoWallet = currentNeoWallet;
+    public void setCurrentWalletBean(WalletBean walletBean) {
+        mCurrentWalletBean = walletBean;
     }
 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
-            savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         // 去掉边框
         Window window = getDialog().getWindow();
@@ -85,10 +84,8 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
     }
 
     private void initView(View view) {
-        mBt_dialog_pwd_export_keystore_cancel = view.findViewById(R.id
-                .bt_dialog_pwd_export_keystore_cancel);
-        mBt_dialog_pwd_export_keystore_confirm = view.findViewById(R.id
-                .bt_dialog_pwd_export_keystore_confirm);
+        mBt_dialog_pwd_export_keystore_cancel = view.findViewById(R.id.bt_dialog_pwd_export_keystore_cancel);
+        mBt_dialog_pwd_export_keystore_confirm = view.findViewById(R.id.bt_dialog_pwd_export_keystore_confirm);
         mEt_dialog_pwd_export_keystore = view.findViewById(R.id.et_dialog_pwd_export_keystore);
 
         mBt_dialog_pwd_export_keystore_cancel.setOnClickListener(this);
@@ -104,8 +101,7 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
                 break;
             case R.id.bt_dialog_pwd_export_keystore_confirm:
                 String pwd = mEt_dialog_pwd_export_keystore.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentNeoWallet
-                        .getKeyStore(), pwd, this));
+                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean.getKeyStore(), pwd, this));
                 break;
         }
     }
@@ -124,9 +120,8 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
             return;
         }
 
-        Intent intent = new Intent(ApexWalletApplication.getInstance(), ExportKeystoreActivity
-                .class);
-        intent.putExtra(Constant.BACKUP_KEYSTORE, mCurrentNeoWallet.getKeyStore());
+        Intent intent = new Intent(ApexWalletApplication.getInstance(), ExportKeystoreActivity.class);
+        intent.putExtra(Constant.BACKUP_KEYSTORE, mCurrentWalletBean.getKeyStore());
         startActivity(intent);
         dismiss();
     }

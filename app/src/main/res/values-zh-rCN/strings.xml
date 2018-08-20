@@ -86,6 +86,8 @@
     <string name="data_empty">暂无交易记录</string>
     <string name="empty_wallet">请点击右上角\n拥有你的钱包</string>
     <string name="wallet_type">钱包类型</string>
+    <string name="seek_bar_slow">慢</string>
+    <string name="seek_bar_fast">快</string>
 
     <!--Me页面，功能菜单文字-->
     <string name="personal_portrait">个人画像</string>

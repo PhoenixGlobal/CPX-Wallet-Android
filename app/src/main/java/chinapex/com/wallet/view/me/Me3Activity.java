@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.base.BaseFragment;
-import chinapex.com.wallet.bean.neo.NeoWallet;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.changelistener.OnNeoDeleteListener;
 import chinapex.com.wallet.global.Constant;
@@ -18,7 +18,7 @@ import chinapex.com.wallet.utils.FragmentFactory;
 public class Me3Activity extends BaseActivity implements OnNeoDeleteListener {
 
     private static final String TAG = Me3Activity.class.getSimpleName();
-    private NeoWallet mNeoWallet;
+    private WalletBean mWalletBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +42,9 @@ public class Me3Activity extends BaseActivity implements OnNeoDeleteListener {
             return;
         }
 
-        Bundle bundle = intent.getBundleExtra(Constant.ME_MANAGER_DETAIL_BUNDLE);
-        if (null == bundle) {
-            CpLog.e(TAG, "bundle is null!");
-            return;
-        }
-
-        mNeoWallet = bundle.getParcelable(Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL);
-
-        String fragmentTag = bundle.getString(Constant.ME_SKIP_ACTIVITY_FRAGMENT_TAG);
+        mWalletBean = intent.getParcelableExtra(Constant.PARCELABLE_WALLET_BEAN_MANAGE_DETAIL);
+        String fragmentTag = intent.getStringExtra(Constant.ME_SKIP_ACTIVITY_FRAGMENT_TAG);
         initFragment(fragmentTag);
-
     }
 
     private void initFragment(String fragmentTag) {
@@ -69,12 +61,12 @@ public class Me3Activity extends BaseActivity implements OnNeoDeleteListener {
         fragmentTransaction.show(fragment).commit();
     }
 
-    public NeoWallet getNeoWallet() {
-        return mNeoWallet;
+    public WalletBean getWalletBean() {
+        return mWalletBean;
     }
 
     @Override
-    public void onNeoDelete(NeoWallet neoWallet) {
+    public void onNeoDelete(WalletBean walletBean) {
         finish();
     }
 
