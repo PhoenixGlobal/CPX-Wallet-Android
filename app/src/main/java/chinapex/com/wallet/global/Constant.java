@@ -64,7 +64,7 @@ public class Constant {
 
     // fragmentTag
     public static final String FRAGMENT_TAG_IMPORT_MNEMONIC = "ImportMnemonicFragment";
-    public static final String FRAGMENT_TAG_IMPORT_KEYSTORE = "ImportKeystoreFragment";
+    public static final String FRAGMENT_TAG_IMPORT_KEYSTORE = "ImportKeystoreFragmentNeo";
     public static final String FRAGMENT_TAG_BACKUP = "BackupFragment";
     public static final String FRAGMENT_TAG_COPY_MNEMONIC = "CopyMnemonicFragment";
     public static final String FRAGMENT_TAG_CONFIRM_MNEMONIC = "ConfirmMnemonicFragment";
@@ -167,6 +167,7 @@ public class Constant {
     public static final String TABLE_NEO_WALLET = "neo_wallet";
 
     public static final String FIELD_ID = "_id";
+    public static final String FIELD_WALLET_TYPE = "wallet_type";
     public static final String FIELD_WALLET_NAME = "wallet_name";
     public static final String FIELD_WALLET_ADDRESS = "wallet_address";
     public static final String FIELD_BACKUP_STATE = "backup_state";
@@ -177,6 +178,7 @@ public class Constant {
 
     public static final String SQL_CREATE_NEO_WALLET = "create table " + TABLE_NEO_WALLET
             + " (" + FIELD_ID + " integer primary key autoincrement, "
+            + FIELD_WALLET_TYPE + " integer, "
             + FIELD_WALLET_NAME + " text, "
             + FIELD_WALLET_ADDRESS + " text, "
             + FIELD_BACKUP_STATE + " integer, "
@@ -279,6 +281,7 @@ public class Constant {
 
     public static final String SQL_CREATE_ETH_WALLET = "create table " + TABLE_ETH_WALLET
             + " (" + FIELD_ID + " integer primary key autoincrement, "
+            + FIELD_WALLET_TYPE + " integer, "
             + FIELD_WALLET_NAME + " text, "
             + FIELD_WALLET_ADDRESS + " text, "
             + FIELD_BACKUP_STATE + " integer, "

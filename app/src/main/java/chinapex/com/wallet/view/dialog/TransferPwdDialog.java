@@ -14,10 +14,9 @@ import android.widget.TextView;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.executor.TaskController;
-import chinapex.com.wallet.executor.callback.IFromKeystoreToWalletCallback;
-import chinapex.com.wallet.executor.runnable.FromKeystoreToWallet;
+import chinapex.com.wallet.executor.callback.IFromKeystoreToNeoWalletCallback;
+import chinapex.com.wallet.executor.runnable.FromKeystoreToNeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
@@ -29,7 +28,7 @@ import neomobile.Wallet;
  */
 
 public class TransferPwdDialog extends DialogFragment implements View.OnClickListener,
-        IFromKeystoreToWalletCallback {
+        IFromKeystoreToNeoWalletCallback {
 
     private static final String TAG = TransferPwdDialog.class.getSimpleName();
     private WalletBean mCurrentWalletBean;
@@ -124,13 +123,13 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
                 break;
             case R.id.bt_dialog_pwd_transfer_confirm:
                 String pwd = mEt_dialog_pwd_transfer.getText().toString().trim();
-                TaskController.getInstance().submit(new FromKeystoreToWallet(mCurrentWalletBean.getKeyStore(), pwd, this));
+                TaskController.getInstance().submit(new FromKeystoreToNeoWallet(mCurrentWalletBean.getKeyStore(), pwd, this));
                 break;
         }
     }
 
     @Override
-    public void fromKeystoreWallet(Wallet wallet) {
+    public void fromKeystoreToNeoWallet(Wallet wallet) {
         if (null == mOnCheckPwdListener) {
             CpLog.e(TAG, "mOnCheckPwdListener is null!");
             return;

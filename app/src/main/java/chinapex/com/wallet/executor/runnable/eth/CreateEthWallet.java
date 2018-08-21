@@ -75,6 +75,7 @@ public class CreateEthWallet implements Runnable {
 //        assetsNep5.add(Constant.ASSETS_CPX);
 
         EthWallet ethWallet = new EthWallet();
+        ethWallet.setWalletType(Constant.WALLET_TYPE_ETH);
         ethWallet.setName(mName);
         ethWallet.setAddress(wallet.address());
         ethWallet.setBackupState(Constant.BACKUP_UNFINISHED);

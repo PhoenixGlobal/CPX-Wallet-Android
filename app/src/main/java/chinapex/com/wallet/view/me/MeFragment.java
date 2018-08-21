@@ -60,8 +60,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener,
         ImageButton ib_me_tx_records = view.findViewById(R.id.ib_me_tx_records);
         TextView tv_me_tx_records = view.findViewById(R.id.tv_me_tx_records);
         RecyclerView rv_me = view.findViewById(R.id.rv_me);
-        rv_me.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager
-                .VERTICAL, false));
+        rv_me.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         int space = DensityUtil.dip2px(getActivity(), 15);
         rv_me.addItemDecoration(new SpacesItemDecorationTopBottom(space));
 
@@ -97,13 +96,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener,
         switch (v.getId()) {
             case R.id.ib_me_manage_wallet:
             case R.id.tv_me_manage_wallet:
-                startActivityStringExtra(Me2Activity.class, false, Constant
-                        .ME_2_SHOULD_BE_SHOW, Constant.ME_2_SHOULD_BE_SHOW_MANAGE_WALLET);
+                startActivityStringExtra(Me2Activity.class, false, Constant.ME_2_SHOULD_BE_SHOW, Constant
+                        .ME_2_SHOULD_BE_SHOW_MANAGE_WALLET);
                 break;
             case R.id.ib_me_tx_records:
             case R.id.tv_me_tx_records:
-                startActivityStringExtra(Me2Activity.class, false, Constant
-                        .ME_2_SHOULD_BE_SHOW, Constant.ME_2_SHOULD_BE_SHOW_TX_RECORDS);
+                startActivityStringExtra(Me2Activity.class, false, Constant.ME_2_SHOULD_BE_SHOW, Constant
+                        .ME_2_SHOULD_BE_SHOW_TX_RECORDS);
                 break;
             default:
                 break;
@@ -140,8 +139,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener,
     }
 
     private WalletBean getRewardWallet() {
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return null;

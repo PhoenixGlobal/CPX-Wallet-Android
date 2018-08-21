@@ -81,6 +81,7 @@ public class ApexWalletDbDao {
         }
 
         ContentValues contentValues = new ContentValues();
+        contentValues.put(Constant.FIELD_WALLET_TYPE, walletBean.getWalletType());
         contentValues.put(Constant.FIELD_WALLET_NAME, walletBean.getName());
         contentValues.put(Constant.FIELD_WALLET_ADDRESS, walletBean.getAddress());
         contentValues.put(Constant.FIELD_BACKUP_STATE, walletBean.getBackupState());
@@ -106,23 +107,20 @@ public class ApexWalletDbDao {
     private static final String WHERE_CLAUSE_WALLET_NAME_EQ_AND_ADDRESS_EQ = Constant
             .FIELD_WALLET_NAME + " = ?" + " and " + Constant.FIELD_WALLET_ADDRESS + " = ?";
 
-    public void deleteByWalletNameAndAddr(String tableName, String walletName, String
-            walletAddress) {
+    public void deleteByWalletNameAndAddr(String tableName, String walletName, String walletAddress) {
         if (TextUtils.isEmpty(walletName) || TextUtils.isEmpty(walletAddress)) {
-            CpLog.e(TAG, "deleteByWalletName() -> walletName or walletAddress is null!");
+            CpLog.e(TAG, "deleteByWalletNameAndAddr() -> walletName or walletAddress is null!");
             return;
         }
 
         SQLiteDatabase db = openDatabase();
         try {
             db.beginTransaction();
-            db.delete(tableName, WHERE_CLAUSE_WALLET_NAME_EQ_AND_ADDRESS_EQ, new
-                    String[]{walletName, walletAddress});
+            db.delete(tableName, WHERE_CLAUSE_WALLET_NAME_EQ_AND_ADDRESS_EQ, new String[]{walletName, walletAddress});
             db.setTransactionSuccessful();
-            CpLog.i(TAG, "deleteByWalletName() -> delete " + walletName + ":" + walletAddress + "" +
-                    " ok!");
+            CpLog.i(TAG, "deleteByWalletNameAndAddr() -> delete " + walletName + ":" + walletAddress + " ok!");
         } catch (Exception e) {
-            CpLog.e(TAG, "deleteByWalletName exception:" + e.getMessage());
+            CpLog.e(TAG, "deleteByWalletNameAndAddr exception:" + e.getMessage());
         } finally {
             db.endTransaction();
         }
@@ -140,14 +138,15 @@ public class ApexWalletDbDao {
         Cursor cursor = db.query(tableName, null, null, null, null, null, null);
         if (null != cursor) {
             while (cursor.moveToNext()) {
+                int walletTypeIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_TYPE);
                 int walletNameIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_NAME);
                 int walletAddressIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_ADDRESS);
                 int backupStateIndex = cursor.getColumnIndex(Constant.FIELD_BACKUP_STATE);
                 int walletKeystoreIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_KEYSTORE);
                 int walletAssetJsonIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_ASSET_JSON);
-                int walletColorAssetJsonIndex = cursor.getColumnIndex(Constant
-                        .FIELD_WALLET_COLOR_ASSET_JSON);
+                int walletColorAssetJsonIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_COLOR_ASSET_JSON);
 
+                int walletType = cursor.getInt(walletTypeIndex);
                 String walletName = cursor.getString(walletNameIndex);
                 String walletAddress = cursor.getString(walletAddressIndex);
                 int backupState = cursor.getInt(backupStateIndex);
@@ -167,6 +166,8 @@ public class ApexWalletDbDao {
                         walletBean = new WalletBean();
                         break;
                 }
+
+                walletBean.setWalletType(walletType);
                 walletBean.setName(walletName);
                 walletBean.setAddress(walletAddress);
                 walletBean.setBackupState(backupState);
@@ -182,8 +183,7 @@ public class ApexWalletDbDao {
         return walletBeans;
     }
 
-    private static final String WHERE_CLAUSE_WALLET_ADDRESS_EQ = Constant.FIELD_WALLET_ADDRESS +
-            " = ?";
+    private static final String WHERE_CLAUSE_WALLET_ADDRESS_EQ = Constant.FIELD_WALLET_ADDRESS + " = ?";
 
     public WalletBean queryByWalletAddress(String tableName, String walletAddress) {
         if (TextUtils.isEmpty(tableName)
@@ -199,6 +199,7 @@ public class ApexWalletDbDao {
                 String[]{walletAddress}, null, null, null);
         if (null != cursor) {
             while (cursor.moveToNext()) {
+                int walletTypeIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_TYPE);
                 int walletNameIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_NAME);
                 int walletAddrIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_ADDRESS);
                 int backupStateIndex = cursor.getColumnIndex(Constant.FIELD_BACKUP_STATE);
@@ -206,6 +207,7 @@ public class ApexWalletDbDao {
                 int walletAssetJsonIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_ASSET_JSON);
                 int walletColorAssetJsonIndex = cursor.getColumnIndex(Constant.FIELD_WALLET_COLOR_ASSET_JSON);
 
+                int walletType = cursor.getInt(walletTypeIndex);
                 String walletName = cursor.getString(walletNameIndex);
                 String walletAddr = cursor.getString(walletAddrIndex);
                 int backupState = cursor.getInt(backupStateIndex);
@@ -213,7 +215,20 @@ public class ApexWalletDbDao {
                 String walletAssetJson = cursor.getString(walletAssetJsonIndex);
                 String walletColorAssetJson = cursor.getString(walletColorAssetJsonIndex);
 
-                WalletBean walletBean = new WalletBean();
+                WalletBean walletBean;
+                switch (tableName) {
+                    case Constant.TABLE_NEO_WALLET:
+                        walletBean = new NeoWallet();
+                        break;
+                    case Constant.TABLE_ETH_WALLET:
+                        walletBean = new EthWallet();
+                        break;
+                    default:
+                        walletBean = new WalletBean();
+                        break;
+                }
+
+                walletBean.setWalletType(walletType);
                 walletBean.setName(walletName);
                 walletBean.setAddress(walletAddr);
                 walletBean.setBackupState(backupState);
@@ -241,8 +256,7 @@ public class ApexWalletDbDao {
         SQLiteDatabase db = openDatabase();
         try {
             db.beginTransaction();
-            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new
-                    String[]{walletAddress});
+            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new String[]{walletAddress});
             db.setTransactionSuccessful();
             CpLog.i(TAG, "updateBackupState -> update" + walletAddress + " backupState ok!");
         } catch (SQLException e) {
@@ -253,8 +267,7 @@ public class ApexWalletDbDao {
         closeDatabase();
     }
 
-    public void updateWalletName(String tableName, String walletAddress, String
-            walletNameNew) {
+    public void updateWalletName(String tableName, String walletAddress, String walletNameNew) {
         if (TextUtils.isEmpty(tableName)
                 || TextUtils.isEmpty(walletAddress)
                 || TextUtils.isEmpty(walletNameNew)) {
@@ -268,8 +281,7 @@ public class ApexWalletDbDao {
         SQLiteDatabase db = openDatabase();
         try {
             db.beginTransaction();
-            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new
-                    String[]{walletAddress});
+            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new String[]{walletAddress});
             db.setTransactionSuccessful();
             CpLog.i(TAG, "updateWalletName: " + walletNameNew + " is ok!");
         } catch (SQLException e) {
@@ -299,8 +311,7 @@ public class ApexWalletDbDao {
         SQLiteDatabase db = openDatabase();
         try {
             db.beginTransaction();
-            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new
-                    String[]{walletAddress});
+            db.update(tableName, contentValues, WHERE_CLAUSE_WALLET_ADDRESS_EQ, new String[]{walletAddress});
             db.setTransactionSuccessful();
             CpLog.i(TAG, "updateCheckedAssets is ok!");
         } catch (SQLException e) {
@@ -412,8 +423,7 @@ public class ApexWalletDbDao {
         return transactionRecords;
     }
 
-    public HashMap<String, TransactionRecord> queryTxCacheByAddress(String tableName, String
-            walletAddress) {
+    public HashMap<String, TransactionRecord> queryTxCacheByAddress(String tableName, String walletAddress) {
         HashMap<String, TransactionRecord> txHashMap = new HashMap<>();
 
         if (TextUtils.isEmpty(tableName) || TextUtils.isEmpty(walletAddress)) {
@@ -859,8 +869,7 @@ public class ApexWalletDbDao {
         return assetBeans;
     }
 
-    private static final String WHERE_CLAUSE_ASSET_HEX_HASH_EQ = Constant.FIELD_ASSET_HEX_HASH +
-            " = ?";
+    private static final String WHERE_CLAUSE_ASSET_HEX_HASH_EQ = Constant.FIELD_ASSET_HEX_HASH + " = ?";
 
     public AssetBean queryAssetByHash(String assetHexHash) {
         if (TextUtils.isEmpty(assetHexHash)) {

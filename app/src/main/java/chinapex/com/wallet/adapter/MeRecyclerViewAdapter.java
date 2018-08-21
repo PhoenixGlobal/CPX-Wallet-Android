@@ -5,13 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
+import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -47,9 +48,7 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
     @NonNull
     @Override
     public MeAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
-                        .recyclerview_me_item,
-                parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_me_item, parent, false);
         MeAdapterHolder holder = new MeAdapterHolder(view);
         view.setOnClickListener(this);
         return holder;
@@ -61,6 +60,21 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
         if (null == walletBean) {
             CpLog.e(TAG, "walletBean is null!");
             return;
+        }
+
+        switch (walletBean.getWalletType()) {
+            case Constant.WALLET_TYPE_NEO:
+                holder.walletType.setImageDrawable(ApexWalletApplication.getInstance().getResources().getDrawable(R.drawable
+                        .icon_wallet_type_neo));
+                break;
+            case Constant.WALLET_TYPE_ETH:
+                holder.walletType.setImageDrawable(ApexWalletApplication.getInstance().getResources().getDrawable(R.drawable
+                        .icon_wallet_type_eth));
+                break;
+            case Constant.WALLET_TYPE_CPX:
+                break;
+            default:
+                break;
         }
 
         holder.walletName.setText(walletBean.getName());
@@ -97,6 +111,7 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
     }
 
     class MeAdapterHolder extends RecyclerView.ViewHolder {
+        ImageView walletType;
         TextView walletName;
         TextView walletAddr;
         TextView isBackup;
@@ -104,6 +119,7 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
 
         MeAdapterHolder(View itemView) {
             super(itemView);
+            walletType = itemView.findViewById(R.id.iv_me_rv_item_wallet_type);
             walletName = itemView.findViewById(R.id.tv_me_rv_item_wallet_name);
             walletAddr = itemView.findViewById(R.id.tv_me_rv_item_wallet_addr);
             isBackup = itemView.findViewById(R.id.tv_me_rv_item_backup);

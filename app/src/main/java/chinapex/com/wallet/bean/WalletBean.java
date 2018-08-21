@@ -8,7 +8,8 @@ import android.os.Parcelable;
  * E-Mail：liuyi_61@163.com
  */
 
-public  class WalletBean implements Parcelable {
+public class WalletBean implements Parcelable {
+    private int walletType;
     private String name;
     private String address;
     private int backupState;
@@ -20,6 +21,14 @@ public  class WalletBean implements Parcelable {
 
     public WalletBean() {
 
+    }
+
+    public int getWalletType() {
+        return walletType;
+    }
+
+    public void setWalletType(int walletType) {
+        this.walletType = walletType;
     }
 
     public String getName() {
@@ -109,6 +118,7 @@ public  class WalletBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.walletType);
         dest.writeString(this.name);
         dest.writeString(this.address);
         dest.writeInt(this.backupState);
@@ -118,6 +128,7 @@ public  class WalletBean implements Parcelable {
     }
 
     protected WalletBean(Parcel in) {
+        this.walletType = in.readInt();
         this.name = in.readString();
         this.address = in.readString();
         this.backupState = in.readInt();
@@ -126,8 +137,7 @@ public  class WalletBean implements Parcelable {
         this.colorAssetJson = in.readString();
     }
 
-    public static final Parcelable.Creator<WalletBean> CREATOR = new Parcelable
-            .Creator<WalletBean>() {
+    public static final Creator<WalletBean> CREATOR = new Creator<WalletBean>() {
         @Override
         public WalletBean createFromParcel(Parcel source) {
             return new WalletBean(source);

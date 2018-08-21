@@ -54,9 +54,7 @@ public class AssetsOverviewRecyclerViewAdapter extends RecyclerView
     @NonNull
     @Override
     public AssetsOverviewAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
-                        .recyclerview_assets_overview_item,
-                parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_assets_overview_item, parent, false);
         AssetsOverviewAdapterHolder holder = new AssetsOverviewAdapterHolder(view);
         view.setOnClickListener(this);
         return holder;

@@ -13,9 +13,8 @@ import android.widget.TextView;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
-import chinapex.com.wallet.changelistener.OnItemStateUpdateListener;
+import chinapex.com.wallet.changelistener.OnWalletBackupStateUpdateListener;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -31,7 +30,7 @@ import chinapex.com.wallet.view.dialog.ExportKeystorePwdDialog;
  */
 
 public class MeManageDetailFragment extends BaseFragment implements View.OnClickListener,
-        OnItemStateUpdateListener {
+        OnWalletBackupStateUpdateListener {
 
     private static final String TAG = MeManageDetailFragment.class.getSimpleName();
     private TextView mTv_me_manager_detail_title;
@@ -61,8 +60,7 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
     private void initView(View view) {
         mTv_me_manager_detail_title = view.findViewById(R.id.tv_me_manager_detail_title);
         mTv_me_manager_detail_address = view.findViewById(R.id.tv_me_manager_detail_address);
-        mEt_me_manager_detail_bottom_wallet_name = view.findViewById(R.id
-                .et_me_manager_detail_bottom_wallet_name);
+        mEt_me_manager_detail_bottom_wallet_name = view.findViewById(R.id.et_me_manager_detail_bottom_wallet_name);
         mBt_me_manager_detail_backup = view.findViewById(R.id.bt_me_manager_detail_backup);
         mBt_me_manager_detail_delete = view.findViewById(R.id.bt_me_manager_detail_delete);
         mBt_me_manager_detail_save = view.findViewById(R.id.bt_me_manager_detail_save);
@@ -120,15 +118,28 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
     }
 
     private void modifyWalletName() {
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
         }
 
         String newWalletName = mEt_me_manager_detail_bottom_wallet_name.getText().toString().trim();
-        apexWalletDbDao.updateWalletName(Constant.TABLE_NEO_WALLET, mCurrentWalletBean.getAddress(), newWalletName);
+        switch (mCurrentWalletBean.getWalletType()) {
+            case Constant.WALLET_TYPE_NEO:
+                apexWalletDbDao.updateWalletName(Constant.TABLE_NEO_WALLET, mCurrentWalletBean.getAddress(), newWalletName);
+                break;
+            case Constant.WALLET_TYPE_ETH:
+                apexWalletDbDao.updateWalletName(Constant.TABLE_ETH_WALLET, mCurrentWalletBean.getAddress(), newWalletName);
+                break;
+            case Constant.WALLET_TYPE_CPX:
+                // TODO: 2018/8/21 0021
+                break;
+            default:
+                break;
+
+        }
+
         mTv_me_manager_detail_title.setText(newWalletName);
         mCurrentWalletBean.setName(newWalletName);
         ApexListeners.getInstance().notifyItemNameUpdate(mCurrentWalletBean);
@@ -155,13 +166,13 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
     }
 
     @Override
-    public void OnItemStateUpdate(NeoWallet neoWallet) {
-        if (null == neoWallet) {
-            CpLog.e(TAG, "neoWallet is null!");
+    public void onWalletBackupStateUpdate(WalletBean walletBean) {
+        if (null == walletBean) {
+            CpLog.e(TAG, "walletBean is null!");
             return;
         }
 
-        setIsShowBackupKey(neoWallet.getBackupState());
+        setIsShowBackupKey(walletBean.getBackupState());
     }
 
     private void setIsShowBackupKey(int backupState) {

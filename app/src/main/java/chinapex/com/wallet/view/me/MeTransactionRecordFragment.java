@@ -82,8 +82,7 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
 
     private void initView(View view) {
         mTv_me_transaction_record_title = view.findViewById(R.id.tv_me_transaction_record_title);
-        mTv_me_transaction_record_address = view.findViewById(R.id
-                .tv_me_transaction_record_address);
+        mTv_me_transaction_record_address = view.findViewById(R.id.tv_me_transaction_record_address);
         mIb_me_transaction_record_switch = view.findViewById(R.id.ib_me_transaction_record_switch);
         mSl_transaction_record = view.findViewById(R.id.sl_transaction_record);
         mRv_transaction_record = view.findViewById(R.id.rv_transaction_record);
@@ -96,20 +95,18 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
         mIb_tx_records_cancel.setOnClickListener(this);
 
 
-        mRv_transaction_record.setLayoutManager(new LinearLayoutManager(ApexWalletApplication
-                .getInstance(), LinearLayoutManager.VERTICAL, false));
+        mRv_transaction_record.setLayoutManager(new LinearLayoutManager(ApexWalletApplication.getInstance(),
+                LinearLayoutManager.VERTICAL, false));
         mTransactionRecords = new ArrayList<>();
         mSearchTxRecords = new ArrayList<>();
-        mTxRecyclerViewAdapter = new TransactionRecordRecyclerViewAdapter
-                (mTransactionRecords);
+        mTxRecyclerViewAdapter = new TransactionRecordRecyclerViewAdapter(mTransactionRecords);
         mTxRecyclerViewAdapter.setOnItemClickListener(this);
-        mEmptyAdapter = new EmptyAdapter(mTxRecyclerViewAdapter, ApexWalletApplication
-                .getInstance(), R.layout.recyclerview_empty_tx);
+        mEmptyAdapter = new EmptyAdapter(mTxRecyclerViewAdapter, ApexWalletApplication.getInstance(), R.layout
+                .recyclerview_empty_tx);
         mRv_transaction_record.setAdapter(mEmptyAdapter);
 
         mIb_me_transaction_record_switch.setOnClickListener(this);
-        mSl_transaction_record.setColorSchemeColors(this.getActivity().getResources().getColor(R
-                .color.c_1253BF));
+        mSl_transaction_record.setColorSchemeColors(this.getActivity().getResources().getColor(R.color.c_1253BF));
         mSl_transaction_record.setOnRefreshListener(this);
 
         // copy address

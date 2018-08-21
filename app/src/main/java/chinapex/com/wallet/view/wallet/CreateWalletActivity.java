@@ -21,7 +21,7 @@ import chinapex.com.wallet.bean.eth.EthWallet;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICreateWalletCallback;
 import chinapex.com.wallet.executor.callback.eth.ICreateEthWalletCallback;
-import chinapex.com.wallet.executor.runnable.CreateWallet;
+import chinapex.com.wallet.executor.runnable.CreateNeoWallet;
 import chinapex.com.wallet.executor.runnable.eth.CreateEthWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -153,7 +153,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
 
                 switch (walletType) {
                     case "NEO":
-                        TaskController.getInstance().submit(new CreateWallet(walletName,
+                        TaskController.getInstance().submit(new CreateNeoWallet(walletName,
                                 walletPwd, this));
                         break;
                     case "ETH":

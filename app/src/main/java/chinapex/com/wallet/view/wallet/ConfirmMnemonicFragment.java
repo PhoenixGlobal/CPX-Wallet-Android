@@ -227,13 +227,13 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
                 NeoWallet neoWallet = (NeoWallet) walletBean;
                 apexWalletDbDao.updateBackupState(Constant.TABLE_NEO_WALLET, neoWallet.getAddress(), Constant.BACKUP_FINISH);
                 neoWallet.setBackupState(Constant.BACKUP_FINISH);
-                ApexListeners.getInstance().notifyItemStateUpdate(neoWallet);
+                ApexListeners.getInstance().notifyWalletBackupStateUpdate(neoWallet);
                 break;
             case "EthWallet":
                 EthWallet ethWallet = (EthWallet) walletBean;
                 apexWalletDbDao.updateBackupState(Constant.TABLE_ETH_WALLET, ethWallet.getAddress(), Constant.BACKUP_FINISH);
                 ethWallet.setBackupState(Constant.BACKUP_FINISH);
-                ApexListeners.getInstance().notifyEthStateUpdate(ethWallet);
+                ApexListeners.getInstance().notifyWalletBackupStateUpdate(ethWallet);
                 break;
             default:
                 CpLog.e(TAG, "unknown wallet type!");
