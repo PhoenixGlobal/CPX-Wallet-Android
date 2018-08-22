@@ -2,9 +2,9 @@
 <resources>
     <!--主页底部导航-->
     <string-array name="main_bn_item_title">
-        <!--<item>发现</item>-->
         <item>@string/asset</item>
         <item>@string/me</item>
+        <item>@string/excitation</item>
     </string-array>
 
     <!--资产页，1侧滑菜单图片-->
@@ -74,5 +74,11 @@
     <string-array name="create_wallet_type">
         <item>@string/create_wallet_type_neo</item>
         <item>@string/create_wallet_type_eth</item>
+    </string-array>
+
+    <!--wallet import method，钱包导入方式-->
+    <string-array name="Wallet_import_method">
+        <item>@string/mnemonic</item>
+        <item>@string/keystore</item>
     </string-array>
 </resources>

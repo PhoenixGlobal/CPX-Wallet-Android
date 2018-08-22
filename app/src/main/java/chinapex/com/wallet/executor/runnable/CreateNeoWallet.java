@@ -91,7 +91,7 @@ public class CreateNeoWallet implements Runnable {
         }
 
         apexWalletDbDao.insert(Constant.TABLE_NEO_WALLET, neoWallet);
-        ApexListeners.getInstance().notifyNeoAdd(neoWallet);
+        ApexListeners.getInstance().notifyWalletAdd(neoWallet);
         mICreateWalletCallback.newWallet(wallet);
     }
 }

@@ -7,9 +7,6 @@ import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -26,10 +23,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         .OnTabSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Toolbar mTb_main;
     private BottomNavigationBar mBn_main;
     private String[] mBnItemTitles;
-    private TextView mTv_main_title;
     private static final int REQUEST_PERMISSION = 201;
 
 
@@ -38,15 +33,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant
-                .IS_FIRST_ENTER_MAIN, false);
+        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant.IS_FIRST_ENTER_MAIN, false);
 
         initData();
         initView();
-        initToolBar();
         initBottomNavigationBar();
         initFragment();
-        mTb_main.setVisibility(View.GONE);
         checkPermission();
     }
 
@@ -55,33 +47,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
     }
 
     private void initView() {
-        mTb_main = (Toolbar) findViewById(R.id.tb_main);
         mBn_main = (BottomNavigationBar) findViewById(R.id.bn_main);
-        mTv_main_title = (TextView) findViewById(R.id.tv_main_title);
-
-    }
-
-    private void initToolBar() {
-        mTb_main.setTitle("");
-        setSupportActionBar(mTb_main);
-        mTv_main_title.setText(mBnItemTitles[0]);
-
-//        ActionBar supportActionBar = getSupportActionBar();
-//        if (null == supportActionBar) {
-//            CpLog.e(TAG, "supportActionBar is null!");
-//            return;
-//        }
-//        supportActionBar.setDisplayHomeAsUpEnabled(true);
-//        supportActionBar.setDisplayShowTitleEnabled(false);
     }
 
     private void initBottomNavigationBar() {
-//        mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_discover,
-//                mBnItemTitles[0]));
-        mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_assets,
-                mBnItemTitles[0]));
-        mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_me,
-                mBnItemTitles[1]));
+        mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_assets, mBnItemTitles[0]));
+        mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_me, mBnItemTitles[1]));
+        mBn_main.addItem(new BottomNavigationItem(R.drawable.bn_main_item_excitation, mBnItemTitles[2]));
         mBn_main.setActiveColor(R.color.c_1253BF);
         mBn_main.setInActiveColor(R.color.c_979797);
         mBn_main.initialise();
@@ -99,8 +71,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         }
         fragmentTransaction.add(R.id.fl_main, FragmentFactory.getFragment(0), "0");
         fragmentTransaction.commit();
-
-        mTv_main_title.setText(mBnItemTitles[0]);
     }
 
     @Override
@@ -111,16 +81,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
             fragmentTransaction.add(R.id.fl_main, fragment, "" + position);
         }
         fragmentTransaction.show(fragment).commit();
-
-        mTv_main_title.setText(mBnItemTitles[position]);
-
-
-        //如果当前fragment为资产页，隐藏ToolBar
-//        if (position != 0) {
-//            mTb_main.setVisibility(View.GONE);
-//        } else {
-//            mTb_main.setVisibility(View.VISIBLE);
-//        }
     }
 
     @Override
@@ -137,13 +97,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
 
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
-                    .PERMISSION_GRANTED
-                    || checkSelfPermission(Manifest.permission.CAMERA) != PackageManager
-                    .PERMISSION_GRANTED) {
-                requestPermissions(
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest
-                                .permission.CAMERA},
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    || checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
                         REQUEST_PERMISSION);
             }
         }

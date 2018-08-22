@@ -64,13 +64,12 @@ public class Constant {
 
     // fragmentTag
     public static final String FRAGMENT_TAG_IMPORT_MNEMONIC = "ImportMnemonicFragment";
-    public static final String FRAGMENT_TAG_IMPORT_KEYSTORE = "ImportKeystoreFragmentNeo";
+    public static final String FRAGMENT_TAG_IMPORT_KEYSTORE = "ImportKeystoreFragment";
     public static final String FRAGMENT_TAG_BACKUP = "BackupFragment";
     public static final String FRAGMENT_TAG_COPY_MNEMONIC = "CopyMnemonicFragment";
     public static final String FRAGMENT_TAG_CONFIRM_MNEMONIC = "ConfirmMnemonicFragment";
     public static final String FRAGMENT_TAG_ME_MANAGE_DETAIL = "MeManageDetailFragment";
     public static final String FRAGMENT_TAG_ME_TRANSACTION_RECORD = "MeTransactionRecordFragment";
-    public static final String FRAGMENT_TAG_ME_PORTRAIT = "MePortraitFragment";
     public static final String FRAGMENT_TAG_ME_COMMON_PORTRAIT = "MeCommonPortraitFragment";
     public static final String FRAGMENT_TAG_ME_ENTERPRISE_PORTRAIT = "MeEnterprisePortraitFragment";
     public static final String FRAGMENT_TAG_ME_ENTERPRISE_KEY = "MeEnterpriseKeyFragment";
@@ -89,7 +88,6 @@ public class Constant {
     public static final int MAP_STATE_UNFINISHED = 0;
 
     // me
-    public static final String ME_MANAGER_DETAIL_BUNDLE = "meManagerDetailBundle";
     public static final String ME_SKIP_ACTIVITY_FRAGMENT_TAG = "meSkipActivityFragmentTag";
     public static final String ME_2_SHOULD_BE_SHOW = "me2ShouldBeShow";
     public static final String ME_2_SHOULD_BE_SHOW_MANAGE_WALLET = "me2ShouldBeShowManageWallet";
@@ -127,7 +125,7 @@ public class Constant {
     public static final String ASSETS_CPX = "0x45d493a6f73fa5f404244a5fb8472fc014ca5885";
 
     // ETH
-    public static final String ASSET_ETH = "ether123";
+    public static final String ASSETS_ETH = "ether123";
 
 
     // tmp 后台更新后删除

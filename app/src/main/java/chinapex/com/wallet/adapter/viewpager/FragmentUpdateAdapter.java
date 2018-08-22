@@ -23,8 +23,7 @@ public class FragmentUpdateAdapter extends MyFragmentPagerAdapter {
     private List<BaseFragment> mFragments;
     private List<String> mTitles;
 
-    public FragmentUpdateAdapter(FragmentManager fm, List<BaseFragment> fragments, List<String>
-            titles) {
+    public FragmentUpdateAdapter(FragmentManager fm, List<BaseFragment> fragments, List<String> titles) {
         super(fm);
         mFragmentManager = fm;
         mTags = new ArrayList<>();

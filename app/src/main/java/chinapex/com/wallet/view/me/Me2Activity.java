@@ -15,9 +15,8 @@ import chinapex.com.wallet.adapter.MeRecyclerViewAdapter;
 import chinapex.com.wallet.adapter.SpacesItemDecoration;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
-import chinapex.com.wallet.changelistener.OnItemNameUpdateListener;
+import chinapex.com.wallet.changelistener.OnWalletNameUpdateListener;
 import chinapex.com.wallet.changelistener.OnWalletBackupStateUpdateListener;
 import chinapex.com.wallet.changelistener.OnWalletDeleteListener;
 import chinapex.com.wallet.global.ApexWalletApplication;
@@ -27,7 +26,7 @@ import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
 
 public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
-        .OnItemClickListener, OnItemNameUpdateListener, OnWalletBackupStateUpdateListener,
+        .OnItemClickListener, OnWalletNameUpdateListener, OnWalletBackupStateUpdateListener,
         OnWalletDeleteListener {
     private static final String TAG = Me2Activity.class.getSimpleName();
     private List<WalletBean> mWalletBeans;
@@ -207,7 +206,7 @@ public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
 
     // 修改钱包名称回调
     @Override
-    public void OnItemNameUpdate(WalletBean walletBean) {
+    public void OnWalletNameUpdate(WalletBean walletBean) {
         if (null == walletBean) {
             CpLog.e(TAG, "neoWallet is null!");
             return;

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -16,8 +17,8 @@ import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.bean.eth.EthWallet;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICreateWalletCallback;
 import chinapex.com.wallet.executor.callback.eth.ICreateEthWalletCallback;
@@ -49,6 +50,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
     private Button mBt_create_wallet_import;
     private TextView mTv_create_wallet_privacy;
     private TextView mTv_create_wallet_type;
+    private ImageView mIv_create_wallet_arrows;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
 
     private void initView() {
         mTv_create_wallet_type = (TextView) findViewById(R.id.tv_create_wallet_type);
+        mIv_create_wallet_arrows = (ImageView) findViewById(R.id.iv_create_wallet_arrows);
         mEt_create_wallet_name = (EditText) findViewById(R.id.et_create_wallet_name);
         mEt_create_wallet_pwd = (EditText) findViewById(R.id.et_create_wallet_pwd);
         mEt_create_wallet_repeat_pwd = (EditText) findViewById(R.id.et_create_wallet_repeat_pwd);
@@ -69,10 +72,10 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         mTv_create_wallet_privacy = (TextView) findViewById(R.id.tv_create_wallet_privacy);
         mTl_create_wallet_name = (TextInputLayout) findViewById(R.id.tl_create_wallet_name);
         mTl_create_wallet_pwd = (TextInputLayout) findViewById(R.id.tl_create_wallet_pwd);
-        mTl_create_wallet_repeat_pwd = (TextInputLayout) findViewById(R.id
-                .tl_create_wallet_repeat_pwd);
+        mTl_create_wallet_repeat_pwd = (TextInputLayout) findViewById(R.id.tl_create_wallet_repeat_pwd);
 
         mTv_create_wallet_type.setOnClickListener(this);
+        mIv_create_wallet_arrows.setOnClickListener(this);
         mBt_create_wallet_confirm.setOnClickListener(this);
         mIb_create_wallet_privacy_point.setOnClickListener(this);
         mBt_create_wallet_import.setOnClickListener(this);
@@ -132,8 +135,8 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_create_wallet_arrows:
             case R.id.tv_create_wallet_type:
-                CpLog.i(TAG, "tv_create_wallet_type");
                 showOptionPicker();
                 break;
             case R.id.bt_create_wallet_confirm:
@@ -153,12 +156,10 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
 
                 switch (walletType) {
                     case "NEO":
-                        TaskController.getInstance().submit(new CreateNeoWallet(walletName,
-                                walletPwd, this));
+                        TaskController.getInstance().submit(new CreateNeoWallet(walletName, walletPwd, this));
                         break;
                     case "ETH":
-                        TaskController.getInstance().submit(new CreateEthWallet(walletName,
-                                walletPwd, this));
+                        TaskController.getInstance().submit(new CreateEthWallet(walletName, walletPwd, this));
                         break;
                     default:
                         break;
@@ -173,14 +174,12 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
                     mIsSelectedPrivacy = false;
                     mIb_create_wallet_privacy_point.setImageResource(R.drawable.icon_privacy_def);
                     mBt_create_wallet_confirm.setBackgroundResource(R.drawable.shape_gray_bt_bg);
-                    mBt_create_wallet_confirm.setTextColor(getResources().getColor(R.color
-                            .c_979797));
+                    mBt_create_wallet_confirm.setTextColor(getResources().getColor(R.color.c_979797));
                     mIsAgreePrivacy = false;
                 } else {
                     mIsSelectedPrivacy = true;
                     mIb_create_wallet_privacy_point.setImageResource(R.drawable.icon_privacy);
-                    mBt_create_wallet_confirm.setBackgroundResource(R.drawable
-                            .shape_new_visitor_bt_bg);
+                    mBt_create_wallet_confirm.setBackgroundResource(R.drawable.shape_new_visitor_bt_bg);
                     mBt_create_wallet_confirm.setTextColor(Color.WHITE);
                     mIsAgreePrivacy = true;
                 }
@@ -297,7 +296,6 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
             return;
         }
 
-        CpLog.i(TAG, "mnemonicEnUs eth:" + mnemonicEnUs);
         EthWallet ethWallet = new EthWallet();
         ethWallet.setAddress(wallet.address());
         ethWallet.setBackupState(Constant.BACKUP_UNFINISHED);
@@ -320,28 +318,22 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         picker.setDividerRatio(WheelView.DividerConfig.FILL);
         picker.setHeight(DensityUtil.dip2px(ApexWalletApplication.getInstance(), 200));
         picker.setTopHeight(40);
-        picker.setDividerColor(ApexWalletApplication.getInstance().getResources().getColor(R
-                .color.c_DDDDDD));
-        picker.setTopLineColor(ApexWalletApplication.getInstance().getResources().getColor(R
-                .color.c_DDDDDD));
-        picker.setTextColor(
-                Color.BLACK,
-                ApexWalletApplication.getInstance().getResources().getColor(R.color.c_999999));
+        picker.setDividerColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_DDDDDD));
+        picker.setTopLineColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_DDDDDD));
+        picker.setTextColor(Color.BLACK, ApexWalletApplication.getInstance().getResources().getColor(R.color.c_999999));
         picker.setSelectedIndex(1);
         picker.setTextSize(16);
 
         // set cancel
         picker.setCancelText(ApexWalletApplication.getInstance().getResources().getString(R
                 .string.cancel));
-        picker.setCancelTextColor(ApexWalletApplication.getInstance().getResources().getColor(R
-                .color.c_1253BF));
+        picker.setCancelTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_1253BF));
         picker.setCancelTextSize(14);
 
         // set confirm
         picker.setSubmitText(ApexWalletApplication.getInstance().getResources().getString(R
                 .string.confirm));
-        picker.setSubmitTextColor(ApexWalletApplication.getInstance().getResources().getColor(R
-                .color.c_1253BF));
+        picker.setSubmitTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_1253BF));
         picker.setSubmitTextSize(14);
 
         picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
