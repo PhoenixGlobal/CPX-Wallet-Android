@@ -58,7 +58,6 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     private final static int REQ_CODE = 1029;
     private TextView mTv_available_amount;
     private TextView mTv_amount_all;
-    private int mCurrentWalletType;
     private SeekBar mSb_transfer;
     private TextView mTv_transfer_gas;
 
@@ -95,8 +94,6 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             CpLog.e(TAG, "intent is null!");
             return;
         }
-
-        mCurrentWalletType = intent.getIntExtra(Constant.PARCELABLE_WALLET_TYPE, Constant.WALLET_TYPE_NEO);
 
         mWalletBean = intent.getParcelableExtra(Constant.PARCELABLE_WALLET_BEAN_TRANSFER);
         if (null == mWalletBean) {

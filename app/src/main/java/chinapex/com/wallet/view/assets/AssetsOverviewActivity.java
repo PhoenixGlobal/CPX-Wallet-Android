@@ -2,7 +2,6 @@ package chinapex.com.wallet.view.assets;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import chinapex.com.wallet.R;
@@ -48,7 +46,6 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
     private SwipeRefreshLayout mSl_assets_overview_rv;
     private ImageButton mIb_assets_overview_ellipsis;
     private List<String> mCurrentAssets;
-    private int mCurrentWalletType;
     private IGetBalancePresenter mIGetBalancePresenter;
 
     @Override
@@ -84,8 +81,6 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
             return;
         }
 
-        // 确定钱包类型 NEO/ETH/CPX
-        mCurrentWalletType = intent.getIntExtra(Constant.PARCELABLE_WALLET_TYPE, Constant.WALLET_TYPE_NEO);
         mWalletBean = intent.getParcelableExtra(Constant.WALLET_BEAN);
 
         mTv_assets_overview_wallet_name.setText(mWalletBean.getName());
@@ -106,7 +101,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
 
     private void getBalance() {
         mIGetBalancePresenter = new GetBalancePresenter(this);
-        mIGetBalancePresenter.init(mCurrentWalletType);
+        mIGetBalancePresenter.init(mWalletBean.getWalletType());
         mIGetBalancePresenter.getAssetBalance(mWalletBean);
     }
 
@@ -149,7 +144,6 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
         Intent intent = new Intent(ApexWalletApplication.getInstance(), BalanceDetailActivity.class);
         intent.putExtra(Constant.WALLET_BEAN, mWalletBean);
         intent.putExtra(Constant.BALANCE_BEAN, balanceBean);
-        intent.putExtra(Constant.PARCELABLE_WALLET_TYPE, mCurrentWalletType);
         startActivity(intent);
     }
 
@@ -195,7 +189,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
         for (String colorAsset : colorAssets) {
             AssetBean assetBean = apexWalletDbDao.queryAssetByHash(colorAsset);
             if (null == assetBean) {
-                CpLog.e(TAG, "assetBean is null!");
+                CpLog.e(TAG, "getColorAssets() -> assetBean is null!");
                 continue;
             }
 
@@ -235,7 +229,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
         for (String globalAsset : globalAssets) {
             AssetBean assetBean = apexWalletDbDao.queryAssetByHash(globalAsset);
             if (null == assetBean) {
-                CpLog.e(TAG, "assetBean is null!");
+                CpLog.e(TAG, "getGlobalAssets() -> assetBean is null!");
                 continue;
             }
 
@@ -319,7 +313,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
             return;
         }
 
-        switch (mCurrentWalletType) {
+        switch (mWalletBean.getWalletType()) {
             case Constant.WALLET_TYPE_NEO:
                 apexWalletDbDao.updateCheckedAssets(Constant.TABLE_NEO_WALLET, mWalletBean);
                 break;

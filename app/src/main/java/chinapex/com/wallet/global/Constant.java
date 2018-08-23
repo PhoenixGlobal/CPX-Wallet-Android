@@ -78,8 +78,11 @@ public class Constant {
     // import wallet from mnemonic
     public static final String WALLET_NAME_IMPORT_DEFAULT = "Wallet";
 
+    // import wallet from keystore
+    public static final String NEO_ADDRESS_START_WITH = "A";
+    public static final String ETH_ADDRESS_START_WITH = "0x";
+
     // assets
-    public static final String PARCELABLE_WALLET_TYPE = "parcelableWalletType";
     public static final String WALLET_BEAN = "walletBean";
     public static final String BALANCE_BEAN = "balanceBean";
 

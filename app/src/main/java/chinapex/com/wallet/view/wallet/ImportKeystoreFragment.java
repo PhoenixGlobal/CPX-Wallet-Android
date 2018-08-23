@@ -110,14 +110,19 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
             case R.id.ib_import_wallet_keystore_privacy_point:
                 if (mIsSelectedPrivacy) {
                     mIsSelectedPrivacy = false;
-                    mIb_import_wallet_keystore_privacy_point.setImageResource(R.drawable.icon_privacy_def);
-                    mBt_import_wallet_keystore.setBackgroundResource(R.drawable.shape_import_wallet_bt_bg_def);
-                    mBt_import_wallet_keystore.setTextColor(getResources().getColor(R.color.c_666666));
+                    mIb_import_wallet_keystore_privacy_point.setImageResource(R.drawable
+                            .icon_privacy_def);
+                    mBt_import_wallet_keystore.setBackgroundResource(R.drawable
+                            .shape_import_wallet_bt_bg_def);
+                    mBt_import_wallet_keystore.setTextColor(getResources().getColor(R.color
+                            .c_666666));
                     mIsAgreePrivacy = false;
                 } else {
                     mIsSelectedPrivacy = true;
-                    mIb_import_wallet_keystore_privacy_point.setImageResource(R.drawable.icon_privacy);
-                    mBt_import_wallet_keystore.setBackgroundResource(R.drawable.shape_new_visitor_bt_bg);
+                    mIb_import_wallet_keystore_privacy_point.setImageResource(R.drawable
+                            .icon_privacy);
+                    mBt_import_wallet_keystore.setBackgroundResource(R.drawable
+                            .shape_new_visitor_bt_bg);
                     mBt_import_wallet_keystore.setTextColor(Color.WHITE);
                     mIsAgreePrivacy = true;
                 }
@@ -142,10 +147,12 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
 
                 switch (walletType) {
                     case "NEO":
-                        TaskController.getInstance().submit(new FromKeystoreToNeoWallet(keystore, keystorePwd, this));
+                        TaskController.getInstance().submit(new FromKeystoreToNeoWallet(keystore,
+                                keystorePwd, this));
                         break;
                     case "ETH":
-                        TaskController.getInstance().submit(new FromKeystoreToEthWallet(keystore, keystorePwd, this));
+                        TaskController.getInstance().submit(new FromKeystoreToEthWallet(keystore,
+                                keystorePwd, this));
                         break;
                     default:
                         break;
@@ -161,8 +168,9 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         String pwd = mEt_import_wallet_keystore_pwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(keystore)) {
-            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources().getString(R.string
-                    .keystore_can_not_be_empty));
+            ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources()
+                    .getString(R.string
+                            .keystore_can_not_be_empty));
             CpLog.w(TAG, "keystore is null!");
             return false;
         }
@@ -197,6 +205,23 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
             return;
         }
 
+        String neoAddress = wallet.address();
+        if (TextUtils.isEmpty(neoAddress)) {
+            CpLog.e(TAG, "fromKeystoreToNeoWallet() -> neoAddress is null!");
+            return;
+        }
+
+        if (!neoAddress.startsWith(Constant.NEO_ADDRESS_START_WITH) || neoAddress.length() != 34) {
+            CpLog.e(TAG, "the address is not Neo type!");
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ToastUtils.getInstance().showToast(getString(R.string.select_correct_import_type));
+                }
+            });
+            return;
+        }
+
         keystoreToWallet(wallet.address(), Constant.WALLET_TYPE_NEO);
     }
 
@@ -214,11 +239,29 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
             return;
         }
 
+        String ethAddress = wallet.address();
+        if (TextUtils.isEmpty(ethAddress)) {
+            CpLog.e(TAG, "fromKeystoreToEthWallet() -> ethAddress is null!");
+            return;
+        }
+
+        if (!ethAddress.startsWith(Constant.ETH_ADDRESS_START_WITH)) {
+            CpLog.e(TAG, "the address is not Eth type!");
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ToastUtils.getInstance().showToast(getString(R.string.select_correct_import_type));
+                }
+            });
+            return;
+        }
+
         keystoreToWallet(wallet.address(), Constant.WALLET_TYPE_ETH);
     }
 
     private void keystoreToWallet(String walletAddress, int walletType) {
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
+                .getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
@@ -244,8 +287,9 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance().getResources().getString(R.string
-                            .wallet_exist));
+                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
+                            .getResources().getString(R.string
+                                    .wallet_exist));
                 }
             });
             return;
@@ -294,10 +338,12 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
     }
 
     private void isFirstEnter() {
-        boolean isFirstExport = (boolean) SharedPreferencesUtils.getParam(ApexWalletApplication.getInstance(), Constant
+        boolean isFirstExport = (boolean) SharedPreferencesUtils.getParam(ApexWalletApplication
+                .getInstance(), Constant
                 .IS_FIRST_ENTER_MAIN, true);
         if (isFirstExport) {
-            SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant.IS_FIRST_ENTER_MAIN, false);
+            SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant
+                    .IS_FIRST_ENTER_MAIN, false);
             startActivity(MainActivity.class, true);
         } else {
             getActivity().finish();
@@ -310,20 +356,27 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         picker.setDividerRatio(WheelView.DividerConfig.FILL);
         picker.setHeight(DensityUtil.dip2px(ApexWalletApplication.getInstance(), 200));
         picker.setTopHeight(40);
-        picker.setDividerColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_DDDDDD));
-        picker.setTopLineColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_DDDDDD));
-        picker.setTextColor(Color.BLACK, ApexWalletApplication.getInstance().getResources().getColor(R.color.c_999999));
+        picker.setDividerColor(ApexWalletApplication.getInstance().getResources().getColor(R
+                .color.c_DDDDDD));
+        picker.setTopLineColor(ApexWalletApplication.getInstance().getResources().getColor(R
+                .color.c_DDDDDD));
+        picker.setTextColor(Color.BLACK, ApexWalletApplication.getInstance().getResources()
+                .getColor(R.color.c_999999));
         picker.setSelectedIndex(1);
         picker.setTextSize(16);
 
         // set cancel
-        picker.setCancelText(ApexWalletApplication.getInstance().getResources().getString(R.string.cancel));
-        picker.setCancelTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_1253BF));
+        picker.setCancelText(ApexWalletApplication.getInstance().getResources().getString(R
+                .string.cancel));
+        picker.setCancelTextColor(ApexWalletApplication.getInstance().getResources().getColor(R
+                .color.c_1253BF));
         picker.setCancelTextSize(14);
 
         // set confirm
-        picker.setSubmitText(ApexWalletApplication.getInstance().getResources().getString(R.string.confirm));
-        picker.setSubmitTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_1253BF));
+        picker.setSubmitText(ApexWalletApplication.getInstance().getResources().getString(R
+                .string.confirm));
+        picker.setSubmitTextColor(ApexWalletApplication.getInstance().getResources().getColor(R
+                .color.c_1253BF));
         picker.setSubmitTextSize(14);
 
         picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {

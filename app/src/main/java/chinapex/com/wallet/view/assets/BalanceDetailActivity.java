@@ -70,7 +70,6 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
             return;
         }
 
-        mCurrentWalletType = intent.getIntExtra(Constant.PARCELABLE_WALLET_TYPE, Constant.WALLET_TYPE_NEO);
         mWalletBean = intent.getParcelableExtra(Constant.WALLET_BEAN);
         mBalanceBean = intent.getParcelableExtra(Constant.BALANCE_BEAN);
 
@@ -92,7 +91,6 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
                 Intent intentTransfer = new Intent(ApexWalletApplication.getInstance(), TransferActivity.class);
                 intentTransfer.putExtra(Constant.PARCELABLE_WALLET_BEAN_TRANSFER, mWalletBean);
                 intentTransfer.putExtra(Constant.PARCELABLE_BALANCE_BEAN_TRANSFER, mBalanceBean);
-                intentTransfer.putExtra(Constant.PARCELABLE_WALLET_TYPE, mCurrentWalletType);
                 startActivity(intentTransfer);
                 break;
             case R.id.bt_balance_detail_gathering:
@@ -132,7 +130,6 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
         intent.putExtra(Constant.PARCELABLE_WALLET_BEAN_TRANSFER, mWalletBean);
         intent.putExtra(Constant.PARCELABLE_BALANCE_BEAN_TRANSFER, mBalanceBean);
         intent.putExtra(Constant.PARCELABLE_QR_CODE_TRANSFER, qrCode);
-        intent.putExtra(Constant.PARCELABLE_WALLET_TYPE, mCurrentWalletType);
         startActivity(intent);
     }
 }

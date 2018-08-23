@@ -128,6 +128,7 @@
     <string name="select_wallet_type">Please Select The Wallet Type!</string>
     <string name="keystore_can_not_be_empty">Keystore can not be empty</string>
     <string name="mnemonic_can_not_be_empty">Mnemonic can not be empty</string>
+    <string name="select_correct_import_type">Select the correct import type!</string>
 
     <!--语言-->
     <string name="language_zh_cn">简体中文</string>
