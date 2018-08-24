@@ -78,8 +78,7 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
 
     private void initView(View view) {
         mTv_import_wallet_keystore_type = view.findViewById(R.id.tv_import_wallet_keystore_type);
-        mIv_import_wallet_keystore_arrows = view.findViewById(R.id
-                .iv_import_wallet_keystore_arrows);
+        mIv_import_wallet_keystore_arrows = view.findViewById(R.id.iv_import_wallet_keystore_arrows);
         mEt_import_wallet_keystore = view.findViewById(R.id.et_import_wallet_keystore);
         mEt_import_wallet_keystore_pwd = view.findViewById(R.id.et_import_wallet_keystore_pwd);
         mIb_import_wallet_keystore_privacy_point = view.findViewById(R.id
@@ -103,7 +102,7 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_create_wallet_arrows:
+            case R.id.iv_import_wallet_keystore_arrows:
             case R.id.tv_import_wallet_keystore_type:
                 showOptionPicker();
                 break;
@@ -245,7 +244,7 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
             return;
         }
 
-        if (!ethAddress.startsWith(Constant.ETH_ADDRESS_START_WITH)) {
+        if (!ethAddress.startsWith(Constant.ETH_ADDRESS_START_WITH) || ethAddress.length() != 42) {
             CpLog.e(TAG, "the address is not Eth type!");
             getActivity().runOnUiThread(new Runnable() {
                 @Override
