@@ -77,7 +77,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
 
         if (null == balanceBeans || balanceBeans.isEmpty()) {
             for (String globalAsset : mGlobalAssets) {
-                AssetBean assetBean = apexWalletDbDao.queryAssetByHash(globalAsset);
+                AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_NEO_ASSETS, globalAsset);
                 if (null == assetBean) {
                     CpLog.e(TAG, "assetBean is null!");
                     continue;
@@ -85,6 +85,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
 
                 BalanceBean balanceBean = new BalanceBean();
                 balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
+                balanceBean.setWalletType(Constant.WALLET_TYPE_NEO);
                 balanceBean.setAssetsID(globalAsset);
                 balanceBean.setAssetSymbol(assetBean.getSymbol());
                 balanceBean.setAssetType(Constant.ASSET_TYPE_GLOBAL);
@@ -98,7 +99,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
         }
 
         for (String globalAsset : mGlobalAssets) {
-            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(globalAsset);
+            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_NEO_ASSETS, globalAsset);
             if (null == assetBean) {
                 CpLog.e(TAG, "assetBean is null!");
                 continue;
@@ -106,6 +107,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
 
             BalanceBean balanceBean = new BalanceBean();
             balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
+            balanceBean.setWalletType(Constant.WALLET_TYPE_NEO);
             balanceBean.setAssetsID(globalAsset);
             balanceBean.setAssetSymbol(assetBean.getSymbol());
             balanceBean.setAssetType(Constant.ASSET_TYPE_GLOBAL);
@@ -167,7 +169,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
         mColorAssetCounter++;
 
         for (Map.Entry<String, BalanceBean> balanceBeanEntry : balanceBeans.entrySet()) {
-            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(balanceBeanEntry.getKey());
+            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_NEO_ASSETS, balanceBeanEntry.getKey());
             if (null == assetBean) {
                 CpLog.e(TAG, "assetBean is null!");
                 continue;
@@ -175,6 +177,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
 
             BalanceBean balanceBean = new BalanceBean();
             balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
+            balanceBean.setWalletType(Constant.WALLET_TYPE_NEO);
             balanceBean.setAssetsID(assetBean.getHexHash());
             balanceBean.setAssetSymbol(assetBean.getSymbol());
             balanceBean.setAssetType(Constant.ASSET_TYPE_NEP5);

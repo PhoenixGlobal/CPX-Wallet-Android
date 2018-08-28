@@ -77,7 +77,7 @@ public class GetNep5Balance implements Runnable, INetCallback {
 
         requestGetNep5Balance.setParams(params);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI, GsonUtils.toJsonStr(requestGetNep5Balance), this);
+        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_NEO, GsonUtils.toJsonStr(requestGetNep5Balance), this);
 
     }
 
@@ -133,6 +133,7 @@ public class GetNep5Balance implements Runnable, INetCallback {
 
             BalanceBean balanceBean = new BalanceBean();
             balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
+            balanceBean.setWalletType(Constant.WALLET_TYPE_NEO);
             balanceBean.setAssetsID(mAssetID);
             balanceBean.setAssetType(Constant.ASSET_TYPE_NEP5);
             balanceBean.setAssetDecimal(8);

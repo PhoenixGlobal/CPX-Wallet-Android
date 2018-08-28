@@ -37,7 +37,6 @@ public class BalanceDetailActivity extends BaseActivity implements View.OnClickL
     private final static int REQ_CODE = 1028;
     private ImageButton mIb_balance_detail_scan;
     private TextView mTv_balance_detail_wallet_name;
-    private int mCurrentWalletType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

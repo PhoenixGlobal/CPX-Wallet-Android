@@ -10,6 +10,10 @@ import android.os.Parcelable;
 public class BalanceBean implements Parcelable {
     // 映射状态值
     private int mapState;
+
+    // wallet type
+    private int walletType;
+
     // 当前资产
     private String assetsID;
     private String assetSymbol;
@@ -26,6 +30,14 @@ public class BalanceBean implements Parcelable {
 
     public void setMapState(int mapState) {
         this.mapState = mapState;
+    }
+
+    public int getWalletType() {
+        return walletType;
+    }
+
+    public void setWalletType(int walletType) {
+        this.walletType = walletType;
     }
 
     public String getAssetsID() {
@@ -77,6 +89,7 @@ public class BalanceBean implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.mapState);
+        dest.writeInt(this.walletType);
         dest.writeString(this.assetsID);
         dest.writeString(this.assetSymbol);
         dest.writeString(this.assetType);
@@ -86,6 +99,7 @@ public class BalanceBean implements Parcelable {
 
     protected BalanceBean(Parcel in) {
         this.mapState = in.readInt();
+        this.walletType = in.readInt();
         this.assetsID = in.readString();
         this.assetSymbol = in.readString();
         this.assetType = in.readString();

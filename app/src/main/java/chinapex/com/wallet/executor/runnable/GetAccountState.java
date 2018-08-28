@@ -46,7 +46,7 @@ public class GetAccountState implements Runnable, INetCallback {
         arrayList.add(mAddress);
         requestGetAccountState.setParams(arrayList);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI, GsonUtils.toJsonStr
+        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_NEO, GsonUtils.toJsonStr
                 (requestGetAccountState), this);
     }
 
@@ -83,6 +83,7 @@ public class GetAccountState implements Runnable, INetCallback {
 
             BalanceBean balanceBean = new BalanceBean();
             balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
+            balanceBean.setWalletType(Constant.WALLET_TYPE_NEO);
             balanceBean.setAssetsID(balance.getAsset());
             balanceBean.setAssetType(Constant.ASSET_TYPE_GLOBAL);
             balanceBean.setAssetDecimal(0);

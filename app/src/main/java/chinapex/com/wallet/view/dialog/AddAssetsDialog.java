@@ -20,7 +20,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -160,13 +159,14 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
             return;
         }
 
-        mAssetBeans = apexWalletDbDao.queryAssetsByType(Constant.ASSET_TYPE_NEP5);
+        mAssetBeans = apexWalletDbDao.queryAssetsByType(Constant.TABLE_NEO_ASSETS, Constant.ASSET_TYPE_NEP5);
         if (null == mAssetBeans || mAssetBeans.isEmpty()) {
             CpLog.e(TAG, "assetBeans is null or empty!");
             return;
         }
 
-        List<AssetBean> governingAssets = apexWalletDbDao.queryAssetsByType(Constant.ASSET_TYPE_GOVERNING);
+        List<AssetBean> governingAssets = apexWalletDbDao.queryAssetsByType(Constant.TABLE_NEO_ASSETS, Constant
+                .ASSET_TYPE_GOVERNING);
         if (null == governingAssets || governingAssets.isEmpty()) {
             CpLog.e(TAG, "governingAssets is null or empty!");
             return;
@@ -174,7 +174,7 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
 
         mAssetBeans.addAll(1, governingAssets);
 
-        List<AssetBean> utilityAssets = apexWalletDbDao.queryAssetsByType(Constant.ASSET_TYPE_UTILITY);
+        List<AssetBean> utilityAssets = apexWalletDbDao.queryAssetsByType(Constant.TABLE_NEO_ASSETS, Constant.ASSET_TYPE_UTILITY);
         if (null == utilityAssets || utilityAssets.isEmpty()) {
             CpLog.e(TAG, "utilityAssets is null or empty!");
             return;

@@ -790,9 +790,9 @@ public class ApexWalletDbDao {
         closeDatabase();
     }
 
-    public synchronized void insertAsset(AssetBean assetBean) {
-        if (null == assetBean) {
-            CpLog.e(TAG, "insertAsset() -> assetBean is null!");
+    public synchronized void insertAsset(String tableName, AssetBean assetBean) {
+        if (TextUtils.isEmpty(tableName) || null == assetBean) {
+            CpLog.e(TAG, "insertAsset() -> tableName or assetBean is null!");
             return;
         }
 
@@ -809,7 +809,7 @@ public class ApexWalletDbDao {
         SQLiteDatabase db = openDatabase();
         try {
             db.beginTransaction();
-            db.insertOrThrow(Constant.TABLE_ASSETS, null, contentValues);
+            db.insertOrThrow(tableName, null, contentValues);
             db.setTransactionSuccessful();
             CpLog.i(TAG, "insert() -> insert " + assetBean.getSymbol() + " ok!");
         } catch (SQLException e) {
@@ -822,17 +822,15 @@ public class ApexWalletDbDao {
 
     private static final String WHERE_CLAUSE_ASSET_TYPE_EQ = Constant.FIELD_ASSET_TYPE + " = ?";
 
-    public List<AssetBean> queryAssetsByType(String assetType) {
-        ArrayList<AssetBean> assetBeans = new ArrayList<>();
-
-        if (TextUtils.isEmpty(assetType)) {
-            CpLog.e(TAG, "queryAssetsByType() -> assetType is null!");
-            return assetBeans;
+    public List<AssetBean> queryAssetsByType(String tableName, String assetType) {
+        if (TextUtils.isEmpty(tableName) || TextUtils.isEmpty(assetType)) {
+            CpLog.e(TAG, "tableName or assetType is null!");
+            return null;
         }
 
+        ArrayList<AssetBean> assetBeans = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
-        Cursor cursor = db.query(Constant.TABLE_ASSETS, null, WHERE_CLAUSE_ASSET_TYPE_EQ, new
-                String[]{assetType}, null, null, null);
+        Cursor cursor = db.query(tableName, null, WHERE_CLAUSE_ASSET_TYPE_EQ, new String[]{assetType}, null, null, null);
         if (null != cursor) {
             while (cursor.moveToNext()) {
                 int assetTypeIndex = cursor.getColumnIndex(Constant.FIELD_ASSET_TYPE);
@@ -871,15 +869,15 @@ public class ApexWalletDbDao {
 
     private static final String WHERE_CLAUSE_ASSET_HEX_HASH_EQ = Constant.FIELD_ASSET_HEX_HASH + " = ?";
 
-    public AssetBean queryAssetByHash(String assetHexHash) {
-        if (TextUtils.isEmpty(assetHexHash)) {
-            CpLog.e(TAG, "queryAssetsByType() -> assetType is null!");
+    public AssetBean queryAssetByHash(String tableName, String assetHexHash) {
+        if (TextUtils.isEmpty(tableName) || TextUtils.isEmpty(assetHexHash)) {
+            CpLog.e(TAG, "queryAssetByHash() -> tableName or assetHexHash is null!");
             return null;
         }
 
         List<AssetBean> assetBeans = new ArrayList<>();
         SQLiteDatabase db = openDatabase();
-        Cursor cursor = db.query(Constant.TABLE_ASSETS, null, WHERE_CLAUSE_ASSET_HEX_HASH_EQ, new
+        Cursor cursor = db.query(tableName, null, WHERE_CLAUSE_ASSET_HEX_HASH_EQ, new
                 String[]{assetHexHash}, null, null, null);
         if (null != cursor) {
             while (cursor.moveToNext()) {

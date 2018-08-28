@@ -25,11 +25,10 @@ public class UpdateTxState implements Runnable, INetCallback {
     private String mWalletAddress;
     private IUpdateTxStateCallback mIUpdateTxStateCallback;
 
-    public UpdateTxState(String txId, String walletAddress, IUpdateTxStateCallback
-            IUpdateTxStateCallback) {
+    public UpdateTxState(String txId, String walletAddress, IUpdateTxStateCallback iUpdateTxStateCallback) {
         mTxId = txId;
         mWalletAddress = walletAddress;
-        mIUpdateTxStateCallback = IUpdateTxStateCallback;
+        mIUpdateTxStateCallback = iUpdateTxStateCallback;
     }
 
     @Override
@@ -50,26 +49,22 @@ public class UpdateTxState implements Runnable, INetCallback {
         requestGetRawTransaction.setParams(params);
         requestGetRawTransaction.setId(1);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI, GsonUtils.toJsonStr
-                (requestGetRawTransaction), this);
+        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_NEO, GsonUtils.toJsonStr(requestGetRawTransaction), this);
     }
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
-        ResponseGetRawTransaction responseGetRawTransaction = GsonUtils.json2Bean(result,
-                ResponseGetRawTransaction.class);
+        ResponseGetRawTransaction responseGetRawTransaction = GsonUtils.json2Bean(result, ResponseGetRawTransaction.class);
         if (null == responseGetRawTransaction) {
             CpLog.e(TAG, "responseGetRawTransaction is null!");
-            mIUpdateTxStateCallback.updateTxState(mTxId, mWalletAddress, Constant
-                    .TX_CONFIRM_EXCEPTION);
+            mIUpdateTxStateCallback.updateTxState(mTxId, mWalletAddress, Constant.TX_CONFIRM_EXCEPTION);
             return;
         }
 
         ResponseGetRawTransaction.ResultBean resultBean = responseGetRawTransaction.getResult();
         if (null == resultBean) {
-            CpLog.e(TAG, "resultBean");
-            mIUpdateTxStateCallback.updateTxState(mTxId, mWalletAddress, Constant
-                    .TX_CONFIRM_EXCEPTION);
+            CpLog.e(TAG, "resultBean is null!");
+            mIUpdateTxStateCallback.updateTxState(mTxId, mWalletAddress, Constant.TX_CONFIRM_EXCEPTION);
             return;
         }
 

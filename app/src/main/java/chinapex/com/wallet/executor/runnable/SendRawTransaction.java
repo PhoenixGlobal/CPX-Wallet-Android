@@ -46,7 +46,7 @@ public class SendRawTransaction implements Runnable, INetCallback {
         requestSendRawTransaction.setParams(sendDatas);
         requestSendRawTransaction.setId(1);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI, GsonUtils.toJsonStr
+        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_NEO, GsonUtils.toJsonStr
                 (requestSendRawTransaction), this);
     }
 

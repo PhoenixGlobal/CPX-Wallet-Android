@@ -82,6 +82,10 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
         }
 
         mWalletBean = intent.getParcelableExtra(Constant.WALLET_BEAN);
+        if (null == mWalletBean) {
+            CpLog.e(TAG, "initData() -> mWalletBean is null!");
+            return;
+        }
 
         mTv_assets_overview_wallet_name.setText(mWalletBean.getName());
         mTv_assets_overview_wallet_address.setText(mWalletBean.getAddress());
@@ -103,34 +107,6 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
         mIGetBalancePresenter = new GetBalancePresenter(this);
         mIGetBalancePresenter.init(mWalletBean.getWalletType());
         mIGetBalancePresenter.getAssetBalance(mWalletBean);
-    }
-
-    @Override
-    public void getGlobalAssetBalance(List<BalanceBean> balanceBeans) {
-        mBalanceBeans.addAll(balanceBeans);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (mSl_assets_overview_rv.isRefreshing()) {
-                    mSl_assets_overview_rv.setRefreshing(false);
-                }
-                mAssetsOverviewRecyclerViewAdapter.notifyDataSetChanged();
-            }
-        });
-    }
-
-    @Override
-    public void getColorAssetBalance(List<BalanceBean> balanceBeans) {
-        mBalanceBeans.addAll(balanceBeans);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (mSl_assets_overview_rv.isRefreshing()) {
-                    mSl_assets_overview_rv.setRefreshing(false);
-                }
-                mAssetsOverviewRecyclerViewAdapter.notifyDataSetChanged();
-            }
-        });
     }
 
     @Override
@@ -178,16 +154,38 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
             return null;
         }
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null");
             return null;
         }
 
+        String tableName = null;
+        String assetType = null;
+        switch (mWalletBean.getWalletType()) {
+            case Constant.WALLET_TYPE_NEO:
+                tableName = Constant.TABLE_NEO_ASSETS;
+                assetType = Constant.ASSET_TYPE_NEP5;
+                break;
+            case Constant.WALLET_TYPE_ETH:
+                tableName = Constant.TABLE_ETH_ASSETS;
+                assetType = Constant.ASSET_TYPE_ERC20;
+                break;
+            case Constant.WALLET_TYPE_CPX:
+                tableName = Constant.TABLE_CPX_ASSETS;
+                break;
+            default:
+                break;
+        }
+
+        if (TextUtils.isEmpty(tableName) || TextUtils.isEmpty(assetType)) {
+            CpLog.e(TAG, "getColorAssets() -> tableName or assetType is null!");
+            return null;
+        }
+
         ArrayList<BalanceBean> balanceBeans = new ArrayList<>();
         for (String colorAsset : colorAssets) {
-            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(colorAsset);
+            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(tableName, colorAsset);
             if (null == assetBean) {
                 CpLog.e(TAG, "getColorAssets() -> assetBean is null!");
                 continue;
@@ -195,9 +193,10 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
 
             BalanceBean balanceBean = new BalanceBean();
             balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
+            balanceBean.setWalletType(mWalletBean.getWalletType());
             balanceBean.setAssetsID(colorAsset);
             balanceBean.setAssetSymbol(assetBean.getSymbol());
-            balanceBean.setAssetType(Constant.ASSET_TYPE_NEP5);
+            balanceBean.setAssetType(assetType);
             balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
             balanceBean.setAssetsValue("0");
             balanceBeans.add(balanceBean);
@@ -225,9 +224,32 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
             return null;
         }
 
+        String tableName = null;
+        String assetType = null;
+        switch (mWalletBean.getWalletType()) {
+            case Constant.WALLET_TYPE_NEO:
+                tableName = Constant.TABLE_NEO_ASSETS;
+                assetType = Constant.ASSET_TYPE_GLOBAL;
+                break;
+            case Constant.WALLET_TYPE_ETH:
+                tableName = Constant.TABLE_ETH_ASSETS;
+                assetType = Constant.ASSET_TYPE_ETH;
+                break;
+            case Constant.WALLET_TYPE_CPX:
+                tableName = Constant.TABLE_CPX_ASSETS;
+                break;
+            default:
+                break;
+        }
+
+        if (TextUtils.isEmpty(tableName) || TextUtils.isEmpty(assetType)) {
+            CpLog.e(TAG, "getGlobalAssets() -> tableName or assetType is null!");
+            return null;
+        }
+
         ArrayList<BalanceBean> balanceBeans = new ArrayList<>();
         for (String globalAsset : globalAssets) {
-            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(globalAsset);
+            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(tableName, globalAsset);
             if (null == assetBean) {
                 CpLog.e(TAG, "getGlobalAssets() -> assetBean is null!");
                 continue;
@@ -235,9 +257,10 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
 
             BalanceBean balanceBean = new BalanceBean();
             balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
+            balanceBean.setWalletType(mWalletBean.getWalletType());
             balanceBean.setAssetsID(globalAsset);
             balanceBean.setAssetSymbol(assetBean.getSymbol());
-            balanceBean.setAssetType(Constant.ASSET_TYPE_GLOBAL);
+            balanceBean.setAssetType(assetType);
             balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
             balanceBean.setAssetsValue("0");
             balanceBeans.add(balanceBean);
@@ -329,10 +352,18 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
 
     @Override
     public void getAssetBalance(final List<BalanceBean> balanceBeans) {
+        CpLog.i(TAG, "getAssetBalance()");
         if (null == balanceBeans || balanceBeans.isEmpty()) {
             CpLog.e(TAG, "balanceBeans is null or emtpy!");
             return;
         }
+
+        for (BalanceBean balanceBean : balanceBeans) {
+            CpLog.i(TAG, "balanceBean type:" + balanceBean.getWalletType());
+            CpLog.i(TAG, "balanceBean id:" + balanceBean.getAssetsID());
+            CpLog.i(TAG, "balanceBean value:" + balanceBean.getAssetsValue());
+        }
+
 
         mBalanceBeans.clear();
         mBalanceBeans.addAll(balanceBeans);

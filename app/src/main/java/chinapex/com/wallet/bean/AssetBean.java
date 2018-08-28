@@ -12,7 +12,7 @@ public class AssetBean {
     private String imageUrl;
     private String hexHash;
     private String hash;
-    private String creatTime;
+    private String createTime;
     private boolean isChecked;
 
     public String getType() {
@@ -71,12 +71,12 @@ public class AssetBean {
         this.hash = hash;
     }
 
-    public String getCreatTime() {
-        return creatTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public boolean isChecked() {

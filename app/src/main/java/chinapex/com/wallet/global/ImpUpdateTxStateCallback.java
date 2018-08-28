@@ -19,8 +19,7 @@ import chinapex.com.wallet.utils.CpLog;
  * E-Mail：liuyi_61@163.com
  */
 
-public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback,
-        IGetTransactionHistoryCallback {
+public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback, IGetTransactionHistoryCallback {
 
     private static final String TAG = ImpUpdateTxStateCallback.class.getSimpleName();
     private String mTxId;
@@ -69,8 +68,11 @@ public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback,
             return;
         }
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        handleFailedTx();
+    }
+
+    private void handleFailedTx() {
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
@@ -78,10 +80,9 @@ public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback,
 
         List<TransactionRecord> cacheTxs = apexWalletDbDao.queryTxCacheByTxId(mTxId);
         if (null == cacheTxs || cacheTxs.isEmpty()) {
-            apexWalletDbDao.updateTxState(Constant.TABLE_TRANSACTION_RECORD, mTxId, Constant
-                    .TRANSACTION_STATE_SUCCESS);
-            ApexListeners.getInstance().notifyTxStateUpdate(mTxId, Constant
-                    .TRANSACTION_STATE_SUCCESS, Constant.NO_NEED_MODIFY_TX_TIME);
+            apexWalletDbDao.updateTxState(Constant.TABLE_TRANSACTION_RECORD, mTxId, Constant.TRANSACTION_STATE_SUCCESS);
+            ApexListeners.getInstance().notifyTxStateUpdate(mTxId, Constant.TRANSACTION_STATE_SUCCESS, Constant
+                    .NO_NEED_MODIFY_TX_TIME);
             return;
         }
 
@@ -94,8 +95,7 @@ public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback,
             cacheTx.setTxState(Constant.TRANSACTION_STATE_FAIL);
             apexWalletDbDao.insertTxRecord(Constant.TABLE_TRANSACTION_RECORD, cacheTx);
         }
-        ApexListeners.getInstance().notifyTxStateUpdate(mTxId, Constant.TRANSACTION_STATE_FAIL,
-                Constant.NO_NEED_MODIFY_TX_TIME);
+        ApexListeners.getInstance().notifyTxStateUpdate(mTxId, Constant.TRANSACTION_STATE_FAIL, Constant.NO_NEED_MODIFY_TX_TIME);
         apexWalletDbDao.delCacheByTxId(mTxId);
     }
 }

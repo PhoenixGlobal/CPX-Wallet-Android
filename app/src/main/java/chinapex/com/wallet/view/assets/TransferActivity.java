@@ -16,50 +16,37 @@ import java.math.BigDecimal;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
-import chinapex.com.wallet.bean.AssertTxBean;
-import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
-import chinapex.com.wallet.bean.Nep5TxBean;
-import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.executor.TaskController;
-import chinapex.com.wallet.executor.callback.ICreateAssertTxCallback;
-import chinapex.com.wallet.executor.callback.ICreateNep5TxCallback;
-import chinapex.com.wallet.executor.callback.IGetUtxosCallback;
-import chinapex.com.wallet.executor.callback.ISendRawTransactionCallback;
-import chinapex.com.wallet.executor.runnable.CreateAssertTx;
-import chinapex.com.wallet.executor.runnable.CreateNep5Tx;
-import chinapex.com.wallet.executor.runnable.GetUtxos;
-import chinapex.com.wallet.executor.runnable.SendRawTransaction;
-import chinapex.com.wallet.global.ApexGlobalTask;
+import chinapex.com.wallet.bean.tx.EthTxBean;
+import chinapex.com.wallet.bean.tx.ITxBean;
+import chinapex.com.wallet.bean.tx.NeoTxBean;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
-import chinapex.com.wallet.model.ApexWalletDbDao;
+import chinapex.com.wallet.presenter.transfer.CreateTxPresenter;
+import chinapex.com.wallet.presenter.transfer.ICreateTxPresenter;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.dialog.TransferPwdDialog;
-import neomobile.Tx;
 import neomobile.Wallet;
 
-public class TransferActivity extends BaseActivity implements View.OnClickListener,
-        IGetUtxosCallback, ISendRawTransactionCallback, ICreateAssertTxCallback,
-        TransferPwdDialog.OnCheckPwdListener, ICreateNep5TxCallback, SeekBar.OnSeekBarChangeListener {
+public class TransferActivity extends BaseActivity implements View.OnClickListener, TransferPwdDialog.OnCheckPwdListener,
+        SeekBar.OnSeekBarChangeListener, ICreateTxView {
 
     private static final String TAG = TransferActivity.class.getSimpleName();
     private WalletBean mWalletBean;
     private BalanceBean mBalanceBean;
     private Button mBt_transfer_send;
-    private Wallet mWalletFrom;
     private EditText mEt_transfer_amount;
     private EditText mEt_transfer_to_wallet_addr;
     private TextView mTv_transfer_unit;
-    private String mOrder;
     private ImageButton mIb_transfer_scan;
     private final static int REQ_CODE = 1029;
     private TextView mTv_available_amount;
     private TextView mTv_amount_all;
     private SeekBar mSb_transfer;
     private TextView mTv_transfer_gas;
+    private ICreateTxPresenter mICreateTxPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +97,9 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         mTv_transfer_unit.setText(mBalanceBean.getAssetSymbol().toUpperCase());
         mTv_available_amount.setText(mBalanceBean.getAssetsValue());
         mTv_transfer_gas.setText(String.valueOf(mSb_transfer.getProgress() / 100.0 + " ether"));
+
+        mICreateTxPresenter = new CreateTxPresenter(this);
+        mICreateTxPresenter.init(mWalletBean.getWalletType());
 
         String qrCode = intent.getStringExtra(Constant.PARCELABLE_QR_CODE_TRANSFER);
         if (TextUtils.isEmpty(qrCode)) {
@@ -188,169 +178,49 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             return;
         }
 
-        mWalletFrom = wallet;
-        TaskController.getInstance().submit(new GetUtxos(mWalletFrom.address(), this));
-    }
+        ITxBean iTxBean = null;
+        switch (mWalletBean.getWalletType()) {
+            case Constant.WALLET_TYPE_NEO:
+                NeoTxBean neoTxBean = new NeoTxBean();
+                neoTxBean.setWallet(wallet);
+                neoTxBean.setAssetID(mBalanceBean.getAssetsID());
+                neoTxBean.setAssetDecimal(mBalanceBean.getAssetDecimal());
+                neoTxBean.setFromAddress(wallet.address());
+                neoTxBean.setToAddress(mEt_transfer_to_wallet_addr.getText().toString().trim());
+                neoTxBean.setAmount(mEt_transfer_amount.getText().toString().trim());
+                iTxBean = neoTxBean;
+                break;
+            case Constant.WALLET_TYPE_ETH:
+                iTxBean = new EthTxBean();
+                break;
+            case Constant.WALLET_TYPE_CPX:
+                break;
+            default:
+                break;
+        }
 
-    @Override
-    public void getUtxos(String utxos) {
-        switch (mBalanceBean.getAssetType()) {
+        if (null == iTxBean) {
+            CpLog.e(TAG, "iTxBean is null!");
+            return;
+        }
+
+        String assetType = mBalanceBean.getAssetType();
+        if (TextUtils.isEmpty(assetType)) {
+            CpLog.e(TAG, "assetType is null or empty!");
+            return;
+        }
+
+        switch (assetType) {
             case Constant.ASSET_TYPE_GLOBAL:
-                startAssertTx(utxos);
+                mICreateTxPresenter.createGlobalTx(iTxBean);
                 break;
             case Constant.ASSET_TYPE_NEP5:
-                startNep5Tx();
+                mICreateTxPresenter.createColorTx(iTxBean);
                 break;
             default:
                 CpLog.w(TAG, "illegal asset");
                 break;
         }
-    }
-
-    private void startAssertTx(String utxos) {
-        if (TextUtils.isEmpty(utxos) || "[]".equals(utxos)) {
-            CpLog.e(TAG, "utxos is null or []!");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
-                            .getResources().getString(R.string.generate_utxo_failed));
-                }
-            });
-            return;
-        }
-
-        AssertTxBean assertTxBean = new AssertTxBean();
-        assertTxBean.setAssetsID(mBalanceBean.getAssetsID());
-        assertTxBean.setAddrFrom(mWalletFrom.address());
-        assertTxBean.setAddrTo(mEt_transfer_to_wallet_addr.getText().toString().trim());
-        assertTxBean.setTransferAmount(Double.valueOf(mEt_transfer_amount.getText().toString()
-                .trim()));
-        assertTxBean.setUtxos(utxos);
-
-        TaskController.getInstance().submit(new CreateAssertTx(mWalletFrom, assertTxBean, this));
-    }
-
-    private void startNep5Tx() {
-        Nep5TxBean nep5TxBean = new Nep5TxBean();
-        nep5TxBean.setAssetID(mBalanceBean.getAssetsID());
-        nep5TxBean.setAssetDecimal(mBalanceBean.getAssetDecimal());
-        nep5TxBean.setAddrFrom(mWalletFrom.address());
-        nep5TxBean.setAddrTo(mEt_transfer_to_wallet_addr.getText().toString().trim());
-        nep5TxBean.setTransferAmount(mEt_transfer_amount.getText().toString().trim());
-        nep5TxBean.setUtxos("[]");
-
-        TaskController.getInstance().submit(new CreateNep5Tx(mWalletFrom, nep5TxBean, this));
-    }
-
-    @Override
-    public void createAssertTx(Tx tx) {
-        if (null == tx) {
-            CpLog.e(TAG, "createAssertTx() -> tx is null！");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
-                            .getResources().getString(R.string.transaction_creation_failed));
-                }
-            });
-            return;
-        }
-
-        mOrder = "0x" + tx.getID();
-        CpLog.i(TAG, "createAssertTx order:" + mOrder);
-
-//        String data = tx.getData();
-//        CpLog.i(TAG, "createAssertTx data:" + data);
-
-        TaskController.getInstance().submit(new SendRawTransaction(tx.getData(), this));
-    }
-
-    @Override
-    public void createNep5Tx(Tx tx) {
-        if (null == tx) {
-            CpLog.e(TAG, "createNep5Tx() -> tx is null！");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
-                            .getResources().getString(R.string.transaction_creation_failed));
-                }
-            });
-            return;
-        }
-
-        mOrder = "0x" + tx.getID();
-        CpLog.i(TAG, "createNep5Tx order:" + mOrder);
-
-        String data = tx.getData();
-        CpLog.i(TAG, "createNep5Tx data:" + data);
-
-        TaskController.getInstance().submit(new SendRawTransaction(tx.getData(), this));
-    }
-
-    @Override
-    public void sendTxData(final Boolean isSuccess) {
-        // write db
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance
-                (ApexWalletApplication.getInstance());
-        if (null == apexWalletDbDao) {
-            CpLog.e(TAG, "apexWalletDbDao is null!");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
-                            .getResources().getString(R.string.db_exception));
-                    finish();
-                }
-            });
-            return;
-        }
-
-        TransactionRecord transactionRecord = new TransactionRecord();
-        transactionRecord.setWalletAddress(mWalletFrom.address());
-        transactionRecord.setTxAmount(String.valueOf("-" + mEt_transfer_amount.getText().toString
-                ().trim()));
-        transactionRecord.setTxFrom(mWalletFrom.address());
-        transactionRecord.setTxTo(mEt_transfer_to_wallet_addr.getText().toString().trim());
-        transactionRecord.setTxTime(0);
-        transactionRecord.setTxID(mOrder);
-
-        AssetBean assetBean = apexWalletDbDao.queryAssetByHash(mBalanceBean.getAssetsID());
-        if (null == assetBean) {
-            CpLog.e(TAG, "assetBean is null!");
-            return;
-        }
-
-        transactionRecord.setAssetID(mBalanceBean.getAssetsID());
-        transactionRecord.setAssetLogoUrl(assetBean.getImageUrl());
-        transactionRecord.setAssetSymbol(assetBean.getSymbol());
-
-        if (isSuccess) {
-            transactionRecord.setTxState(Constant.TRANSACTION_STATE_PACKAGING);
-            apexWalletDbDao.insertTxRecord(Constant.TABLE_TX_CACHE, transactionRecord);
-        } else {
-            transactionRecord.setTxState(Constant.TRANSACTION_STATE_FAIL);
-            apexWalletDbDao.insertTxRecord(Constant.TABLE_TRANSACTION_RECORD, transactionRecord);
-        }
-
-        // prompt the user
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (isSuccess) {
-                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
-                            .getResources().getString(R.string.transaction_broadcast_successful));
-                } else {
-                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
-                            .getResources().getString(R.string.transaction_broadcast_failed));
-                }
-            }
-        });
-
-        // start polling
-        ApexGlobalTask.getInstance().startPolling(mOrder, mWalletFrom.address());
-        finish();
     }
 
     // QR_CODE Result
@@ -390,5 +260,18 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
+    }
+
+    @Override
+    public void createTxMsg(final String toastMsg, final boolean isFinish) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtils.getInstance().showToast(toastMsg);
+                if (isFinish) {
+                    finish();
+                }
+            }
+        });
     }
 }

@@ -113,8 +113,8 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         mRv_assets.addItemDecoration(new SpacesItemDecoration(space));
 
 //        mRv_assets.setAdapter(mAssetsRecyclerViewAdapter);
-        mEmptyAdapter = new EmptyAdapter(mAssetsRecyclerViewAdapter, ApexWalletApplication
-                .getInstance(), R.layout.recyclerview_empty_wallet);
+        mEmptyAdapter = new EmptyAdapter(mAssetsRecyclerViewAdapter, ApexWalletApplication.getInstance(), R.layout
+                .recyclerview_empty_wallet);
         mRv_assets.setAdapter(mEmptyAdapter);
 
         mSl_assets_rv.setColorSchemeColors(this.getActivity().getResources().getColor(R.color.c_1253BF));
