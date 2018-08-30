@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/d_189dp"
+    android:layout_height="159dp"
+    android:background="@drawable/gradient_dialog_pwd_bg">
+
+    <TextView
+        android:id="@+id/tv_excitation_dialog_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="@dimen/d_30dp"
+        android:gravity="center"
+        android:text="@string/excitation_detail_sum_dialog_note"
+        android:textColor="@color/c_030303"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/bt_excitation_confirm"
+        android:background="@color/c_DDDDDD" />
+
+    <Button
+        android:id="@+id/bt_excitation_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@null"
+        android:gravity="center"
+        android:text="@string/excitation_detail_sum_dialog_confirm"
+        android:textAllCaps="false"
+        android:textColor="#007AFF"
+        android:textSize="@dimen/paratext_14sp" />
+
+</RelativeLayout>

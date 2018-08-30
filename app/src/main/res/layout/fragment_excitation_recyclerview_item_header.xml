@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d_63dp"
+    android:orientation="vertical"
+    android:visibility="invisible">
+    <View
+        android:id="@+id/view_recyclerview_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_535353"/>
+
+</RelativeLayout>

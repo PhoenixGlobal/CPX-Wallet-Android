@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_F0F0F0"
+    tools:context=".view.excitation.detail.ExcitationDetailActivity">
+
+    <RelativeLayout
+        android:id="@+id/excitation_detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/excitation_actionbar_bg">
+
+        <TextView
+            android:id="@+id/tv_excitation_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/d_25dp"
+            android:text="@string/excitation"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/d_17sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/cpx_address_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/excitation_detail_header"
+        android:layout_marginTop="@dimen/d_34dp">
+
+        <TextView
+            android:id="@+id/cpx_address_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d_12dp"
+            android:text="@string/excitation_detail_cpx_address"
+            android:textSize="@dimen/d_13sp" />
+
+        <EditText
+            android:id="@+id/cpx_address_input"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_46dp"
+            android:layout_below="@id/cpx_address_title"
+            android:layout_marginTop="@dimen/d_5dp"
+            android:background="@color/c_FFFFFF"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/d_13dp"
+            android:paddingStart="@dimen/d_15dp"
+            android:paddingTop="@dimen/d_16dp"
+            android:textColor="@color/c_666666"
+            android:textSize="@dimen/d_12sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_excitation_detail_wrong_address_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cpx_address_container"
+        android:layout_marginStart="@dimen/d_11dp"
+        android:layout_marginTop="@dimen/d_3dp"
+        android:text="@string/excitation_detail_wrong_address_note"
+        android:textColor="@color/c_D0021B"
+        android:textSize="@dimen/d_12sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/eth_address_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cpx_address_container"
+        android:layout_marginTop="@dimen/d_35dp">
+
+        <TextView
+            android:id="@+id/eth_address_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d_13sp"
+            android:text="@string/excitation_detail_eth_address" />
+
+        <EditText
+            android:id="@+id/eth_address_input"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_46dp"
+            android:layout_below="@id/eth_address_title"
+            android:layout_marginTop="@dimen/d_5dp"
+            android:background="@color/c_FFFFFF"
+            android:paddingBottom="@dimen/d_13dp"
+            android:paddingStart="@dimen/d_15dp"
+            android:paddingTop="@dimen/d_16dp"
+            android:textColor="@color/c_666666"
+            android:textSize="@dimen/d_12sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eth_address_container"
+        >
+
+        <ImageView
+            android:id="@+id/excitation_note_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/excitation_detail_note"
+            android:layout_marginStart="@dimen/d_43dp"
+            android:layout_marginTop="@dimen/d_33dp"/>
+
+        <TextView
+            android:id="@+id/excitation_note_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@+id/excitation_note_pic"
+            android:text="@string/excitation_detail_condition_tip"
+            android:textColor="@color/c_666666"
+            android:textSize="@dimen/d_12sp"
+            android:layout_marginStart="@dimen/d_3dp"
+            android:layout_marginTop="@dimen/d_30dp"
+            android:layout_marginEnd="@dimen/d_42dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_excitation_detail_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_excitation_submit"
+        android:layout_marginBottom="@dimen/d_22dp"
+        android:gravity="center"
+        android:text="@string/excitation_detail_copyright"
+        android:textColor="@color/c_666666"
+        android:textSize="@dimen/d_12sp" />
+
+    <Button
+        android:id="@+id/btn_excitation_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d_40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/d_7dp"
+        android:layout_marginEnd="@dimen/d_7dp"
+        android:layout_marginStart="@dimen/d_8dp"
+        android:background="@drawable/shape_new_visitor_bt_bg"
+        android:gravity="center"
+        android:text="@string/excitation_detail_submit"
+        android:textAllCaps="false"
+        android:textColor="@color/c_FFFFFF"
+        android:textSize="@dimen/d_12sp" />
+
+</RelativeLayout>

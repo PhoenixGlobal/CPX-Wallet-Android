@@ -1,5 +1,7 @@
 package chinapex.com.wallet.model.balance;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +10,9 @@ import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.executor.TaskController;
+import chinapex.com.wallet.executor.callback.eth.IGetErc20BalanceCallback;
 import chinapex.com.wallet.executor.callback.eth.IGetEthBalanceCallback;
+import chinapex.com.wallet.executor.runnable.eth.GetErc20Balance;
 import chinapex.com.wallet.executor.runnable.eth.GetEthBalance;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -21,7 +25,7 @@ import chinapex.com.wallet.utils.GsonUtils;
  * E-Mail：liuyi_61@163.com
  */
 
-public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallback {
+public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallback, IGetErc20BalanceCallback {
     private static final String TAG = GetEthBalanceModel.class.getSimpleName();
     private IGetBalanceModelCallback mIGetBalanceModelCallback;
     private List<String> mGlobalAssets;
@@ -117,9 +121,47 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
 
     @Override
     public void getColorAssetBalance(WalletBean walletBean) {
-        // TODO: 2018/8/28 0028  erc20
-        mIGetBalanceModelCallback.getColorBalanceModel(new ArrayList<BalanceBean>());
+        if (null == walletBean) {
+            CpLog.e(TAG, "getColorAssetBalance() -> walletBean is null!");
+            return;
+        }
+
+        String colorAssetJson = walletBean.getColorAssetJson();
+        mColorAssets = GsonUtils.json2List(colorAssetJson, String.class);
+        if (null == mColorAssets || mColorAssets.isEmpty()) {
+            CpLog.e(TAG, "getColorAssetBalance() -> mColorAssets is null or empty!");
+            return;
+        }
+
+        for (String colorAsset : mColorAssets) {
+            if (TextUtils.isEmpty(colorAsset)) {
+                CpLog.e(TAG, "colorAsset is null or empty!");
+                continue;
+            }
+
+            TaskController.getInstance().submit(new GetErc20Balance(colorAsset, walletBean.getAddress(), this));
+        }
     }
 
 
+    @Override
+    public void getErc20Balance(Map<String, BalanceBean> balanceBeans) {
+        if (null == balanceBeans || balanceBeans.isEmpty()) {
+            CpLog.e(TAG, "balanceBeans is null!");
+            mIGetBalanceModelCallback.getColorBalanceModel(new ArrayList<BalanceBean>());
+            return;
+        }
+
+        ArrayList<BalanceBean> balanceBeansFinal = new ArrayList<>();
+        for (Map.Entry<String, BalanceBean> balance : balanceBeans.entrySet()) {
+            if (null == balance) {
+                CpLog.e(TAG, "balance is null!");
+                continue;
+            }
+
+            balanceBeansFinal.add(balance.getValue());
+        }
+
+        mIGetBalanceModelCallback.getColorBalanceModel(balanceBeansFinal);
+    }
 }

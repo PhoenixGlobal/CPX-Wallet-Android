@@ -27,9 +27,7 @@ import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IFromMnemonicToNeoWalletCallback;
 import chinapex.com.wallet.executor.callback.eth.IFromMnemonicToEthWalletCallback;
-import chinapex.com.wallet.executor.runnable.FromKeystoreToNeoWallet;
 import chinapex.com.wallet.executor.runnable.FromMnemonicToNeoWallet;
-import chinapex.com.wallet.executor.runnable.eth.FromKeystoreToEthWallet;
 import chinapex.com.wallet.executor.runnable.eth.FromMnemonicToEthWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -342,6 +340,7 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
             case Constant.WALLET_TYPE_ETH:
                 walletBean = new EthWallet();
                 assets.add(Constant.ASSETS_ETH);
+                colorAsset.add(Constant.ASSETS_ERC20_NMB);
                 walletBean.setWalletType(Constant.WALLET_TYPE_ETH);
                 break;
             case Constant.WALLET_TYPE_CPX:

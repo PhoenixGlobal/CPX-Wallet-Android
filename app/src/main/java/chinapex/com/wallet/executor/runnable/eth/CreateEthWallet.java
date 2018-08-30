@@ -71,8 +71,8 @@ public class CreateEthWallet implements Runnable {
         ArrayList<String> assets = new ArrayList<>();
         assets.add(Constant.ASSETS_ETH);
 
-//        ArrayList<String> assetsNep5 = new ArrayList<>();
-//        assetsNep5.add(Constant.ASSETS_CPX);
+        ArrayList<String> colorAssets = new ArrayList<>();
+        colorAssets.add(Constant.ASSETS_ERC20_NMB);
 
         EthWallet ethWallet = new EthWallet();
         ethWallet.setWalletType(Constant.WALLET_TYPE_ETH);
@@ -81,7 +81,7 @@ public class CreateEthWallet implements Runnable {
         ethWallet.setBackupState(Constant.BACKUP_UNFINISHED);
         ethWallet.setKeyStore(toKeyStore);
         ethWallet.setAssetJson(GsonUtils.toJsonStr(assets));
-//        walletBean.setAssetsErc20Json(GsonUtils.toJsonStr(assetsNep5));
+        ethWallet.setColorAssetJson(GsonUtils.toJsonStr(colorAssets));
 
         ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
                 .getInstance());

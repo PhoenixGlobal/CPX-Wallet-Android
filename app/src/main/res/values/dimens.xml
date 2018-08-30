@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="new_visitor_icon_margin_top">166dp</dimen>
     <dimen name="new_visitor_bt_margin_top">172dp</dimen>
     <dimen name="new_visitor_bt_width">200dp</dimen>
@@ -96,4 +97,42 @@
     <dimen name="tb_bg_narrow_height">80dp</dimen>
     <dimen name="create_margin_start">50dp</dimen>
     <dimen name="create_margin_end">50dp</dimen>
+
+    <!-- excitation dimension-->
+    <dimen name="d_1dp">1dp</dimen>
+    <dimen name="d_2dp">2dp</dimen>
+    <dimen name="d_3dp">3dp</dimen>
+    <dimen name="d_5dp">5dp</dimen>
+    <dimen name="d_7dp">7dp</dimen>
+    <dimen name="d_8dp">8dp</dimen>
+    <dimen name="d_11dp">11dp</dimen>
+    <dimen name="d_12dp">12dp</dimen>
+    <dimen name="d_13dp">13dp</dimen>
+    <dimen name="d_15dp">15dp</dimen>
+    <dimen name="d_16dp">16dp</dimen>
+    <dimen name="d_22dp">22dp</dimen>
+    <dimen name="d_25dp">25dp</dimen>
+    <dimen name="d_26dp">26dp</dimen>
+    <dimen name="d_30dp">30dp</dimen>
+    <dimen name="d_33dp">33dp</dimen>
+    <dimen name="d_34dp">34dp</dimen>
+    <dimen name="d_35dp">35dp</dimen>
+    <dimen name="d_40dp">40dp</dimen>
+    <dimen name="d_42dp">42dp</dimen>
+    <dimen name="d_43dp">43dp</dimen>
+    <dimen name="d_46dp">46dp</dimen>
+    <dimen name="d_54dp">54dp</dimen>
+    <dimen name="d_63dp">63dp</dimen>
+    <dimen name="d_77dp">77dp</dimen>
+    <dimen name="d_85dp">85dp</dimen>
+    <dimen name="d_116dp">116dp</dimen>
+    <dimen name="d_189dp">189dp</dimen>
+
+    <dimen name="d_9sp">9sp</dimen>
+    <dimen name="d_10sp">10sp</dimen>
+    <dimen name="d_11sp">11sp</dimen>
+    <dimen name="d_12sp">12sp</dimen>
+    <dimen name="d_13sp">13sp</dimen>
+    <dimen name="d_16sp">16sp</dimen>
+    <dimen name="d_17sp">17sp</dimen>
 </resources>

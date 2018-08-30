@@ -89,7 +89,7 @@
     <string name="wallet_type">Wallet Type</string>
     <string name="seek_bar_slow">Slow</string>
     <string name="seek_bar_fast">Fast</string>
-    <string name="excitation">Excitation</string>
+    <string name="excitation">Reward</string>
     <string name="latest_activity">Latest Activity</string>
 
 
@@ -143,5 +143,23 @@
     <string name="create_wallet_type_eth">ETH</string>
 
 
-
+    <!--激励界面-->
+    <string name="excitation_new_activity">New</string>
+    <string name="excitation_about_to_begin">About to begin</string>
+    <string name="excitation_in_progress">In progress</string>
+    <string name="excitation_closed">Closed</string>
+    <string name="excitation_detail_cpx_address">CPX Address (achieved T1/ Genesis level)</string>
+    <string name="excitation_detail_wrong_address_note">Please enter the correct wallet address</string>
+    <string name="excitation_detail_eth_address">ETH Address</string>
+    <string name="excitation_detail_submit">Submit</string>
+    <string name="excitation_detail_condition_tip">Please be sure you have local NEO wallet, and the total amount of CPX should be equal or more than 100.</string>
+    <string name="excitation_detail_copyright">The final interpretation of this activity belongs to APEX TECHNOLOGIES</string>
+    <string name="excitation_detail_save_successfully">Save successfully</string>
+    <string name="excitation_save_ok">Submitted successfully</string>
+    <string name="excitation_save_repeat">This address has already participated please do not submit again</string>
+    <string name="excitation_format_err">Please enter the correct wallet address. </string>
+    <string name="excitation_save_fail">Server error, storage failed</string>
+    <string name="server_request_failed">Server request failed</string>
+    <string name="excitation_detail_sum_dialog_note">Please be sure the amount of CPX in the local wallets more than 100(≥100)</string>
+    <string name="excitation_detail_sum_dialog_confirm">Confirm</string>
 </resources>

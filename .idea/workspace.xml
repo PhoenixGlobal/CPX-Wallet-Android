@@ -15,23 +15,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee7a4be4-f911-4ec3-8210-e5cc8e294f4a" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestGetEthBalance.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseGetEthBalance.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetEthBalanceCallback.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthBalance.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/CheckIsUpdateNeoAssets.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/CheckIsUpdateNeoAssets.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetAccountState.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetAccountState.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetNep5Balance.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetNep5Balance.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/SendRawTransaction.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/SendRawTransaction.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/UpdateTxState.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/UpdateTxState.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CheckIsUpdateEthAssets.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CheckIsUpdateEthAssets.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/Constant.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/Constant.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/GetEthBalanceModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/GetEthBalanceModel.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/net/OkHttpClientManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/net/OkHttpClientManager.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/IGetBalanceView.java" afterPath="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/IGetBalanceView.java" />
-    </list>
+    <list default="true" id="ee7a4be4-f911-4ec3-8210-e5cc8e294f4a" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,75 +53,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file leaf-file-name="AssetsOverviewActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java">
+      <file leaf-file-name="CpLog.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/CpLog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="363" column="76" lean-forward="false" selection-start-line="363" selection-start-column="76" selection-end-line="363" selection-end-column="76" />
-              <folding>
-                <element signature="e#11586#11703#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GetBalancePresenter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/presenter/balance/GetBalancePresenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-300">
-              <caret line="105" column="80" lean-forward="false" selection-start-line="105" selection-start-column="68" selection-end-line="105" selection-end-column="80" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GetNeoBalanceModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/GetNeoBalanceModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="195" column="57" lean-forward="false" selection-start-line="195" selection-start-column="57" selection-end-line="195" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GetEthBalanceModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/GetEthBalanceModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1800">
-              <caret line="108" column="71" lean-forward="false" selection-start-line="108" selection-start-column="60" selection-end-line="108" selection-end-column="71" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GetEthBalance.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthBalance.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WalletUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResponseGetEthBalance.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseGetEthBalance.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            <state relative-caret-position="105">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -159,13 +79,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mNeoWallets</find>
-      <find>onWalletDelete() -&gt; this wallet not exist!</find>
-      <find>deleteByWalletName() -&gt;</find>
-      <find>mTl_import_wallet_keystore</find>
-      <find>ImportMnemonicFragment</find>
-      <find>tb_main</find>
-      <find>tv_main_title</find>
       <find>getColorAssetBalance() -&gt; mColorAssets is null or empty!</find>
       <find>mWalletBeans</find>
       <find>mCurrentWalletType</find>
@@ -189,6 +102,13 @@
       <find>mGlobalAssets</find>
       <find>no need to update assets</find>
       <find>hexStringToByte</find>
+      <find>onSuccess() -&gt;</find>
+      <find>mLl_assets_drawer</find>
+      <find>glide</find>
+      <find>mBalanceBean</find>
+      <find>excitationBeans is null</find>
+      <find>mGetAddressResultPresenter</find>
+      <find>result</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -1766,9 +1686,13 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre8/1.2.0/505f55b9619bbc5f5e26c77427dd24a6a441eef1/kotlin-stdlib-jre8-1.2.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/transform-api/2.0.0-deprecated-use-gradle-api/f18536c1fe08673c69e869be170759616a9df16/transform-api-2.0.0-deprecated-use-gradle-api-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/transform-api/2.0.0-deprecated-use-gradle-api/47f6c56527c42425742fa9b56ffd3fd80763fe03/transform-api-2.0.0-deprecated-use-gradle-api.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.1/5ef31c4fe953b1fd00b8a88fa1d6820e8785bb45/asm-5.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-analysis-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.1/6d1bf8989fc7901f868bee3863c44f21aa63d110/asm-analysis-5.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-commons-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/5.1/25d8a575034dd9cfcb375a39b5334f0ba9c8474e/asm-commons-5.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-util-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/5.1/b60e33a6bd0d71831e0c249816d01e6c1dd90a47/asm-util-5.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.9/d965219b87f79e81b07116d451e684ab2f3acc27/jopt-simple-4.9-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.9/ee9e9eaa0a35360dcfeac129ff4923215fd65904/jopt-simple-4.9.jar" />
@@ -1776,6 +1700,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-gradle/5.3.3/ad23a0505f58d0dfc95bb1472decc397460406c9/proguard-gradle-5.3.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.5.2/e96b1f4a9e6630a405434fca857c6b8f777163cf/auto-value-1.5.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.5.2/1b94ab7ec707e2220a0d1a7517488d1843236345/auto-value-1.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/22.0/55edc69e4fc937f4e58e577bb144b824c0ec7c55/guava-22.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/22.0/3564ef3803de51fb0530a8377ec6100b33b0d073/guava-22.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.4.0/c57c9f6bcbdb783260d00b80c455d82a6a8b02db/protobuf-java-3.4.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.4.0/b32aba0cbe737a4ca953f71688725972e3ee927c/protobuf-java-3.4.0.jar" />
@@ -1806,18 +1731,27 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/tracker/26.1.4/fd48066d6c78b78abf5baa335dc2124060e8371c/tracker-26.1.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/3.1.4/ad063ccf7e40d6526f9dbe709f44f5aa964277d6/apksig-3.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/3.1.4/e0c4d0059e68e9f64606dfa01e066f86dd07c6cb/apksig-3.1.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/1b2a0925ff06220c0261b6fd468183cd9e9a9a47/javawriter-2.5.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/81241ff7078ef14f42ea2a8995fa09c096256e6b/javawriter-2.5.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.56/118b4633c59394749b2b2f278138beb31c930663/bcpkix-jdk15on-1.56-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.56/4648af70268b6fdb24674fb1fd7c1fcc73db1231/bcpkix-jdk15on-1.56.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.56/93c7b191596378df51c31b7d8717f71b0aeee53c/bcprov-jdk15on-1.56-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.56/a153c6f9744a3e9dd6feab5e210e1c9861362ec7/bcprov-jdk15on-1.56.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-tree-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.1/87b38c12a0ea645791ead9d3e74ae5268d1d6c34/asm-tree-5.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.2.0/a1a8e178d7813bb9596ee4e3d5e07b90ebe660af/fastutil-7.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.2.0/5ad3a2bb04143f70aa0765fc29fc29571a7d6b34/fastutil-7.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/19c6d8dee6803c520d855ff7e8a8c3d97f1271ec/json-simple-1.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/5e303a03d04e6788dddfa3655272580ae0fc13bb/json-simple-1.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.0/7fb1210ceec26e7e5195894fa83e9e67ea4d2ba/kotlin-reflect-1.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.0/4bbda3b5425aa38a9f6960468a29c5ef3e8a28c9/kotlin-reflect-1.2.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.1.4/514be2ac98c79ce5ed5f6ba86061d408f56155bc/baseLibrary-3.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.1.4/df1e7638ba852152abe964e86f60fa4ce12e6a6a/baseLibrary-3.1.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4/4.5.3/e836b2a7348320a86c3bbd91a032486798e6ab98/antlr4-4.5.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4/4.5.3/f35db7e4b2446e4174ba6a73db7bd6b3e6bb5da1/antlr4-4.5.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/f2d8698c46d1167ff24b06a840a87d91a02db891/commons-io-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.juniversalchardet/juniversalchardet/1.0.3/77979eaa98f90806f984155f44f63cc1fb60ac25/juniversalchardet-1.0.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.juniversalchardet/juniversalchardet/1.0.3/cd49678784c46aa8789c060538e0154013bb421b/juniversalchardet-1.0.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/499341a875fe72e8fcf4ba856ba15f498d348e38/javapoet-1.8.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/e858dc62ef484048540d27d36f3ec2177a3fa9b1/javapoet-1.8.0.jar" />
@@ -1825,6 +1759,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/26.1.4/66750bfa2a9ec7691f14f38343a8ce3e447d8511/annotations-26.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/26.1.4/817d5238d9ea07b4b26d04e29e9bada2aacb7245/annotations-26.1.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/5.3.3/6c73d839fa1603c38b067bc04d7950e05aef3d22/proguard-base-5.3.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/5.3.3/988b6b0636ce343d4962b3b37f6319dcc6e99a61/proguard-base-5.3.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/26.1.4/80e637b685d1ef56a5182e0f541f8235ad14a874/layoutlib-api-26.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/26.1.4/dad1158a9fc38b711339960b82fd9dcf32009e46/layoutlib-api-26.1.4.jar" />
@@ -1832,10 +1767,15 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/26.1.4/5d443b51ad041e9599cfdb278cd2f6c9d2ccdf28/dvlib-26.1.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/repository/26.1.4/1d966e9c5ed47e405f8f31558d1e6f2cba83ed77/repository-26.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/repository/26.1.4/349dfc72ae53dedc32a17f5d47440838fe2527f1/repository-26.1.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.12/1fdd1a2fed15cdf08780ed564279c0ddbff46419/commons-compress-1.12-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.12/84caa68576e345eb5e7ae61a0e5a9229eb100d7b/commons-compress-1.12.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.6/b4e00fa279b1d45af3cb6daebcc1fee3f5402392/httpclient-4.2.6-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.6/e4ca30a6a3a075053a61c6fc850d2432dc012ba7/httpclient-4.2.6.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.1/3ac83213baeab2b21fde6c0bf47ed68ea3e6a8da/httpmime-4.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.1/9ba2dcdf94ce35c8a8e9bff242db0618ca932e92/httpmime-4.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/309cd2cff7260e465792fda3dcbb063b730d8050/kxml2-2.3.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/ccbc77a5fd907ef863c29f3596c6f54ffa4e9442/kxml2-2.3.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/5991ca87ef1fb5544943d9abc5a9a37583fabe03/annotations-13.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/javax.activation/1.2.0/5b034823866d38f38f02bdad7ed8a14e650c61b6/javax.activation-1.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/javax.activation/1.2.0/bf744c1e2776ed1de3c55c8dac1057ec331ef744/javax.activation-1.2.0.jar" />
@@ -1843,8 +1783,11 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-runtime/2.2.11/65510afc78679e347b0d774617a97fedac94f8/jaxb-runtime-2.2.11.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.jimfs/jimfs/1.1/a2e6f6d75b7fa7e8eedb3062e5bfd24cc9fe8591/jimfs-1.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.jimfs/jimfs/1.1/8fbd0579dc68aba6186935cc1bee21d2f3e7ec1c/jimfs-1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.2.5/4fd9ac94cd3c26551bc7aecd62fce8e49f076635/httpcore-4.2.5-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.2.5/472f0f5f8dba5d1962cb9d7739feed739a31c30d/httpcore-4.2.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/f3f156cbff0e0fb0d64bfce31a352cce4a33bc19/commons-logging-1.1.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/5043bfebc3db072ed80fbd362e7caf00e885d8ae/commons-logging-1.1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/61e9f9d11fe3e12ec62f633006e99d75fd7f19c8/commons-codec-1.6-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/b7f0fc8f61ecadeb3695f0b9464755eee44374d4/commons-codec-1.6.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.0/180a4946e471f9f47d4b6139c5dbc5e7603a8424/kotlin-stdlib-1.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.0/25eb440d6eeb9fc60299121020fe726eb2100d03/kotlin-stdlib-1.2.0.jar" />
@@ -1857,7 +1800,9 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.0/d6ced6c0bf21af19fb83f24bb6ff28ea43ddc61f/kotlin-stdlib-jre7-1.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.0/ec8b969e26fbcf2265a4d1a1539c4d1d4c5af380/kotlin-stdlib-jre7-1.2.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/1.3.9/40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf/jsr305-1.3.9.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/dcd31de68a90e41e336f6b7afce0d39285c433d7/j2objc-annotations-1.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/976d8d30bebc251db406f2bdb3eb01962b5685b3/j2objc-annotations-1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/886474da3f761d39fcbb723d97ecc5089e731f42/animal-sniffer-annotations-1.14-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/775b7e22fb10026eed3f86e8dc556dfafe35f2d5/animal-sniffer-annotations-1.14.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.2.12-b140109.1041/d59f43002d3d07c6adaaeedd93e7944c273821d2/jaxb-api-2.2.12-b140109.1041-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.2.12-b140109.1041/7ed0e0d01198614194d56dfb03d9d95aa311824c/jaxb-api-2.2.12-b140109.1041.jar" />
@@ -1893,9 +1838,13 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre8/1.2.0/505f55b9619bbc5f5e26c77427dd24a6a441eef1/kotlin-stdlib-jre8-1.2.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/transform-api/2.0.0-deprecated-use-gradle-api/f18536c1fe08673c69e869be170759616a9df16/transform-api-2.0.0-deprecated-use-gradle-api-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/transform-api/2.0.0-deprecated-use-gradle-api/47f6c56527c42425742fa9b56ffd3fd80763fe03/transform-api-2.0.0-deprecated-use-gradle-api.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.1/5ef31c4fe953b1fd00b8a88fa1d6820e8785bb45/asm-5.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-analysis-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/5.1/6d1bf8989fc7901f868bee3863c44f21aa63d110/asm-analysis-5.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-commons-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/5.1/25d8a575034dd9cfcb375a39b5334f0ba9c8474e/asm-commons-5.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-util-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/5.1/b60e33a6bd0d71831e0c249816d01e6c1dd90a47/asm-util-5.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.9/d965219b87f79e81b07116d451e684ab2f3acc27/jopt-simple-4.9-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.9/ee9e9eaa0a35360dcfeac129ff4923215fd65904/jopt-simple-4.9.jar" />
@@ -1903,6 +1852,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-gradle/5.3.3/ad23a0505f58d0dfc95bb1472decc397460406c9/proguard-gradle-5.3.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.5.2/e96b1f4a9e6630a405434fca857c6b8f777163cf/auto-value-1.5.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.5.2/1b94ab7ec707e2220a0d1a7517488d1843236345/auto-value-1.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/22.0/55edc69e4fc937f4e58e577bb144b824c0ec7c55/guava-22.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/22.0/3564ef3803de51fb0530a8377ec6100b33b0d073/guava-22.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.4.0/c57c9f6bcbdb783260d00b80c455d82a6a8b02db/protobuf-java-3.4.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.4.0/b32aba0cbe737a4ca953f71688725972e3ee927c/protobuf-java-3.4.0.jar" />
@@ -1933,18 +1883,27 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/tracker/26.1.4/fd48066d6c78b78abf5baa335dc2124060e8371c/tracker-26.1.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/3.1.4/ad063ccf7e40d6526f9dbe709f44f5aa964277d6/apksig-3.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/3.1.4/e0c4d0059e68e9f64606dfa01e066f86dd07c6cb/apksig-3.1.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/1b2a0925ff06220c0261b6fd468183cd9e9a9a47/javawriter-2.5.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.5.0/81241ff7078ef14f42ea2a8995fa09c096256e6b/javawriter-2.5.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.56/118b4633c59394749b2b2f278138beb31c930663/bcpkix-jdk15on-1.56-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.56/4648af70268b6fdb24674fb1fd7c1fcc73db1231/bcpkix-jdk15on-1.56.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.56/93c7b191596378df51c31b7d8717f71b0aeee53c/bcprov-jdk15on-1.56-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.56/a153c6f9744a3e9dd6feab5e210e1c9861362ec7/bcprov-jdk15on-1.56.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.1/81e81bd6c20b965f88d0462e2559f8759fc6c26d/asm-tree-5.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.1/87b38c12a0ea645791ead9d3e74ae5268d1d6c34/asm-tree-5.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.2.0/a1a8e178d7813bb9596ee4e3d5e07b90ebe660af/fastutil-7.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.2.0/5ad3a2bb04143f70aa0765fc29fc29571a7d6b34/fastutil-7.2.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/19c6d8dee6803c520d855ff7e8a8c3d97f1271ec/json-simple-1.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/5e303a03d04e6788dddfa3655272580ae0fc13bb/json-simple-1.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.0/7fb1210ceec26e7e5195894fa83e9e67ea4d2ba/kotlin-reflect-1.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.0/4bbda3b5425aa38a9f6960468a29c5ef3e8a28c9/kotlin-reflect-1.2.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.1.4/514be2ac98c79ce5ed5f6ba86061d408f56155bc/baseLibrary-3.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.1.4/df1e7638ba852152abe964e86f60fa4ce12e6a6a/baseLibrary-3.1.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4/4.5.3/e836b2a7348320a86c3bbd91a032486798e6ab98/antlr4-4.5.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4/4.5.3/f35db7e4b2446e4174ba6a73db7bd6b3e6bb5da1/antlr4-4.5.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/f2d8698c46d1167ff24b06a840a87d91a02db891/commons-io-2.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.juniversalchardet/juniversalchardet/1.0.3/77979eaa98f90806f984155f44f63cc1fb60ac25/juniversalchardet-1.0.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.juniversalchardet/juniversalchardet/1.0.3/cd49678784c46aa8789c060538e0154013bb421b/juniversalchardet-1.0.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/499341a875fe72e8fcf4ba856ba15f498d348e38/javapoet-1.8.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javapoet/1.8.0/e858dc62ef484048540d27d36f3ec2177a3fa9b1/javapoet-1.8.0.jar" />
@@ -1952,6 +1911,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/26.1.4/66750bfa2a9ec7691f14f38343a8ce3e447d8511/annotations-26.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/annotations/26.1.4/817d5238d9ea07b4b26d04e29e9bada2aacb7245/annotations-26.1.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/5.3.3/6c73d839fa1603c38b067bc04d7950e05aef3d22/proguard-base-5.3.3-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/5.3.3/988b6b0636ce343d4962b3b37f6319dcc6e99a61/proguard-base-5.3.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/26.1.4/80e637b685d1ef56a5182e0f541f8235ad14a874/layoutlib-api-26.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/26.1.4/dad1158a9fc38b711339960b82fd9dcf32009e46/layoutlib-api-26.1.4.jar" />
@@ -1959,10 +1919,15 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/26.1.4/5d443b51ad041e9599cfdb278cd2f6c9d2ccdf28/dvlib-26.1.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/repository/26.1.4/1d966e9c5ed47e405f8f31558d1e6f2cba83ed77/repository-26.1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/repository/26.1.4/349dfc72ae53dedc32a17f5d47440838fe2527f1/repository-26.1.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.12/1fdd1a2fed15cdf08780ed564279c0ddbff46419/commons-compress-1.12-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.12/84caa68576e345eb5e7ae61a0e5a9229eb100d7b/commons-compress-1.12.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.6/b4e00fa279b1d45af3cb6daebcc1fee3f5402392/httpclient-4.2.6-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.6/e4ca30a6a3a075053a61c6fc850d2432dc012ba7/httpclient-4.2.6.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.1/3ac83213baeab2b21fde6c0bf47ed68ea3e6a8da/httpmime-4.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.1/9ba2dcdf94ce35c8a8e9bff242db0618ca932e92/httpmime-4.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/309cd2cff7260e465792fda3dcbb063b730d8050/kxml2-2.3.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/ccbc77a5fd907ef863c29f3596c6f54ffa4e9442/kxml2-2.3.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/5991ca87ef1fb5544943d9abc5a9a37583fabe03/annotations-13.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/javax.activation/1.2.0/5b034823866d38f38f02bdad7ed8a14e650c61b6/javax.activation-1.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/javax.activation/1.2.0/bf744c1e2776ed1de3c55c8dac1057ec331ef744/javax.activation-1.2.0.jar" />
@@ -1970,8 +1935,11 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-runtime/2.2.11/65510afc78679e347b0d774617a97fedac94f8/jaxb-runtime-2.2.11.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.jimfs/jimfs/1.1/a2e6f6d75b7fa7e8eedb3062e5bfd24cc9fe8591/jimfs-1.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.jimfs/jimfs/1.1/8fbd0579dc68aba6186935cc1bee21d2f3e7ec1c/jimfs-1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.2.5/4fd9ac94cd3c26551bc7aecd62fce8e49f076635/httpcore-4.2.5-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.2.5/472f0f5f8dba5d1962cb9d7739feed739a31c30d/httpcore-4.2.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/f3f156cbff0e0fb0d64bfce31a352cce4a33bc19/commons-logging-1.1.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/5043bfebc3db072ed80fbd362e7caf00e885d8ae/commons-logging-1.1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/61e9f9d11fe3e12ec62f633006e99d75fd7f19c8/commons-codec-1.6-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/b7f0fc8f61ecadeb3695f0b9464755eee44374d4/commons-codec-1.6.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.0/180a4946e471f9f47d4b6139c5dbc5e7603a8424/kotlin-stdlib-1.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.0/25eb440d6eeb9fc60299121020fe726eb2100d03/kotlin-stdlib-1.2.0.jar" />
@@ -1984,7 +1952,9 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.0/d6ced6c0bf21af19fb83f24bb6ff28ea43ddc61f/kotlin-stdlib-jre7-1.2.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.0/ec8b969e26fbcf2265a4d1a1539c4d1d4c5af380/kotlin-stdlib-jre7-1.2.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/1.3.9/40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf/jsr305-1.3.9.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/dcd31de68a90e41e336f6b7afce0d39285c433d7/j2objc-annotations-1.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/976d8d30bebc251db406f2bdb3eb01962b5685b3/j2objc-annotations-1.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/886474da3f761d39fcbb723d97ecc5089e731f42/animal-sniffer-annotations-1.14-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.14/775b7e22fb10026eed3f86e8dc556dfafe35f2d5/animal-sniffer-annotations-1.14.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.2.12-b140109.1041/d59f43002d3d07c6adaaeedd93e7944c273821d2/jaxb-api-2.2.12-b140109.1041-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.2.12-b140109.1041/7ed0e0d01198614194d56dfb03d9d95aa311824c/jaxb-api-2.2.12-b140109.1041.jar" />
@@ -2167,37 +2137,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/wallet/CreateWalletActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/presenter/balance/GetBalancePresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_create_wallet.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_import_mnemonic.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_import_keystore.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/wallet/ImportKeystoreFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/tx/Erc20TxBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/tx/EthTxBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/tx/Nep5TxBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/presenter/transfer/ICreateTxPresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/transfer/ICreateTxModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/transfer/ICreateTxModelCallback.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/ICreateTxView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/presenter/transfer/CreateTxPresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/transfer/CreateEthTxModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/dialog/TransferPwdDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/tx/NeoTxBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/AssetsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/ImpUpdateTxStateCallback.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/UpdateTxState.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/ICheckIsUpdateEthAssetsCallback.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/ICheckIsUpdateNeoAssetsCallback.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/dialog/AddAssetsDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/IGetAssetsCallback.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/IGetNeoAssetsCallback.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetEthAssetsCallback.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/AssetBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetNeoAssets.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthAssets.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/ApexGlobalTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbDao.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/BalanceBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetAccountState.java" />
@@ -2209,15 +2148,46 @@
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/BalanceDetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetEthBalanceCallback.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestGetEthBalance.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/Constant.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/net/OkHttpClientManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseGetEthBalance.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthBalance.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/CheckIsUpdateNeoAssets.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CheckIsUpdateEthAssets.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/IGetBalanceView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetErc20BalanceCallback.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetEthGasPriceCallback.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthGasPrice.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/wallet/ImportMnemonicFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/wallet/ImportKeystoreFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthAssets.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CheckIsUpdateEthAssets.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/GetEthBalanceModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestErc20Params.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestGetErc20Balance.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetErc20Balance.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_transfer.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_delete_wallet_pwd.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_excitation.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-en-rUS/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/GetExcitationModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetLocalCpxSum.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestSubmitExcitation.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/IGetDetailCodePresenter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/IDetailCodeModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/GetDetailCodeModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/Constant.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/ExcitationBean.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/GetExcitation.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/ExcitationFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/GetDetailCodePresenter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/ExcitationDetailActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/CpLog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/GetDetailCode.java" />
       </list>
     </option>
   </component>
@@ -2261,27 +2231,6 @@
               <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
               <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
-              <item name="classes.jar" type="ab9368bb:PsiFileNode" />
-            </path>
-            <path>
-              <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
-              <item name="classes.jar" type="ab9368bb:PsiFileNode" />
-              <item name="ethmobile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -2316,7 +2265,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="wallet" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
@@ -2324,16 +2273,61 @@
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="jniLibs" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wallet" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+              <item name="request" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wallet" type="462c0819:PsiDirectoryNode" />
+              <item name="executor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wallet" type="462c0819:PsiDirectoryNode" />
+              <item name="executor" type="462c0819:PsiDirectoryNode" />
+              <item name="runnable" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wallet" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wallet" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="excitation" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2344,7 +2338,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.profiler.active" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="GetEthBalance&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthBalance.java&#10;CheckIsUpdateEthAssets&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CheckIsUpdateEthAssets.java&#10;CheckIsUpdateNeoAssets&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/CheckIsUpdateNeoAssets.java&#10;createth&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.eth.CreateEthWallet&#10;constan&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;global&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/ApexGlobalTask.java&#10;getran&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.GetTransactionHistory&#10;dao&#9;PSI&#9;JAVA://chinapex.com.wallet.model.ApexWalletDbDao&#10;fromkeyneo&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.FromKeystoreToNeoWallet&#10;creat&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/res/layout/activity_create_wallet.xml&#10;cons&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;create&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java&#10;createa&#9;PSI&#9;JAVA://chinapex.com.wallet.view.wallet.CreateWalletActivity&#10;constant&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;walletb&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/bean/WalletBean.java&#10;balancebe&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/bean/BalanceBean.java&#10;basea&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java&#10;uti&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.DensityUtil&#10;createac&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/wallet/CreateWalletActivity.java&#10;basefr&#9;PSI&#9;JAVA://chinapex.com.wallet.base.BaseFragment&#10;baseac&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java&#10;toast&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.ToastUtils&#10;listview&#9;FILE&#9;file://D:/develop/AndroidSDK/sources/android-27/android/widget/ListView.java&#10;base&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseFragment.java&#10;cplog&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/CpLog.java&#10;basef&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseFragment.java&#10;baseact&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java&#10;phone&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/PhoneUtils.java&#10;basefrag&#9;PSI&#9;JAVA://chinapex.com.wallet.base.BaseFragment&#10;icon_add&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/res/drawable-mdpi/icon_add_assets.png&#10;fragmentfa&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.FragmentFactory&#10;con&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;local&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.callback.ILoadTransactionRecordCallback&#10;fac&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/FragmentFactory.java&#10;facto&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/FragmentFactory.java&#10;getut&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.GetUtxos&#10;consta&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;apewa&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbDao.java&#10;apexwa&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbDao.java&#10;const&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;walletbe&#9;PSI&#9;JAVA://chinapex.com.wallet.bean.WalletBean&#10;flexlay&#9;FILE&#9;jar://C:/Users/SteelCabbage/.gradle/caches/modules-2/files-2.1/com.google.android/flexbox/1.0.0/c4c7f74d77a222833719306af2c4003bdacccc38/flexbox-1.0.0-sources.jar!/com/google/android/flexbox/FlexboxLayout.java&#10;FlexWrap&#9;FILE&#9;jar://C:/Users/SteelCabbage/.gradle/caches/modules-2/files-2.1/com.google.android/flexbox/1.0.0/c4c7f74d77a222833719306af2c4003bdacccc38/flexbox-1.0.0-sources.jar!/com/google/android/flexbox/FlexWrap.java&#10;upda&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/UpdateTransacitonState.java&#10;pho&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/PhoneUtils.java&#10;share&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/SharedPreferencesUtils.java&#10;help&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbHelper.java&#10;util&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.SharedPreferencesUtils&#10;getne&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/GetNep5Balance.java&#10;walletbean&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/bean/WalletBean.java" />
+    <property name="SearchEverywhereHistoryKey" value="GetDetailCode&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/excitation/detail/GetDetailCode.java&#10;cplog&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/CpLog.java&#10;dialog&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/res/layout/dialog_excitation.xml&#10;maina&#9;PSI&#9;JAVA://chinapex.com.wallet.view.MainActivity&#10;creawa&#9;PSI&#9;JAVA://chinapex.com.wallet.view.wallet.CreateWalletActivity&#10;sendra&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.SendRawTransaction&#10;AssetsOverviewActivity&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java&#10;GetEthBalance&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthBalance.java&#10;CheckIsUpdateEthAssets&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CheckIsUpdateEthAssets.java&#10;CheckIsUpdateNeoAssets&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/CheckIsUpdateNeoAssets.java&#10;createth&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.eth.CreateEthWallet&#10;constan&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;global&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/ApexGlobalTask.java&#10;getran&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.GetTransactionHistory&#10;dao&#9;PSI&#9;JAVA://chinapex.com.wallet.model.ApexWalletDbDao&#10;fromkeyneo&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.FromKeystoreToNeoWallet&#10;creat&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/res/layout/activity_create_wallet.xml&#10;cons&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;create&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java&#10;createa&#9;PSI&#9;JAVA://chinapex.com.wallet.view.wallet.CreateWalletActivity&#10;constant&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;walletb&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/bean/WalletBean.java&#10;balancebe&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/bean/BalanceBean.java&#10;basea&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java&#10;uti&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.DensityUtil&#10;createac&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/wallet/CreateWalletActivity.java&#10;basefr&#9;PSI&#9;JAVA://chinapex.com.wallet.base.BaseFragment&#10;baseac&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java&#10;toast&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.ToastUtils&#10;listview&#9;FILE&#9;file://D:/develop/AndroidSDK/sources/android-27/android/widget/ListView.java&#10;base&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseFragment.java&#10;basef&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseFragment.java&#10;baseact&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java&#10;phone&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/PhoneUtils.java&#10;basefrag&#9;PSI&#9;JAVA://chinapex.com.wallet.base.BaseFragment&#10;icon_add&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/res/drawable-mdpi/icon_add_assets.png&#10;fragmentfa&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.FragmentFactory&#10;con&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;local&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.callback.ILoadTransactionRecordCallback&#10;fac&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/FragmentFactory.java&#10;facto&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/FragmentFactory.java&#10;getut&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.GetUtxos&#10;consta&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;apewa&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbDao.java&#10;apexwa&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbDao.java&#10;const&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;walletbe&#9;PSI&#9;JAVA://chinapex.com.wallet.bean.WalletBean&#10;flexlay&#9;FILE&#9;jar://C:/Users/SteelCabbage/.gradle/caches/modules-2/files-2.1/com.google.android/flexbox/1.0.0/c4c7f74d77a222833719306af2c4003bdacccc38/flexbox-1.0.0-sources.jar!/com/google/android/flexbox/FlexboxLayout.java&#10;FlexWrap&#9;FILE&#9;jar://C:/Users/SteelCabbage/.gradle/caches/modules-2/files-2.1/com.google.android/flexbox/1.0.0/c4c7f74d77a222833719306af2c4003bdacccc38/flexbox-1.0.0-sources.jar!/com/google/android/flexbox/FlexWrap.java&#10;upda&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/UpdateTransacitonState.java" />
     <property name="ExportApk.ApkPath" value="C:\Users\SteelCabbage\Desktop\keyApk" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.BuildType" value="release" />
@@ -2353,15 +2347,11 @@
     <property name="DEBUGGABLE_PROCESS" value="chinapex.com.wallet" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535450796398" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535621491560" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\res\drawable-mdpi" />
-      <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\res\drawable-xxhdpi" />
-      <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\res\layout" />
-      <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\assets\web" />
-      <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\res\drawable" />
     </key>
     <key name="android.template.packageName">
       <recent name="chinapex.com.wallet.view.wallet" />
@@ -2371,14 +2361,18 @@
       <recent name="chinapex.com.wallet.view.assets" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="chinapex.com.wallet.executor.runnable.eth" />
       <recent name="chinapex.com.wallet.executor.callback.eth" />
+      <recent name="chinapex.com.wallet.executor.runnable.eth" />
       <recent name="chinapex.com.wallet.model.balance" />
       <recent name="chinapex.com.wallet.adapter" />
       <recent name="chinapex.com.wallet.changelistener.eth" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\res\drawable-mdpi" />
+      <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\res\drawable-xxhdpi" />
+      <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\res\layout" />
+      <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\assets\web" />
+      <recent name="D:\develop\Repos\Demo\ApexWallet\app\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -2768,22 +2762,22 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25454545" sideWeight="0.5039106" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3881081" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908458" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6171967" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5477032" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30756757" sideWeight="0.4960894" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286219" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43816254" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25621623" sideWeight="0.4960894" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7243816" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972972" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20378378" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32955772" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2792,8 +2786,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35457706" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38852814" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43816254" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2849,367 +2843,411 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/TaskController.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestSendRawTransaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
-          <caret line="65" column="37" lean-forward="true" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetTransactionHistory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="109" column="37" lean-forward="true" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseGetRawTransaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="84" column="30" lean-forward="true" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/CheckIsUpdateTxState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="42" column="44" lean-forward="false" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/IUpdateTxStateCallback.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/json/PortraitCommonEn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/ImpUpdateTxStateCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="21" column="37" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/UpdateTxState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-405">
-          <caret line="44" column="64" lean-forward="true" selection-start-line="44" selection-start-column="64" selection-end-line="44" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/ICheckIsUpdateNeoAssetsCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="7" column="25" lean-forward="false" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/IGetNeoAssetsCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/AssetBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1109">
-          <caret line="14" column="25" lean-forward="false" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetNeoAssets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="73" column="66" lean-forward="false" selection-start-line="73" selection-start-column="66" selection-end-line="73" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthAssets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="711">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetEthAssetsCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="7" column="15" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="82" column="57" lean-forward="false" selection-start-line="82" selection-start-column="51" selection-end-line="82" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="879" column="42" lean-forward="false" selection-start-line="879" selection-start-column="42" selection-end-line="879" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/dialog/AddAssetsDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="176" column="110" lean-forward="false" selection-start-line="176" selection-start-column="110" selection-end-line="176" selection-end-column="110" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetAccountState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="85" column="54" lean-forward="false" selection-start-line="85" selection-start-column="54" selection-end-line="85" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetNep5Balance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="135" column="62" lean-forward="false" selection-start-line="135" selection-start-column="62" selection-end-line="135" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/transfer/CreateNeoTxModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="176" column="19" lean-forward="false" selection-start-line="176" selection-start-column="19" selection-end-line="176" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/AssetsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="162" column="42" lean-forward="false" selection-start-line="162" selection-start-column="42" selection-end-line="162" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/BalanceDetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/ICheckIsUpdateEthAssetsCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/ICreateNep5TxCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/IGetNep5BalanceCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="12" column="63" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetEthBalanceCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestGetAccountState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="35" />
-          <folding />
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestGetEthBalance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="13" column="69" lean-forward="false" selection-start-line="13" selection-start-column="63" selection-end-line="13" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/Constant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseGetAccountState.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
-          <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="36" />
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/ApexGlobalTask.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestErc20Params.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="64" column="24" lean-forward="true" selection-start-line="64" selection-start-column="24" selection-end-line="64" selection-end-column="24" />
+        <state relative-caret-position="280">
+          <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/net/OkHttpClientManager.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestGetErc20Balance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/GsonUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
-          <caret line="92" column="100" lean-forward="false" selection-start-line="92" selection-start-column="100" selection-end-line="92" selection-end-column="100" />
+          <caret line="27" column="25" lean-forward="false" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/presenter/balance/IGetBalancePresenter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetErc20Balance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="12" column="9" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        <state relative-caret-position="-2065">
+          <caret line="10" column="34" lean-forward="false" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/IGetBalanceModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/WalletBean.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/IGetBalanceModelCallback.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/BalanceBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1951">
-          <caret line="62" column="16" lean-forward="false" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/AssetsOverviewRecyclerViewAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3080">
-          <caret line="169" column="18" lean-forward="false" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/CheckIsUpdateNeoAssets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CheckIsUpdateEthAssets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="35" selection-start-column="9" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/IGetBalanceView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="363" column="76" lean-forward="false" selection-start-line="363" selection-start-column="76" selection-end-line="363" selection-end-column="76" />
-          <folding>
-            <element signature="e#11586#11703#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/GetNeoBalanceModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="195" column="57" lean-forward="false" selection-start-line="195" selection-start-column="57" selection-end-line="195" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/presenter/balance/GetBalancePresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
-          <caret line="105" column="80" lean-forward="false" selection-start-line="105" selection-start-column="68" selection-end-line="105" selection-end-column="80" />
+        <state relative-caret-position="315">
+          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/GetEthBalanceModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="108" column="71" lean-forward="false" selection-start-line="108" selection-start-column="60" selection-end-line="108" selection-end-column="71" />
+        <state relative-caret-position="431">
+          <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/presenter/balance/GetBalancePresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2601">
+          <caret line="91" column="54" lean-forward="false" selection-start-line="91" selection-start-column="41" selection-end-line="91" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="119" column="83" lean-forward="false" selection-start-line="119" selection-start-column="83" selection-end-line="119" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/BalanceDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="89" column="93" lean-forward="false" selection-start-line="89" selection-start-column="93" selection-end-line="89" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="53" column="43" lean-forward="false" selection-start-line="53" selection-start-column="43" selection-end-line="53" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_transfer.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="147" column="37" lean-forward="false" selection-start-line="147" selection-start-column="37" selection-end-line="147" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/balance/GetNeoBalanceModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="165" column="19" lean-forward="true" selection-start-line="165" selection-start-column="19" selection-end-line="165" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/gradient_dialog_pwd_bg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_delete_wallet_pwd.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/dialog/ExcitationDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="43" column="41" lean-forward="false" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/dialog/ExportKeystorePwdDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="65" column="57" lean-forward="false" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_export_keystore_pwd.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_excitation.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#139#155#0" expanded="false" />
+            <element signature="e#523#538#0" expanded="false" />
+            <element signature="e#593#636#0" expanded="false" />
+            <element signature="e#706#728#0" expanded="false" />
+            <element signature="e#1216#1262#0" expanded="false" />
+            <element signature="e#1360#1382#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseGetEthBalance.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/bn_main_item_excitation.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/bn_main_item_excitation.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/bn_main_item_me.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="45" column="71" lean-forward="true" selection-start-line="45" selection-start-column="71" selection-end-line="45" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="91" column="18" lean-forward="false" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-en-rUS/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="91" column="18" lean-forward="false" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/arrays.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-zh-rCN/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="91" column="48" lean-forward="true" selection-start-line="91" selection-start-column="48" selection-end-line="91" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/net/OkHttpClientManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="165" column="0" lean-forward="false" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_excitation.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1498">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/GetExcitationModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/GetExcitationPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="15" column="16" lean-forward="false" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/request/RequestSubmitExcitation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetNep5Balance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3404">
+          <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/GetLocalCpxSum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="67" column="19" lean-forward="false" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/IDetailCodeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/IGetDetailCodePresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/Constant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="141" column="53" lean-forward="false" selection-start-line="141" selection-start-column="31" selection-end-line="141" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseExcitation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1100">
+          <caret line="70" column="19" lean-forward="false" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/GetExcitation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="76" column="27" lean-forward="false" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/ExcitationBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="606">
+          <caret line="54" column="23" lean-forward="false" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/ExcitationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="101" column="49" lean-forward="false" selection-start-line="101" selection-start-column="49" selection-end-line="101" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/GetDetailCodePresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/GetDetailCodeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/ExcitationDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="76" column="16" lean-forward="true" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
+          <folding>
+            <element signature="e#4417#4458#0" expanded="false" />
+            <element signature="e#4857#4895#0" expanded="false" />
+            <element signature="e#5088#5130#0" expanded="false" />
+            <element signature="e#5293#5334#0" expanded="false" />
+            <element signature="e#5497#5537#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/excitation/detail/GetDetailCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1034">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseExcitationDetailCode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
@@ -3217,75 +3255,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/app/libs/classes.jar!/ethmobile/EthCall.class">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/CpLog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="31" column="72" lean-forward="false" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
-          <folding>
-            <marker date="1528860046844" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528860046844" expanded="false" signature="133:186" ph="..." />
-            <marker date="1528860046844" expanded="true" signature="298:374" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="397:485" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="556:627" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="2288:2470" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="2498:2552" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="2583:2728" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="2741:2775" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/app/libs/classes.jar!/ethmobile/Ethmobile.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding>
-            <marker date="1528860046844" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528860046844" expanded="true" signature="200:207" ph="{}" />
-            <marker date="1528860046844" expanded="true" signature="240:247" ph="{}" />
-            <marker date="1528860046844" expanded="true" signature="666:711" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/app/libs/classes.jar!/ethmobile/Wallet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-735">
-          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding>
-            <marker date="1528860046844" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1528860046844" expanded="false" signature="133:186" ph="..." />
-            <marker date="1528860046844" expanded="true" signature="297:373" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="396:467" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="489:570" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="1704:1883" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="1911:1965" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="1996:2140" ph="{...}" />
-            <marker date="1528860046844" expanded="true" signature="2153:2187" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/PhoneUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="119" column="23" lean-forward="false" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthBalance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+        <state relative-caret-position="105">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>

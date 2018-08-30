@@ -103,10 +103,12 @@
         <activity
             android:name=".view.me.portrait.TypeInputActivity"
             android:screenOrientation="portrait" />
-        <!--服务与隐私条款-->
+        <!-- 服务与隐私条款 -->
         <activity
             android:name=".view.wallet.PrivacyActivity"
             android:screenOrientation="portrait" />
+        <!-- 激励 -->
+        <activity android:name=".view.excitation.detail.ExcitationDetailActivity" />
     </application>
 
 </manifest>

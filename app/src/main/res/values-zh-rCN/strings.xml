@@ -137,6 +137,23 @@
     <string name="portrait_type_enterprise">企业端特殊数据画像</string>
     <string name="password_incorrect">密码输入有误！</string>
 
-
-
+    <!--激励界面-->
+    <string name="excitation_new_activity">新</string>
+    <string name="excitation_about_to_begin">即将开始</string>
+    <string name="excitation_in_progress">进行中</string>
+    <string name="excitation_closed">已结束</string>
+    <string name="excitation_detail_cpx_address">CPX 地址 (符合T1或Genesis等级资格)</string>
+    <string name="excitation_detail_wrong_address_note">请输入正确的钱包地址</string>
+    <string name="excitation_detail_eth_address">ETH 地址</string>
+    <string name="excitation_detail_submit">提交</string>
+    <string name="excitation_detail_condition_tip">参与活动需在本地创建NEO钱包，并且钱包中的CPX总余额大于等于100(≥100)方可参加。</string>
+    <string name="excitation_detail_copyright">本活动最终解释权归APEX TECHNOLOGIES所有。</string>
+    <string name="excitation_detail_save_successfully">保存成功</string>
+    <string name="excitation_save_ok">已提交完成</string>
+    <string name="excitation_save_repeat">此地址已参与 请勿重复提交</string>
+    <string name="excitation_format_err">您输入的ETH,CPX的格式错误，请重新输入 </string>
+    <string name="excitation_save_fail">服务器存储失败</string>
+    <string name="server_request_failed">服务器请求失败</string>
+    <string name="excitation_detail_sum_dialog_note">请确保本地创建的钱包中CPX总和 大于等于100（≥100）</string>
+    <string name="excitation_detail_sum_dialog_confirm">确认</string>
 </resources>

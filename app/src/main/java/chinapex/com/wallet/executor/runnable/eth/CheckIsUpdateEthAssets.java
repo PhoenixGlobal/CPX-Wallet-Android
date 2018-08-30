@@ -35,8 +35,7 @@ public class CheckIsUpdateEthAssets implements Runnable {
             return;
         }
 
-        // TODO: 2018/8/28 0028  Constant.ASSET_TYPE_ERC20
-        List<AssetBean> assetBeans = apexWalletDbDao.queryAssetsByType(Constant.TABLE_ETH_ASSETS, Constant.ASSET_TYPE_ETH);
+        List<AssetBean> assetBeans = apexWalletDbDao.queryAssetsByType(Constant.TABLE_ETH_ASSETS, Constant.ASSET_TYPE_ERC20);
         if (null == assetBeans || assetBeans.isEmpty()) {
             mICheckIsUpdateEthAssetsCallback.checkIsUpdateEthAssets(true);
             return;

@@ -358,13 +358,6 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
             return;
         }
 
-        for (BalanceBean balanceBean : balanceBeans) {
-            CpLog.i(TAG, "balanceBean type:" + balanceBean.getWalletType());
-            CpLog.i(TAG, "balanceBean id:" + balanceBean.getAssetsID());
-            CpLog.i(TAG, "balanceBean value:" + balanceBean.getAssetsValue());
-        }
-
-
         mBalanceBeans.clear();
         mBalanceBeans.addAll(balanceBeans);
         runOnUiThread(new Runnable() {

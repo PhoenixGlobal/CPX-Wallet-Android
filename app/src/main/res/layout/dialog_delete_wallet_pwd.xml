@@ -4,7 +4,6 @@
     android:layout_height="159dp"
     android:background="@drawable/gradient_dialog_pwd_bg">
 
-
     <TextView
         android:id="@+id/tv_delete_wallet_pwd_title"
         android:layout_width="wrap_content"

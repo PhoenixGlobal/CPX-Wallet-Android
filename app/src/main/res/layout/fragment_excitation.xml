@@ -1,41 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/c_F0F0F0">
 
     <RelativeLayout
+        android:id="@+id/excitation_header"
         android:layout_width="match_parent"
-        android:layout_height="133dp"
-        android:background="@drawable/tb_bg">
+        android:layout_height="wrap_content"
+        android:background="@mipmap/excitation_actionbar_bg">
 
         <TextView
             android:id="@+id/tv_excitation_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/fragment_assets_title_margin_top"
+            android:layout_marginTop="@dimen/d_26dp"
             android:text="@string/excitation"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/tb_title_size" />
+            android:textColor="@color/c_FFFFFF"
+            android:textSize="@dimen/d_16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/excitation_apex_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/excitation_bg">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:text="@string/latest_activity"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:layout_marginStart="@dimen/d_15dp"
+            android:layout_marginTop="@dimen/d_77dp"
+            android:text="@string/excitation"
+            android:textColor="@color/c_FFFFFF"
+            android:textSize="@dimen/d_16sp" />
 
     </RelativeLayout>
 
-    <TextView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_event_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"
-        android:text="活动内容"
-        android:textSize="30sp" />
-</LinearLayout>
+        android:layout_marginEnd="@dimen/d_12dp"
+        android:layout_marginStart="@dimen/d_12dp"
+        android:layout_below="@+id/excitation_header">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/new_event"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/excitation_header"
+            android:layout_centerHorizontal="true"
+            android:overScrollMode="never" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

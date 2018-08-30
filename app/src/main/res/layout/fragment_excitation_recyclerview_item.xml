@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/new_event_pic_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/new_event_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/new_event_pic" />
+
+        <ImageView
+            android:id="@+id/new_event_tag_chinese"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/new_event_tag_chinese" />
+        <ImageView
+            android:id="@+id/new_event_tag_english"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/new_event_tag_english" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d_85dp"
+        android:layout_below="@id/new_event_pic_container"
+        android:background="@color/c_ffffffff">
+
+        <TextView
+            android:id="@+id/new_event_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d_11dp"
+            android:layout_marginStart="@dimen/d_13dp"
+            android:layout_marginTop="@dimen/d_15dp"
+            android:singleLine="true"
+            android:textSize="@dimen/d_16sp" />
+
+        <TextView
+            android:id="@+id/new_event_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/d_22dp"
+            android:layout_marginTop="@dimen/d_54dp"
+            android:background="@mipmap/new_event_status"
+            android:gravity="center" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
