@@ -8,12 +8,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.request.RequestGetNep5Balance;
 import chinapex.com.wallet.bean.request.RequestGetNep5BalanceSub;
 import chinapex.com.wallet.bean.response.ResponseGetNep5Balance;
 import chinapex.com.wallet.executor.callback.IGetNep5BalanceCallback;
+import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
+import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
@@ -85,8 +88,7 @@ public class GetNep5Balance implements Runnable, INetCallback {
     public void onSuccess(int statusCode, String msg, String result) {
         HashMap<String, BalanceBean> balanceBeans = new HashMap<>();
 
-        ResponseGetNep5Balance responseGetNep5Balance = GsonUtils.json2Bean(result,
-                ResponseGetNep5Balance.class);
+        ResponseGetNep5Balance responseGetNep5Balance = GsonUtils.json2Bean(result, ResponseGetNep5Balance.class);
         if (null == responseGetNep5Balance) {
             CpLog.e(TAG, "responseGetNep5Balance is null!");
             balanceBeans.put(mAssetID, null);
@@ -105,6 +107,22 @@ public class GetNep5Balance implements Runnable, INetCallback {
         List<ResponseGetNep5Balance.ResultBean.StackBean> stackBeans = resultBean.getStack();
         if (null == stackBeans || stackBeans.isEmpty()) {
             CpLog.e(TAG, "stackBeans is null or empty!");
+            balanceBeans.put(mAssetID, null);
+            mIGetNep5BalanceCallback.getNep5Balance(balanceBeans);
+            return;
+        }
+
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
+        if (null == apexWalletDbDao) {
+            CpLog.e(TAG, "apexWalletDbDao is null!");
+            balanceBeans.put(mAssetID, null);
+            mIGetNep5BalanceCallback.getNep5Balance(balanceBeans);
+            return;
+        }
+
+        AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_NEO_ASSETS, mAssetID);
+        if (null == assetBean) {
+            CpLog.e(TAG, "assetBean is null!");
             balanceBeans.put(mAssetID, null);
             mIGetNep5BalanceCallback.getNep5Balance(balanceBeans);
             return;
@@ -135,8 +153,9 @@ public class GetNep5Balance implements Runnable, INetCallback {
             balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
             balanceBean.setWalletType(Constant.WALLET_TYPE_NEO);
             balanceBean.setAssetsID(mAssetID);
+            balanceBean.setAssetSymbol(assetBean.getSymbol());
             balanceBean.setAssetType(Constant.ASSET_TYPE_NEP5);
-            balanceBean.setAssetDecimal(8);
+            balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
             balanceBean.setAssetsValue(null == value ? "0" : value.toPlainString());
             balanceBeans.put(mAssetID, balanceBean);
         }

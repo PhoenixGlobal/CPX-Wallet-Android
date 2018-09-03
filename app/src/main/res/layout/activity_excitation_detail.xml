@@ -11,7 +11,7 @@
         android:id="@+id/excitation_detail_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/excitation_actionbar_bg">
+        android:background="@drawable/excitation_actionbar_bg">
 
         <TextView
             android:id="@+id/tv_excitation_detail_title"
@@ -40,20 +40,37 @@
             android:text="@string/excitation_detail_cpx_address"
             android:textSize="@dimen/d_13sp" />
 
-        <EditText
-            android:id="@+id/cpx_address_input"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d_46dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/cpx_address_title"
-            android:layout_marginTop="@dimen/d_5dp"
-            android:background="@color/c_FFFFFF"
-            android:gravity="center_vertical"
-            android:paddingBottom="@dimen/d_13dp"
-            android:paddingStart="@dimen/d_15dp"
-            android:paddingTop="@dimen/d_16dp"
-            android:textColor="@color/c_666666"
-            android:textSize="@dimen/d_12sp" />
+            android:layout_marginTop="@dimen/d_5dp">
 
+            <EditText
+                android:id="@+id/cpx_address_input"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d_46dp"
+                android:background="@color/c_FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/d_13dp"
+                android:paddingStart="@dimen/d_15dp"
+                android:paddingTop="@dimen/d_16dp"
+                android:singleLine="true"
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/d_12sp" />
+
+
+            <ImageButton
+                android:id="@+id/cpx_address_input_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/d_6dp"
+                android:background="@null"
+                android:src="@drawable/excitation_detail_address_cancel"
+                android:visibility="gone" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <TextView
@@ -82,47 +99,63 @@
             android:layout_marginStart="@dimen/d_13sp"
             android:text="@string/excitation_detail_eth_address" />
 
-        <EditText
-            android:id="@+id/eth_address_input"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/d_46dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/eth_address_title"
-            android:layout_marginTop="@dimen/d_5dp"
-            android:background="@color/c_FFFFFF"
-            android:paddingBottom="@dimen/d_13dp"
-            android:paddingStart="@dimen/d_15dp"
-            android:paddingTop="@dimen/d_16dp"
-            android:textColor="@color/c_666666"
-            android:textSize="@dimen/d_12sp" />
+            android:layout_marginTop="@dimen/d_5dp">
 
+            <EditText
+                android:id="@+id/eth_address_input"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d_46dp"
+                android:background="@color/c_FFFFFF"
+                android:paddingBottom="@dimen/d_13dp"
+                android:paddingStart="@dimen/d_15dp"
+                android:paddingTop="@dimen/d_16dp"
+                android:singleLine="true"
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/d_12sp" />
+
+            <ImageButton
+                android:id="@+id/eth_address_input_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/d_6dp"
+                android:background="@null"
+                android:src="@drawable/excitation_detail_address_cancel"
+                android:visibility="gone" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/eth_address_container"
-        >
+        android:layout_below="@+id/eth_address_container">
 
         <ImageView
             android:id="@+id/excitation_note_pic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/excitation_detail_note"
             android:layout_marginStart="@dimen/d_43dp"
-            android:layout_marginTop="@dimen/d_33dp"/>
+            android:layout_marginTop="@dimen/d_33dp"
+            android:src="@drawable/excitation_detail_note" />
 
         <TextView
             android:id="@+id/excitation_note_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/d_42dp"
+            android:layout_marginStart="@dimen/d_3dp"
+            android:layout_marginTop="@dimen/d_30dp"
             android:layout_toEndOf="@+id/excitation_note_pic"
             android:text="@string/excitation_detail_condition_tip"
             android:textColor="@color/c_666666"
-            android:textSize="@dimen/d_12sp"
-            android:layout_marginStart="@dimen/d_3dp"
-            android:layout_marginTop="@dimen/d_30dp"
-            android:layout_marginEnd="@dimen/d_42dp"/>
+            android:textSize="@dimen/d_12sp" />
     </RelativeLayout>
 
     <TextView

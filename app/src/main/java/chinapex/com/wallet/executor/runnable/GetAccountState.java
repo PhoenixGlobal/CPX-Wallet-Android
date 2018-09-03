@@ -46,14 +46,12 @@ public class GetAccountState implements Runnable, INetCallback {
         arrayList.add(mAddress);
         requestGetAccountState.setParams(arrayList);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_NEO, GsonUtils.toJsonStr
-                (requestGetAccountState), this);
+        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_NEO, GsonUtils.toJsonStr(requestGetAccountState), this);
     }
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
-        ResponseGetAccountState responseGetAccountState = GsonUtils.json2Bean(result,
-                ResponseGetAccountState.class);
+        ResponseGetAccountState responseGetAccountState = GsonUtils.json2Bean(result, ResponseGetAccountState.class);
         if (null == responseGetAccountState) {
             CpLog.e(TAG, "responseGetAccountState is null!");
             mIGetAccountStateCallback.getNeoGlobalAssetBalance(null);

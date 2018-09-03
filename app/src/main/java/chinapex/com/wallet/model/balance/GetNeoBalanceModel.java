@@ -160,40 +160,24 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
             return;
         }
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
-        if (null == apexWalletDbDao) {
-            CpLog.e(TAG, "apexWalletDbDao is null!");
-            return;
-        }
-
         mColorAssetCounter++;
 
         for (Map.Entry<String, BalanceBean> balanceBeanEntry : balanceBeans.entrySet()) {
-            AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_NEO_ASSETS, balanceBeanEntry.getKey());
-            if (null == assetBean) {
-                CpLog.e(TAG, "assetBean is null!");
+            if (null == balanceBeanEntry) {
+                CpLog.e(TAG, "balanceBeanEntry is null!");
                 continue;
             }
 
-            BalanceBean balanceBean = new BalanceBean();
-            balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
-            balanceBean.setWalletType(Constant.WALLET_TYPE_NEO);
-            balanceBean.setAssetsID(assetBean.getHexHash());
-            balanceBean.setAssetSymbol(assetBean.getSymbol());
-            balanceBean.setAssetType(Constant.ASSET_TYPE_NEP5);
-            balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
-
-            BalanceBean value = balanceBeanEntry.getValue();
-            if (null == value) {
-                balanceBean.setAssetsValue("0");
-            } else {
-                balanceBean.setAssetsValue(value.getAssetsValue());
+            BalanceBean balanceBeanTmp = balanceBeanEntry.getValue();
+            if (null == balanceBeanTmp) {
+                CpLog.e(TAG, "balanceBeanTmp is null!");
+                continue;
             }
 
-            if (Constant.ASSETS_CPX.equals(assetBean.getHexHash())) {
-                mColorAssetBalanceBeans.add(0, balanceBean);
+            if (Constant.ASSETS_CPX.equals(balanceBeanEntry.getKey())) {
+                mColorAssetBalanceBeans.add(0, balanceBeanTmp);
             } else {
-                mColorAssetBalanceBeans.add(balanceBean);
+                mColorAssetBalanceBeans.add(balanceBeanTmp);
             }
         }
 

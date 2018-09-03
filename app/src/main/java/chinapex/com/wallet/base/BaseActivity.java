@@ -97,6 +97,6 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(PhoneUtils.attachBaseContext(ApexWalletApplication.getInstance()));
+        super.attachBaseContext(PhoneUtils.attachBaseContext(newBase));
     }
 }

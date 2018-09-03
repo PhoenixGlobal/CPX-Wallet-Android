@@ -5,12 +5,15 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.request.RequestErc20Params;
 import chinapex.com.wallet.bean.request.RequestGetErc20Balance;
 import chinapex.com.wallet.bean.response.ResponseGetEthBalance;
 import chinapex.com.wallet.executor.callback.eth.IGetErc20BalanceCallback;
+import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
+import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
@@ -85,14 +88,29 @@ public class GetErc20Balance implements Runnable, INetCallback {
             return;
         }
 
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
+        if (null == apexWalletDbDao) {
+            CpLog.e(TAG, "apexWalletDbDao is null!");
+            mIGetErc20BalanceCallback.getErc20Balance(null);
+            return;
+        }
+
+        AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_ETH_ASSETS, mAssetID);
+        if (null == assetBean) {
+            CpLog.e(TAG, "assetBean is null!");
+            mIGetErc20BalanceCallback.getErc20Balance(null);
+            return;
+        }
+
         HashMap<String, BalanceBean> erc20Balance = new HashMap<>();
 
         BalanceBean balanceBean = new BalanceBean();
         balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
         balanceBean.setWalletType(Constant.WALLET_TYPE_ETH);
         balanceBean.setAssetsID(mAssetID);
+        balanceBean.setAssetSymbol(assetBean.getSymbol());
         balanceBean.setAssetType(Constant.ASSET_TYPE_ERC20);
-        balanceBean.setAssetDecimal(18);
+        balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
         balanceBean.setAssetsValue(erc20BalanceValue);
 
         erc20Balance.put(mAssetID, balanceBean);

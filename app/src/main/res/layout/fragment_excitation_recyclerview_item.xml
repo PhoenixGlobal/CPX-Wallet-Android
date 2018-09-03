@@ -13,18 +13,18 @@
             android:id="@+id/new_event_pic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/new_event_pic" />
+            android:src="@drawable/new_event_pic" />
 
         <ImageView
             android:id="@+id/new_event_tag_chinese"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/new_event_tag_chinese" />
+            android:background="@drawable/new_event_tag_chinese" />
         <ImageView
             android:id="@+id/new_event_tag_english"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/new_event_tag_english" />
+            android:background="@drawable/new_event_tag_english" />
 
 
     </RelativeLayout>
@@ -52,7 +52,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/d_22dp"
             android:layout_marginTop="@dimen/d_54dp"
-            android:background="@mipmap/new_event_status"
+            android:background="@drawable/new_event_status"
             android:gravity="center" />
 
     </RelativeLayout>

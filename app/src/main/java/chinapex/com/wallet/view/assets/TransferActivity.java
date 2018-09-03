@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -30,7 +31,8 @@ import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.dialog.TransferPwdDialog;
 import neomobile.Wallet;
 
-public class TransferActivity extends BaseActivity implements View.OnClickListener, TransferPwdDialog.OnCheckPwdListener,
+public class TransferActivity extends BaseActivity implements View.OnClickListener,
+        TransferPwdDialog.OnCheckPwdListener,
         SeekBar.OnSeekBarChangeListener, ICreateTxView {
 
     private static final String TAG = TransferActivity.class.getSimpleName();
@@ -47,6 +49,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     private SeekBar mSb_transfer;
     private TextView mTv_transfer_gas;
     private ICreateTxPresenter mICreateTxPresenter;
+    private RelativeLayout mRl_seek_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         mTv_amount_all = (TextView) findViewById(R.id.tv_amount_all);
         mSb_transfer = (SeekBar) findViewById(R.id.sb_transfer);
         mTv_transfer_gas = (TextView) findViewById(R.id.tv_transfer_gas);
+        mRl_seek_bar = (RelativeLayout) findViewById(R.id.rl_seek_bar);
 
         mBt_transfer_send = (Button) findViewById(R.id.bt_transfer_send);
         mBt_transfer_send.setOnClickListener(this);
@@ -88,6 +92,21 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             return;
         }
 
+        int walletType = mWalletBean.getWalletType();
+        switch (walletType) {
+            case Constant.WALLET_TYPE_NEO:
+                mRl_seek_bar.setVisibility(View.INVISIBLE);
+                break;
+            case Constant.WALLET_TYPE_ETH:
+                mRl_seek_bar.setVisibility(View.VISIBLE);
+                break;
+            case Constant.WALLET_TYPE_CPX:
+                break;
+            default:
+                CpLog.e(TAG, "unknown wallet type!");
+                break;
+        }
+
         mBalanceBean = intent.getParcelableExtra(Constant.PARCELABLE_BALANCE_BEAN_TRANSFER);
         if (null == mBalanceBean) {
             CpLog.e(TAG, "mBalanceBean is null!");
@@ -99,7 +118,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         mTv_transfer_gas.setText(String.valueOf(mSb_transfer.getProgress() / 100.0 + " ether"));
 
         mICreateTxPresenter = new CreateTxPresenter(this);
-        mICreateTxPresenter.init(mWalletBean.getWalletType());
+        mICreateTxPresenter.init(walletType);
 
         String qrCode = intent.getStringExtra(Constant.PARCELABLE_QR_CODE_TRANSFER);
         if (TextUtils.isEmpty(qrCode)) {

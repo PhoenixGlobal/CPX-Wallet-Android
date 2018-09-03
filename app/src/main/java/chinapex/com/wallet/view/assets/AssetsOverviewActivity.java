@@ -352,7 +352,6 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
 
     @Override
     public void getAssetBalance(final List<BalanceBean> balanceBeans) {
-        CpLog.i(TAG, "getAssetBalance()");
         if (null == balanceBeans || balanceBeans.isEmpty()) {
             CpLog.e(TAG, "balanceBeans is null or emtpy!");
             return;

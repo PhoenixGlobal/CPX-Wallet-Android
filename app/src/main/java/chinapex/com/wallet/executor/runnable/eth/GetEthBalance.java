@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.request.RequestGetEthBalance;
 import chinapex.com.wallet.bean.response.ResponseGetAccountState;
 import chinapex.com.wallet.bean.response.ResponseGetEthBalance;
 import chinapex.com.wallet.executor.callback.eth.IGetEthBalanceCallback;
+import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
+import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
@@ -68,13 +71,28 @@ public class GetEthBalance implements Runnable, INetCallback {
             return;
         }
 
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
+        if (null == apexWalletDbDao) {
+            CpLog.e(TAG, "apexWalletDbDao is null!");
+            mIGetEthBalanceCallback.getEthBalance(null);
+            return;
+        }
+
+        AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_ETH_ASSETS, Constant.ASSETS_ETH);
+        if (null == assetBean) {
+            CpLog.e(TAG, "assetBean is null!");
+            mIGetEthBalanceCallback.getEthBalance(null);
+            return;
+        }
+
         HashMap<String, BalanceBean> balanceBeans = new HashMap<>();
         BalanceBean balanceBean = new BalanceBean();
         balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
         balanceBean.setWalletType(Constant.WALLET_TYPE_ETH);
         balanceBean.setAssetsID(Constant.ASSETS_ETH);
+        balanceBean.setAssetSymbol(assetBean.getSymbol());
         balanceBean.setAssetType(Constant.ASSET_TYPE_ETH);
-        balanceBean.setAssetDecimal(18);
+        balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
         balanceBean.setAssetsValue(ethBalanceResult);
         balanceBeans.put(Constant.ASSETS_ETH, balanceBean);
 

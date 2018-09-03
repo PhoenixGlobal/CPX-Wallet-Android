@@ -18,11 +18,12 @@ import java.util.Locale;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.ExcitationBean;
 import chinapex.com.wallet.global.ApexWalletApplication;
+import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.PhoneUtils;
 
-import static chinapex.com.wallet.R.mipmap.new_event_status;
-import static chinapex.com.wallet.R.mipmap.new_event_status_end;
+import static chinapex.com.wallet.R.drawable.new_event_status;
+import static chinapex.com.wallet.R.drawable.new_event_status_end;
 
 
 public class ExcitationAdapter extends RecyclerView.Adapter<ExcitationAdapter.ExcitationAdapterHolder> implements View.OnClickListener {
@@ -108,11 +109,11 @@ public class ExcitationAdapter extends RecyclerView.Adapter<ExcitationAdapter.Ex
         }
 
         int newEventStatus = bean.getNewEventStatus();
-        if (newEventStatus == -1) {
+        if (newEventStatus == Constant.EXCITATION_EXCITATION_AOUBT_TO_BEGIN) {
             holder.newEventStatus.setText(ApexWalletApplication.getInstance().getResources().getText(R.string.excitation_about_to_begin));
             holder.newEventStatus.setBackground(ApexWalletApplication.getInstance().getResources().getDrawable(new_event_status_end));
             holder.newEventStatus.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_ff666666));
-        } else if (newEventStatus == 1) {
+        } else if (newEventStatus == Constant.EXCITATION_EXCITATION_IN_PROGRESS) {
             holder.newEventStatus.setText(ApexWalletApplication.getInstance().getResources().getText(R.string.excitation_in_progress));
             holder.newEventStatus.setBackground(ApexWalletApplication.getInstance().getResources().getDrawable(new_event_status));
             holder.newEventStatus.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_FFFFFF));

@@ -2,19 +2,25 @@ package chinapex.com.wallet.view.excitation.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.AddressResultCode;
+import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.request.RequestSubmitExcitation;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IGetLocalCpxSumCallback;
@@ -34,6 +40,8 @@ public class ExcitationDetailActivity extends BaseActivity implements View.OnCli
     private EditText mEthAddressInput;
     private TextView mWrongAddressNote;
     private Button mExcitationCommit;
+    private ImageButton mCpxAddressInputCancel;
+    private ImageButton mEthAddressInputCancel;
     private GetDetailCodePresenter mGetAddressResultPresenter;
     private int mGasLimit;
     private int mExcitationId;
@@ -89,9 +97,18 @@ public class ExcitationDetailActivity extends BaseActivity implements View.OnCli
         mCpxAddressInput = findViewById(R.id.cpx_address_input);
         mEthAddressInput = findViewById(R.id.eth_address_input);
         mWrongAddressNote = findViewById(R.id.tv_excitation_detail_wrong_address_note);
+        mCpxAddressInputCancel = findViewById(R.id.cpx_address_input_cancel);
+        mEthAddressInputCancel = findViewById(R.id.eth_address_input_cancel);
+        mWrongAddressNote = findViewById(R.id.tv_excitation_detail_wrong_address_note);
         mExcitationCommit = findViewById(R.id.btn_excitation_submit);
 
+
+        mCpxAddressInput.addTextChangedListener(new DetailTextWatcher(mCpxAddressInput));
+        mEthAddressInput.addTextChangedListener(new DetailTextWatcher(mEthAddressInput));
+
         mExcitationCommit.setOnClickListener(this);
+        mCpxAddressInputCancel.setOnClickListener(this);
+        mEthAddressInputCancel.setOnClickListener(this);
     }
 
     @Override
@@ -100,14 +117,52 @@ public class ExcitationDetailActivity extends BaseActivity implements View.OnCli
             case R.id.btn_excitation_submit:
                 submitExcitation();
                 break;
+            case R.id.cpx_address_input_cancel:
+                clearCpxInput();
+                break;
+            case R.id.eth_address_input_cancel:
+                clearEthInput();
+                break;
             default:
                 break;
         }
     }
 
+    private void clearCpxInput() {
+        mCpxAddressInput.getText().clear();
+    }
+
+    private void clearEthInput() {
+        mEthAddressInput.getText().clear();
+    }
+
     private void submitExcitation() {
         String cpxAddress = mCpxAddressInput.getText().toString().trim();
         String ethAddress = mEthAddressInput.getText().toString().trim();
+
+        if (TextUtils.isEmpty(cpxAddress)) {
+            CpLog.e(TAG, "the CPX address isEmpty!");
+            ToastUtils.getInstance().showToast(getResources().getString(R.string.excitation_cpx_address_empty_toast));
+            return;
+        }
+
+        if (TextUtils.isEmpty(ethAddress)) {
+            CpLog.e(TAG, "the ETH address isEmpty!");
+            ToastUtils.getInstance().showToast(getResources().getString(R.string.excitation_eth_address_empty_toast));
+            return;
+        }
+
+        if (!ethAddress.startsWith(Constant.ETH_ADDRESS_START_WITH) || ethAddress.length() != 42) {
+            CpLog.e(TAG, "the address is not Eth type!");
+            ToastUtils.getInstance().showToast(getResources().getString(R.string.excitation_eth_address_wrong_format_toast));
+            return;
+        }
+
+        if (!cpxAddress.startsWith(Constant.NEO_ADDRESS_START_WITH) || cpxAddress.length() != 34) {
+            CpLog.e(TAG, "the address is not CPX type!");
+            ToastUtils.getInstance().showToast(getResources().getString(R.string.excitation_cpx_address_wrong_format_toast));
+            return;
+        }
 
         RequestSubmitExcitation requestSubmitExcitation = new RequestSubmitExcitation();
         requestSubmitExcitation.setCPX(cpxAddress);
@@ -160,5 +215,42 @@ public class ExcitationDetailActivity extends BaseActivity implements View.OnCli
 
     }
 
+
+    private class DetailTextWatcher implements TextWatcher {
+        private EditText mEditText;
+
+        public DetailTextWatcher(EditText editText) {
+            mEditText = editText;
+        }
+
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            int textId = mEditText.getId();
+            switch (textId) {
+                case R.id.cpx_address_input:
+                    if (TextUtils.isEmpty(mEditText.getText())) {
+                        mCpxAddressInputCancel.setVisibility(View.GONE);
+                    } else {
+                        mCpxAddressInputCancel.setVisibility(View.VISIBLE);
+                    }
+                    break;
+                case R.id.eth_address_input:
+                    if (TextUtils.isEmpty(mEditText.getText())) {
+                        mEthAddressInputCancel.setVisibility(View.GONE);
+                    } else {
+                        mEthAddressInputCancel.setVisibility(View.VISIBLE);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        public void afterTextChanged(Editable s) {
+        }
+    }
 
 }

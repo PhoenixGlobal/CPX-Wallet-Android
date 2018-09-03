@@ -103,6 +103,7 @@
     <dimen name="d_2dp">2dp</dimen>
     <dimen name="d_3dp">3dp</dimen>
     <dimen name="d_5dp">5dp</dimen>
+    <dimen name="d_6dp">6dp</dimen>
     <dimen name="d_7dp">7dp</dimen>
     <dimen name="d_8dp">8dp</dimen>
     <dimen name="d_11dp">11dp</dimen>

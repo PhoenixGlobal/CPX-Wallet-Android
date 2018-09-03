@@ -148,7 +148,7 @@
     <string name="excitation_about_to_begin">About to begin</string>
     <string name="excitation_in_progress">In progress</string>
     <string name="excitation_closed">Closed</string>
-    <string name="excitation_detail_cpx_address">CPX Address (achieved T1/ Genesis level)</string>
+    <string name="excitation_detail_cpx_address">CPX Address (achieved T2/T1/ Genesis level)</string>
     <string name="excitation_detail_wrong_address_note">Please enter the correct wallet address</string>
     <string name="excitation_detail_eth_address">ETH Address</string>
     <string name="excitation_detail_submit">Submit</string>
@@ -162,4 +162,10 @@
     <string name="server_request_failed">Server request failed</string>
     <string name="excitation_detail_sum_dialog_note">Please be sure the amount of CPX in the local wallets more than 100(≥100)</string>
     <string name="excitation_detail_sum_dialog_confirm">Confirm</string>
+    <string name="excitation_about_to_begin_toast">The reward is about to begin. Please look forward to it!</string>
+    <string name="excitation_closed_toast">The reward is closed</string>
+    <string name="excitation_cpx_address_wrong_format_toast">Please input the correct format CPX address!</string>
+    <string name="excitation_cpx_address_empty_toast">CPX address can not be empty!</string>
+    <string name="excitation_eth_address_wrong_format_toast">Please input the correct format ETH address!</string>
+    <string name="excitation_eth_address_empty_toast">ETH address can not be empty!</string>
 </resources>

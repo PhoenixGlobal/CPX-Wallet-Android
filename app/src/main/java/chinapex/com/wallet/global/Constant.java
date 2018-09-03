@@ -141,6 +141,10 @@ public class Constant {
     public static final String EXCITATION_GAS_LIMIT = "excitationGasLimit";
     public static final String EXCITATION_ACTIVITY_ID = "excitationActivityId";
 
+    public static final int EXCITATION_EXCITATION_AOUBT_TO_BEGIN = -1;
+    public static final int EXCITATION_EXCITATION_IN_PROGRESS = 1;
+    public static final int EXCITATION_EXCITATION_CLOSED = 2;
+
 
     // tmp 后台更新后删除
     public static final String ASSETS_APH = "0xa0777c3ce2b169d4a23bcba4565e3225a0122d95";
