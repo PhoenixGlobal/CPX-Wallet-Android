@@ -3,6 +3,7 @@ package chinapex.com.wallet.model.balance;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
     private IGetBalanceModelCallback mIGetBalanceModelCallback;
     private List<String> mGlobalAssets;
     private List<String> mColorAssets;
-    private List<BalanceBean> mColorAssetBalanceBeans;
+    private HashMap<String, BalanceBean> mColorAssetBalanceBeans;
     private int mColorAssetNum;
     private int mColorAssetCounter;
 
@@ -73,7 +74,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
             return;
         }
 
-        List<BalanceBean> globalBalanceBeans = new ArrayList<>();
+        HashMap<String, BalanceBean> globalBalanceBeans = new HashMap<>();
 
         if (null == balanceBeans || balanceBeans.isEmpty()) {
             for (String globalAsset : mGlobalAssets) {
@@ -91,7 +92,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
                 balanceBean.setAssetType(Constant.ASSET_TYPE_GLOBAL);
                 balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
                 balanceBean.setAssetsValue("0");
-                globalBalanceBeans.add(balanceBean);
+                globalBalanceBeans.put(globalAsset, balanceBean);
             }
 
             mIGetBalanceModelCallback.getGlobalBalanceModel(globalBalanceBeans);
@@ -117,7 +118,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
             } else {
                 balanceBean.setAssetsValue("0");
             }
-            globalBalanceBeans.add(balanceBean);
+            globalBalanceBeans.put(globalAsset, balanceBean);
         }
         mIGetBalanceModelCallback.getGlobalBalanceModel(globalBalanceBeans);
     }
@@ -142,7 +143,7 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
         }
 
         mColorAssetNum = mColorAssets.size();
-        mColorAssetBalanceBeans = new ArrayList<>();
+        mColorAssetBalanceBeans = new HashMap<>();
         for (String colorAsset : mColorAssets) {
             if (TextUtils.isEmpty(colorAsset)) {
                 CpLog.e(TAG, "colorAsset is null or empty!");
@@ -168,17 +169,13 @@ public class GetNeoBalanceModel implements IGetBalanceModel, IGetAccountStateCal
                 continue;
             }
 
-            BalanceBean balanceBeanTmp = balanceBeanEntry.getValue();
-            if (null == balanceBeanTmp) {
-                CpLog.e(TAG, "balanceBeanTmp is null!");
+            String assetIdTmp = balanceBeanEntry.getKey();
+            if (TextUtils.isEmpty(assetIdTmp)) {
+                CpLog.e(TAG, "assetIdTmp is null!");
                 continue;
             }
 
-            if (Constant.ASSETS_CPX.equals(balanceBeanEntry.getKey())) {
-                mColorAssetBalanceBeans.add(0, balanceBeanTmp);
-            } else {
-                mColorAssetBalanceBeans.add(balanceBeanTmp);
-            }
+            mColorAssetBalanceBeans.put(assetIdTmp, balanceBeanEntry.getValue());
         }
 
         if (mColorAssetCounter >= mColorAssetNum) {

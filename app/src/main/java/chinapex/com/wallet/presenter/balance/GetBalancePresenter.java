@@ -1,15 +1,14 @@
 package chinapex.com.wallet.presenter.balance;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.balance.GetEthBalanceModel;
+import chinapex.com.wallet.model.balance.GetNeoBalanceModel;
 import chinapex.com.wallet.model.balance.IGetBalanceModel;
 import chinapex.com.wallet.model.balance.IGetBalanceModelCallback;
-import chinapex.com.wallet.model.balance.GetNeoBalanceModel;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.view.assets.IGetBalanceView;
 
@@ -22,11 +21,6 @@ public class GetBalancePresenter implements IGetBalancePresenter, IGetBalanceMod
     private static final String TAG = GetBalancePresenter.class.getSimpleName();
     private IGetBalanceView mIGetBalanceView;
     private IGetBalanceModel mIGetBalanceModel;
-    private List<BalanceBean> mBalanceBeans;
-    private int mAssetOrder;
-    private static final int GLOBAL_ASSET_FIRST = 1;
-    private static final int COLOR_ASSET_FIRST = 2;
-
 
     public GetBalancePresenter(IGetBalanceView IGetBalanceView) {
         mIGetBalanceView = IGetBalanceView;
@@ -44,25 +38,11 @@ public class GetBalancePresenter implements IGetBalancePresenter, IGetBalanceMod
             default:
                 break;
         }
-        mBalanceBeans = new ArrayList<>();
-    }
-
-    @Override
-    public void getAssetBalance(WalletBean walletBean) {
-        if (null == mIGetBalanceModel) {
-            CpLog.e(TAG, "getAssetBalance() -> mIGetBalanceModel is null!");
-            return;
-        }
-
-        mIGetBalanceModel.init();
-        mAssetOrder = 0;
-        mBalanceBeans.clear();
-        getGlobalAssetBalance(walletBean);
-        getColorAssetBalance(walletBean);
     }
 
     @Override
     public void getGlobalAssetBalance(WalletBean walletBean) {
+        mIGetBalanceModel.init();
         if (null == mIGetBalanceModel) {
             CpLog.e(TAG, "getColorAssetBalance() -> mIGetBalanceModel is null!");
             return;
@@ -72,28 +52,18 @@ public class GetBalancePresenter implements IGetBalancePresenter, IGetBalanceMod
     }
 
     @Override
-    public synchronized void getGlobalBalanceModel(List<BalanceBean> balanceBeans) {
+    public synchronized void getGlobalBalanceModel(HashMap<String, BalanceBean> balanceBeans) {
         if (null == mIGetBalanceView) {
             CpLog.e(TAG, "getBalanceModel() -> mIGetBalanceModel is null!");
             return;
         }
 
-        if (mAssetOrder == 0) {
-            mAssetOrder = GLOBAL_ASSET_FIRST;
-            mBalanceBeans.addAll(balanceBeans);
-            return;
-        }
-
-        if (mBalanceBeans.size() >= 1) {
-            mBalanceBeans.addAll(1, balanceBeans);
-        } else {
-            mBalanceBeans.addAll(balanceBeans);
-        }
-        mIGetBalanceView.getAssetBalance(mBalanceBeans);
+        mIGetBalanceView.getGlobalAssetBalance(balanceBeans);
     }
 
     @Override
     public void getColorAssetBalance(WalletBean walletBean) {
+        mIGetBalanceModel.init();
         if (null == mIGetBalanceModel) {
             CpLog.e(TAG, "getColorAssetBalance() -> mIGetBalanceModel is null!");
             return;
@@ -103,36 +73,13 @@ public class GetBalancePresenter implements IGetBalancePresenter, IGetBalanceMod
     }
 
     @Override
-    public synchronized void getColorBalanceModel(List<BalanceBean> balanceBeans) {
+    public synchronized void getColorBalanceModel(HashMap<String, BalanceBean> balanceBeans) {
         if (null == mIGetBalanceView) {
             CpLog.e(TAG, "getBalanceModel() -> mIGetBalanceModel is null!");
             return;
         }
 
-        if (mAssetOrder == 0) {
-            mAssetOrder = COLOR_ASSET_FIRST;
-            mBalanceBeans.addAll(balanceBeans);
-            return;
-        }
-
-        if (mBalanceBeans.isEmpty()) {
-            mBalanceBeans.addAll(balanceBeans);
-        } else {
-            for (BalanceBean balanceBean : balanceBeans) {
-                if (null == balanceBean) {
-                    CpLog.e(TAG, "balanceBean is null!");
-                    continue;
-                }
-
-                if (Constant.ASSETS_CPX.equals(balanceBean.getAssetsID())) {
-                    mBalanceBeans.add(0, balanceBean);
-                } else {
-                    mBalanceBeans.add(balanceBean);
-                }
-            }
-        }
-
-        mIGetBalanceView.getAssetBalance(mBalanceBeans);
+        mIGetBalanceView.getColorAssetBalance(balanceBeans);
     }
 
 }

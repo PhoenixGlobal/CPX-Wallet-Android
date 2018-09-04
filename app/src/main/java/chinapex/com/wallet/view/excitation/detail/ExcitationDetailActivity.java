@@ -10,17 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.AddressResultCode;
-import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.request.RequestSubmitExcitation;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.IGetLocalCpxSumCallback;
@@ -29,12 +24,11 @@ import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.ToastUtils;
 import chinapex.com.wallet.view.dialog.ExcitationDialog;
-import chinapex.com.wallet.view.excitation.ExcitationFragment;
 
 public class ExcitationDetailActivity extends BaseActivity implements View.OnClickListener,
         IDetailView, IGetLocalCpxSumCallback {
 
-    private static final String TAG = ExcitationFragment.class.getSimpleName();
+    private static final String TAG = ExcitationDetailActivity.class.getSimpleName();
 
     private EditText mCpxAddressInput;
     private EditText mEthAddressInput;
@@ -89,7 +83,7 @@ public class ExcitationDetailActivity extends BaseActivity implements View.OnCli
     }
 
     private void showExcitationDialog() {
-        ExcitationDialog excitationDialog = ExcitationDialog.newInstance();
+        ExcitationDialog excitationDialog = ExcitationDialog.newInstance(mGasLimit);
         excitationDialog.show(getFragmentManager(), "ExcitationDialog");
     }
 
@@ -189,25 +183,24 @@ public class ExcitationDetailActivity extends BaseActivity implements View.OnCli
             @Override
             public void run() {
                 int cpxCode = addressResultCode.getCpxCode();
-                int ethCode = addressResultCode.getEthCode();
 
-                if (cpxCode == 5200 || ethCode == 5200) {
+                if (cpxCode == 5200) {
                     ToastUtils.getInstance().showToast(getString(R.string.excitation_save_ok));
                     finish();
                     return;
                 }
 
-                if (cpxCode == 5000 || ethCode == 5000) {
+                if (cpxCode == 5000) {
                     ToastUtils.getInstance().showToast(getString(R.string.excitation_save_repeat));
                     return;
                 }
 
-                if (cpxCode == 5003 || ethCode == 5003) {
+                if (cpxCode == 5003) {
                     ToastUtils.getInstance().showToast(getString(R.string.excitation_format_err));
                     return;
                 }
 
-                if (cpxCode == 5001 || ethCode == 5001) {
+                if (cpxCode == 5001) {
                     ToastUtils.getInstance().showToast(getString(R.string.excitation_save_fail));
                 }
             }

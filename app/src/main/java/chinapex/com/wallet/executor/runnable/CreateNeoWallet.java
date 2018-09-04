@@ -68,8 +68,8 @@ public class CreateNeoWallet implements Runnable {
         }
 
         ArrayList<String> assets = new ArrayList<>();
-        assets.add(Constant.ASSETS_NEO);
         assets.add(Constant.ASSETS_NEO_GAS);
+        assets.add(Constant.ASSETS_NEO);
 
         ArrayList<String> assetsNep5 = new ArrayList<>();
         assetsNep5.add(Constant.ASSETS_CPX);

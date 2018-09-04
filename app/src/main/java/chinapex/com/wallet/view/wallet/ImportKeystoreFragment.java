@@ -302,8 +302,8 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         switch (walletType) {
             case Constant.WALLET_TYPE_NEO:
                 walletBean = new NeoWallet();
-                assets.add(Constant.ASSETS_NEO);
                 assets.add(Constant.ASSETS_NEO_GAS);
+                assets.add(Constant.ASSETS_NEO);
                 colorAsset.add(Constant.ASSETS_CPX);
                 walletBean.setWalletType(Constant.WALLET_TYPE_NEO);
                 break;

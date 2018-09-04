@@ -9,7 +9,7 @@
         android:id="@+id/iv_wallet_detail_drawer_menu_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/icon_create_wallet"
         android:scaleType="center" />
 
@@ -17,7 +17,7 @@
         android:id="@+id/tv_wallet_detail_drawer_menu_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="15dp"
         android:text="添加钱包"
         android:textSize="14sp" />
 

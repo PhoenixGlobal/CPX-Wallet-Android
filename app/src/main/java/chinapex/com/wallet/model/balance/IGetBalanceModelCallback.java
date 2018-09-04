@@ -1,5 +1,6 @@
 package chinapex.com.wallet.model.balance;
 
+import java.util.HashMap;
 import java.util.List;
 
 import chinapex.com.wallet.bean.BalanceBean;
@@ -10,7 +11,7 @@ import chinapex.com.wallet.bean.BalanceBean;
  */
 
 public interface IGetBalanceModelCallback {
-    void getGlobalBalanceModel(List<BalanceBean> balanceBeans);
+    void getGlobalBalanceModel(HashMap<String, BalanceBean> balanceBeans);
 
-    void getColorBalanceModel(List<BalanceBean> balanceBeans);
+    void getColorBalanceModel(HashMap<String, BalanceBean> balanceBeans);
 }

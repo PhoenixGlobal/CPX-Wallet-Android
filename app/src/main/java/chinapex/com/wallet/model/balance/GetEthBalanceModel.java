@@ -3,6 +3,7 @@ package chinapex.com.wallet.model.balance;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,8 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
     private IGetBalanceModelCallback mIGetBalanceModelCallback;
     private List<String> mGlobalAssets;
     private List<String> mColorAssets;
+    private int mColorAssetNum;
+    private int mColorAssetCounter;
 
     public GetEthBalanceModel(IGetBalanceModelCallback IGetBalanceModelCallback) {
         mIGetBalanceModelCallback = IGetBalanceModelCallback;
@@ -37,7 +40,7 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
 
     @Override
     public void init() {
-
+        mColorAssetCounter = 0;
     }
 
     @Override
@@ -70,7 +73,7 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
             return;
         }
 
-        List<BalanceBean> globalBalanceBeans = new ArrayList<>();
+        HashMap<String, BalanceBean> globalBalanceBeans = new HashMap<>();
 
         if (null == balanceBeans || balanceBeans.isEmpty()) {
             for (String globalAsset : mGlobalAssets) {
@@ -88,7 +91,7 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
                 balanceBean.setAssetType(Constant.ASSET_TYPE_ETH);
                 balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
                 balanceBean.setAssetsValue("0");
-                globalBalanceBeans.add(balanceBean);
+                globalBalanceBeans.put(globalAsset, balanceBean);
             }
 
             mIGetBalanceModelCallback.getGlobalBalanceModel(globalBalanceBeans);
@@ -114,7 +117,7 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
             } else {
                 balanceBean.setAssetsValue("0");
             }
-            globalBalanceBeans.add(balanceBean);
+            globalBalanceBeans.put(globalAsset, balanceBean);
         }
         mIGetBalanceModelCallback.getGlobalBalanceModel(globalBalanceBeans);
     }
@@ -133,6 +136,7 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
             return;
         }
 
+        mColorAssetNum = mColorAssets.size();
         for (String colorAsset : mColorAssets) {
             if (TextUtils.isEmpty(colorAsset)) {
                 CpLog.e(TAG, "colorAsset is null or empty!");
@@ -143,25 +147,29 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
         }
     }
 
-
     @Override
     public void getErc20Balance(Map<String, BalanceBean> balanceBeans) {
+        HashMap<String, BalanceBean> balanceBeansFinal = new HashMap<>();
+        mColorAssetCounter++;
         if (null == balanceBeans || balanceBeans.isEmpty()) {
             CpLog.e(TAG, "balanceBeans is null!");
-            mIGetBalanceModelCallback.getColorBalanceModel(new ArrayList<BalanceBean>());
+            if (mColorAssetCounter >= mColorAssetNum) {
+                mIGetBalanceModelCallback.getColorBalanceModel(balanceBeansFinal);
+            }
             return;
         }
 
-        ArrayList<BalanceBean> balanceBeansFinal = new ArrayList<>();
         for (Map.Entry<String, BalanceBean> balance : balanceBeans.entrySet()) {
             if (null == balance) {
                 CpLog.e(TAG, "balance is null!");
                 continue;
             }
 
-            balanceBeansFinal.add(balance.getValue());
+            balanceBeansFinal.put(balance.getKey(), balance.getValue());
         }
 
-        mIGetBalanceModelCallback.getColorBalanceModel(balanceBeansFinal);
+        if (mColorAssetCounter >= mColorAssetNum) {
+            mIGetBalanceModelCallback.getColorBalanceModel(balanceBeansFinal);
+        }
     }
 }

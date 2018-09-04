@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Locale;
 
 import chinapex.com.wallet.R;
-import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.DensityUtil;
+import chinapex.com.wallet.utils.PhoneUtils;
 
 /**
  * Created by SteelCabbage on 2018/5/31 0031.
@@ -22,8 +25,11 @@ import chinapex.com.wallet.utils.DensityUtil;
 public class ExcitationDialog extends DialogFragment implements View.OnClickListener {
 
     private static final String TAG = ExcitationDialog.class.getSimpleName();
+    private TextView mDialogContent;
+    private static int mGasLimit;
 
-    public static ExcitationDialog newInstance() {
+    public static ExcitationDialog newInstance(int gasLimit) {
+        mGasLimit = gasLimit;
         return new ExcitationDialog();
     }
 
@@ -59,6 +65,20 @@ public class ExcitationDialog extends DialogFragment implements View.OnClickList
     }
 
     private void initView(View view) {
+        mDialogContent = view.findViewById(R.id.tv_excitation_dialog_content);
+
+        if (PhoneUtils.getAppLanguage().contains(Locale.CHINA.toString())) {
+            String tipPartOne = getResources().getString(R.string.excitation_detail_condition_chinese_tip_part_one);
+            String tipPartTwo = getResources().getString(R.string.excitation_detail_condition_chinese_tip_part_two);
+            String chineseTip = tipPartOne + mGasLimit + "(≥" + mGasLimit + ")" + tipPartTwo;
+            CpLog.i(TAG, "chineseTip: " + chineseTip);
+            mDialogContent.setText(chineseTip);
+        } else {
+            String tipPartOne = getResources().getString(R.string.excitation_detail_condition_chinese_tip_part_one);
+            String englishTip = tipPartOne + mGasLimit + ".";
+            mDialogContent.setText(englishTip);
+        }
+
         Button bt_excitation_confirm = view.findViewById(R.id.bt_excitation_confirm);
         bt_excitation_confirm.setOnClickListener(this);
     }

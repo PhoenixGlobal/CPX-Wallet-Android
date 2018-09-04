@@ -146,7 +146,8 @@
     <string name="excitation_detail_wrong_address_note">请输入正确的钱包地址</string>
     <string name="excitation_detail_eth_address">ETH 地址</string>
     <string name="excitation_detail_submit">提交</string>
-    <string name="excitation_detail_condition_tip">参与活动需在本地创建NEO钱包，并且钱包中的CPX总余额大于等于100(≥100)方可参加。</string>
+    <string name="excitation_detail_condition_chinese_tip_part_one">参与活动需在本地创建NEO钱包，并且钱包中的CPX总余额大于等于</string>
+    <string name="excitation_detail_condition_chinese_tip_part_two">方可参加。</string>
     <string name="excitation_detail_copyright">本活动最终解释权归APEX TECHNOLOGIES所有。</string>
     <string name="excitation_detail_save_successfully">保存成功</string>
     <string name="excitation_save_ok">已提交完成</string>

@@ -1,5 +1,6 @@
 package chinapex.com.wallet.view.assets;
 
+import java.util.HashMap;
 import java.util.List;
 
 import chinapex.com.wallet.bean.BalanceBean;
@@ -10,5 +11,7 @@ import chinapex.com.wallet.bean.BalanceBean;
  */
 
 public interface IGetBalanceView {
-    void getAssetBalance(List<BalanceBean> balanceBeans);
+    void getGlobalAssetBalance(HashMap<String, BalanceBean> balanceBeans);
+
+    void getColorAssetBalance(HashMap<String, BalanceBean> balanceBeans);
 }

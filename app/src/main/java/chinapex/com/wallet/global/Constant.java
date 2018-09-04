@@ -86,6 +86,11 @@ public class Constant {
     public static final String NEO_ADDRESS_START_WITH = "A";
     public static final String ETH_ADDRESS_START_WITH = "0x";
 
+    // neo and eth address regex
+    public static final String NEO_ADDRESS_REGEX = "^[A][0-9a-zA-Z]{33}$";
+    public static final String ETH_ADDRESS_REGEX = "^[0][x][0-9a-zA-Z]{40}$";
+
+
     // assets
     public static final String WALLET_BEAN = "walletBean";
     public static final String BALANCE_BEAN = "balanceBean";
