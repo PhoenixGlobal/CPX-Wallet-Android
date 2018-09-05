@@ -3,6 +3,7 @@ package chinapex.com.wallet.view.wallet;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
@@ -38,9 +39,9 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
 
     private static final String TAG = CreateWalletActivity.class.getSimpleName();
     private Button mBt_create_wallet_confirm;
-    private EditText mEt_create_wallet_name;
-    private EditText mEt_create_wallet_pwd;
-    private EditText mEt_create_wallet_repeat_pwd;
+    private TextInputEditText mEt_create_wallet_name;
+    private TextInputEditText mEt_create_wallet_pwd;
+    private TextInputEditText mEt_create_wallet_repeat_pwd;
     private boolean mIsSelectedPrivacy;
     private boolean mIsAgreePrivacy;
     private ImageButton mIb_create_wallet_privacy_point;
@@ -63,9 +64,9 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
     private void initView() {
         mTv_create_wallet_type = (TextView) findViewById(R.id.tv_create_wallet_type);
         mIv_create_wallet_arrows = (ImageView) findViewById(R.id.iv_create_wallet_arrows);
-        mEt_create_wallet_name = (EditText) findViewById(R.id.et_create_wallet_name);
-        mEt_create_wallet_pwd = (EditText) findViewById(R.id.et_create_wallet_pwd);
-        mEt_create_wallet_repeat_pwd = (EditText) findViewById(R.id.et_create_wallet_repeat_pwd);
+        mEt_create_wallet_name = (TextInputEditText) findViewById(R.id.et_create_wallet_name);
+        mEt_create_wallet_pwd = (TextInputEditText) findViewById(R.id.et_create_wallet_pwd);
+        mEt_create_wallet_repeat_pwd = (TextInputEditText) findViewById(R.id.et_create_wallet_repeat_pwd);
         mBt_create_wallet_confirm = (Button) findViewById(R.id.bt_create_wallet_confirm);
         mBt_create_wallet_import = (Button) findViewById(R.id.bt_create_wallet_import);
         mIb_create_wallet_privacy_point = findViewById(R.id.ib_create_wallet_privacy_point);

@@ -66,11 +66,12 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/et_import_wallet_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textSize="@dimen/et_create_wallet_font_size" />
     </android.support.design.widget.TextInputLayout>
@@ -83,11 +84,12 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/et_import_wallet_repeat_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/repeat_password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textSize="@dimen/et_create_wallet_font_size" />
     </android.support.design.widget.TextInputLayout>

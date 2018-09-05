@@ -3,6 +3,7 @@ package chinapex.com.wallet.view.wallet;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -55,7 +56,7 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
     private Button mBt_import_wallet_keystore;
     private boolean mIsSelectedPrivacy;
     private boolean mIsAgreePrivacy;
-    private EditText mEt_import_wallet_keystore_pwd;
+    private TextInputEditText mEt_import_wallet_keystore_pwd;
     private TextInputLayout mTl_import_wallet_keystore;
     private TextView mTv_import_wallet_keystore_privacy;
     private TextView mTv_import_wallet_keystore_type;
@@ -81,10 +82,8 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         mIv_import_wallet_keystore_arrows = view.findViewById(R.id.iv_import_wallet_keystore_arrows);
         mEt_import_wallet_keystore = view.findViewById(R.id.et_import_wallet_keystore);
         mEt_import_wallet_keystore_pwd = view.findViewById(R.id.et_import_wallet_keystore_pwd);
-        mIb_import_wallet_keystore_privacy_point = view.findViewById(R.id
-                .ib_import_wallet_keystore_privacy_point);
-        mTv_import_wallet_keystore_privacy = view.findViewById(R.id
-                .tv_import_wallet_keystore_privacy);
+        mIb_import_wallet_keystore_privacy_point = view.findViewById(R.id.ib_import_wallet_keystore_privacy_point);
+        mTv_import_wallet_keystore_privacy = view.findViewById(R.id.tv_import_wallet_keystore_privacy);
         mBt_import_wallet_keystore = view.findViewById(R.id.bt_import_wallet_keystore);
         mTl_import_wallet_keystore = view.findViewById(R.id.tl_import_wallet_keystore);
 

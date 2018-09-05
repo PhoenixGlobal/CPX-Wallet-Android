@@ -95,11 +95,12 @@
         android:layout_marginStart="@dimen/create_margin_end"
         android:layout_marginTop="5dp">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/et_create_wallet_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/wallet_name"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:textSize="@dimen/et_create_wallet_font_size" />
     </android.support.design.widget.TextInputLayout>
@@ -112,11 +113,12 @@
         android:layout_marginEnd="@dimen/create_margin_start"
         android:layout_marginStart="@dimen/create_margin_end">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/et_create_wallet_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textSize="@dimen/et_create_wallet_font_size" />
     </android.support.design.widget.TextInputLayout>
@@ -129,11 +131,12 @@
         android:layout_marginEnd="@dimen/create_margin_start"
         android:layout_marginStart="@dimen/create_margin_end">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/et_create_wallet_repeat_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/repeat_password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textSize="@dimen/et_create_wallet_font_size" />
     </android.support.design.widget.TextInputLayout>

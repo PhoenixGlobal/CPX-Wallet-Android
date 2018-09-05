@@ -3,6 +3,7 @@ package chinapex.com.wallet.view.wallet;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -51,8 +52,8 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
 
     private static final String TAG = ImportMnemonicFragment.class.getSimpleName();
     private EditText mEt_import_wallet_mnemonic;
-    private EditText mEt_import_wallet_pwd;
-    private EditText mEt_import_wallet_repeat_pwd;
+    private TextInputEditText mEt_import_wallet_pwd;
+    private TextInputEditText mEt_import_wallet_repeat_pwd;
     private ImageButton mIb_import_wallet_privacy_point;
     private Button mBt_import_wallet_mnemonic;
     private TextInputLayout mTl_import_wallet_pwd;
