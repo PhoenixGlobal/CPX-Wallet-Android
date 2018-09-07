@@ -10,13 +10,13 @@
     <!--资产页，1侧滑菜单图片-->
     <integer-array name="assets_drawer1_icons">
         <item>@drawable/icon_wallet_type_neo</item>
-        <!--<item>@drawable/icon_wallet_type_eth</item>-->
+        <item>@drawable/icon_wallet_type_eth</item>
     </integer-array>
 
     <!--资产页，1侧滑菜单文字-->
     <string-array name="assets_drawer1_texts">
         <item>@string/create_wallet_type_neo</item>
-        <!--<item>@string/create_wallet_type_eth</item>-->
+        <item>@string/create_wallet_type_eth</item>
     </string-array>
 
     <!--资产页，2侧滑菜单图片-->
@@ -73,7 +73,7 @@
     <!--createWallet Type，钱包类型-->
     <string-array name="create_wallet_type">
         <item>@string/create_wallet_type_neo</item>
-        <!--<item>@string/create_wallet_type_eth</item>-->
+        <item>@string/create_wallet_type_eth</item>
     </string-array>
 
     <!--wallet import method，钱包导入方式-->

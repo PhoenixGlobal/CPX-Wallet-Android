@@ -197,31 +197,13 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             return;
         }
 
-        ITxBean iTxBean = null;
-        switch (mWalletBean.getWalletType()) {
-            case Constant.WALLET_TYPE_NEO:
-                NeoTxBean neoTxBean = new NeoTxBean();
-                neoTxBean.setWallet(wallet);
-                neoTxBean.setAssetID(mBalanceBean.getAssetsID());
-                neoTxBean.setAssetDecimal(mBalanceBean.getAssetDecimal());
-                neoTxBean.setFromAddress(wallet.address());
-                neoTxBean.setToAddress(mEt_transfer_to_wallet_addr.getText().toString().trim());
-                neoTxBean.setAmount(mEt_transfer_amount.getText().toString().trim());
-                iTxBean = neoTxBean;
-                break;
-            case Constant.WALLET_TYPE_ETH:
-                iTxBean = new EthTxBean();
-                break;
-            case Constant.WALLET_TYPE_CPX:
-                break;
-            default:
-                break;
-        }
-
-        if (null == iTxBean) {
-            CpLog.e(TAG, "iTxBean is null!");
-            return;
-        }
+        NeoTxBean neoTxBean = new NeoTxBean();
+        neoTxBean.setWallet(wallet);
+        neoTxBean.setAssetID(mBalanceBean.getAssetsID());
+        neoTxBean.setAssetDecimal(mBalanceBean.getAssetDecimal());
+        neoTxBean.setFromAddress(wallet.address());
+        neoTxBean.setToAddress(mEt_transfer_to_wallet_addr.getText().toString().trim());
+        neoTxBean.setAmount(mEt_transfer_amount.getText().toString().trim());
 
         String assetType = mBalanceBean.getAssetType();
         if (TextUtils.isEmpty(assetType)) {
@@ -231,10 +213,49 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
         switch (assetType) {
             case Constant.ASSET_TYPE_GLOBAL:
-                mICreateTxPresenter.createGlobalTx(iTxBean);
+                mICreateTxPresenter.createGlobalTx(neoTxBean);
                 break;
             case Constant.ASSET_TYPE_NEP5:
-                mICreateTxPresenter.createColorTx(iTxBean);
+                mICreateTxPresenter.createColorTx(neoTxBean);
+                break;
+            default:
+                CpLog.w(TAG, "illegal asset");
+                break;
+        }
+    }
+
+    @Override
+    public void onCheckEthPwd(ethmobile.Wallet wallet) {
+        if (null == wallet) {
+            CpLog.e(TAG, "onCheckPwd() -> wallet is null!");
+            return;
+        }
+
+
+        EthTxBean ethTxBean = new EthTxBean();
+        ethTxBean.setWallet(wallet);
+        ethTxBean.setAssetID(mBalanceBean.getAssetsID());
+        ethTxBean.setAssetDecimal(mBalanceBean.getAssetDecimal());
+        ethTxBean.setFromAddress(wallet.address());
+        ethTxBean.setToAddress(mEt_transfer_to_wallet_addr.getText().toString().trim());
+        // TODO: 2018/9/7 0007  amount,price,limit
+//        ethTxBean.setAmount(mEt_transfer_amount.getText().toString().trim());
+        ethTxBean.setAmount("");
+        ethTxBean.setGasPrice("");
+        ethTxBean.setGasLimit("");
+
+        String assetType = mBalanceBean.getAssetType();
+        if (TextUtils.isEmpty(assetType)) {
+            CpLog.e(TAG, "assetType is null or empty!");
+            return;
+        }
+
+        switch (assetType) {
+            case Constant.ASSET_TYPE_ETH:
+                mICreateTxPresenter.createGlobalTx(ethTxBean);
+                break;
+            case Constant.ASSET_TYPE_ERC20:
+                mICreateTxPresenter.createColorTx(ethTxBean);
                 break;
             default:
                 CpLog.w(TAG, "illegal asset");

@@ -31,19 +31,33 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_assets_overview_wallet_name"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="15dp"
             android:singleLine="true"
             android:text="0x2334dwq212lkdjbholiuenkgjhbkjh342023"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
 
         <ImageButton
-            android:id="@+id/ib_assets_overview_ellipsis"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_alignParentEnd="true"
+            android:id="@+id/ib_assets_address_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_assets_overview_wallet_name"
             android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tv_assets_overview_wallet_address"
             android:background="@null"
+            android:padding="10dp"
+            android:src="@drawable/icon_copy" />
+
+        <ImageButton
+            android:id="@+id/ib_assets_overview_ellipsis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@null"
+            android:paddingBottom="@dimen/d_10sp"
+            android:paddingEnd="@dimen/d_30dp"
+            android:paddingStart="@dimen/d_30dp"
+            android:paddingTop="@dimen/d_30dp"
             android:src="@drawable/icon_add_assets_round" />
     </RelativeLayout>
 

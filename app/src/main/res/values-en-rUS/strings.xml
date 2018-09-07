@@ -128,6 +128,9 @@
     <string name="keystore_can_not_be_empty">Keystore can not be empty</string>
     <string name="mnemonic_can_not_be_empty">Mnemonic can not be empty</string>
     <string name="select_correct_import_type">Select the correct import type!</string>
+    <string name="server_err_txId_null">Server error! TxId is null!</string>
+    <string name="eth_nonce_null">Nonce query failed, please check the network</string>
+    <string name="eth_data_null">Transaction data generation failed!</string>
 
     <!--语言-->
     <string name="language_zh_cn">简体中文</string>

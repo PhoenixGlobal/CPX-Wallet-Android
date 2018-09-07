@@ -43,7 +43,6 @@ public class CreateNeoTxModel implements ICreateTxModel, IGetUtxosCallback, ICre
 
     @Override
     public void createGlobalTx(ITxBean iTxBean) {
-        CpLog.i(TAG, "createGlobalTx");
         if (null == mICreateTxModelCallback) {
             CpLog.e(TAG, "mICreateTxModelCallback is null!");
             return;

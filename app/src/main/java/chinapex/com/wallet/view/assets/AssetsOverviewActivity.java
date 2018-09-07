@@ -49,6 +49,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
     private ImageButton mIb_assets_overview_ellipsis;
     private List<String> mCurrentAssets;
     private IGetBalancePresenter mIGetBalancePresenter;
+    private ImageButton mIb_assets_address_copy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +62,9 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
     }
 
     private void initView() {
-        mTv_assets_overview_wallet_name = (TextView) findViewById(R.id
-                .tv_assets_overview_wallet_name);
-        mTv_assets_overview_wallet_address = (TextView) findViewById(R.id
-                .tv_assets_overview_wallet_address);
+        mTv_assets_overview_wallet_name = (TextView) findViewById(R.id.tv_assets_overview_wallet_name);
+        mTv_assets_overview_wallet_address = (TextView) findViewById(R.id.tv_assets_overview_wallet_address);
+        mIb_assets_address_copy = (ImageButton) findViewById(R.id.ib_assets_address_copy);
         mIb_assets_overview_ellipsis = (ImageButton) findViewById(R.id.ib_assets_overview_ellipsis);
 
         mRv_assets_overview = (RecyclerView) findViewById(R.id.rv_assets_overview);
@@ -76,6 +76,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
 
         // 复制地址
         mTv_assets_overview_wallet_address.setOnClickListener(this);
+        mIb_assets_address_copy.setOnClickListener(this);
     }
 
     private void initData() {
@@ -317,6 +318,7 @@ public class AssetsOverviewActivity extends BaseActivity implements AssetsOvervi
                 showAddAssetsDialog();
                 break;
             case R.id.tv_assets_overview_wallet_address:
+            case R.id.ib_assets_address_copy:
                 String copyAddr = mTv_assets_overview_wallet_address.getText().toString().trim();
                 PhoneUtils.copy2Clipboard(ApexWalletApplication.getInstance(), copyAddr);
                 ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()

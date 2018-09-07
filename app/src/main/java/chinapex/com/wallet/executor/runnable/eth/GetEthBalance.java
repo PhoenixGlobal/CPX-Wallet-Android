@@ -2,15 +2,15 @@ package chinapex.com.wallet.executor.runnable.eth;
 
 import android.text.TextUtils;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
-import chinapex.com.wallet.bean.request.RequestGetEthBalance;
-import chinapex.com.wallet.bean.response.ResponseGetAccountState;
-import chinapex.com.wallet.bean.response.ResponseGetEthBalance;
+import chinapex.com.wallet.bean.request.RequestGetEthRpc;
+import chinapex.com.wallet.bean.response.ResponseGetEthRpcResult;
 import chinapex.com.wallet.executor.callback.eth.IGetEthBalanceCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -42,31 +42,50 @@ public class GetEthBalance implements Runnable, INetCallback {
             return;
         }
 
-        RequestGetEthBalance requestGetEthBalance = new RequestGetEthBalance();
-        requestGetEthBalance.setJsonrpc("2.0");
-        requestGetEthBalance.setMethod("eth_getBalance");
-        requestGetEthBalance.setId(1);
+        RequestGetEthRpc requestGetEthRpc = new RequestGetEthRpc();
+        requestGetEthRpc.setJsonrpc("2.0");
+        requestGetEthRpc.setMethod("eth_getBalance");
+        requestGetEthRpc.setId(1);
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add(mAddress);
         arrayList.add("latest");
-        requestGetEthBalance.setParams(arrayList);
+        requestGetEthRpc.setParams(arrayList);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_ETH, GsonUtils.toJsonStr(requestGetEthBalance), this);
+        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_ETH, GsonUtils.toJsonStr(requestGetEthRpc), this);
     }
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
         CpLog.i(TAG, "result:" + result);
-        ResponseGetEthBalance responseGetEthBalance = GsonUtils.json2Bean(result, ResponseGetEthBalance.class);
-        if (null == responseGetEthBalance) {
-            CpLog.e(TAG, "responseGetEthBalance is null!");
+        ResponseGetEthRpcResult responseGetEthRpcResult = GsonUtils.json2Bean(result, ResponseGetEthRpcResult.class);
+        if (null == responseGetEthRpcResult) {
+            CpLog.e(TAG, "responseGetEthRpcResult is null!");
             mIGetEthBalanceCallback.getEthBalance(null);
             return;
         }
 
-        String ethBalanceResult = responseGetEthBalance.getResult();
+        String ethBalanceResult = responseGetEthRpcResult.getResult();
         if (TextUtils.isEmpty(ethBalanceResult)) {
             CpLog.e(TAG, "ethBalanceResult is null!");
+            mIGetEthBalanceCallback.getEthBalance(null);
+            return;
+        }
+
+        int length = ethBalanceResult.length();
+        if (length < 3) {
+            CpLog.e(TAG, "ethBalanceResult.length < 3!");
+            mIGetEthBalanceCallback.getEthBalance(null);
+            return;
+        }
+
+        String ethBalance;
+        try {
+            String hexString = ethBalanceResult.substring(2);
+            CpLog.i(TAG, hexString);
+            String dec = new BigInteger(hexString, 16).toString(10);
+            ethBalance = new BigDecimal(dec).divide(new BigDecimal(10).pow(Integer.parseInt("18"))).toPlainString();
+        } catch (Exception e) {
+            CpLog.e(TAG, "balance cast exception:" + e.getMessage());
             mIGetEthBalanceCallback.getEthBalance(null);
             return;
         }
@@ -93,7 +112,7 @@ public class GetEthBalance implements Runnable, INetCallback {
         balanceBean.setAssetSymbol(assetBean.getSymbol());
         balanceBean.setAssetType(Constant.ASSET_TYPE_ETH);
         balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
-        balanceBean.setAssetsValue(ethBalanceResult);
+        balanceBean.setAssetsValue(ethBalance);
         balanceBeans.put(Constant.ASSETS_ETH, balanceBean);
 
         mIGetEthBalanceCallback.getEthBalance(balanceBeans);

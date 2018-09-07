@@ -9,7 +9,7 @@ import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.request.RequestErc20Params;
 import chinapex.com.wallet.bean.request.RequestGetErc20Balance;
-import chinapex.com.wallet.bean.response.ResponseGetEthBalance;
+import chinapex.com.wallet.bean.response.ResponseGetEthRpcResult;
 import chinapex.com.wallet.executor.callback.eth.IGetErc20BalanceCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -74,7 +74,7 @@ public class GetErc20Balance implements Runnable, INetCallback {
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
         CpLog.i(TAG, "result:" + result);
-        ResponseGetEthBalance responseGetErc20Balance = GsonUtils.json2Bean(result, ResponseGetEthBalance.class);
+        ResponseGetEthRpcResult responseGetErc20Balance = GsonUtils.json2Bean(result, ResponseGetEthRpcResult.class);
         if (null == responseGetErc20Balance) {
             CpLog.e(TAG, "responseGetErc20Balance is null!");
             mIGetErc20BalanceCallback.getErc20Balance(null);

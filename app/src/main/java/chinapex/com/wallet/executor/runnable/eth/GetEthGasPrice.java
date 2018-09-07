@@ -2,8 +2,8 @@ package chinapex.com.wallet.executor.runnable.eth;
 
 import java.util.ArrayList;
 
-import chinapex.com.wallet.bean.request.RequestGetEthBalance;
-import chinapex.com.wallet.bean.response.ResponseGetEthBalance;
+import chinapex.com.wallet.bean.request.RequestGetEthRpc;
+import chinapex.com.wallet.bean.response.ResponseGetEthRpcResult;
 import chinapex.com.wallet.executor.callback.eth.IGetEthGasPriceCallback;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.net.INetCallback;
@@ -30,7 +30,7 @@ public class GetEthGasPrice implements Runnable, INetCallback {
             return;
         }
 
-        RequestGetEthBalance requestGetEthGasPrice = new RequestGetEthBalance();
+        RequestGetEthRpc requestGetEthGasPrice = new RequestGetEthRpc();
         requestGetEthGasPrice.setJsonrpc("2.0");
         requestGetEthGasPrice.setMethod("eth_gasPrice");
         requestGetEthGasPrice.setId(73);
@@ -43,7 +43,7 @@ public class GetEthGasPrice implements Runnable, INetCallback {
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
         CpLog.i(TAG, "result:" + result);
-        ResponseGetEthBalance responseGetEthGasPrice = GsonUtils.json2Bean(result, ResponseGetEthBalance.class);
+        ResponseGetEthRpcResult responseGetEthGasPrice = GsonUtils.json2Bean(result, ResponseGetEthRpcResult.class);
         if (null == responseGetEthGasPrice) {
             CpLog.e(TAG, "responseGetEthGasPrice is null!");
             mIGetEthGasPriceCallback.getEthGasPrice(null);
