@@ -45,7 +45,7 @@ public class CreateEthTx implements Runnable {
                     mEthTxBean.getAmount(),
                     mEthTxBean.getGasPrice(),
                     mEthTxBean.getGasLimit());
-            mICreateEthTxCallback.createEthTx(data);
+            mICreateEthTxCallback.createEthTx("0x" + data);
         } catch (Exception e) {
             CpLog.e(TAG, "ethWallet.transfer exception:" + e.getMessage());
             mICreateEthTxCallback.createEthTx(null);

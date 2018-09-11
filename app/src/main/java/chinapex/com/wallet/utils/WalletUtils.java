@@ -1,11 +1,43 @@
 package chinapex.com.wallet.utils;
 
+import android.text.TextUtils;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 /**
  * Created by SteelCabbage on 2018/6/13 0013 14:58.
  * E-Mail：liuyi_61@163.com
  */
 
 public class WalletUtils {
+    private static final String TAG = WalletUtils.class.getSimpleName();
+
+    public static String toDecString(String oxHexString, String assetDecimal) {
+        if (TextUtils.isEmpty(oxHexString) || TextUtils.isEmpty(assetDecimal)) {
+            CpLog.e(TAG, "oxHexString or assetDecimal is null!");
+            return null;
+        }
+
+        int length = oxHexString.length();
+        if (length < 3) {
+            CpLog.e(TAG, "oxHexString.length < 3!");
+            return null;
+        }
+
+        String decString;
+        try {
+            String hexString = oxHexString.substring(2);
+            String dec = new BigInteger(hexString, 16).toString(10);
+            decString = new BigDecimal(dec).divide(new BigDecimal(10).pow(Integer.parseInt(assetDecimal)))
+                    .setScale(8, BigDecimal.ROUND_UP).stripTrailingZeros().toPlainString();
+        } catch (Exception e) {
+            CpLog.e(TAG, "toDecString exception:" + e.getMessage());
+            return null;
+        }
+
+        return decString;
+    }
 
     public static byte[] reverseArray(String string) {
         if ("0".equals(string)) {

@@ -19,6 +19,7 @@ import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
+import chinapex.com.wallet.utils.WalletUtils;
 
 /**
  * Created by SteelCabbage on 2018/5/17 0017.
@@ -56,36 +57,9 @@ public class GetEthBalance implements Runnable, INetCallback {
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
-        CpLog.i(TAG, "result:" + result);
         ResponseGetEthRpcResult responseGetEthRpcResult = GsonUtils.json2Bean(result, ResponseGetEthRpcResult.class);
         if (null == responseGetEthRpcResult) {
             CpLog.e(TAG, "responseGetEthRpcResult is null!");
-            mIGetEthBalanceCallback.getEthBalance(null);
-            return;
-        }
-
-        String ethBalanceResult = responseGetEthRpcResult.getResult();
-        if (TextUtils.isEmpty(ethBalanceResult)) {
-            CpLog.e(TAG, "ethBalanceResult is null!");
-            mIGetEthBalanceCallback.getEthBalance(null);
-            return;
-        }
-
-        int length = ethBalanceResult.length();
-        if (length < 3) {
-            CpLog.e(TAG, "ethBalanceResult.length < 3!");
-            mIGetEthBalanceCallback.getEthBalance(null);
-            return;
-        }
-
-        String ethBalance;
-        try {
-            String hexString = ethBalanceResult.substring(2);
-            CpLog.i(TAG, hexString);
-            String dec = new BigInteger(hexString, 16).toString(10);
-            ethBalance = new BigDecimal(dec).divide(new BigDecimal(10).pow(Integer.parseInt("18"))).toPlainString();
-        } catch (Exception e) {
-            CpLog.e(TAG, "balance cast exception:" + e.getMessage());
             mIGetEthBalanceCallback.getEthBalance(null);
             return;
         }
@@ -100,6 +74,13 @@ public class GetEthBalance implements Runnable, INetCallback {
         AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_ETH_ASSETS, Constant.ASSETS_ETH);
         if (null == assetBean) {
             CpLog.e(TAG, "assetBean is null!");
+            mIGetEthBalanceCallback.getEthBalance(null);
+            return;
+        }
+
+        String ethBalance = WalletUtils.toDecString(responseGetEthRpcResult.getResult(), assetBean.getPrecision());
+        if (TextUtils.isEmpty(ethBalance)) {
+            CpLog.e(TAG, "ethBalance is null or empty!");
             mIGetEthBalanceCallback.getEthBalance(null);
             return;
         }

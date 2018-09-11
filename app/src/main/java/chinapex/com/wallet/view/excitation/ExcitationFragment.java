@@ -1,17 +1,16 @@
 package chinapex.com.wallet.view.excitation;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,17 +31,13 @@ import chinapex.com.wallet.view.excitation.detail.ExcitationDetailActivity;
  * Created by SteelCabbage on 2018/5/21 0021.
  */
 
-@RequiresApi(api = Build.VERSION_CODES.M)
 public class ExcitationFragment extends BaseFragment implements ExcitationAdapter
-        .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, View.OnScrollChangeListener,
-        IGetExcitationView {
+        .OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, IGetExcitationView {
 
     private static final String TAG = ExcitationFragment.class.getSimpleName();
 
     private List<ExcitationBean> mList;
-    private RecyclerView mExcitationEvnet;
-    private RelativeLayout mExcitationApexHeader;
-    private RelativeLayout mExcitationHeader;
+    private RecyclerView mExcitationEvent;
     private SwipeRefreshLayout mExcitationRefresh;
     private IGetExcitationPresenter mIGetExcitationPresenter;
     private ExcitationAdapter mAdapter;
@@ -65,27 +60,30 @@ public class ExcitationFragment extends BaseFragment implements ExcitationAdapte
     }
 
     private void initView(View view) {
-        mExcitationApexHeader = (RelativeLayout) view.findViewById(R.id.excitation_apex_header);
-        mExcitationHeader = (RelativeLayout) view.findViewById(R.id.excitation_header);
-        mExcitationEvnet = (RecyclerView) view.findViewById(R.id.new_event);
+        mExcitationEvent = (RecyclerView) view.findViewById(R.id.new_event);
         mExcitationRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_event_refresh);
 
-        mExcitationEvnet.setLayoutManager(new LinearLayoutManager(getActivity(),
+        mExcitationEvent.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
         mList = new ArrayList<>();
         mAdapter = new ExcitationAdapter(mList);
-        View header = LayoutInflater.from(getActivity()).inflate(R.layout
-                .fragment_excitation_recyclerview_item_header, mExcitationEvnet, false);
-        mAdapter.addHeaderView(header);
         mAdapter.setOnItemClickListener(this);
-        mExcitationEvnet.setAdapter(mAdapter);
-        mExcitationEvnet.setOnScrollChangeListener(this);
+        mExcitationEvent.setAdapter(mAdapter);
 
         int space = DensityUtil.dip2px(getActivity(), 15);
-        mExcitationEvnet.addItemDecoration(new SpacesItemDecorationBottom(space));
+        int bottomsSpace = DensityUtil.dip2px(getActivity(), 34);
+        mExcitationEvent.addItemDecoration(new SpacesItemDecorationBottom(space));
         mExcitationRefresh.setColorSchemeColors(ApexWalletApplication.getInstance().getResources
                 ().getColor(R.color.c_1253BF));
         mExcitationRefresh.setOnRefreshListener(this);
+
+        CollapsingToolbarLayout ctlTitle = view.findViewById(R.id.collapsing_toolbar_layout);
+
+        ctlTitle.setCollapsedTitleGravity(Gravity.CENTER_HORIZONTAL);
+        ctlTitle.setScrimAnimationDuration(50);
+
+        ctlTitle.setExpandedTitleMarginStart(space);
+        ctlTitle.setExpandedTitleMarginBottom(space + bottomsSpace);
     }
 
     private void initData() {
@@ -121,22 +119,6 @@ public class ExcitationFragment extends BaseFragment implements ExcitationAdapte
     public void onRefresh() {
         mIGetExcitationPresenter.getExcitation();
     }
-
-    @Override
-    public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-        if (null == view) return;
-        RecyclerView.LayoutManager layoutManager = mExcitationEvnet.getLayoutManager();
-        if (layoutManager instanceof LinearLayoutManager) {
-            LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
-            int firstItemPosition = linearManager.findFirstVisibleItemPosition();
-            if (firstItemPosition != 0) {
-                mExcitationApexHeader.setVisibility(View.INVISIBLE);
-            } else {
-                mExcitationApexHeader.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
 
     @Override
     public void getExcitation(List<ExcitationBean> excitationBeans) {

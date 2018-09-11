@@ -99,6 +99,8 @@
     <dimen name="create_margin_end">50dp</dimen>
 
     <!-- excitation dimension-->
+    <dimen name="d_n34dp">-34dp</dimen>
+    <dimen name="d_0dp">0dp</dimen>
     <dimen name="d_1dp">1dp</dimen>
     <dimen name="d_2dp">2dp</dimen>
     <dimen name="d_3dp">3dp</dimen>
@@ -124,6 +126,7 @@
     <dimen name="d_46dp">46dp</dimen>
     <dimen name="d_54dp">54dp</dimen>
     <dimen name="d_63dp">63dp</dimen>
+    <dimen name="d_65dp">65dp</dimen>
     <dimen name="d_77dp">77dp</dimen>
     <dimen name="d_85dp">85dp</dimen>
     <dimen name="d_116dp">116dp</dimen>
@@ -136,4 +139,5 @@
     <dimen name="d_13sp">13sp</dimen>
     <dimen name="d_16sp">16sp</dimen>
     <dimen name="d_17sp">17sp</dimen>
+    <dimen name="d_18sp">18sp</dimen>
 </resources>

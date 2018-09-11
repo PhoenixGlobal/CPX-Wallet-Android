@@ -18,6 +18,7 @@ import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
+import chinapex.com.wallet.utils.WalletUtils;
 import ethmobile.EthCall;
 
 /**
@@ -73,17 +74,9 @@ public class GetErc20Balance implements Runnable, INetCallback {
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
-        CpLog.i(TAG, "result:" + result);
         ResponseGetEthRpcResult responseGetErc20Balance = GsonUtils.json2Bean(result, ResponseGetEthRpcResult.class);
         if (null == responseGetErc20Balance) {
             CpLog.e(TAG, "responseGetErc20Balance is null!");
-            mIGetErc20BalanceCallback.getErc20Balance(null);
-            return;
-        }
-
-        String erc20BalanceValue = responseGetErc20Balance.getResult();
-        if (TextUtils.isEmpty(erc20BalanceValue)) {
-            CpLog.e(TAG, "erc20BalanceValue is null!");
             mIGetErc20BalanceCallback.getErc20Balance(null);
             return;
         }
@@ -102,8 +95,14 @@ public class GetErc20Balance implements Runnable, INetCallback {
             return;
         }
 
-        HashMap<String, BalanceBean> erc20Balance = new HashMap<>();
+        String erc20BalanceValue = WalletUtils.toDecString(responseGetErc20Balance.getResult(), assetBean.getPrecision());
+        if (TextUtils.isEmpty(erc20BalanceValue)) {
+            CpLog.e(TAG, "ethBalance is null or empty!");
+            mIGetErc20BalanceCallback.getErc20Balance(null);
+            return;
+        }
 
+        HashMap<String, BalanceBean> erc20Balance = new HashMap<>();
         BalanceBean balanceBean = new BalanceBean();
         balanceBean.setMapState(Constant.MAP_STATE_UNFINISHED);
         balanceBean.setWalletType(Constant.WALLET_TYPE_ETH);
@@ -112,8 +111,8 @@ public class GetErc20Balance implements Runnable, INetCallback {
         balanceBean.setAssetType(Constant.ASSET_TYPE_ERC20);
         balanceBean.setAssetDecimal(Integer.valueOf(assetBean.getPrecision()));
         balanceBean.setAssetsValue(erc20BalanceValue);
-
         erc20Balance.put(mAssetID, balanceBean);
+
         mIGetErc20BalanceCallback.getErc20Balance(erc20Balance);
     }
 

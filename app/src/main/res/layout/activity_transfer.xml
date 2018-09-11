@@ -140,12 +140,43 @@
         android:layout_marginTop="24dp"
         android:background="@color/c_DDDDDD" />
 
+    <LinearLayout
+        android:id="@+id/ll_transfer_gas_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_gas_price"
+            android:textSize="@dimen/paratext_14sp" />
+
+        <TextView
+            android:id="@+id/tv_transfer_gas_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="0.0"
+            android:textColor="@color/c_1253BF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Gwei" />
+
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/rl_seek_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:visibility="invisible">
+        android:layout_marginTop="20dp"
+        android:visibility="visible">
 
         <SeekBar
             android:id="@+id/sb_transfer"
@@ -153,8 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:layout_marginStart="30dp"
-            android:max="100"
-            android:progress="20" />
+            android:max="320" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -166,12 +196,13 @@
             android:textSize="@dimen/paratext_14sp" />
 
         <TextView
-            android:id="@+id/tv_transfer_gas"
+            android:id="@+id/tv_transfer_user_set_gas_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/sb_transfer"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
+            android:text="0.0 Gwei"
             android:textSize="@dimen/paratext_14sp" />
 
         <TextView
@@ -185,12 +216,44 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl_transfer_gas_fee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gas_fee"
+            android:textSize="@dimen/paratext_14sp" />
+
+        <TextView
+            android:id="@+id/tv_transfer_gas_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_toStartOf="@+id/tv_transfer_gas_fee_unit"
+            android:text="0.0"
+            android:textColor="@color/c_1253BF" />
+
+        <TextView
+            android:id="@+id/tv_transfer_gas_fee_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="ETH" />
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/bt_transfer_send"
         android:layout_width="267dp"
         android:layout_height="33dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/shape_balance_detail_bt_bg"
         android:text="@string/send"
         android:textAllCaps="false"

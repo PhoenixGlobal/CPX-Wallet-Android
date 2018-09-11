@@ -1,5 +1,7 @@
 package chinapex.com.wallet.executor.runnable.eth;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 
 import chinapex.com.wallet.bean.request.RequestGetEthRpc;
@@ -10,6 +12,7 @@ import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.GsonUtils;
+import chinapex.com.wallet.utils.WalletUtils;
 
 /**
  * Created by SteelCabbage on 2018/8/29 0029 15:07.
@@ -42,7 +45,6 @@ public class GetEthGasPrice implements Runnable, INetCallback {
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
-        CpLog.i(TAG, "result:" + result);
         ResponseGetEthRpcResult responseGetEthGasPrice = GsonUtils.json2Bean(result, ResponseGetEthRpcResult.class);
         if (null == responseGetEthGasPrice) {
             CpLog.e(TAG, "responseGetEthGasPrice is null!");
@@ -50,11 +52,19 @@ public class GetEthGasPrice implements Runnable, INetCallback {
             return;
         }
 
-        mIGetEthGasPriceCallback.getEthGasPrice(responseGetEthGasPrice.getResult());
+        String gwei = WalletUtils.toDecString(responseGetEthGasPrice.getResult(), "9");
+        if (TextUtils.isEmpty(gwei)) {
+            CpLog.e(TAG, "gwei is null or empty!");
+            mIGetEthGasPriceCallback.getEthGasPrice(null);
+            return;
+        }
+
+        mIGetEthGasPriceCallback.getEthGasPrice(gwei);
     }
 
     @Override
     public void onFailed(int failedCode, String msg) {
         CpLog.e(TAG, "onFailed() -> msg:" + msg);
+        mIGetEthGasPriceCallback.getEthGasPrice(null);
     }
 }

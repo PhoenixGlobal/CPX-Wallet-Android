@@ -11,7 +11,7 @@
         android:id="@+id/excitation_detail_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/excitation_actionbar_bg">
+        android:background="@drawable/excitation_actionbar_scrim">
 
         <TextView
             android:id="@+id/tv_excitation_detail_title"

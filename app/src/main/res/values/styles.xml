@@ -26,4 +26,10 @@
         <item name="android:windowExitAnimation">@anim/bottom_dialog_anim_exit</item>
     </style>
 
+    <style name="ExcitationCollapsedTextStyle" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textColor">@color/c_FFFFFF</item>
+        <item name="textAllCaps">@bool/abc_config_actionMenuItemAllCaps</item>
+        <item name="android:textSize">@dimen/d_18sp</item>
+    </style>
+
 </resources>

@@ -91,6 +91,8 @@
     <string name="seek_bar_fast">Fast</string>
     <string name="excitation">Reward</string>
     <string name="latest_activity">Latest Activity</string>
+    <string name="current_gas_price">Current Gas Price:</string>
+    <string name="gas_fee">Gas Fee ≈</string>
 
     <!--Me页面，功能菜单文字-->
     <string name="personal_portrait">Profile</string>
@@ -165,4 +167,6 @@
     <string name="excitation_cpx_address_empty_toast">CPX address can not be empty!</string>
     <string name="excitation_eth_address_wrong_format_toast">Please input the correct format ETH address!</string>
     <string name="excitation_eth_address_empty_toast">ETH address can not be empty!</string>
+
+
 </resources>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -20,8 +21,10 @@ import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.tx.EthTxBean;
-import chinapex.com.wallet.bean.tx.ITxBean;
 import chinapex.com.wallet.bean.tx.NeoTxBean;
+import chinapex.com.wallet.executor.TaskController;
+import chinapex.com.wallet.executor.callback.eth.IGetEthGasPriceCallback;
+import chinapex.com.wallet.executor.runnable.eth.GetEthGasPrice;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.presenter.transfer.CreateTxPresenter;
@@ -33,7 +36,7 @@ import neomobile.Wallet;
 
 public class TransferActivity extends BaseActivity implements View.OnClickListener,
         TransferPwdDialog.OnCheckPwdListener,
-        SeekBar.OnSeekBarChangeListener, ICreateTxView {
+        SeekBar.OnSeekBarChangeListener, ICreateTxView, IGetEthGasPriceCallback {
 
     private static final String TAG = TransferActivity.class.getSimpleName();
     private WalletBean mWalletBean;
@@ -47,9 +50,13 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
     private TextView mTv_available_amount;
     private TextView mTv_amount_all;
     private SeekBar mSb_transfer;
-    private TextView mTv_transfer_gas;
+    private TextView mTv_transfer_user_set_gas_price;
     private ICreateTxPresenter mICreateTxPresenter;
     private RelativeLayout mRl_seek_bar;
+    private LinearLayout mLl_transfer_gas_price;
+    private RelativeLayout mRl_transfer_gas_fee;
+    private TextView mTv_transfer_gas_price;
+    private TextView mTv_transfer_gas_fee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +76,15 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         mTv_available_amount = (TextView) findViewById(R.id.tv_available_amount);
         mTv_amount_all = (TextView) findViewById(R.id.tv_amount_all);
         mSb_transfer = (SeekBar) findViewById(R.id.sb_transfer);
-        mTv_transfer_gas = (TextView) findViewById(R.id.tv_transfer_gas);
+
+        mLl_transfer_gas_price = (LinearLayout) findViewById(R.id.ll_transfer_gas_price);
+        mTv_transfer_gas_price = (TextView) findViewById(R.id.tv_transfer_gas_price);
+
         mRl_seek_bar = (RelativeLayout) findViewById(R.id.rl_seek_bar);
+        mTv_transfer_user_set_gas_price = (TextView) findViewById(R.id.tv_transfer_user_set_gas_price);
+
+        mRl_transfer_gas_fee = (RelativeLayout) findViewById(R.id.rl_transfer_gas_fee);
+        mTv_transfer_gas_fee = (TextView) findViewById(R.id.tv_transfer_gas_fee);
 
         mBt_transfer_send = (Button) findViewById(R.id.bt_transfer_send);
         mBt_transfer_send.setOnClickListener(this);
@@ -95,10 +109,15 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         int walletType = mWalletBean.getWalletType();
         switch (walletType) {
             case Constant.WALLET_TYPE_NEO:
+                mLl_transfer_gas_price.setVisibility(View.INVISIBLE);
                 mRl_seek_bar.setVisibility(View.INVISIBLE);
+                mRl_transfer_gas_fee.setVisibility(View.INVISIBLE);
                 break;
             case Constant.WALLET_TYPE_ETH:
+                mLl_transfer_gas_price.setVisibility(View.VISIBLE);
                 mRl_seek_bar.setVisibility(View.VISIBLE);
+                mRl_transfer_gas_fee.setVisibility(View.VISIBLE);
+                TaskController.getInstance().submit(new GetEthGasPrice(this));
                 break;
             case Constant.WALLET_TYPE_CPX:
                 break;
@@ -115,7 +134,6 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
         mTv_transfer_unit.setText(mBalanceBean.getAssetSymbol().toUpperCase());
         mTv_available_amount.setText(mBalanceBean.getAssetsValue());
-        mTv_transfer_gas.setText(String.valueOf(mSb_transfer.getProgress() / 100.0 + " ether"));
 
         mICreateTxPresenter = new CreateTxPresenter(this);
         mICreateTxPresenter.init(walletType);
@@ -127,6 +145,30 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         }
 
         mEt_transfer_to_wallet_addr.setText(qrCode);
+    }
+
+    @Override
+    public void getEthGasPrice(final String gasPrice) {
+        if (TextUtils.isEmpty(gasPrice)) {
+            CpLog.e(TAG, "gasPrice is null!");
+            return;
+        }
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mTv_transfer_gas_price.setText(gasPrice);
+                mSb_transfer.setProgress(Integer.valueOf(gasPrice) * 10);
+                String gasFee = "0";
+                try {
+                    gasFee = new BigDecimal(gasPrice).divide(new BigDecimal(10).pow(5)).multiply(new BigDecimal(9))
+                            .setScale(8, BigDecimal.ROUND_UP).stripTrailingZeros().toPlainString();
+                } catch (Exception e) {
+                    CpLog.e(TAG, "gasFee Exception:" + e.getMessage());
+                }
+                mTv_transfer_gas_fee.setText(gasFee);
+            }
+        });
     }
 
     @Override
@@ -240,9 +282,9 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         ethTxBean.setToAddress(mEt_transfer_to_wallet_addr.getText().toString().trim());
         // TODO: 2018/9/7 0007  amount,price,limit
 //        ethTxBean.setAmount(mEt_transfer_amount.getText().toString().trim());
-        ethTxBean.setAmount("");
-        ethTxBean.setGasPrice("");
-        ethTxBean.setGasLimit("");
+        ethTxBean.setAmount("0x16345785d8a0000");
+        ethTxBean.setGasPrice("0x3b9aca00");
+        ethTxBean.setGasLimit("0x15f90");
 
         String assetType = mBalanceBean.getAssetType();
         if (TextUtils.isEmpty(assetType)) {
@@ -289,7 +331,15 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        mTv_transfer_gas.setText(String.valueOf(progress / 100.0 + " ether"));
+        mTv_transfer_user_set_gas_price.setText(String.valueOf(progress / 10.0 + " Gwei"));
+        String gasFee = "0";
+        try {
+            gasFee = new BigDecimal(progress / 10.0).divide(new BigDecimal(10).pow(5)).multiply(new BigDecimal(9))
+                    .setScale(8, BigDecimal.ROUND_UP).stripTrailingZeros().toPlainString();
+        } catch (Exception e) {
+            CpLog.e(TAG, "gasFee Exception:" + e.getMessage());
+        }
+        mTv_transfer_gas_fee.setText(gasFee);
     }
 
     @Override
@@ -314,4 +364,6 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             }
         });
     }
+
+
 }

@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/c_F0F0F0">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/excitation_header"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/excitation_actionbar_bg">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_excitation_title"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/d_26dp"
-            android:text="@string/excitation"
-            android:textColor="@color/c_FFFFFF"
-            android:textSize="@dimen/d_16sp" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:collapsedTitleTextAppearance="@style/ExcitationCollapsedTextStyle"
+            app:contentInsetLeft="@dimen/d_0dp"
+            app:contentInsetStart="@dimen/d_0dp"
+            app:contentScrim="@drawable/excitation_actionbar_scrim"
+            app:expandedTitleTextAppearance="@style/ExcitationCollapsedTextStyle"
+            app:layout_scrollFlags="scroll | exitUntilCollapsed ">
 
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/excitation_actionbar_image"
+                app:layout_collapseMode="parallax"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <RelativeLayout
-        android:id="@+id/excitation_apex_header"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/excitation_bg">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d_15dp"
-            android:layout_marginTop="@dimen/d_77dp"
-            android:text="@string/excitation"
-            android:textColor="@color/c_FFFFFF"
-            android:textSize="@dimen/d_16sp" />
-
-    </RelativeLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d_63dp"
+                app:layout_collapseMode="parallax"
+                app:title="@string/excitation" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_event_refresh"
@@ -46,14 +43,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/d_12dp"
         android:layout_marginStart="@dimen/d_12dp"
-        android:layout_below="@+id/excitation_header">
+        android:layout_marginTop="@dimen/d_n34dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/new_event"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/excitation_header"
             android:layout_centerHorizontal="true"
             android:overScrollMode="never" />
     </android.support.v4.widget.SwipeRefreshLayout>
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
