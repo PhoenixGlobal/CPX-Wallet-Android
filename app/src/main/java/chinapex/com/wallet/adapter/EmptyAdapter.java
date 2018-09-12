@@ -15,11 +15,13 @@ import android.view.ViewGroup;
 public class EmptyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = EmptyAdapter.class.getSimpleName();
-    private RecyclerView.Adapter mAdapter; //需要装饰的Adapter
-    private Context mContext;
-    private int mEmptyViewId;
+
     private static final int EMPTY_VIEW = 0;
     private static final int NOT_EMPTY_VIEW = 1;
+
+    private Context mContext;
+    private RecyclerView.Adapter mAdapter; //需要装饰的Adapter
+    private int mEmptyViewId;
 
     public EmptyAdapter(RecyclerView.Adapter adapter, Context context, int emptyViewId) {
         mAdapter = adapter;

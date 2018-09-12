@@ -20,6 +20,7 @@ public class MeFunctionRecyclerViewAdapter extends RecyclerView
         .OnClickListener {
 
     private static final String TAG = MeFunctionRecyclerViewAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private List<MeFunction> mMeFunctions;
 

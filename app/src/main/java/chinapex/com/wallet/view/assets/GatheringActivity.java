@@ -14,7 +14,6 @@ import com.google.zxing.common.BitmapUtils;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
@@ -24,16 +23,25 @@ import chinapex.com.wallet.utils.ToastUtils;
 public class GatheringActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = GatheringActivity.class.getSimpleName();
-    private WalletBean mWalletBean;
+
     private TextView mTv_gathering_wallet_name;
     private TextView mTv_gathering_wallet_addr;
     private Button mBt_gathering_copy_addr;
     private ImageView mIv_gathering_qr_code;
 
+    private WalletBean mWalletBean;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_gathering);
+
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();

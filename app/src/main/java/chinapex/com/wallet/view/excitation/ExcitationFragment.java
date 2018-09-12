@@ -36,12 +36,13 @@ public class ExcitationFragment extends BaseFragment implements ExcitationAdapte
 
     private static final String TAG = ExcitationFragment.class.getSimpleName();
 
-    private List<ExcitationBean> mList;
+    private IGetExcitationPresenter mIGetExcitationPresenter;
+
     private RecyclerView mExcitationEvent;
     private SwipeRefreshLayout mExcitationRefresh;
-    private IGetExcitationPresenter mIGetExcitationPresenter;
     private ExcitationAdapter mAdapter;
 
+    private List<ExcitationBean> mList;
 
     @Nullable
     @Override
@@ -52,8 +53,8 @@ public class ExcitationFragment extends BaseFragment implements ExcitationAdapte
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
         initData();

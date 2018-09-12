@@ -36,10 +36,12 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
         IFromKeystoreToEthWalletCallback {
 
     private static final String TAG = DeleteWalletPwdDialog.class.getSimpleName();
-    private WalletBean mCurrentWalletBean;
+
     private Button mBt_dialog_pwd_del_cancel;
     private Button mBt_dialog_pwd_del_confirm;
     private EditText mEt_dialog_pwd_del;
+
+    private WalletBean mCurrentWalletBean;
 
     public static DeleteWalletPwdDialog newInstance() {
         return new DeleteWalletPwdDialog();
@@ -48,7 +50,6 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
     public void setCurrentWalletBean(WalletBean walletBean) {
         mCurrentWalletBean = walletBean;
     }
-
 
     @Nullable
     @Override

@@ -18,6 +18,7 @@ import chinapex.com.wallet.utils.CpLog;
 public class CheckIsUpdateTxState implements Runnable {
 
     private static final String TAG = CheckIsUpdateTxState.class.getSimpleName();
+
     private ICheckIsUpdateTxStateCallback mICheckIsUpdateTxStateCallback;
 
     public CheckIsUpdateTxState(ICheckIsUpdateTxStateCallback ICheckIsUpdateTxStateCallback) {

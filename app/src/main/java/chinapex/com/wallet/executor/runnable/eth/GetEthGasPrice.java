@@ -19,7 +19,9 @@ import chinapex.com.wallet.utils.WalletUtils;
  * E-Mail：liuyi_61@163.com
  */
 public class GetEthGasPrice implements Runnable, INetCallback {
+
     private static final String TAG = GetEthGasPrice.class.getSimpleName();
+
     private IGetEthGasPriceCallback mIGetEthGasPriceCallback;
 
     public GetEthGasPrice(IGetEthGasPriceCallback IGetEthGasPriceCallback) {

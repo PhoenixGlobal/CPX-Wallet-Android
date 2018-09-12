@@ -18,6 +18,7 @@ import chinapex.com.wallet.utils.GsonUtils;
 public class SendRawTransaction implements Runnable, INetCallback {
 
     private static final String TAG = SendRawTransaction.class.getSimpleName();
+
     private String mTxData;
     private ISendRawTransactionCallback mISendRawTransactionCallback;
 

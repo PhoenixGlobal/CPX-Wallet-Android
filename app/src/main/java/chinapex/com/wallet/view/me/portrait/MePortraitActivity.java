@@ -16,7 +16,6 @@ import chinapex.com.wallet.adapter.viewpager.FragmentUpdateAdapter;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -28,20 +27,28 @@ public class MePortraitActivity extends BaseActivity implements View.OnClickList
         SwitchWallet2Dialog.onSelectedWalletListener {
 
     private static final String TAG = MePortraitActivity.class.getSimpleName();
+
     private TextView mTv_portrait_address;
     private ImageButton mIb_portrait_switch_wallet;
-    private List<WalletBean> mWalletBeans;
     private TabLayout mTl_portrait;
     private ViewPager mVp_portrait;
-    private List<BaseFragment> mBaseFragments;
-    private List<String> mTitles;
     private FragmentUpdateAdapter mFragmentUpdateAdapter;
+
     private WalletBean mCurrentCheckedWallet;
+    private List<String> mTitles;
+    private List<BaseFragment> mBaseFragments;
+    private List<WalletBean> mWalletBeans;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_me_portrait);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();

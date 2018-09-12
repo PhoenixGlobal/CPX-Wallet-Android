@@ -32,7 +32,9 @@ import neomobile.Wallet;
  */
 public class CreateNeoTxModel implements ICreateTxModel, IGetUtxosCallback, ICreateAssertTxCallback,
         ISendRawTransactionCallback, ICreateNep5TxCallback {
+
     private static final String TAG = CreateNeoTxModel.class.getSimpleName();
+
     private ICreateTxModelCallback mICreateTxModelCallback;
     private NeoTxBean mNeoTxBean;
     private String mOrder;

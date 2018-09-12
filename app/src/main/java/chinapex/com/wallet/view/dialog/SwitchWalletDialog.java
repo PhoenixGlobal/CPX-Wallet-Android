@@ -32,14 +32,16 @@ public class SwitchWalletDialog extends DialogFragment implements View.OnClickLi
         SwitchTransactionRecyclerViewAdapter.OnItemClickListener {
 
     private static final String TAG = SwitchWalletDialog.class.getSimpleName();
+
     private ImageButton mIb_switch_wallet_close;
     private RecyclerView mRv_me_switch_wallet;
-    private List<WalletBean> mWalletBeans;
-    private NeoWallet mCurrentNeoWallet;
-    private int mPreIndex;
-    private int mCurrentIndex;
     private SwitchTransactionRecyclerViewAdapter mSwitchTransactionRecyclerViewAdapter;
     private onItemSelectedListener mOnItemSelectedListener;
+
+    private int mPreIndex;
+    private int mCurrentIndex;
+    private NeoWallet mCurrentNeoWallet;
+    private List<WalletBean> mWalletBeans;
 
     public static SwitchWalletDialog newInstance() {
         return new SwitchWalletDialog();

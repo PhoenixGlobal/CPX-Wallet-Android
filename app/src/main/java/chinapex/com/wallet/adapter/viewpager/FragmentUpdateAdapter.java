@@ -18,8 +18,9 @@ import chinapex.com.wallet.base.BaseFragment;
  */
 
 public class FragmentUpdateAdapter extends MyFragmentPagerAdapter {
-    private List<String> mTags;
+
     private FragmentManager mFragmentManager;
+    private List<String> mTags;
     private List<BaseFragment> mFragments;
     private List<String> mTitles;
 

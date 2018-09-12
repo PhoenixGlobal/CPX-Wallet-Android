@@ -38,12 +38,11 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
         ICreateWalletCallback, ICreateEthWalletCallback {
 
     private static final String TAG = CreateWalletActivity.class.getSimpleName();
+
     private Button mBt_create_wallet_confirm;
     private TextInputEditText mEt_create_wallet_name;
     private TextInputEditText mEt_create_wallet_pwd;
     private TextInputEditText mEt_create_wallet_repeat_pwd;
-    private boolean mIsSelectedPrivacy;
-    private boolean mIsAgreePrivacy;
     private ImageButton mIb_create_wallet_privacy_point;
     private TextInputLayout mTl_create_wallet_name;
     private TextInputLayout mTl_create_wallet_pwd;
@@ -53,10 +52,19 @@ public class CreateWalletActivity extends BaseActivity implements View.OnClickLi
     private TextView mTv_create_wallet_type;
     private ImageView mIv_create_wallet_arrows;
 
+    private boolean mIsSelectedPrivacy;
+    private boolean mIsAgreePrivacy;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_create_wallet);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
     }

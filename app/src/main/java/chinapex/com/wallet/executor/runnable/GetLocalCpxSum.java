@@ -15,7 +15,9 @@ import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 
 public class GetLocalCpxSum implements Runnable, IGetNep5BalanceCallback {
+
     private static final String TAG = GetLocalCpxSum.class.getSimpleName();
+
     private IGetLocalCpxSumCallback iGetLocalCpxSumCallback;
     private int cpxWalletNum;
     private int cpxWalletCounter;

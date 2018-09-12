@@ -18,14 +18,22 @@ import chinapex.com.wallet.utils.ToastUtils;
 public class ExportKeystoreActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = ExportKeystoreActivity.class.getSimpleName();
+
     private TextView mTv_export_wallet_keystore;
     private Button mBt_export_wallet_keystore;
+
     private String mKeystore;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_export_keystore);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();

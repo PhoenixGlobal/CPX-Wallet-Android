@@ -16,9 +16,9 @@ import chinapex.com.wallet.adapter.SpacesItemDecoration;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.changelistener.ApexListeners;
-import chinapex.com.wallet.changelistener.OnWalletNameUpdateListener;
 import chinapex.com.wallet.changelistener.OnWalletBackupStateUpdateListener;
 import chinapex.com.wallet.changelistener.OnWalletDeleteListener;
+import chinapex.com.wallet.changelistener.OnWalletNameUpdateListener;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -28,18 +28,27 @@ import chinapex.com.wallet.utils.DensityUtil;
 public class Me2Activity extends BaseActivity implements MeRecyclerViewAdapter
         .OnItemClickListener, OnWalletNameUpdateListener, OnWalletBackupStateUpdateListener,
         OnWalletDeleteListener {
+
     private static final String TAG = Me2Activity.class.getSimpleName();
-    private List<WalletBean> mWalletBeans;
+
     private RecyclerView mRv_me2;
-    private MeRecyclerViewAdapter mMeRecyclerViewAdapter;
     private TextView mTv_me2_title;
+    private MeRecyclerViewAdapter mMeRecyclerViewAdapter;
+
     private WalletBean mCurrentClickedWallet;
+    private List<WalletBean> mWalletBeans;
     private String mShowTag;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_me2);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();

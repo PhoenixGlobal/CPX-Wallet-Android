@@ -18,7 +18,7 @@ import chinapex.com.wallet.utils.ToastUtils;
 public class TransactionDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = TransactionDetailActivity.class.getSimpleName();
-    private TransactionRecord mTransactionRecord;
+
     private TextView mTv_transaction_detail_amount;
     private TextView mTv_transaction_detail_unit;
     private TextView mTv_transaction_detail_from;
@@ -26,13 +26,27 @@ public class TransactionDetailActivity extends BaseActivity implements View.OnCl
     private TextView mTv_transaction_detail_time;
     private TextView mTv_transaction_detail_tx_id;
 
+    private TransactionRecord mTransactionRecord;
+
+    @Override
+    protected void setContentView() {
+        super.setContentView();
+
+        setContentView(R.layout.activity_transaction_detail);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        initView();
+        initData();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setBlackStatusBar(true);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_detail);
-        initView();
-        initData();
     }
 
     private void initView() {

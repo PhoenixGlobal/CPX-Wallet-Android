@@ -34,9 +34,9 @@ import chinapex.com.wallet.bean.DrawerMenu;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.changelistener.OnAssetJsonUpdateListener;
-import chinapex.com.wallet.changelistener.OnWalletNameUpdateListener;
 import chinapex.com.wallet.changelistener.OnWalletAddListener;
 import chinapex.com.wallet.changelistener.OnWalletDeleteListener;
+import chinapex.com.wallet.changelistener.OnWalletNameUpdateListener;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -57,23 +57,25 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
         .DrawerMenu2OnItemClickListener {
 
     private static final String TAG = AssetsFragment.class.getSimpleName();
+
     private RecyclerView mRv_assets;
-    private int mWalletType;
-    private List<WalletBean> mWalletBeans;
-    private List<WalletBean> mSearchWalletBeans;
     private SwipeRefreshLayout mSl_assets_rv;
-    private AssetsRecyclerViewAdapter mAssetsRecyclerViewAdapter;
     private DrawerLayout mDl_assets;
     private RecyclerView mRv_assets_drawer_menu1;
     private RecyclerView mRv_assets_drawer_menu2;
-    private DrawerMenu1RecyclerViewAdapter mDrawerMenu1RecyclerViewAdapter;
     private ImageButton mIb_assets_ellipsis;
     private LinearLayout mLl_assets_drawer;
     private EditText mEt_assets_search;
     private ImageButton mIb_assets_cancel;
-    private EmptyAdapter mEmptyAdapter;
-    private DrawerMenu2RecyclerViewAdapter mDrawerMenu2RecyclerViewAdapter;
     private TextView mTv_assets_wallet_type;
+    private EmptyAdapter mEmptyAdapter;
+    private AssetsRecyclerViewAdapter mAssetsRecyclerViewAdapter;
+    private DrawerMenu1RecyclerViewAdapter mDrawerMenu1RecyclerViewAdapter;
+    private DrawerMenu2RecyclerViewAdapter mDrawerMenu2RecyclerViewAdapter;
+
+    private int mWalletType;
+    private List<WalletBean> mWalletBeans;
+    private List<WalletBean> mSearchWalletBeans;
 
     @Nullable
     @Override
@@ -84,8 +86,8 @@ public class AssetsFragment extends BaseFragment implements AssetsRecyclerViewAd
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
         initData();

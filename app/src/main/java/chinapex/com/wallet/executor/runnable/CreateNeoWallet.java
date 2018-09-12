@@ -23,6 +23,7 @@ import neomobile.Wallet;
 public class CreateNeoWallet implements Runnable {
 
     private static final String TAG = CreateNeoWallet.class.getSimpleName();
+
     private String mWalletName;
     private String mPwd;
     private ICreateWalletCallback mICreateWalletCallback;

@@ -14,13 +14,21 @@ import chinapex.com.wallet.view.wallet.CreateWalletActivity;
  */
 
 public class MePortraitEmptyActivity extends BaseActivity implements View.OnClickListener {
+
     private static final String TAG = MePortraitEmptyActivity.class.getSimpleName();
+
     private Button mBt_portrait_create_wallet;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_me_portrait_empty);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();

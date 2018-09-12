@@ -14,6 +14,7 @@ import neomobile.Wallet;
 public class FromKeystoreToNeoWallet implements Runnable {
 
     private static final String TAG = FromKeystoreToNeoWallet.class.getSimpleName();
+
     private String mKeystore;
     private String mPwd;
     private IFromKeystoreToNeoWalletCallback mIFromKeystoreToNeoWalletCallback;

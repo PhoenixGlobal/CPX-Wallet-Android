@@ -22,7 +22,6 @@ import java.util.List;
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.adapter.SwitchWallet2RecyclerViewAdapter;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -36,13 +35,14 @@ public class SwitchWallet2Dialog extends DialogFragment implements View.OnClickL
         DialogInterface.OnKeyListener, SwitchWallet2RecyclerViewAdapter.OnItemClickListener {
 
     private static final String TAG = SwitchWallet2Dialog.class.getSimpleName();
-    private onSelectedWalletListener mOnSelectedWalletListener;
+
     private ImageButton mIb_switch_wallet2_back;
     private RecyclerView mRv_dialog_switch_wallet2;
-    private List<WalletBean> mWalletBeans;
-    private WalletBean mCurrentWalletBean;
+    private onSelectedWalletListener mOnSelectedWalletListener;
     private SwitchWallet2RecyclerViewAdapter mSwitchWallet2RecyclerViewAdapter;
 
+    private List<WalletBean> mWalletBeans;
+    private WalletBean mCurrentWalletBean;
 
     public interface onSelectedWalletListener {
         void onSelectedWallet(WalletBean walletBean);

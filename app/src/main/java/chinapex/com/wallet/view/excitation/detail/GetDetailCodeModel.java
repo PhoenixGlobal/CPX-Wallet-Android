@@ -6,8 +6,10 @@ import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.global.Constant;
 
 public class GetDetailCodeModel implements IDetailCodeModel, IGetDetailCodeCallback {
+
     private static final String TAG = GetDetailCodeModel.class.getSimpleName();
-    IGetResultCodeModelCallback mIGetResultCodeModelCallback;
+
+    private IGetResultCodeModelCallback mIGetResultCodeModelCallback;
 
     public GetDetailCodeModel(IGetResultCodeModelCallback iGetResultCodeModelCallback) {
         mIGetResultCodeModelCallback = iGetResultCodeModelCallback;

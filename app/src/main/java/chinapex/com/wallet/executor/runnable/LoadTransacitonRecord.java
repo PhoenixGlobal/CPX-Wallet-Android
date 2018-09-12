@@ -21,6 +21,7 @@ import chinapex.com.wallet.utils.CpLog;
 public class LoadTransacitonRecord implements Runnable {
 
     private static final String TAG = LoadTransacitonRecord.class.getSimpleName();
+
     private String mAddress;
     private ILoadTransactionRecordCallback mILoadTransactionRecordCallback;
 

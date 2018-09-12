@@ -12,8 +12,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
 
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.utils.CpLog;
@@ -24,18 +22,12 @@ import chinapex.com.wallet.utils.PhoneUtils;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
     private static final String TAG = BaseActivity.class.getSimpleName();
+
     /***是否显示状态栏*/
     private boolean mIsShowStatusBar = false;
     private boolean mIsBlackStatusBar = false;
-
-    public void setShowStatusBar(boolean showStatusBar) {
-        mIsShowStatusBar = showStatusBar;
-    }
-
-    public void setBlackStatusBar(boolean blackStatusBar) {
-        mIsBlackStatusBar = blackStatusBar;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +62,20 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
 
+        setContentView();
+        init();
+
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(PhoneUtils.attachBaseContext(newBase));
+    }
+
+    protected void setContentView() {
+    }
+
+    protected void init() {
     }
 
     public void startActivity(Class cls, boolean isFinish) {
@@ -95,8 +101,12 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(PhoneUtils.attachBaseContext(newBase));
+    public void setShowStatusBar(boolean showStatusBar) {
+        mIsShowStatusBar = showStatusBar;
     }
+
+    public void setBlackStatusBar(boolean blackStatusBar) {
+        mIsBlackStatusBar = blackStatusBar;
+    }
+
 }

@@ -28,6 +28,7 @@ public class ApexGlobalTask implements ICheckIsUpdateNeoAssetsCallback, IGetNeoA
         ICheckIsUpdateTxStateCallback, ICheckIsUpdateEthAssetsCallback, IGetEthAssetsCallback {
 
     private static final String TAG = ApexGlobalTask.class.getSimpleName();
+
     private ScheduledFuture mCheckIsUpdateNeoAssetsSF;
     private ScheduledFuture mCheckIsUpdateEthAssetsSF;
 

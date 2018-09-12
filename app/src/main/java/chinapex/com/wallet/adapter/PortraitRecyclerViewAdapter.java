@@ -30,7 +30,6 @@ public class PortraitRecyclerViewAdapter extends RecyclerView.Adapter implements
     private OnItemClickListener mOnItemClickListener;
     private List<PortraitBean> mPortraitBeans;
 
-
     public interface OnItemClickListener {
         void onItemClick(int position);
     }

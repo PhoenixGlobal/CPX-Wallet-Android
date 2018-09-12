@@ -23,9 +23,9 @@ import chinapex.com.wallet.adapter.BackupShowMnemonicAdapter;
 import chinapex.com.wallet.adapter.SpacesItemDecorationHorizontal;
 import chinapex.com.wallet.base.BaseFragment;
 import chinapex.com.wallet.bean.MnemonicState;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.bean.WalletBean;
 import chinapex.com.wallet.bean.eth.EthWallet;
+import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -45,11 +45,13 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
                 .OnItemClickShowListener {
 
     private static final String TAG = ConfirmMnemonicFragment.class.getSimpleName();
+
     private Button mBt_confirm_mnemonic_confirm;
     private RecyclerView mRv_confirm_mnemonic_show;
     private RecyclerView mRv_confirm_mnemonic_click;
     private BackupClickMnemonicAdapter mBackupClickMnemonicAdapter;
     private BackupShowMnemonicAdapter mBackupShowMnemonicAdapter;
+
     private ArrayList<MnemonicState> mMnemonicStatesShow;
     private ArrayList<MnemonicState> mMnemonicStatesClick;
     private ArrayList<MnemonicState> mFinalRightMnemonics;
@@ -62,8 +64,9 @@ public class ConfirmMnemonicFragment extends BaseFragment implements View.OnClic
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
+
         initView(view);
         initData();
     }

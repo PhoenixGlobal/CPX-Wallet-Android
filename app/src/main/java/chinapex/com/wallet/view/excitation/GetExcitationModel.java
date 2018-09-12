@@ -5,10 +5,11 @@ import java.util.List;
 import chinapex.com.wallet.bean.ExcitationBean;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.global.Constant;
-import chinapex.com.wallet.utils.CpLog;
 
 public class GetExcitationModel implements IGetExcitationModel, IGetExcitationCallback {
+
     private static final String TAG = GetExcitationModel.class.getSimpleName();
+
     private IGetExcitationModelCallback mIGetExcitationModelCallback;
 
     public GetExcitationModel(IGetExcitationModelCallback mIGetExcitationModelCallback) {

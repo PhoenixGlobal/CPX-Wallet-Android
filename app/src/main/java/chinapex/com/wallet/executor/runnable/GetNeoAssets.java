@@ -18,7 +18,9 @@ import chinapex.com.wallet.utils.GsonUtils;
  * E-Mail：liuyi_61@163.com
  */
 public class GetNeoAssets implements Runnable, INetCallback {
+
     private static final String TAG = GetNeoAssets.class.getSimpleName();
+
     private IGetNeoAssetsCallback mIGetNeoAssetsCallback;
 
     public GetNeoAssets(IGetNeoAssetsCallback IGetNeoAssetsCallback) {

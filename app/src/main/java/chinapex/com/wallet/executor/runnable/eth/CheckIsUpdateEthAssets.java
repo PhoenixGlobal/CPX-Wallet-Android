@@ -3,7 +3,6 @@ package chinapex.com.wallet.executor.runnable.eth;
 import java.util.List;
 
 import chinapex.com.wallet.bean.AssetBean;
-import chinapex.com.wallet.executor.callback.ICheckIsUpdateNeoAssetsCallback;
 import chinapex.com.wallet.executor.callback.eth.ICheckIsUpdateEthAssetsCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
@@ -15,7 +14,9 @@ import chinapex.com.wallet.utils.CpLog;
  * E-Mail：liuyi_61@163.com
  */
 public class CheckIsUpdateEthAssets implements Runnable {
+
     private static final String TAG = CheckIsUpdateEthAssets.class.getSimpleName();
+
     private ICheckIsUpdateEthAssetsCallback mICheckIsUpdateEthAssetsCallback;
 
     public CheckIsUpdateEthAssets(ICheckIsUpdateEthAssetsCallback ICheckIsUpdateEthAssetsCallback) {

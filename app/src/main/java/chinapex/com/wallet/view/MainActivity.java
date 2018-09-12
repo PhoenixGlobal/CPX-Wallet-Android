@@ -23,22 +23,28 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
         .OnTabSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private BottomNavigationBar mBn_main;
-    private String[] mBnItemTitles;
+
     private static final int REQUEST_PERMISSION = 201;
 
+    private BottomNavigationBar mBn_main;
+
+    private String[] mBnItemTitles;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void setContentView() {
+        super.setContentView();
 
-        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant.IS_FIRST_ENTER_MAIN, false);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initData();
         initView();
-        initBottomNavigationBar();
-        initFragment();
+
+        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant.IS_FIRST_ENTER_MAIN, false);
         checkPermission();
     }
 
@@ -48,6 +54,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar
 
     private void initView() {
         mBn_main = (BottomNavigationBar) findViewById(R.id.bn_main);
+
+        initBottomNavigationBar();
+        initFragment();
     }
 
     private void initBottomNavigationBar() {

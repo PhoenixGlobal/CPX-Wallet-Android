@@ -17,16 +17,25 @@ import chinapex.com.wallet.utils.CpLog;
 public class TypeInputActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
 
     private static final String TAG = TypeInputActivity.class.getSimpleName();
+
+    private static final int RESULT_CODE = 102;
+
     private TextView mTv_type_input_title;
     private TextView mTv_type_input_save;
     private EditText mEt_type_input_content;
-    private static final int RESULT_CODE = 102;
+
     private int mPosition;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_type_input);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();

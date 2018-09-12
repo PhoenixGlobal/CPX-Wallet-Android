@@ -22,6 +22,7 @@ public class AddAssetsRecyclerViewAdapter extends RecyclerView.Adapter<AddAssets
         .AddAssetsHolder> implements View.OnClickListener {
 
     private static final String TAG = AddAssetsRecyclerViewAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private List<AssetBean> mAssetBeans;
 

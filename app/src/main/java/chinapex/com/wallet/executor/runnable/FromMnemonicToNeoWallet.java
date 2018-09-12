@@ -14,6 +14,7 @@ import neomobile.Wallet;
 public class FromMnemonicToNeoWallet implements java.lang.Runnable {
 
     private static final String TAG = FromMnemonicToNeoWallet.class.getSimpleName();
+
     private String mMnemonic;
     private String mMnemonicType;
     private IFromMnemonicToNeoWalletCallback mIFromMnemonicToNeoWalletCallback;

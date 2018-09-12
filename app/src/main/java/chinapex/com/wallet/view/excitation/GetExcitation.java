@@ -8,7 +8,6 @@ import java.util.Locale;
 
 import chinapex.com.wallet.bean.ExcitationBean;
 import chinapex.com.wallet.bean.response.ResponseExcitation;
-import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
@@ -18,6 +17,7 @@ import chinapex.com.wallet.utils.PhoneUtils;
 public class GetExcitation implements Runnable, INetCallback {
 
     private static final String TAG = GetExcitation.class.getSimpleName();
+
     private String mAddress;
     private IGetExcitationCallback mIGetExcitationCallback;
 

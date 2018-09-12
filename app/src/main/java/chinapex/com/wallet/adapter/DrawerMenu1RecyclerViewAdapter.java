@@ -24,6 +24,7 @@ public class DrawerMenu1RecyclerViewAdapter extends RecyclerView
         implements View.OnClickListener {
 
     private static final String TAG = DrawerMenu1RecyclerViewAdapter.class.getSimpleName();
+
     private DrawerMenu1OnItemClickListener mDrawerMenu1OnItemClickListener;
     private List<DrawerMenu> mDrawerMenuList;
 

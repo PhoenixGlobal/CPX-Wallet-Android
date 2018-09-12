@@ -22,6 +22,7 @@ import chinapex.com.wallet.utils.FragmentFactory;
 public class CopyMnemonicFragment extends BaseFragment implements View.OnClickListener {
 
     private static final String TAG = CopyMnemonicFragment.class.getSimpleName();
+
     private TextView mTv_copy_mnemonic;
     private Button mBt_copy_mnemonic_next;
 
@@ -35,8 +36,8 @@ public class CopyMnemonicFragment extends BaseFragment implements View.OnClickLi
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
         initData();

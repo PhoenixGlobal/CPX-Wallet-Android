@@ -12,7 +12,6 @@ import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -25,6 +24,7 @@ public class SwitchTransactionRecyclerViewAdapter extends RecyclerView
         implements View.OnClickListener {
 
     private static final String TAG = SwitchTransactionRecyclerViewAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private List<WalletBean> mWalletBeans;
 

@@ -35,11 +35,12 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
         IFromKeystoreToNeoWalletCallback, IFromKeystoreToEthWalletCallback {
 
     private static final String TAG = ExportKeystorePwdDialog.class.getSimpleName();
-    private WalletBean mCurrentWalletBean;
+
     private Button mBt_dialog_pwd_export_keystore_cancel;
     private Button mBt_dialog_pwd_export_keystore_confirm;
     private EditText mEt_dialog_pwd_export_keystore;
 
+    private WalletBean mCurrentWalletBean;
 
     public static ExportKeystorePwdDialog newInstance() {
         return new ExportKeystorePwdDialog();
@@ -48,7 +49,6 @@ public class ExportKeystorePwdDialog extends DialogFragment implements View.OnCl
     public void setCurrentWalletBean(WalletBean walletBean) {
         mCurrentWalletBean = walletBean;
     }
-
 
     @Nullable
     @Override

@@ -24,6 +24,7 @@ import ethmobile.Wallet;
 public class CreateEthWallet implements Runnable {
 
     private static final String TAG = CreateEthWallet.class.getSimpleName();
+
     private String mName;
     private String mPwd;
     private ICreateEthWalletCallback mICreateEthWalletCallback;

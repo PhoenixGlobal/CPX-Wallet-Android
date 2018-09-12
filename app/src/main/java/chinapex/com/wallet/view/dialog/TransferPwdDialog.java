@@ -34,16 +34,17 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
         IFromKeystoreToNeoWalletCallback, IFromKeystoreToEthWalletCallback {
 
     private static final String TAG = TransferPwdDialog.class.getSimpleName();
-    private WalletBean mCurrentWalletBean;
 
     private Button mBt_dialog_pwd_transfer_cancel;
     private Button mBt_dialog_pwd_transfer_confirm;
-    private String mTransferAmount;
-    private String mTransferUnit;
     private EditText mEt_dialog_pwd_transfer;
-    private OnCheckPwdListener mOnCheckPwdListener;
     private TextView mTv_dialog_amount;
     private TextView mTv_dialog_unit;
+    private OnCheckPwdListener mOnCheckPwdListener;
+
+    private WalletBean mCurrentWalletBean;
+    private String mTransferAmount;
+    private String mTransferUnit;
 
     public static TransferPwdDialog newInstance() {
         return new TransferPwdDialog();

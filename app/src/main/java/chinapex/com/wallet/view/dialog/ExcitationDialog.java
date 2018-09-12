@@ -25,14 +25,15 @@ import chinapex.com.wallet.utils.PhoneUtils;
 public class ExcitationDialog extends DialogFragment implements View.OnClickListener {
 
     private static final String TAG = ExcitationDialog.class.getSimpleName();
+
     private TextView mDialogContent;
+
     private static int mGasLimit;
 
     public static ExcitationDialog newInstance(int gasLimit) {
         mGasLimit = gasLimit;
         return new ExcitationDialog();
     }
-
 
     @Nullable
     @Override

@@ -24,6 +24,7 @@ public class TransactionRecordRecyclerViewAdapter extends RecyclerView
         View.OnClickListener, View.OnLongClickListener {
 
     private static final String TAG = TransactionRecordRecyclerViewAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
     private List<TransactionRecord> mTransactionRecords;

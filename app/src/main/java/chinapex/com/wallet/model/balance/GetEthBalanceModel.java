@@ -2,7 +2,6 @@ package chinapex.com.wallet.model.balance;
 
 import android.text.TextUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,9 @@ import chinapex.com.wallet.utils.GsonUtils;
  */
 
 public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallback, IGetErc20BalanceCallback {
+
     private static final String TAG = GetEthBalanceModel.class.getSimpleName();
+
     private IGetBalanceModelCallback mIGetBalanceModelCallback;
     private List<String> mGlobalAssets;
     private List<String> mColorAssets;

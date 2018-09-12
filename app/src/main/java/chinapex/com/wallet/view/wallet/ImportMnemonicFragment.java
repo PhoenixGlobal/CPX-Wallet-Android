@@ -51,6 +51,7 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
         IFromMnemonicToNeoWalletCallback, IFromMnemonicToEthWalletCallback {
 
     private static final String TAG = ImportMnemonicFragment.class.getSimpleName();
+
     private EditText mEt_import_wallet_mnemonic;
     private TextInputEditText mEt_import_wallet_pwd;
     private TextInputEditText mEt_import_wallet_repeat_pwd;
@@ -58,11 +59,12 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
     private Button mBt_import_wallet_mnemonic;
     private TextInputLayout mTl_import_wallet_pwd;
     private TextInputLayout mTl_import_wallet_repeat_pwd;
-    private boolean mIsSelectedPrivacy;
-    private boolean mIsAgreePrivacy;
     private TextView mTv_import_wallet_privacy;
     private TextView mTv_import_wallet_mnemonic_type;
     private ImageView mIv_import_wallet_mnemonic_arrows;
+
+    private boolean mIsSelectedPrivacy;
+    private boolean mIsAgreePrivacy;
 
     @Nullable
     @Override
@@ -72,8 +74,8 @@ public class ImportMnemonicFragment extends BaseFragment implements View.OnClick
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
         initData();

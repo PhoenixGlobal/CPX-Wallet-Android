@@ -1,7 +1,5 @@
 package chinapex.com.wallet.bean.tx;
 
-import java.math.BigDecimal;
-
 import ethmobile.Wallet;
 
 /**
@@ -18,6 +16,7 @@ public class EthTxBean implements ITxBean {
     private String gasPrice;
     private String gasLimit;
     private String nonce;
+    private String assetType;
 
     public EthTxBean() {
 
@@ -93,5 +92,13 @@ public class EthTxBean implements ITxBean {
 
     public void setNonce(String nonce) {
         this.nonce = nonce;
+    }
+
+    public String getAssetType() {
+        return assetType;
+    }
+
+    public void setAssetType(String assetType) {
+        this.assetType = assetType;
     }
 }

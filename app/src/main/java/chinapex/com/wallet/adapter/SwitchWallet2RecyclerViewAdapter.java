@@ -19,9 +19,9 @@ public class SwitchWallet2RecyclerViewAdapter extends RecyclerView
         .OnClickListener {
 
     private static final String TAG = SwitchWallet2RecyclerViewAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private List<WalletBean> mWalletBeans;
-
 
     public interface OnItemClickListener {
         void onItemClick(int position);

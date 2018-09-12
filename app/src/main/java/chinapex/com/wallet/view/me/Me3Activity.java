@@ -18,19 +18,21 @@ import chinapex.com.wallet.utils.FragmentFactory;
 public class Me3Activity extends BaseActivity implements OnWalletDeleteListener {
 
     private static final String TAG = Me3Activity.class.getSimpleName();
+
     private WalletBean mWalletBean;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_me_skip);
+    protected void setContentView() {
+        super.setContentView();
 
-        initView();
-        initData();
+        setContentView(R.layout.activity_me_skip);
     }
 
-    private void initView() {
+    @Override
+    protected void init() {
+        super.init();
 
+        initData();
     }
 
     private void initData() {

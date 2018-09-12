@@ -19,6 +19,7 @@ public class PortraitTagsAdapter extends RecyclerView.Adapter<PortraitTagsAdapte
         .PortraitTagsHolder> implements View.OnClickListener {
 
     private static final String TAG = PortraitTagsAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private List<PortraitTagsBean> mPortraitTagsBeans;
 

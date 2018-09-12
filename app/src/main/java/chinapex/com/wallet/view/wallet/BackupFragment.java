@@ -30,11 +30,10 @@ public class BackupFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
-
     }
 
     private void initView(View view) {

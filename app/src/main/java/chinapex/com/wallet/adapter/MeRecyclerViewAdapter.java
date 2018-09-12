@@ -21,6 +21,7 @@ public class MeRecyclerViewAdapter extends RecyclerView.Adapter<MeRecyclerViewAd
         .OnClickListener {
 
     private static final String TAG = MeRecyclerViewAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private List<WalletBean> mWalletBeans;
 

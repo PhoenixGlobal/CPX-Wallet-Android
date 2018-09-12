@@ -29,12 +29,14 @@ import static chinapex.com.wallet.R.drawable.new_event_status_end;
 public class ExcitationAdapter extends RecyclerView.Adapter<ExcitationAdapter.ExcitationAdapterHolder> implements View.OnClickListener {
     private static final String TAG = ExcitationAdapter.class.getSimpleName();
 
-    private List<ExcitationBean> mExcitationBeans = new ArrayList<>();
-    private OnItemClickListener mOnItemClickListener = null;
-    private View mHeaderView;
 
     private int ITEM_TYPE_NORMAL = 0;
     private int ITEM_TYPE_HEADER = 1;
+
+    private View mHeaderView;
+
+    private List<ExcitationBean> mExcitationBeans = new ArrayList<>();
+    private OnItemClickListener mOnItemClickListener = null;
 
     public ExcitationAdapter(List<ExcitationBean> list) {
         mExcitationBeans = list;

@@ -22,6 +22,7 @@ import chinapex.com.wallet.utils.CpLog;
 public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback, IGetTransactionHistoryCallback {
 
     private static final String TAG = ImpUpdateTxStateCallback.class.getSimpleName();
+
     private String mTxId;
     private ScheduledFuture mScheduledFuture;
     private long mConfirmations;

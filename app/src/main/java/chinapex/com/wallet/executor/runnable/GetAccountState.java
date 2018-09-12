@@ -23,6 +23,7 @@ import chinapex.com.wallet.utils.GsonUtils;
 public class GetAccountState implements Runnable, INetCallback {
 
     private static final String TAG = GetAccountState.class.getSimpleName();
+
     private String mAddress;
     private IGetAccountStateCallback mIGetAccountStateCallback;
 

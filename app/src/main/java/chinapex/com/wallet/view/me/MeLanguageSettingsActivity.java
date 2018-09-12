@@ -1,15 +1,10 @@
 package chinapex.com.wallet.view.me;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +25,23 @@ public class MeLanguageSettingsActivity extends BaseActivity implements
         LanguageRecyclerViewAdapter.OnItemClickListener {
 
     private static final String TAG = MeLanguageSettingsActivity.class.getSimpleName();
+
     private LanguageRecyclerViewAdapter mLanguageRecyclerViewAdapter;
+
     private List<LanguageState> mLanguageStates;
     private LanguageState mCurrentLanguage;
     private LanguageState mPreLanguage;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_me_language_settings);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initData();
         initView();

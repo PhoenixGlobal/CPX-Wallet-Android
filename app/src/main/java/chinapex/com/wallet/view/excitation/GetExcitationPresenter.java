@@ -5,6 +5,7 @@ import java.util.List;
 import chinapex.com.wallet.bean.ExcitationBean;
 
 public class GetExcitationPresenter implements IGetExcitationPresenter, IGetExcitationModelCallback {
+
     private IGetExcitationView mIGetExcitationView;
     private IGetExcitationModel mIGetExcitationModel;
 

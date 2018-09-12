@@ -33,14 +33,16 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
         OnWalletBackupStateUpdateListener {
 
     private static final String TAG = MeManageDetailFragment.class.getSimpleName();
+
     private TextView mTv_me_manager_detail_title;
     private TextView mTv_me_manager_detail_address;
     private Button mBt_me_manager_detail_backup;
     private Button mBt_me_manager_detail_delete;
-    private WalletBean mCurrentWalletBean;
     private ImageButton mIb_manage_detail_export;
     private EditText mEt_me_manager_detail_bottom_wallet_name;
     private Button mBt_me_manager_detail_save;
+
+    private WalletBean mCurrentWalletBean;
 
 
     @Nullable
@@ -51,8 +53,9 @@ public class MeManageDetailFragment extends BaseFragment implements View.OnClick
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
+
         initView(view);
         initData();
     }

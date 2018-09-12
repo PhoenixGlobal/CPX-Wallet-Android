@@ -14,6 +14,7 @@ import ethmobile.Wallet;
 public class FromKeystoreToEthWallet implements Runnable {
 
     private static final String TAG = FromKeystoreToEthWallet.class.getSimpleName();
+
     private String mKeystore;
     private String mPwd;
     private IFromKeystoreToEthWalletCallback mIFromKeystoreToEthWalletCallback;
@@ -37,7 +38,6 @@ public class FromKeystoreToEthWallet implements Runnable {
         Wallet wallet = null;
         try {
             wallet = Ethmobile.fromKeyStore(mKeystore, mPwd);
-            CpLog.i(TAG, "wallet address:" + wallet.address());
         } catch (Exception e) {
             CpLog.e(TAG, "fromKeyStore exception:" + e.getMessage());
         }

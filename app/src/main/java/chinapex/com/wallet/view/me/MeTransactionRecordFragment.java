@@ -50,18 +50,20 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
                 .onSelectedWalletListener {
 
     private static final String TAG = MeTransactionRecordFragment.class.getSimpleName();
+
     private TextView mTv_me_transaction_record_title;
     private TextView mTv_me_transaction_record_address;
     private ImageButton mIb_me_transaction_record_switch;
-    private WalletBean mCurrentClickedWallet;
     private SwipeRefreshLayout mSl_transaction_record;
     private RecyclerView mRv_transaction_record;
-    private List<TransactionRecord> mTransactionRecords;
-    private List<TransactionRecord> mSearchTxRecords;
-    private TransactionRecordRecyclerViewAdapter mTxRecyclerViewAdapter;
     private EditText mEt_tx_records_search;
     private ImageButton mIb_tx_records_cancel;
     private EmptyAdapter mEmptyAdapter;
+    private TransactionRecordRecyclerViewAdapter mTxRecyclerViewAdapter;
+
+    private WalletBean mCurrentClickedWallet;
+    private List<TransactionRecord> mTransactionRecords;
+    private List<TransactionRecord> mSearchTxRecords;
 
     @Nullable
     @Override
@@ -71,8 +73,8 @@ public class MeTransactionRecordFragment extends BaseFragment implements View.On
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
         initData();

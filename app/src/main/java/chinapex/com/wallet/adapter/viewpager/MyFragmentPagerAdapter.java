@@ -17,7 +17,9 @@ import android.view.ViewGroup;
 
 
 public abstract class MyFragmentPagerAdapter extends PagerAdapter {
+
     private static final String TAG = "MyFragmentPagerAdapter";
+
     private static final boolean DEBUG = false;
 
     private final FragmentManager mFragmentManager;

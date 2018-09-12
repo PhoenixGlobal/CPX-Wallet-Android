@@ -40,7 +40,6 @@ public class OkHttpClientManager {
 
     private MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
-
     private OkHttpClientManager() {
         mOkHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(Constant.CONNECT_TIMEOUT, TimeUnit.SECONDS)
@@ -65,7 +64,6 @@ public class OkHttpClientManager {
         return sSLSocketFactory;
     }
 
-
     private class TrustAllManager implements X509TrustManager {
 
         @Override
@@ -86,14 +84,12 @@ public class OkHttpClientManager {
         }
     }
 
-
     private class TrustAllHostnameVerifier implements HostnameVerifier {
         @Override
         public boolean verify(String hostname, SSLSession session) {
             return Constant.HOSTNAME_VERIFIER_NEO.equals(hostname) || Constant.HOSTNAME_VERIFIER_ETH.equals(hostname);
         }
     }
-
 
     public static OkHttpClientManager getInstance() {
         if (null == sOkHttpClientManager) {

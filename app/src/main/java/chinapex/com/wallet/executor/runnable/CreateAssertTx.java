@@ -13,6 +13,7 @@ import neomobile.Wallet;
 public class CreateAssertTx implements Runnable {
 
     private static final String TAG = CreateAssertTx.class.getSimpleName();
+
     private Wallet mWallet;
     private AssertTxBean mAssertTxBean;
     private ICreateAssertTxCallback mICreateAssertTxCallback;

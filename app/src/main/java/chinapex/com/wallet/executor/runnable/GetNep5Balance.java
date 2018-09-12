@@ -31,6 +31,7 @@ import neomobile.Neomobile;
 public class GetNep5Balance implements Runnable, INetCallback {
 
     private static final String TAG = GetNep5Balance.class.getSimpleName();
+
     private String mAssetID;
     private String mAddress;
     private IGetNep5BalanceCallback mIGetNep5BalanceCallback;

@@ -15,6 +15,7 @@ import chinapex.com.wallet.utils.GsonUtils;
 public class GetUtxos implements Runnable, INetCallback {
 
     private static final String TAG = GetUtxos.class.getSimpleName();
+
     private String mAddress;
     private IGetUtxosCallback mIGetUtxosCallback;
 

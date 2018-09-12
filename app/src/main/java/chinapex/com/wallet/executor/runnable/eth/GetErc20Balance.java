@@ -28,6 +28,7 @@ import ethmobile.EthCall;
 public class GetErc20Balance implements Runnable, INetCallback {
 
     private static final String TAG = GetErc20Balance.class.getSimpleName();
+
     private String mAssetID;
     private String mAddress;
     private IGetErc20BalanceCallback mIGetErc20BalanceCallback;

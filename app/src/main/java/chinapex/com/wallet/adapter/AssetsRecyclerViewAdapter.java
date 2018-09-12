@@ -21,6 +21,7 @@ public class AssetsRecyclerViewAdapter extends RecyclerView.Adapter<AssetsRecycl
         View.OnClickListener, View.OnLongClickListener {
 
     private static final String TAG = AssetsRecyclerViewAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
     private List<WalletBean> mWalletBeans;

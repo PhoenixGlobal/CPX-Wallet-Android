@@ -2,7 +2,6 @@ package chinapex.com.wallet.view.assets;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +11,10 @@ import android.widget.TextView;
 
 import com.google.zxing.activity.CaptureActivity;
 
-import java.util.HashMap;
-
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.WalletBean;
-import chinapex.com.wallet.bean.neo.NeoWallet;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
@@ -26,22 +22,31 @@ import chinapex.com.wallet.utils.CpLog;
 public class BalanceDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = BalanceDetailActivity.class.getSimpleName();
+
+    // QR_CODE activity请求码
+    private final static int REQ_CODE = 1028;
+
     private Button mBt_balance_detail_transfer;
     private Button mBt_balance_detail_gathering;
     private TextView mTv_balance_detail_assets_name;
     private TextView mTv_balance_detail_assets_value;
-    private WalletBean mWalletBean;
-    private BalanceBean mBalanceBean;
     private LinearLayout mLl_balance_detail_map;
-    // QR_CODE activity请求码
-    private final static int REQ_CODE = 1028;
     private ImageButton mIb_balance_detail_scan;
     private TextView mTv_balance_detail_wallet_name;
 
+    private WalletBean mWalletBean;
+    private BalanceBean mBalanceBean;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_balance_detail);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();

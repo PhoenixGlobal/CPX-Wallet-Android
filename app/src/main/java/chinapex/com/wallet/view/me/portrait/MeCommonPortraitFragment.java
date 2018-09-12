@@ -45,14 +45,18 @@ import cn.qqtheme.framework.widget.WheelView;
 
 public class MeCommonPortraitFragment extends BaseFragment implements PortraitRecyclerViewAdapter
         .OnItemClickListener, View.OnClickListener {
+
     private static final String TAG = MeCommonPortraitFragment.class.getSimpleName();
-    private RecyclerView mRv_portrait_common;
-    private List<PortraitBean> mPortraitBeans;
-    private PortraitRecyclerViewAdapter mPortraitRecyclerViewAdapter;
+
     private static final int REQUEST_CODE = 101;
+
+    private RecyclerView mRv_portrait_common;
+    private PortraitRecyclerViewAdapter mPortraitRecyclerViewAdapter;
     private Button mBt_portrait_common_save;
-    private HashMap<String, String> mhowHmS;
+
     private String mAppLanguage;
+    private HashMap<String, String> mhowHmS;
+    private List<PortraitBean> mPortraitBeans;
 
     @Nullable
     @Override
@@ -62,8 +66,8 @@ public class MeCommonPortraitFragment extends BaseFragment implements PortraitRe
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initData();
         initView(view);

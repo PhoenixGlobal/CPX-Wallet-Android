@@ -19,6 +19,7 @@ public class LanguageRecyclerViewAdapter extends RecyclerView
         .OnClickListener {
 
     private static final String TAG = LanguageRecyclerViewAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private List<LanguageState> mLanguageStates;
 

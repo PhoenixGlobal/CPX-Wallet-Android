@@ -6,13 +6,16 @@ import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.tx.EthTxBean;
 import chinapex.com.wallet.bean.tx.ITxBean;
 import chinapex.com.wallet.executor.TaskController;
+import chinapex.com.wallet.executor.callback.eth.ICreateErc20TxCallback;
 import chinapex.com.wallet.executor.callback.eth.ICreateEthTxCallback;
 import chinapex.com.wallet.executor.callback.eth.IEthSendRawTransactionCallback;
 import chinapex.com.wallet.executor.callback.eth.IGetEthNonceCallback;
+import chinapex.com.wallet.executor.runnable.eth.CreateErc20Tx;
 import chinapex.com.wallet.executor.runnable.eth.CreateEthTx;
 import chinapex.com.wallet.executor.runnable.eth.EthSendRawTransaction;
 import chinapex.com.wallet.executor.runnable.eth.GetEthNonce;
 import chinapex.com.wallet.global.ApexWalletApplication;
+import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
 /**
@@ -20,8 +23,10 @@ import chinapex.com.wallet.utils.CpLog;
  * E-Mail：liuyi_61@163.com
  */
 public class CreateEthTxModel implements ICreateTxModel, ICreateEthTxCallback, IEthSendRawTransactionCallback,
-        IGetEthNonceCallback {
+        IGetEthNonceCallback, ICreateErc20TxCallback {
+
     private static final String TAG = CreateEthTxModel.class.getSimpleName();
+
     private ICreateTxModelCallback mICreateTxModelCallback;
     private EthTxBean mEthTxBean;
 
@@ -54,6 +59,30 @@ public class CreateEthTxModel implements ICreateTxModel, ICreateEthTxCallback, I
     }
 
     @Override
+    public void createColorTx(ITxBean iTxBean) {
+        if (null == mICreateTxModelCallback) {
+            CpLog.e(TAG, "mICreateTxModelCallback is null!");
+            return;
+        }
+
+        if (null == iTxBean) {
+            CpLog.e(TAG, "iTxBean is null!");
+            return;
+        }
+
+        if (iTxBean instanceof EthTxBean) {
+            mEthTxBean = (EthTxBean) iTxBean;
+        }
+
+        if (null == mEthTxBean) {
+            CpLog.e(TAG, "mEthTxBean is null!");
+            return;
+        }
+
+        TaskController.getInstance().submit(new GetEthNonce(mEthTxBean.getFromAddress(), this));
+    }
+
+    @Override
     public void getEthNonce(String nonce) {
         if (TextUtils.isEmpty(nonce)) {
             CpLog.e(TAG, "nonce is null!");
@@ -63,7 +92,24 @@ public class CreateEthTxModel implements ICreateTxModel, ICreateEthTxCallback, I
         }
 
         mEthTxBean.setNonce(nonce);
-        TaskController.getInstance().submit(new CreateEthTx(mEthTxBean, this));
+
+        String assetType = mEthTxBean.getAssetType();
+        if (TextUtils.isEmpty(assetType)) {
+            CpLog.e(TAG, "assetType is null!");
+            return;
+        }
+
+        switch (assetType) {
+            case Constant.ASSET_TYPE_ETH:
+                TaskController.getInstance().submit(new CreateEthTx(mEthTxBean, this));
+                break;
+            case Constant.ASSET_TYPE_ERC20:
+                TaskController.getInstance().submit(new CreateErc20Tx(mEthTxBean, this));
+                break;
+            default:
+                CpLog.w(TAG, "illegal asset");
+                break;
+        }
     }
 
     @Override
@@ -71,11 +117,24 @@ public class CreateEthTxModel implements ICreateTxModel, ICreateEthTxCallback, I
         if (TextUtils.isEmpty(data)) {
             CpLog.e(TAG, "createEthTx() -> data is null!");
             mICreateTxModelCallback.CreateTxModel(ApexWalletApplication.getInstance().getResources().getString(R.string
-                    .eth_nonce_null), false);
+                    .eth_data_null), false);
             return;
         }
 
         CpLog.i(TAG, "createEthTx() -> data:" + data);
+        TaskController.getInstance().submit(new EthSendRawTransaction(data, this));
+    }
+
+    @Override
+    public void createErc20Tx(String data) {
+        if (TextUtils.isEmpty(data)) {
+            CpLog.e(TAG, "createErc20Tx() -> data is null!");
+            mICreateTxModelCallback.CreateTxModel(ApexWalletApplication.getInstance().getResources().getString(R.string
+                    .eth_data_null), false);
+            return;
+        }
+
+        CpLog.i(TAG, "createErc20Tx() -> data:" + data);
         TaskController.getInstance().submit(new EthSendRawTransaction(data, this));
     }
 
@@ -98,11 +157,5 @@ public class CreateEthTxModel implements ICreateTxModel, ICreateEthTxCallback, I
         mICreateTxModelCallback.CreateTxModel(ApexWalletApplication.getInstance().getResources().getString(R.string
                 .transaction_broadcast_successful), true);
     }
-
-    @Override
-    public void createColorTx(ITxBean iTxBean) {
-
-    }
-
 
 }

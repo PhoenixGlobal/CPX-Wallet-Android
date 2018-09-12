@@ -18,16 +18,24 @@ import chinapex.com.wallet.utils.FragmentFactory;
 public class ImportWalletActivity extends BaseActivity {
 
     private static final String TAG = ImportWalletActivity.class.getSimpleName();
+
     private TabLayout mTl_import_wallet;
     private ViewPager mVp_import_wallet;
-    private List<BaseFragment> mBaseFragments;
-    private List<String> mTitles;
     private FragmentUpdateAdapter mFragmentUpdateAdapter;
 
+    private List<BaseFragment> mBaseFragments;
+    private List<String> mTitles;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_import_wallet);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();

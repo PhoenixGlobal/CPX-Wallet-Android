@@ -2,8 +2,6 @@ package chinapex.com.wallet.executor.runnable.eth;
 
 import android.text.TextUtils;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,6 +26,7 @@ import chinapex.com.wallet.utils.WalletUtils;
 public class GetEthBalance implements Runnable, INetCallback {
 
     private static final String TAG = GetEthBalance.class.getSimpleName();
+
     private String mAddress;
     private IGetEthBalanceCallback mIGetEthBalanceCallback;
 

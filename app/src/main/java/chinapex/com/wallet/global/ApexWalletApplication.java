@@ -2,22 +2,20 @@ package chinapex.com.wallet.global;
 
 import android.app.Application;
 import android.content.res.Configuration;
-import android.text.TextUtils;
-
-import java.util.Locale;
 
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.PhoneUtils;
-import chinapex.com.wallet.utils.SharedPreferencesUtils;
 
 /**
  * Created by SteelCabbage on 2018/5/21 0021.
  */
 
 public class ApexWalletApplication extends Application {
+
     private static final String TAG = ApexWalletApplication.class.getSimpleName();
+
     private static ApexWalletApplication sApexWalletApplication;
 
     @Override

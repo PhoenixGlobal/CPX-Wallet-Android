@@ -14,7 +14,9 @@ import chinapex.com.wallet.view.assets.ICreateTxView;
  * E-Mail：liuyi_61@163.com
  */
 public class CreateTxPresenter implements ICreateTxPresenter, ICreateTxModelCallback {
+
     private static final String TAG = CreateTxPresenter.class.getSimpleName();
+
     private ICreateTxView mICreateTxView;
     private ICreateTxModel mICreateTxModel = new CreateEthTxModel(this);
 

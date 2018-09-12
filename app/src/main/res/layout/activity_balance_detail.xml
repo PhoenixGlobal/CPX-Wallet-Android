@@ -30,7 +30,7 @@
             android:layout_marginTop="45dp"
             android:text="2.00320000"
             android:textColor="@android:color/white"
-            android:textSize="48sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tv_balance_detail_assets_name"

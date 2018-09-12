@@ -18,7 +18,9 @@ import chinapex.com.wallet.utils.GsonUtils;
  * E-Mail：liuyi_61@163.com
  */
 public class GetEthNonce implements Runnable, INetCallback {
+
     private static final String TAG = GetEthNonce.class.getSimpleName();
+
     private String mAddress;
     private IGetEthNonceCallback mIGetEthNonceCallback;
 
@@ -48,7 +50,6 @@ public class GetEthNonce implements Runnable, INetCallback {
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
-        CpLog.i(TAG, "GetEthNonce result:" + result);
         ResponseGetEthRpcResult responseGetEthRpcResult = GsonUtils.json2Bean(result, ResponseGetEthRpcResult.class);
         if (null == responseGetEthRpcResult) {
             CpLog.e(TAG, "responseGetEthRpcResult is null!");

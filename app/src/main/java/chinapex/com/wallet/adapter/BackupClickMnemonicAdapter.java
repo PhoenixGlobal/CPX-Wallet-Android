@@ -19,9 +19,9 @@ public class BackupClickMnemonicAdapter extends RecyclerView.Adapter<BackupClick
         .BackupClickMnemonicAdapterHolder> implements View.OnClickListener {
 
     private static final String TAG = BackupClickMnemonicAdapter.class.getSimpleName();
+
     private OnItemClickListener mOnItemClickListener;
     private List<MnemonicState> mMnemonicStates;
-
 
     public interface OnItemClickListener {
         void onItemClick(int position);

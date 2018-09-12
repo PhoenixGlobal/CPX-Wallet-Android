@@ -16,20 +16,26 @@ import chinapex.com.wallet.utils.FragmentFactory;
 public class BackupWalletActivity extends BaseActivity {
 
     private static final String TAG = BackupWalletActivity.class.getSimpleName();
+
     private TextView mTv_backup_title;
+
+    private WalletBean mWalletBean;
     private String[] mBackupTitles;
     private String mBackupMnemonic;
-    private WalletBean mWalletBean;
-
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_backup_wallet);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initData();
         initView();
-        initFragment();
     }
 
     private void initData() {
@@ -48,6 +54,8 @@ public class BackupWalletActivity extends BaseActivity {
 
     private void initView() {
         mTv_backup_title = (TextView) findViewById(R.id.tv_backup_title);
+
+        initFragment();
     }
 
     private void initFragment() {

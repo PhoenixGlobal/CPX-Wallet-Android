@@ -36,9 +36,10 @@ import chinapex.com.wallet.view.me.portrait.MePortraitEmptyActivity;
 
 public class MeFragment extends BaseFragment implements View.OnClickListener,
         MeFunctionRecyclerViewAdapter.OnItemClickListener {
-    public static final String TAG = MeFragment.class.getSimpleName();
-    private MeFunctionRecyclerViewAdapter mMeFunctionRecyclerViewAdapter;
 
+    public static final String TAG = MeFragment.class.getSimpleName();
+
+    private MeFunctionRecyclerViewAdapter mMeFunctionRecyclerViewAdapter;
 
     @Nullable
     @Override
@@ -48,8 +49,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener,
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
     }

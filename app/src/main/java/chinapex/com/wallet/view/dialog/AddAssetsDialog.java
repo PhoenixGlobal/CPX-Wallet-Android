@@ -42,16 +42,17 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
                 .OnKeyListener {
 
     private static final String TAG = AddAssetsDialog.class.getSimpleName();
+
     private RecyclerView mRv_add_assets;
-    private List<AssetBean> mAssetBeans;
-    private List<AssetBean> mSearchAssetBeans;
-    private AddAssetsRecyclerViewAdapter mAddAssetsRecyclerViewAdapter;
-    private List<String> mCheckedAssets;
-    private List<String> mCurrentAssets;
-    private onCheckedAssetsListener mOnCheckedAssetsListener;
     private EditText mEt_add_assets_search;
     private ImageButton mIb_add_assets_cancel;
+    private onCheckedAssetsListener mOnCheckedAssetsListener;
+    private AddAssetsRecyclerViewAdapter mAddAssetsRecyclerViewAdapter;
 
+    private List<String> mCheckedAssets;
+    private List<String> mCurrentAssets;
+    private List<AssetBean> mAssetBeans;
+    private List<AssetBean> mSearchAssetBeans;
 
     public interface onCheckedAssetsListener {
         void onCheckedAssets(List<String> checkedAssets);

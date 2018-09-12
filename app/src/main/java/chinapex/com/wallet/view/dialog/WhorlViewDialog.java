@@ -22,8 +22,8 @@ import chinapex.com.wallet.utils.DensityUtil;
 public class WhorlViewDialog extends DialogFragment {
 
     private static final String TAG = WhorlViewDialog.class.getSimpleName();
-    private WhorlView mWl_common_portrait;
 
+    private WhorlView mWl_common_portrait;
 
     public static WhorlViewDialog newInstance() {
         return new WhorlViewDialog();

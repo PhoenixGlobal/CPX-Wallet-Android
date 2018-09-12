@@ -18,7 +18,9 @@ import chinapex.com.wallet.view.assets.IGetBalanceView;
  */
 
 public class GetBalancePresenter implements IGetBalancePresenter, IGetBalanceModelCallback {
+
     private static final String TAG = GetBalancePresenter.class.getSimpleName();
+
     private IGetBalanceView mIGetBalanceView;
     private IGetBalanceModel mIGetBalanceModel;
 

@@ -17,6 +17,7 @@ import neomobile.Wallet;
 public class CreateNep5Tx implements Runnable {
 
     private static final String TAG = CreateNep5Tx.class.getSimpleName();
+
     private Wallet mWallet;
     private Nep5TxBean mNep5TxBean;
     private ICreateNep5TxCallback mICreateNep5TxCallback;

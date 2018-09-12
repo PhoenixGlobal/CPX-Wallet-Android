@@ -51,16 +51,18 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
         IFromKeystoreToNeoWalletCallback, IFromKeystoreToEthWalletCallback {
 
     private static final String TAG = ImportKeystoreFragment.class.getSimpleName();
+
     private EditText mEt_import_wallet_keystore;
     private ImageButton mIb_import_wallet_keystore_privacy_point;
     private Button mBt_import_wallet_keystore;
-    private boolean mIsSelectedPrivacy;
-    private boolean mIsAgreePrivacy;
     private TextInputEditText mEt_import_wallet_keystore_pwd;
     private TextInputLayout mTl_import_wallet_keystore;
     private TextView mTv_import_wallet_keystore_privacy;
     private TextView mTv_import_wallet_keystore_type;
     private ImageView mIv_import_wallet_keystore_arrows;
+
+    private boolean mIsSelectedPrivacy;
+    private boolean mIsAgreePrivacy;
 
     @Nullable
     @Override
@@ -70,8 +72,8 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
         initData();

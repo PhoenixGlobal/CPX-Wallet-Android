@@ -21,6 +21,7 @@ import chinapex.com.wallet.utils.GsonUtils;
 public class UpdateTxState implements Runnable, INetCallback {
 
     private static final String TAG = UpdateTxState.class.getSimpleName();
+
     private String mTxId;
     private String mWalletAddress;
     private IUpdateTxStateCallback mIUpdateTxStateCallback;

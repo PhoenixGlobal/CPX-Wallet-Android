@@ -13,6 +13,7 @@ import chinapex.com.wallet.utils.GsonUtils;
 public class GetDetailCode implements Runnable, INetCallback {
 
     private static final String TAG = GetDetailCode.class.getSimpleName();
+
     private String mAddress;
     private RequestSubmitExcitation mRequestSubmitExcitation;
     private IGetDetailCodeCallback mIGetDetailCodeCallback;

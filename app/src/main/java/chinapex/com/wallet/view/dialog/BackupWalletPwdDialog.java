@@ -36,11 +36,12 @@ public class BackupWalletPwdDialog extends DialogFragment implements View.OnClic
         IFromKeystoreToNeoWalletCallback, IFromKeystoreToEthWalletCallback {
 
     private static final String TAG = BackupWalletPwdDialog.class.getSimpleName();
-    private WalletBean mCurrentWalletBean;
+
     private Button mBt_dialog_pwd_backup_cancel;
     private Button mBt_dialog_pwd_backup_confirm;
     private EditText mEt_dialog_pwd_backup;
 
+    private WalletBean mCurrentWalletBean;
 
     public static BackupWalletPwdDialog newInstance() {
         return new BackupWalletPwdDialog();
@@ -49,7 +50,6 @@ public class BackupWalletPwdDialog extends DialogFragment implements View.OnClic
     public void setCurrentWalletBean(WalletBean walletBean) {
         mCurrentWalletBean = walletBean;
     }
-
 
     @Nullable
     @Override

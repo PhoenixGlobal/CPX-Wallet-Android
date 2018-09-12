@@ -14,7 +14,9 @@ import chinapex.com.wallet.utils.CpLog;
  * E-Mail：liuyi_61@163.com
  */
 public class CheckIsUpdateNeoAssets implements Runnable {
+
     private static final String TAG = CheckIsUpdateNeoAssets.class.getSimpleName();
+
     private ICheckIsUpdateNeoAssetsCallback mICheckIsUpdateNeoAssetsCallback;
 
     public CheckIsUpdateNeoAssets(ICheckIsUpdateNeoAssetsCallback ICheckIsUpdateNeoAssetsCallback) {

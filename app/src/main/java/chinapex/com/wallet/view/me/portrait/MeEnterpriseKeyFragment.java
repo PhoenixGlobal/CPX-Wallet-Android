@@ -17,17 +17,11 @@ import chinapex.com.wallet.utils.CpLog;
  */
 
 public class MeEnterpriseKeyFragment extends BaseFragment implements View.OnClickListener {
+
     private static final String TAG = MeEnterpriseKeyFragment.class.getSimpleName();
+
     private Button mBt_enterprise_key_confirm;
     private OnConfirmClickListener mOnConfirmClickListener;
-
-    public interface OnConfirmClickListener {
-        void onConfirmClick();
-    }
-
-    public void setOnConfirmClickListener(OnConfirmClickListener onConfirmClickListener) {
-        mOnConfirmClickListener = onConfirmClickListener;
-    }
 
     @Nullable
     @Override
@@ -37,19 +31,10 @@ public class MeEnterpriseKeyFragment extends BaseFragment implements View.OnClic
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void init(View view) {
+        super.init(view);
 
         initView(view);
-        initData();
-    }
-
-    private void initView(View view) {
-        mBt_enterprise_key_confirm = view.findViewById(R.id.bt_enterprise_key_confirm);
-        mBt_enterprise_key_confirm.setOnClickListener(this);
-    }
-
-    private void initData() {
     }
 
     @Override
@@ -67,4 +52,18 @@ public class MeEnterpriseKeyFragment extends BaseFragment implements View.OnClic
                 break;
         }
     }
+
+    private void initView(View view) {
+        mBt_enterprise_key_confirm = view.findViewById(R.id.bt_enterprise_key_confirm);
+        mBt_enterprise_key_confirm.setOnClickListener(this);
+    }
+
+    public interface OnConfirmClickListener {
+        void onConfirmClick();
+    }
+
+    public void setOnConfirmClickListener(OnConfirmClickListener onConfirmClickListener) {
+        mOnConfirmClickListener = onConfirmClickListener;
+    }
+
 }

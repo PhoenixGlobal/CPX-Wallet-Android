@@ -1,25 +1,20 @@
 package chinapex.com.wallet.executor.runnable.eth;
 
-import java.util.List;
-
 import chinapex.com.wallet.bean.AssetBean;
-import chinapex.com.wallet.bean.response.ResponseGetAssets;
-import chinapex.com.wallet.executor.callback.IGetNeoAssetsCallback;
 import chinapex.com.wallet.executor.callback.eth.IGetEthAssetsCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
-import chinapex.com.wallet.net.INetCallback;
-import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
-import chinapex.com.wallet.utils.GsonUtils;
 
 /**
  * Created by SteelCabbage on 2018/7/8 13:57
  * E-Mail：liuyi_61@163.com
  */
 public class GetEthAssets implements Runnable/*, INetCallback*/ {
+
     private static final String TAG = GetEthAssets.class.getSimpleName();
+
     private IGetEthAssetsCallback mIGetEthAssetsCallback;
 
     public GetEthAssets(IGetEthAssetsCallback IGetEthAssetsCallback) {

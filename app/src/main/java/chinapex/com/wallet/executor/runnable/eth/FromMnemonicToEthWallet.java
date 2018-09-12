@@ -15,6 +15,7 @@ import ethmobile.Wallet;
 public class FromMnemonicToEthWallet implements Runnable {
 
     private static final String TAG = FromMnemonicToEthWallet.class.getSimpleName();
+
     private String mMnemonic;
     private String mMnemonicType;
     private IFromMnemonicToEthWalletCallback mIFromMnemonicToEthWalletCallback;

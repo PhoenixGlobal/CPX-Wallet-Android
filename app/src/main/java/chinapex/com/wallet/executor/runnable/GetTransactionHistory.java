@@ -27,6 +27,7 @@ import chinapex.com.wallet.utils.SharedPreferencesUtils;
 public class GetTransactionHistory implements Runnable, INetCallback {
 
     private static final String TAG = GetTransactionHistory.class.getSimpleName();
+
     private String mAddress;
     private IGetTransactionHistoryCallback mIGetTransactionHistoryCallback;
     private long mRecentTime;

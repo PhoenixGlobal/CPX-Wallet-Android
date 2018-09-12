@@ -31,6 +31,7 @@ import chinapex.com.wallet.presenter.transfer.CreateTxPresenter;
 import chinapex.com.wallet.presenter.transfer.ICreateTxPresenter;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.ToastUtils;
+import chinapex.com.wallet.utils.WalletUtils;
 import chinapex.com.wallet.view.dialog.TransferPwdDialog;
 import neomobile.Wallet;
 
@@ -39,33 +40,42 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
         SeekBar.OnSeekBarChangeListener, ICreateTxView, IGetEthGasPriceCallback {
 
     private static final String TAG = TransferActivity.class.getSimpleName();
-    private WalletBean mWalletBean;
-    private BalanceBean mBalanceBean;
+
+    private final static int REQ_CODE = 1029;
+
+    private ICreateTxPresenter mICreateTxPresenter;
+
     private Button mBt_transfer_send;
     private EditText mEt_transfer_amount;
     private EditText mEt_transfer_to_wallet_addr;
     private TextView mTv_transfer_unit;
     private ImageButton mIb_transfer_scan;
-    private final static int REQ_CODE = 1029;
     private TextView mTv_available_amount;
     private TextView mTv_amount_all;
     private SeekBar mSb_transfer;
     private TextView mTv_transfer_user_set_gas_price;
-    private ICreateTxPresenter mICreateTxPresenter;
     private RelativeLayout mRl_seek_bar;
     private LinearLayout mLl_transfer_gas_price;
     private RelativeLayout mRl_transfer_gas_fee;
     private TextView mTv_transfer_gas_price;
     private TextView mTv_transfer_gas_fee;
 
+    private WalletBean mWalletBean;
+    private BalanceBean mBalanceBean;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setContentView() {
+        super.setContentView();
+
         setContentView(R.layout.activity_transfer);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
 
         initView();
         initData();
-
     }
 
     private void initView() {
@@ -273,17 +283,24 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             return;
         }
 
-
         EthTxBean ethTxBean = new EthTxBean();
         ethTxBean.setWallet(wallet);
         ethTxBean.setAssetID(mBalanceBean.getAssetsID());
         ethTxBean.setAssetDecimal(mBalanceBean.getAssetDecimal());
         ethTxBean.setFromAddress(wallet.address());
         ethTxBean.setToAddress(mEt_transfer_to_wallet_addr.getText().toString().trim());
-        // TODO: 2018/9/7 0007  amount,price,limit
-//        ethTxBean.setAmount(mEt_transfer_amount.getText().toString().trim());
-        ethTxBean.setAmount("0x16345785d8a0000");
-        ethTxBean.setGasPrice("0x3b9aca00");
+
+        // amount 0xHex
+        String amountDec = mEt_transfer_amount.getText().toString().trim();
+        String amountOxHex = WalletUtils.toHexString(amountDec, String.valueOf(mBalanceBean.getAssetDecimal()));
+        ethTxBean.setAmount(amountOxHex);
+
+        // gasPrice 0xHex
+        String gasPriceDec = String.valueOf(mSb_transfer.getProgress() / 10);
+        String gasPriceOxHex = WalletUtils.toHexString(gasPriceDec, String.valueOf(9));
+        ethTxBean.setGasPrice(gasPriceOxHex);
+
+        // gasLimit 90000
         ethTxBean.setGasLimit("0x15f90");
 
         String assetType = mBalanceBean.getAssetType();
@@ -294,9 +311,11 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
         switch (assetType) {
             case Constant.ASSET_TYPE_ETH:
+                ethTxBean.setAssetType(Constant.ASSET_TYPE_ETH);
                 mICreateTxPresenter.createGlobalTx(ethTxBean);
                 break;
             case Constant.ASSET_TYPE_ERC20:
+                ethTxBean.setAssetType(Constant.ASSET_TYPE_ERC20);
                 mICreateTxPresenter.createColorTx(ethTxBean);
                 break;
             default:

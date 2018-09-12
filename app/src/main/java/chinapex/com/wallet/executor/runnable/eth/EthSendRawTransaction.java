@@ -18,7 +18,9 @@ import chinapex.com.wallet.utils.GsonUtils;
  * E-Mail：liuyi_61@163.com
  */
 public class EthSendRawTransaction implements Runnable, INetCallback {
+
     private static final String TAG = EthSendRawTransaction.class.getSimpleName();
+
     private String mEthTxData;
     private IEthSendRawTransactionCallback mIEthSendRawTransactionCallback;
 

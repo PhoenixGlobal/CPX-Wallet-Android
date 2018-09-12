@@ -18,6 +18,7 @@ public class BackupShowMnemonicAdapter extends RecyclerView.Adapter<BackupShowMn
         .OnClickListener {
 
     private static final String TAG = BackupShowMnemonicAdapter.class.getSimpleName();
+
     private OnItemClickShowListener mOnItemClickShowListener;
     private List<MnemonicState> mMnemonicStates;
 

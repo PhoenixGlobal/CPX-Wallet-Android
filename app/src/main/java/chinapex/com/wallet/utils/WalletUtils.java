@@ -19,6 +19,7 @@ public class WalletUtils {
             return null;
         }
 
+        CpLog.w(TAG, "oxHexString:" + oxHexString);
         int length = oxHexString.length();
         if (length < 3) {
             CpLog.e(TAG, "oxHexString.length < 3!");
@@ -30,13 +31,33 @@ public class WalletUtils {
             String hexString = oxHexString.substring(2);
             String dec = new BigInteger(hexString, 16).toString(10);
             decString = new BigDecimal(dec).divide(new BigDecimal(10).pow(Integer.parseInt(assetDecimal)))
-                    .setScale(8, BigDecimal.ROUND_UP).stripTrailingZeros().toPlainString();
+                    .stripTrailingZeros().toPlainString();
         } catch (Exception e) {
             CpLog.e(TAG, "toDecString exception:" + e.getMessage());
             return null;
         }
 
         return decString;
+    }
+
+    public static String toHexString(String decString, String decimal) {
+        if (TextUtils.isEmpty(decString) || TextUtils.isEmpty(decimal)) {
+            CpLog.e(TAG, "decString or decimal is null!");
+            return "";
+        }
+
+        String hexString;
+        try {
+            String bigDecString = new BigDecimal(decString).multiply(new BigDecimal(10).pow(Integer.valueOf(decimal))).setScale(0,
+                    BigDecimal.ROUND_DOWN).toPlainString();
+            CpLog.i(TAG, "bigDecString:" + bigDecString);
+            hexString = new BigInteger(bigDecString, 10).toString(16);
+        } catch (Exception e) {
+            CpLog.e(TAG, "toHexString Exception:" + e.getMessage());
+            return "";
+        }
+
+        return "0x" + hexString;
     }
 
     public static byte[] reverseArray(String string) {
