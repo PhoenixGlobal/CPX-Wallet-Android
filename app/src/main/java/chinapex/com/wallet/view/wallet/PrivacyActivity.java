@@ -1,6 +1,5 @@
 package chinapex.com.wallet.view.wallet;
 
-import android.os.Bundle;
 import android.webkit.WebView;
 
 import java.util.Locale;

@@ -24,12 +24,13 @@ public class Constant {
     // neo node
     public static final String HOSTNAME_VERIFIER_NEO = "tracker.chinapex.com.cn";
     public static final String URL_CLI_NEO = "https://tracker.chinapex.com.cn/neo-cli/";
-    public static final String URL_UTXOS = "https://tracker.chinapex.com.cn/tool/utxos/";
-    public static final String URL_ASSETS = "https://tracker.chinapex.com.cn/tool/assets";
+    public static final String URL_UTXOS_NEO = "https://tracker.chinapex.com.cn/tool/utxos/";
+    public static final String URL_ASSETS_NEO = "https://tracker.chinapex.com.cn/tool/assets";
 
     // eth node
     public static final String HOSTNAME_VERIFIER_ETH = "42.159.95.191";
     public static final String URL_CLI_ETH = "http://42.159.95.191:8545";
+    public static final String URL_ASSETS_ETH = "https://tracker.chinapex.com.cn/tool/test/eth-assets";
 
     // ApexGlobalTask
     public static final long ASSETS_POLLING_TIME = 10 * 1000;
@@ -138,7 +139,7 @@ public class Constant {
     public static final String ASSETS_CPX = "0x45d493a6f73fa5f404244a5fb8472fc014ca5885";
 
     // ETH
-    public static final String ASSETS_ETH = "ether666";
+    public static final String ASSETS_ETH = "0xeth99999999";
     public static final String ASSETS_ERC20_NMB = "0xc7773e07adb2642a1eb03c5e340430b6cedc2aa9";
     //Excitation
     public static final String EXCITATION_SHOW_LIST = "https://tracker.chinapex.com.cn/tool/j2/activitys/list/";
@@ -169,10 +170,10 @@ public class Constant {
 
 
     // neo asset type
-    public static final String ASSET_TYPE_GLOBAL = "GLOBAL";
+    public static final String ASSET_TYPE_GLOBAL = "Global";
     public static final String ASSET_TYPE_NEP5 = "NEP5";
-    public static final String ASSET_TYPE_UTILITY = "UtilityToken";
     public static final String ASSET_TYPE_GOVERNING = "GoverningToken";
+    public static final String ASSET_TYPE_UTILITY = "UtilityToken";
 
     // eth asset type
     public static final String ASSET_TYPE_ETH = "Eth";

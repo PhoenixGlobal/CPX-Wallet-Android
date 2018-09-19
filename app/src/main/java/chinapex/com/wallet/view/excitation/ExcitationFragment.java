@@ -7,7 +7,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,12 +78,10 @@ public class ExcitationFragment extends BaseFragment implements ExcitationAdapte
         mExcitationRefresh.setOnRefreshListener(this);
 
         CollapsingToolbarLayout ctlTitle = view.findViewById(R.id.collapsing_toolbar_layout);
-
-        ctlTitle.setCollapsedTitleGravity(Gravity.CENTER_HORIZONTAL);
         ctlTitle.setScrimAnimationDuration(50);
-
         ctlTitle.setExpandedTitleMarginStart(space);
         ctlTitle.setExpandedTitleMarginBottom(space + bottomsSpace);
+
     }
 
     private void initData() {

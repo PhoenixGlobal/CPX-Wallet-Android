@@ -98,7 +98,7 @@ public class GetErc20Balance implements Runnable, INetCallback {
 
         String erc20BalanceValue = WalletUtils.toDecString(responseGetErc20Balance.getResult(), assetBean.getPrecision());
         if (TextUtils.isEmpty(erc20BalanceValue)) {
-            CpLog.e(TAG, "ethBalance is null or empty!");
+            CpLog.e(TAG, "erc20Balance is null or empty!");
             mIGetErc20BalanceCallback.getErc20Balance(null);
             return;
         }

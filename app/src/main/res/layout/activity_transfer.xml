@@ -74,7 +74,7 @@
             android:singleLine="true"
             android:text="@string/available_amount"
             android:textColor="@color/c_999999"
-            android:textSize="@dimen/title_small_16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_available_amount"
@@ -83,13 +83,13 @@
             android:layout_marginStart="5dp"
             android:text="0.00000008"
             android:textColor="@color/c_E16A67"
-            android:textSize="@dimen/title_small_16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" )"
-            android:textSize="@dimen/title_small_16sp" />
+            android:textSize="15sp" />
 
 
     </LinearLayout>
@@ -202,7 +202,16 @@
             android:layout_below="@+id/sb_transfer"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
-            android:text="0.0 Gwei"
+            android:text="0.0"
+            android:textSize="@dimen/paratext_14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sb_transfer"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/tv_transfer_user_set_gas_price"
+            android:text=" Gwei"
             android:textSize="@dimen/paratext_14sp" />
 
         <TextView

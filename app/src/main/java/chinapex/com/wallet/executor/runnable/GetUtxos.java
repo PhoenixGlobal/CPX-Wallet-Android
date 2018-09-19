@@ -26,7 +26,7 @@ public class GetUtxos implements Runnable, INetCallback {
 
     @Override
     public void run() {
-        String url = Constant.URL_UTXOS + mAddress;
+        String url = Constant.URL_UTXOS_NEO + mAddress;
         if (null == mIGetUtxosCallback) {
             CpLog.e(TAG, "mIGetUtxosCallback is null！");
             return;

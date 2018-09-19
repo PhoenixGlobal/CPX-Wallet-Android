@@ -1,5 +1,6 @@
 package chinapex.com.wallet.presenter.transfer;
 
+import chinapex.com.wallet.bean.gasfee.ITxFee;
 import chinapex.com.wallet.bean.tx.ITxBean;
 
 /**
@@ -8,6 +9,8 @@ import chinapex.com.wallet.bean.tx.ITxBean;
  */
 public interface ICreateTxPresenter {
     void init(int walletType);
+
+    void checkTxFee(ITxFee iTxFee);
 
     void createGlobalTx(ITxBean iTxBean);
 

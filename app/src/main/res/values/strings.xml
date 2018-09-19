@@ -134,6 +134,8 @@
     <string name="server_err_txId_null">Server error! TxId is null!</string>
     <string name="eth_nonce_null">Nonce query failed, please check the network!</string>
     <string name="eth_data_null">Transaction data generation failed!</string>
+    <string name="no_this_type_asset">No asset of this type!</string>
+    <string name="insufficient_gas">Insufficient gas</string>
 
     <!--语言-->
     <string name="language_zh_cn">简体中文</string>
@@ -173,6 +175,7 @@
     <string name="excitation_cpx_address_empty_toast">CPX address can not be empty!</string>
     <string name="excitation_eth_address_wrong_format_toast">Please input the correct format ETH address!</string>
     <string name="excitation_eth_address_empty_toast">ETH address can not be empty!</string>
+
 
 
 </resources>

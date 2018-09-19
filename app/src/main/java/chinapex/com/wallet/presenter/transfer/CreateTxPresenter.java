@@ -1,5 +1,6 @@
 package chinapex.com.wallet.presenter.transfer;
 
+import chinapex.com.wallet.bean.gasfee.ITxFee;
 import chinapex.com.wallet.bean.tx.ITxBean;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.transfer.CreateEthTxModel;
@@ -39,6 +40,11 @@ public class CreateTxPresenter implements ICreateTxPresenter, ICreateTxModelCall
     }
 
     @Override
+    public void checkTxFee(ITxFee iTxFee) {
+        mICreateTxModel.checkTxFee(iTxFee);
+    }
+
+    @Override
     public void createGlobalTx(ITxBean iTxBean) {
         mICreateTxModel.createGlobalTx(iTxBean);
     }
@@ -46,6 +52,11 @@ public class CreateTxPresenter implements ICreateTxPresenter, ICreateTxModelCall
     @Override
     public void createColorTx(ITxBean iTxBean) {
         mICreateTxModel.createColorTx(iTxBean);
+    }
+
+    @Override
+    public void checkTxFee(boolean isEnough, String msg) {
+        mICreateTxView.checkTxFee(isEnough, msg);
     }
 
     @Override
@@ -57,4 +68,5 @@ public class CreateTxPresenter implements ICreateTxPresenter, ICreateTxModelCall
 
         mICreateTxView.createTxMsg(toastMsg, isFinish);
     }
+
 }

@@ -57,7 +57,7 @@
             android:paddingBottom="@dimen/d_10sp"
             android:paddingEnd="@dimen/d_30dp"
             android:paddingStart="@dimen/d_30dp"
-            android:paddingTop="@dimen/d_30dp"
+            android:paddingTop="@dimen/d_35dp"
             android:src="@drawable/icon_add_assets_round" />
     </RelativeLayout>
 

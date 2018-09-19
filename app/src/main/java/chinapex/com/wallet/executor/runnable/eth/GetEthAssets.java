@@ -1,17 +1,23 @@
 package chinapex.com.wallet.executor.runnable.eth;
 
+import java.util.List;
+
 import chinapex.com.wallet.bean.AssetBean;
+import chinapex.com.wallet.bean.response.ResponseGetEthAssets;
 import chinapex.com.wallet.executor.callback.eth.IGetEthAssetsCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
+import chinapex.com.wallet.net.INetCallback;
+import chinapex.com.wallet.net.OkHttpClientManager;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.utils.GsonUtils;
 
 /**
  * Created by SteelCabbage on 2018/7/8 13:57
  * E-Mail：liuyi_61@163.com
  */
-public class GetEthAssets implements Runnable/*, INetCallback*/ {
+public class GetEthAssets implements Runnable, INetCallback {
 
     private static final String TAG = GetEthAssets.class.getSimpleName();
 
@@ -28,25 +34,36 @@ public class GetEthAssets implements Runnable/*, INetCallback*/ {
             return;
         }
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
-        if (null == apexWalletDbDao) {
-            CpLog.e(TAG, "apexWalletDbDao is null!");
+        OkHttpClientManager.getInstance().get(Constant.URL_ASSETS_ETH, this);
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String msg, String result) {
+        ResponseGetEthAssets responseGetEthAssets = GsonUtils.json2Bean(result, ResponseGetEthAssets.class);
+        if (null == responseGetEthAssets) {
+            CpLog.e(TAG, "responseGetEthAssets is null!");
+            mIGetEthAssetsCallback.getEthAssets(null);
             return;
         }
 
-        // eth
-        AssetBean assetBean = new AssetBean();
-        assetBean.setType(Constant.ASSET_TYPE_ETH);
-        assetBean.setSymbol("ETH");
-        assetBean.setPrecision(18 + "");
-        assetBean.setName("ETH");
-        assetBean.setImageUrl("");
-        assetBean.setHexHash(Constant.ASSETS_ETH);
-        assetBean.setHash(Constant.ASSETS_ETH);
+        List<ResponseGetEthAssets.DataBean> data = responseGetEthAssets.getData();
+        if (null == data || data.isEmpty()) {
+            CpLog.e(TAG, "data is null or empty!");
+            mIGetEthAssetsCallback.getEthAssets(null);
+            return;
+        }
 
-        apexWalletDbDao.insertAsset(Constant.TABLE_ETH_ASSETS, assetBean);
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
+        if (null == apexWalletDbDao) {
+            CpLog.e(TAG, "apexWalletDbDao is null!");
+            mIGetEthAssetsCallback.getEthAssets(null);
+            return;
+        }
 
-        // erc20
+
+        /**
+         *  erc20 NMB(Test)==========================================================
+         */
         AssetBean assetBeanErc20 = new AssetBean();
         assetBeanErc20.setType(Constant.ASSET_TYPE_ERC20);
         assetBeanErc20.setSymbol("NMB");
@@ -57,56 +74,36 @@ public class GetEthAssets implements Runnable/*, INetCallback*/ {
         assetBeanErc20.setHash(Constant.ASSETS_ERC20_NMB);
 
         apexWalletDbDao.insertAsset(Constant.TABLE_ETH_ASSETS, assetBeanErc20);
+        /**
+         *  erc20 NMB(Test)==========================================================
+         */
+
+
+        for (ResponseGetEthAssets.DataBean dataBean : data) {
+            if (null == dataBean) {
+                CpLog.e(TAG, "resultBean is null!");
+                continue;
+            }
+
+            AssetBean assetBean = new AssetBean();
+            assetBean.setType(dataBean.getType());
+            assetBean.setSymbol(dataBean.getSymbol());
+            assetBean.setPrecision(dataBean.getPrecision());
+            assetBean.setName(dataBean.getName());
+            assetBean.setImageUrl(dataBean.getImage_url());
+            assetBean.setHexHash(dataBean.getHex_hash());
+            assetBean.setHash(dataBean.getHash());
+
+            apexWalletDbDao.insertAsset(Constant.TABLE_ETH_ASSETS, assetBean);
+        }
 
         mIGetEthAssetsCallback.getEthAssets(Constant.UPDATE_ASSETS_OK);
-
-//        OkHttpClientManager.getInstance().get(Constant.URL_ASSETS, this);
     }
 
-//    @Override
-//    public void onSuccess(int statusCode, String msg, String result) {
-//        ResponseGetAssets responseGetAssets = GsonUtils.json2Bean(result, ResponseGetAssets.class);
-//        if (null == responseGetAssets) {
-//            CpLog.e(TAG, "responseGetAssets is null!");
-//            return;
-//        }
-//
-//        List<ResponseGetAssets.ResultBean> resultBeans = responseGetAssets.getResult();
-//        if (null == resultBeans || resultBeans.isEmpty()) {
-//            CpLog.e(TAG, "resultBeans is null or empty!");
-//            return;
-//        }
-//
-//        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-//                .getInstance());
-//        if (null == apexWalletDbDao) {
-//            CpLog.e(TAG, "apexWalletDbDao is null!");
-//            return;
-//        }
-//
-//        for (ResponseGetAssets.ResultBean resultBean : resultBeans) {
-//            if (null == resultBean) {
-//                CpLog.e(TAG, "resultBean is null!");
-//                continue;
-//            }
-//
-//            AssetBean assetBean = new AssetBean();
-//            assetBean.setType(resultBean.getType());
-//            assetBean.setSymbol(resultBean.getSymbol());
-//            assetBean.setPrecision(resultBean.getPrecision());
-//            assetBean.setName(resultBean.getName());
-//            assetBean.setImageUrl(resultBean.getImage_url());
-//            assetBean.setHexHash(resultBean.getHex_hash());
-//            assetBean.setHash(resultBean.getHash());
-//
-//            apexWalletDbDao.insertAsset(assetBean);
-//        }
-//
-//        mIGetNeoAssetsCallback.getNeoAssets(Constant.UPDATE_ASSETS_OK);
-//    }
-//
-//    @Override
-//    public void onFailed(int failedCode, String msg) {
-//        CpLog.e(TAG, "onFailed() -> msg:" + msg);
-//    }
+    @Override
+    public void onFailed(int failedCode, String msg) {
+        CpLog.e(TAG, "onFailed() -> msg:" + msg);
+        mIGetEthAssetsCallback.getEthAssets(null);
+    }
+
 }

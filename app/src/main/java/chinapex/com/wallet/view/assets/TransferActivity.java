@@ -1,7 +1,6 @@
 package chinapex.com.wallet.view.assets;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +19,9 @@ import chinapex.com.wallet.R;
 import chinapex.com.wallet.base.BaseActivity;
 import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.bean.gasfee.EthTxFee;
+import chinapex.com.wallet.bean.gasfee.ITxFee;
+import chinapex.com.wallet.bean.gasfee.NeoTxFee;
 import chinapex.com.wallet.bean.tx.EthTxBean;
 import chinapex.com.wallet.bean.tx.NeoTxBean;
 import chinapex.com.wallet.executor.TaskController;
@@ -201,24 +203,29 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
                     return;
                 }
 
-                String balance = mBalanceBean.getAssetsValue();
-                String amount = mEt_transfer_amount.getText().toString().trim();
-                try {
-                    BigDecimal balanceBigDecimal = new BigDecimal(balance);
-                    BigDecimal amountBigDecimal = new BigDecimal(amount);
-                    if (amountBigDecimal.compareTo(balanceBigDecimal) == 1) {
-                        ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
-                                .getResources().getString(R.string.insufficient_balance));
-                        return;
-                    }
-                } catch (NumberFormatException e) {
-                    CpLog.e(TAG, "NumberFormatException: " + e.getMessage());
-                    ToastUtils.getInstance().showToast(ApexWalletApplication.getInstance()
-                            .getResources().getString(R.string.illegal_input));
-                    return;
+                int walletType = mWalletBean.getWalletType();
+                switch (walletType) {
+                    case Constant.WALLET_TYPE_NEO:
+                        NeoTxFee neoTxFee = new NeoTxFee();
+                        neoTxFee.setBalance(mBalanceBean.getAssetsValue());
+                        neoTxFee.setAmount(mEt_transfer_amount.getText().toString().trim());
+                        mICreateTxPresenter.checkTxFee(neoTxFee);
+                        break;
+                    case Constant.WALLET_TYPE_ETH:
+                        EthTxFee ethTxFee = new EthTxFee();
+                        ethTxFee.setAssetType(mBalanceBean.getAssetType());
+                        ethTxFee.setAddress(mWalletBean.getAddress());
+                        ethTxFee.setBalance(mBalanceBean.getAssetsValue());
+                        ethTxFee.setAmount(mEt_transfer_amount.getText().toString().trim());
+                        ethTxFee.setGasPrice(mTv_transfer_user_set_gas_price.getText().toString().trim());
+                        ethTxFee.setGasLimit("90000");
+                        mICreateTxPresenter.checkTxFee(ethTxFee);
+                        break;
+                    case Constant.WALLET_TYPE_CPX:
+                        break;
+                    default:
+                        break;
                 }
-
-                showTransferPwdDialog();
                 break;
             case R.id.ib_transfer_scan:
                 Intent intent = new Intent(TransferActivity.this, CaptureActivity.class);
@@ -231,6 +238,22 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
             default:
                 break;
         }
+    }
+
+    @Override
+    public void checkTxFee(final boolean isEnough, final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (isEnough) {
+                    showTransferPwdDialog();
+                } else {
+                    if (!TextUtils.isEmpty(msg)) {
+                        ToastUtils.getInstance().showToast(msg);
+                    }
+                }
+            }
+        });
     }
 
     public void showTransferPwdDialog() {
@@ -350,7 +373,7 @@ public class TransferActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        mTv_transfer_user_set_gas_price.setText(String.valueOf(progress / 10.0 + " Gwei"));
+        mTv_transfer_user_set_gas_price.setText(String.valueOf(progress / 10.0));
         String gasFee = "0";
         try {
             gasFee = new BigDecimal(progress / 10.0).divide(new BigDecimal(10).pow(5)).multiply(new BigDecimal(9))

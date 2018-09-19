@@ -1,5 +1,6 @@
 package chinapex.com.wallet.model.transfer;
 
+import chinapex.com.wallet.bean.gasfee.ITxFee;
 import chinapex.com.wallet.bean.tx.ITxBean;
 
 /**
@@ -7,7 +8,10 @@ import chinapex.com.wallet.bean.tx.ITxBean;
  * E-Mail：liuyi_61@163.com
  */
 public interface ICreateTxModel {
+    void checkTxFee(ITxFee iTxFee);
+
     void createGlobalTx(ITxBean iTxBean);
 
     void createColorTx(ITxBean iTxBean);
+
 }

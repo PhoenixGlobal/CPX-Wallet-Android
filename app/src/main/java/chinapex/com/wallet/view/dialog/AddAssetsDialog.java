@@ -49,6 +49,7 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
     private onCheckedAssetsListener mOnCheckedAssetsListener;
     private AddAssetsRecyclerViewAdapter mAddAssetsRecyclerViewAdapter;
 
+    private int mWalletType;
     private List<String> mCheckedAssets;
     private List<String> mCurrentAssets;
     private List<AssetBean> mAssetBeans;
@@ -64,6 +65,10 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
 
     public static AddAssetsDialog newInstance() {
         return new AddAssetsDialog();
+    }
+
+    public void setWalletType(int walletType) {
+        mWalletType = walletType;
     }
 
     public void setCurrentAssets(List<String> currentAssets) {
@@ -153,35 +158,50 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
     }
 
     private void initData() {
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
         }
 
-        mAssetBeans = apexWalletDbDao.queryAssetsByType(Constant.TABLE_NEO_ASSETS, Constant.ASSET_TYPE_NEP5);
-        if (null == mAssetBeans || mAssetBeans.isEmpty()) {
-            CpLog.e(TAG, "assetBeans is null or empty!");
+        String tableName = null;
+        String colorAssetType = null;
+        String globalAssetType = null;
+        int insertIndex = 0;
+        switch (mWalletType) {
+            case Constant.WALLET_TYPE_NEO:
+                tableName = Constant.TABLE_NEO_ASSETS;
+                colorAssetType = Constant.ASSET_TYPE_NEP5;
+                globalAssetType = Constant.ASSET_TYPE_GLOBAL;
+                insertIndex = 1;
+                break;
+            case Constant.WALLET_TYPE_ETH:
+                tableName = Constant.TABLE_ETH_ASSETS;
+                colorAssetType = Constant.ASSET_TYPE_ERC20;
+                globalAssetType = Constant.ASSET_TYPE_ETH;
+                insertIndex = 0;
+                break;
+            case Constant.WALLET_TYPE_CPX:
+                tableName = Constant.TABLE_CPX_ASSETS;
+                break;
+            default:
+                CpLog.e(TAG, "unknown wallet type!");
+                break;
+        }
+
+        mAssetBeans = new ArrayList<>();
+        List<AssetBean> colorAssets = apexWalletDbDao.queryAssetsByType(tableName, colorAssetType);
+        if (null != colorAssets && !colorAssets.isEmpty()) {
+            mAssetBeans.addAll(colorAssets);
+        }
+
+        List<AssetBean> globalAssets = apexWalletDbDao.queryAssetsByType(tableName, globalAssetType);
+        if (null == globalAssets || globalAssets.isEmpty()) {
+            CpLog.e(TAG, "globalAssets is null or empty!");
             return;
         }
 
-        List<AssetBean> governingAssets = apexWalletDbDao.queryAssetsByType(Constant.TABLE_NEO_ASSETS, Constant
-                .ASSET_TYPE_GOVERNING);
-        if (null == governingAssets || governingAssets.isEmpty()) {
-            CpLog.e(TAG, "governingAssets is null or empty!");
-            return;
-        }
-
-        mAssetBeans.addAll(1, governingAssets);
-
-        List<AssetBean> utilityAssets = apexWalletDbDao.queryAssetsByType(Constant.TABLE_NEO_ASSETS, Constant.ASSET_TYPE_UTILITY);
-        if (null == utilityAssets || utilityAssets.isEmpty()) {
-            CpLog.e(TAG, "utilityAssets is null or empty!");
-            return;
-        }
-
-        mAssetBeans.addAll(1, utilityAssets);
+        mAssetBeans.addAll(insertIndex, globalAssets);
 
         if (null == mCurrentAssets) {
             CpLog.e(TAG, "mCurrentAssets is null!");

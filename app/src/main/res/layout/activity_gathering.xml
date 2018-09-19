@@ -68,7 +68,7 @@
         android:singleLine="true"
         android:text="@string/wallet_address"
         android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/bt_gathering_copy_addr"

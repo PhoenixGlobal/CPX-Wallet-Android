@@ -1,7 +1,6 @@
 package chinapex.com.wallet.view.excitation.detail;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -57,6 +56,24 @@ public class ExcitationDetailActivity extends BaseActivity implements View.OnCli
         initData();
     }
 
+    private void initView() {
+        mCpxAddressInput = findViewById(R.id.cpx_address_input);
+        mEthAddressInput = findViewById(R.id.eth_address_input);
+        mWrongAddressNote = findViewById(R.id.tv_excitation_detail_wrong_address_note);
+        mCpxAddressInputCancel = findViewById(R.id.cpx_address_input_cancel);
+        mEthAddressInputCancel = findViewById(R.id.eth_address_input_cancel);
+        mWrongAddressNote = findViewById(R.id.tv_excitation_detail_wrong_address_note);
+        mExcitationCommit = findViewById(R.id.btn_excitation_submit);
+
+
+        mCpxAddressInput.addTextChangedListener(new DetailTextWatcher(mCpxAddressInput));
+        mEthAddressInput.addTextChangedListener(new DetailTextWatcher(mEthAddressInput));
+
+        mExcitationCommit.setOnClickListener(this);
+        mCpxAddressInputCancel.setOnClickListener(this);
+        mEthAddressInputCancel.setOnClickListener(this);
+    }
+
     private void initData() {
         Intent intent = getIntent();
         if (null == intent) {
@@ -95,23 +112,6 @@ public class ExcitationDetailActivity extends BaseActivity implements View.OnCli
         excitationDialog.show(getFragmentManager(), "ExcitationDialog");
     }
 
-    private void initView() {
-        mCpxAddressInput = findViewById(R.id.cpx_address_input);
-        mEthAddressInput = findViewById(R.id.eth_address_input);
-        mWrongAddressNote = findViewById(R.id.tv_excitation_detail_wrong_address_note);
-        mCpxAddressInputCancel = findViewById(R.id.cpx_address_input_cancel);
-        mEthAddressInputCancel = findViewById(R.id.eth_address_input_cancel);
-        mWrongAddressNote = findViewById(R.id.tv_excitation_detail_wrong_address_note);
-        mExcitationCommit = findViewById(R.id.btn_excitation_submit);
-
-
-        mCpxAddressInput.addTextChangedListener(new DetailTextWatcher(mCpxAddressInput));
-        mEthAddressInput.addTextChangedListener(new DetailTextWatcher(mEthAddressInput));
-
-        mExcitationCommit.setOnClickListener(this);
-        mCpxAddressInputCancel.setOnClickListener(this);
-        mEthAddressInputCancel.setOnClickListener(this);
-    }
 
     @Override
     public void onClick(View v) {

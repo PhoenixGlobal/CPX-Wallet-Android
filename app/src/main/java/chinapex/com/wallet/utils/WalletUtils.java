@@ -22,8 +22,8 @@ public class WalletUtils {
         CpLog.w(TAG, "oxHexString:" + oxHexString);
         int length = oxHexString.length();
         if (length < 3) {
-            CpLog.e(TAG, "oxHexString.length < 3!");
-            return null;
+            CpLog.w(TAG, "oxHexString.length < 3!");
+            return "0";
         }
 
         String decString;

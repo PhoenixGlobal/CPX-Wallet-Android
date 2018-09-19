@@ -34,6 +34,7 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
     private List<String> mColorAssets;
     private int mColorAssetNum;
     private int mColorAssetCounter;
+    private HashMap<String, BalanceBean> mColorAssetBalanceBeans;
 
     public GetEthBalanceModel(IGetBalanceModelCallback IGetBalanceModelCallback) {
         mIGetBalanceModelCallback = IGetBalanceModelCallback;
@@ -138,6 +139,7 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
         }
 
         mColorAssetNum = mColorAssets.size();
+        mColorAssetBalanceBeans = new HashMap<>();
         for (String colorAsset : mColorAssets) {
             if (TextUtils.isEmpty(colorAsset)) {
                 CpLog.e(TAG, "colorAsset is null or empty!");
@@ -150,12 +152,12 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
 
     @Override
     public void getErc20Balance(Map<String, BalanceBean> balanceBeans) {
-        HashMap<String, BalanceBean> balanceBeansFinal = new HashMap<>();
         mColorAssetCounter++;
+
         if (null == balanceBeans || balanceBeans.isEmpty()) {
             CpLog.e(TAG, "balanceBeans is null!");
             if (mColorAssetCounter >= mColorAssetNum) {
-                mIGetBalanceModelCallback.getColorBalanceModel(balanceBeansFinal);
+                mIGetBalanceModelCallback.getColorBalanceModel(mColorAssetBalanceBeans);
             }
             return;
         }
@@ -166,11 +168,11 @@ public class GetEthBalanceModel implements IGetBalanceModel, IGetEthBalanceCallb
                 continue;
             }
 
-            balanceBeansFinal.put(balance.getKey(), balance.getValue());
+            mColorAssetBalanceBeans.put(balance.getKey(), balance.getValue());
         }
 
         if (mColorAssetCounter >= mColorAssetNum) {
-            mIGetBalanceModelCallback.getColorBalanceModel(balanceBeansFinal);
+            mIGetBalanceModelCallback.getColorBalanceModel(mColorAssetBalanceBeans);
         }
     }
 }

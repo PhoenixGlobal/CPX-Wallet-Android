@@ -2,11 +2,16 @@ package chinapex.com.wallet.model.transfer;
 
 import android.text.TextUtils;
 
+import java.math.BigDecimal;
+
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.AssertTxBean;
 import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.Nep5TxBean;
 import chinapex.com.wallet.bean.TransactionRecord;
+import chinapex.com.wallet.bean.gasfee.EthTxFee;
+import chinapex.com.wallet.bean.gasfee.ITxFee;
+import chinapex.com.wallet.bean.gasfee.NeoTxFee;
 import chinapex.com.wallet.bean.tx.ITxBean;
 import chinapex.com.wallet.bean.tx.NeoTxBean;
 import chinapex.com.wallet.executor.TaskController;
@@ -36,11 +41,53 @@ public class CreateNeoTxModel implements ICreateTxModel, IGetUtxosCallback, ICre
     private static final String TAG = CreateNeoTxModel.class.getSimpleName();
 
     private ICreateTxModelCallback mICreateTxModelCallback;
+    private NeoTxFee mNeoTxFee;
     private NeoTxBean mNeoTxBean;
     private String mOrder;
 
     public CreateNeoTxModel(ICreateTxModelCallback ICreateTxModelCallback) {
         mICreateTxModelCallback = ICreateTxModelCallback;
+    }
+
+    @Override
+    public void checkTxFee(ITxFee iTxFee) {
+        if (null == mICreateTxModelCallback) {
+            CpLog.e(TAG, "mICreateTxModelCallback is null!");
+            return;
+        }
+
+        if (null == iTxFee) {
+            CpLog.e(TAG, "iTxFee is null!");
+            return;
+        }
+
+        if (iTxFee instanceof NeoTxFee) {
+            mNeoTxFee = (NeoTxFee) iTxFee;
+        }
+
+        if (null == mNeoTxFee) {
+            CpLog.e(TAG, "mNeoTxFee is null!");
+            return;
+        }
+
+        CpLog.i(TAG, "mNeoTxFee:" + mNeoTxFee.toString());
+
+        try {
+            BigDecimal balance = new BigDecimal(mNeoTxFee.getBalance());
+            BigDecimal amount = new BigDecimal(mNeoTxFee.getAmount());
+
+            if (amount.compareTo(balance) == 1) {
+                mICreateTxModelCallback.checkTxFee(false, ApexWalletApplication.getInstance()
+                        .getResources().getString(R.string.insufficient_balance));
+                return;
+            }
+
+            mICreateTxModelCallback.checkTxFee(true, null);
+        } catch (Exception e) {
+            mICreateTxModelCallback.checkTxFee(false, ApexWalletApplication.getInstance().getResources().getString(R.string
+                    .illegal_input));
+            CpLog.e(TAG, "checkTxFee Exception:" + e.getMessage());
+        }
     }
 
     @Override

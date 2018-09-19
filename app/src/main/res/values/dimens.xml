@@ -63,10 +63,10 @@
     <dimen name="et_assets_search_padding_start">34dp</dimen>
     <dimen name="et_assets_search_font_size">16sp</dimen>
     <dimen name="tv_transfer_from_margin_top">22dp</dimen>
-    <dimen name="tv_transfer_from_margin_start">30dp</dimen>
-    <dimen name="tv_transfer_from_font_size">18sp</dimen>
+    <dimen name="tv_transfer_from_margin_start">20dp</dimen>
+    <dimen name="tv_transfer_from_font_size">15sp</dimen>
     <dimen name="tv_transfer_from_wallet_name_font_size">16sp</dimen>
-    <dimen name="tv_transfer_from_wallet_addr_font_size">14sp</dimen>
+    <dimen name="tv_transfer_from_wallet_addr_font_size">12sp</dimen>
     <dimen name="iv_new_visitor_width">186dp</dimen>
     <dimen name="iv_new_visitor_height">43dp</dimen>
     <dimen name="tv_me_title_size">18sp</dimen>
@@ -100,6 +100,7 @@
 
     <!-- excitation dimension-->
     <dimen name="d_n34dp">-34dp</dimen>
+    <dimen name="d_n18sp">-18sp</dimen>
     <dimen name="d_0dp">0dp</dimen>
     <dimen name="d_1dp">1dp</dimen>
     <dimen name="d_2dp">2dp</dimen>

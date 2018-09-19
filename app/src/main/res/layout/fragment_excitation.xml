@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:collapsedTitleGravity="center_horizontal | bottom"
             app:collapsedTitleTextAppearance="@style/ExcitationCollapsedTextStyle"
             app:contentInsetLeft="@dimen/d_0dp"
             app:contentInsetStart="@dimen/d_0dp"
@@ -32,8 +33,11 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/d_63dp"
+                android:layout_marginStart="@dimen/d_n18sp"
                 app:layout_collapseMode="parallax"
-                app:title="@string/excitation" />
+                app:title="@string/excitation"
+                app:titleMarginBottom="@dimen/d_12dp" />
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -53,4 +57,5 @@
             android:layout_centerHorizontal="true"
             android:overScrollMode="never" />
     </android.support.v4.widget.SwipeRefreshLayout>
+
 </android.support.design.widget.CoordinatorLayout>

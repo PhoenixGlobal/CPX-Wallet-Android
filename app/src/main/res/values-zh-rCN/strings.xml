@@ -131,6 +131,8 @@
     <string name="server_err_txId_null">服务器错误！交易Id生成失败！</string>
     <string name="eth_nonce_null">交易次数查询失败，请检查网络！</string>
     <string name="eth_data_null">交易内容生成失败！</string>
+    <string name="no_this_type_asset">无此种类型的资产!</string>
+    <string name="insufficient_gas">ETH的余额不足以支付Gas</string>
 
     <!--语言-->
     <string name="language_zh_cn">简体中文</string>
@@ -168,6 +170,7 @@
     <string name="excitation_cpx_address_empty_toast">CPX地址不能为空！</string>
     <string name="excitation_eth_address_wrong_format_toast">请输入正确格式的ETH地址！</string>
     <string name="excitation_eth_address_empty_toast">ETH地址不能为空！</string>
+
 
 
 </resources>
