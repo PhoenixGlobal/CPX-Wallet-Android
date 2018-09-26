@@ -2,21 +2,26 @@ package chinapex.com.wallet.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 import chinapex.com.wallet.R;
+import chinapex.com.wallet.bean.BalanceBean;
 import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.global.GlideApp;
 import chinapex.com.wallet.utils.CpLog;
 import chinapex.com.wallet.utils.PhoneUtils;
+import chinapex.com.wallet.utils.WalletUtils;
 
 public class TransactionRecordRecyclerViewAdapter extends RecyclerView
         .Adapter<TransactionRecordRecyclerViewAdapter.TransactionRecordAdapterHolder> implements
@@ -88,7 +93,6 @@ public class TransactionRecordRecyclerViewAdapter extends RecyclerView
             return;
         }
 
-        // TODO: 2018/6/21 0021 logoUrl
         holder.txID.setText(transactionRecord.getTxID());
         holder.txAmount.setText(transactionRecord.getTxAmount());
         holder.txTime.setText(PhoneUtils.getFormatTime(transactionRecord.getTxTime()));
@@ -96,26 +100,22 @@ public class TransactionRecordRecyclerViewAdapter extends RecyclerView
         switch (transactionRecord.getTxState()) {
             case Constant.TRANSACTION_STATE_FAIL:
                 holder.txState.setText(R.string.tx_failed);
-                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources()
-                        .getColor(R.color.c_E16A67));
+                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_E16A67));
                 holder.txTime.setVisibility(View.INVISIBLE);
                 break;
             case Constant.TRANSACTION_STATE_SUCCESS:
                 holder.txState.setText(R.string.tx_successful);
-                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources()
-                        .getColor(R.color.c_54CA80));
+                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_54CA80));
                 holder.txTime.setVisibility(View.VISIBLE);
                 break;
             case Constant.TRANSACTION_STATE_CONFIRMING:
                 holder.txState.setText(R.string.tx_confirming);
-                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources()
-                        .getColor(R.color.c_1253BF));
+                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_1253BF));
                 holder.txTime.setVisibility(View.VISIBLE);
                 break;
             case Constant.TRANSACTION_STATE_PACKAGING:
                 holder.txState.setText(R.string.tx_blocking);
-                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources()
-                        .getColor(R.color.c_F5A623));
+                holder.txState.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_F5A623));
                 holder.txTime.setVisibility(View.INVISIBLE);
                 break;
             default:
@@ -126,73 +126,103 @@ public class TransactionRecordRecyclerViewAdapter extends RecyclerView
         String assetID = transactionRecord.getAssetID();
         switch (assetID) {
             case Constant.ASSETS_NEO:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_global_neo)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_global_neo).into(holder.txLogo);
                 break;
             case Constant.ASSETS_NEO_GAS:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_global_gas)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_global_gas).into(holder.txLogo);
                 break;
             case Constant.ASSETS_CPX:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_cpx)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_cpx).into(holder.txLogo);
                 break;
             case Constant.ASSETS_APH:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_aph)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_aph).into(holder.txLogo);
                 break;
             case Constant.ASSETS_AVA:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_ava)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_ava).into(holder.txLogo);
                 break;
             case Constant.ASSETS_DBC:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_dbc)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_dbc).into(holder.txLogo);
                 break;
             case Constant.ASSETS_EXT:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_ext)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_ext).into(holder.txLogo);
                 break;
             case Constant.ASSETS_LRN:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_lrn)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_lrn).into(holder.txLogo);
                 break;
             case Constant.ASSETS_NKN:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_nkn)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_nkn).into(holder.txLogo);
                 break;
             case Constant.ASSETS_ONT:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_ont)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_ont).into(holder.txLogo);
                 break;
             case Constant.ASSETS_PKC:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_pkc)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_pkc).into(holder.txLogo);
                 break;
             case Constant.ASSETS_RPX:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_rpx)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_rpx).into(holder.txLogo);
                 break;
             case Constant.ASSETS_SOUL:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_soul)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_soul).into(holder.txLogo);
                 break;
             case Constant.ASSETS_SWTH:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_swth)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_swth).into(holder.txLogo);
                 break;
             case Constant.ASSETS_TKY:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_tky)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_tky).into(holder.txLogo);
                 break;
             case Constant.ASSETS_ZPT:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_zpt)
-                        .into(holder.txLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_zpt).into(holder.txLogo);
+                break;
+            case Constant.ASSETS_PHX:
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_phx).into(holder.txLogo);
+                break;
+            case Constant.ASSETS_ETH:
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_global_eth).into(holder.txLogo);
                 break;
             default:
-                GlideApp.with(ApexWalletApplication.getInstance()).load(transactionRecord
-                        .getAssetLogoUrl()).into(holder.txLogo);
+                switch (transactionRecord.getTxType()) {
+                    case Constant.ASSET_TYPE_NEP5:
+                        GlideApp.with(ApexWalletApplication.getInstance())
+                                .load(transactionRecord.getAssetLogoUrl())
+                                .placeholder(R.drawable.logo_global_neo)
+                                .error(R.drawable.logo_global_neo)
+                                .into(holder.txLogo);
+                        break;
+                    case Constant.ASSET_TYPE_ERC20:
+                        GlideApp.with(ApexWalletApplication.getInstance())
+                                .load(transactionRecord.getAssetLogoUrl())
+                                .placeholder(R.drawable.logo_global_eth)
+                                .error(R.drawable.logo_global_eth)
+                                .into(holder.txLogo);
+                        break;
+                    default:
+                        break;
+                }
                 break;
+        }
+
+        String txAmount = transactionRecord.getTxAmount();
+        if (TextUtils.isEmpty(txAmount)) {
+            CpLog.e(TAG, "txAmount is null!");
+            return;
+        }
+
+        String sign;
+        String value;
+        try {
+            sign = txAmount.substring(0, 1);
+            String amount = txAmount.substring(1);
+            value = new BigDecimal(amount).setScale(8, BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toPlainString();
+        } catch (Exception e) {
+            CpLog.e(TAG, "TransactionRecordRecyclerViewAdapter Exception:" + e.getMessage());
+            return;
+        }
+
+        if ("0".equals(value)
+                || "0.00000000".equals(value)) {
+            holder.txAmount.setText(String.valueOf(sign + "0"));
+        } else {
+            holder.txAmount.setText(String.valueOf(sign + value));
         }
 
         holder.itemView.setTag(position);

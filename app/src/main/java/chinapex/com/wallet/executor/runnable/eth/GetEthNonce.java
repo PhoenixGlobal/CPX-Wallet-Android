@@ -45,7 +45,7 @@ public class GetEthNonce implements Runnable, INetCallback {
         arrayList.add("latest");
         requestGetEthRpc.setParams(arrayList);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_ETH, GsonUtils.toJsonStr(requestGetEthRpc), this);
+        OkHttpClientManager.getInstance().postJsonByAuth(Constant.URL_CLI_ETH, GsonUtils.toJsonStr(requestGetEthRpc), this);
     }
 
     @Override

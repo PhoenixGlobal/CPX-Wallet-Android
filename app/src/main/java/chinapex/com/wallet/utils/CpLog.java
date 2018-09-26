@@ -7,7 +7,7 @@ import android.util.Log;
  */
 
 public class CpLog {
-    private static final boolean IS_DEBUG = true;
+    private static final boolean IS_DEBUG = false;
 
     public static void v(String tag, String msg) {
         if (IS_DEBUG) {

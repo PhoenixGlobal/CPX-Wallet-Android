@@ -168,10 +168,14 @@ public class AssetsOverviewRecyclerViewAdapter extends RecyclerView
                 holder.mapState.setVisibility(View.GONE);
                 GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_zpt).into(holder.assetLogo);
                 break;
+            case Constant.ASSETS_PHX:
+                holder.mapState.setVisibility(View.GONE);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_phx).into(holder.assetLogo);
+                break;
             // eth
             case Constant.ASSETS_ETH:
                 holder.mapState.setVisibility(View.GONE);
-                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.icon_wallet_type_eth).into(holder.assetLogo);
+                GlideApp.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_global_eth).into(holder.assetLogo);
                 break;
             default:
                 holder.mapState.setVisibility(View.GONE);
@@ -187,8 +191,8 @@ public class AssetsOverviewRecyclerViewAdapter extends RecyclerView
                     case Constant.ASSET_TYPE_ERC20:
                         GlideApp.with(ApexWalletApplication.getInstance())
                                 .load(assetBean.getImageUrl())
-                                .placeholder(R.drawable.icon_wallet_type_eth)
-                                .error(R.drawable.icon_wallet_type_eth)
+                                .placeholder(R.drawable.logo_global_eth)
+                                .error(R.drawable.logo_global_eth)
                                 .into(holder.assetLogo);
                         break;
                     default:
@@ -201,17 +205,19 @@ public class AssetsOverviewRecyclerViewAdapter extends RecyclerView
         holder.assetsName.setText(balanceBean.getAssetSymbol());
 
         String assetsValue = balanceBean.getAssetsValue();
-        if (TextUtils.isEmpty(assetsValue)) {
+        String showValue;
+        try {
+            showValue = new BigDecimal(assetsValue).setScale(8, BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toPlainString();
+        } catch (Exception e) {
+            CpLog.e(TAG, "AssetsOverviewRecyclerViewAdapter Exception:" + e.getMessage());
+            return;
+        }
+
+        if ("0".equals(showValue)
+                || "0.00000000".equals(showValue)) {
             holder.assetsValue.setText("0");
         } else {
-            if ("0".equals(assetsValue)
-                    || "0000000000000000000000000000000000000000000000000000000000000000".equals(assetsValue)) {
-                holder.assetsValue.setText("0");
-            } else {
-                String value = new BigDecimal(assetsValue).setScale(8, BigDecimal.ROUND_HALF_UP).stripTrailingZeros()
-                        .toPlainString();
-                holder.assetsValue.setText(value);
-            }
+            holder.assetsValue.setText(showValue);
         }
 
         holder.itemView.setTag(position);

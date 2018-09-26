@@ -168,8 +168,11 @@ public class AddAssetsRecyclerViewAdapter extends RecyclerView.Adapter<AddAssets
             case Constant.ASSETS_ZPT:
                 Glide.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_zpt).into(holder.assetLogo);
                 break;
+            case Constant.ASSETS_PHX:
+                Glide.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_nep5_phx).into(holder.assetLogo);
+                break;
             case Constant.ASSETS_ETH:
-                Glide.with(ApexWalletApplication.getInstance()).load(R.drawable.icon_wallet_type_eth).into(holder.assetLogo);
+                Glide.with(ApexWalletApplication.getInstance()).load(R.drawable.logo_global_eth).into(holder.assetLogo);
                 break;
             default:
                 switch (assetBean.getType()) {
@@ -183,8 +186,8 @@ public class AddAssetsRecyclerViewAdapter extends RecyclerView.Adapter<AddAssets
                     case Constant.ASSET_TYPE_ERC20:
                         GlideApp.with(ApexWalletApplication.getInstance())
                                 .load(assetBean.getImageUrl())
-                                .placeholder(R.drawable.icon_wallet_type_eth)
-                                .error(R.drawable.icon_wallet_type_eth)
+                                .placeholder(R.drawable.logo_global_eth)
+                                .error(R.drawable.logo_global_eth)
                                 .into(holder.assetLogo);
                         break;
                     default:

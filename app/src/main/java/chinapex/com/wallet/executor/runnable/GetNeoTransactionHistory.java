@@ -9,7 +9,7 @@ import java.util.List;
 import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.bean.response.ResponseGetTransactionHistory;
 import chinapex.com.wallet.changelistener.ApexListeners;
-import chinapex.com.wallet.executor.callback.IGetTransactionHistoryCallback;
+import chinapex.com.wallet.executor.callback.IGetNeoTransactionHistoryCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -24,39 +24,31 @@ import chinapex.com.wallet.utils.SharedPreferencesUtils;
  * E-Mail：liuyi_61@163.com
  */
 
-public class GetTransactionHistory implements Runnable, INetCallback {
+public class GetNeoTransactionHistory implements Runnable, INetCallback {
 
-    private static final String TAG = GetTransactionHistory.class.getSimpleName();
+    private static final String TAG = GetNeoTransactionHistory.class.getSimpleName();
 
     private String mAddress;
-    private IGetTransactionHistoryCallback mIGetTransactionHistoryCallback;
+    private IGetNeoTransactionHistoryCallback mIGetNeoTransactionHistoryCallback;
     private long mRecentTime;
 
-    public GetTransactionHistory(String address, IGetTransactionHistoryCallback
-            IGetTransactionHistoryCallback) {
+    public GetNeoTransactionHistory(String address, IGetNeoTransactionHistoryCallback
+            IGetNeoTransactionHistoryCallback) {
         mAddress = address;
-        mIGetTransactionHistoryCallback = IGetTransactionHistoryCallback;
+        mIGetNeoTransactionHistoryCallback = IGetNeoTransactionHistoryCallback;
     }
 
     @Override
     public void run() {
-        if (null == mIGetTransactionHistoryCallback || TextUtils.isEmpty(mAddress)) {
-            CpLog.e(TAG, "mIGetTransactionHistoryCallback or mAddress is null!");
+        if (null == mIGetNeoTransactionHistoryCallback || TextUtils.isEmpty(mAddress)) {
+            CpLog.e(TAG, "mIGetNeoTransactionHistoryCallback or mAddress is null!");
             return;
         }
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
-        if (null == apexWalletDbDao) {
-            CpLog.e(TAG, "apexWalletDbDao is null!");
-            return;
-        }
-
-        mRecentTime = (long) SharedPreferencesUtils.getParam(ApexWalletApplication.getInstance(),
-                mAddress, 0L);
+        mRecentTime = (long) SharedPreferencesUtils.getParam(ApexWalletApplication.getInstance(), mAddress, 0L);
         CpLog.i(TAG, "mRecentTime:" + mRecentTime);
 
-        String url = Constant.URL_TRANSACTION_HISTORY + mAddress + "?beginTime=" + mRecentTime;
+        String url = Constant.URL_NEO_TRANSACTION_HISTORY + mAddress + "?beginTime=" + mRecentTime;
         OkHttpClientManager.getInstance().get(url, this);
     }
 
@@ -64,7 +56,7 @@ public class GetTransactionHistory implements Runnable, INetCallback {
     public void onSuccess(int statusCode, String msg, String result) {
         if (TextUtils.isEmpty(result)) {
             CpLog.e(TAG, "result is null!");
-            mIGetTransactionHistoryCallback.getTransactionHistory(null);
+            mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
             return;
         }
 
@@ -72,15 +64,14 @@ public class GetTransactionHistory implements Runnable, INetCallback {
                 ResponseGetTransactionHistory.class);
         if (null == responseGetTransactionHistory) {
             CpLog.e(TAG, "responseGetTransactionHistory is null!");
-            mIGetTransactionHistoryCallback.getTransactionHistory(null);
+            mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
             return;
         }
 
-        List<ResponseGetTransactionHistory.ResultBean> resultBeans = responseGetTransactionHistory
-                .getResult();
+        List<ResponseGetTransactionHistory.ResultBean> resultBeans = responseGetTransactionHistory.getResult();
         if (null == resultBeans || resultBeans.isEmpty()) {
             CpLog.w(TAG, "resultBeans is null or empty!");
-            mIGetTransactionHistoryCallback.getTransactionHistory(null);
+            mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
             return;
         }
 
@@ -88,16 +79,16 @@ public class GetTransactionHistory implements Runnable, INetCallback {
                 .getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
-            mIGetTransactionHistoryCallback.getTransactionHistory(null);
+            mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
             return;
         }
 
         HashMap<String, TransactionRecord> txCacheByAddress = apexWalletDbDao
-                .queryTxCacheByAddress(Constant.TABLE_TX_CACHE, mAddress);
+                .queryTxCacheByAddress(Constant.TABLE_NEO_TX_CACHE, mAddress);
 
         if (null == txCacheByAddress) {
             CpLog.e(TAG, "txCacheByAddress is null!");
-            mIGetTransactionHistoryCallback.getTransactionHistory(null);
+            mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
             return;
         }
 
@@ -124,7 +115,7 @@ public class GetTransactionHistory implements Runnable, INetCallback {
                 transactionRecord.setTxState(Constant.TRANSACTION_STATE_CONFIRMING);
                 ApexListeners.getInstance().notifyTxStateUpdate(txID, Constant
                         .TRANSACTION_STATE_CONFIRMING, txTime);
-                apexWalletDbDao.delCacheByTxIDAndAddr(Constant.TABLE_TX_CACHE, txID, mAddress);
+                apexWalletDbDao.delCacheByTxIDAndAddr(Constant.TABLE_NEO_TX_CACHE, txID, mAddress);
             } else {
                 switch (txType) {
                     case Constant.ASSET_TYPE_NEP5:
@@ -165,19 +156,19 @@ public class GetTransactionHistory implements Runnable, INetCallback {
             transactionRecord.setTxTime(txTime);
 
             List<TransactionRecord> txsByTxIdAndAddress = apexWalletDbDao.queryTxByTxIdAndAddress
-                    (Constant.TABLE_TRANSACTION_RECORD, txID, mAddress);
+                    (Constant.TABLE_NEO_TRANSACTION_RECORD, txID, mAddress);
             if (null == txsByTxIdAndAddress || txsByTxIdAndAddress.isEmpty()) {
-                apexWalletDbDao.insertTxRecord(Constant.TABLE_TRANSACTION_RECORD, transactionRecord);
+                apexWalletDbDao.insertTxRecord(Constant.TABLE_NEO_TRANSACTION_RECORD, transactionRecord);
                 transactionRecords.add(transactionRecord);
             }
         }
 
-        mIGetTransactionHistoryCallback.getTransactionHistory(transactionRecords);
+        mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(transactionRecords);
     }
 
     @Override
     public void onFailed(int failedCode, String msg) {
-        CpLog.e(TAG, "getTransactionHistory net onFailed!");
-        mIGetTransactionHistoryCallback.getTransactionHistory(null);
+        CpLog.e(TAG, "getNeoTransactionHistory net onFailed!");
+        mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
     }
 }

@@ -8,16 +8,19 @@ import java.util.concurrent.ScheduledFuture;
 import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.executor.TaskController;
 import chinapex.com.wallet.executor.callback.ICheckIsUpdateNeoAssetsCallback;
-import chinapex.com.wallet.executor.callback.ICheckIsUpdateTxStateCallback;
+import chinapex.com.wallet.executor.callback.ICheckIsUpdateNeoTxStateCallback;
 import chinapex.com.wallet.executor.callback.IGetNeoAssetsCallback;
 import chinapex.com.wallet.executor.callback.eth.ICheckIsUpdateEthAssetsCallback;
+import chinapex.com.wallet.executor.callback.eth.ICheckIsUpdateEthTxStateCallback;
 import chinapex.com.wallet.executor.callback.eth.IGetEthAssetsCallback;
 import chinapex.com.wallet.executor.runnable.CheckIsUpdateNeoAssets;
-import chinapex.com.wallet.executor.runnable.CheckIsUpdateTxState;
+import chinapex.com.wallet.executor.runnable.CheckIsUpdateNeoTxState;
 import chinapex.com.wallet.executor.runnable.GetNeoAssets;
-import chinapex.com.wallet.executor.runnable.UpdateTxState;
+import chinapex.com.wallet.executor.runnable.GetRawTransaction;
 import chinapex.com.wallet.executor.runnable.eth.CheckIsUpdateEthAssets;
+import chinapex.com.wallet.executor.runnable.eth.CheckIsUpdateEthTxState;
 import chinapex.com.wallet.executor.runnable.eth.GetEthAssets;
+import chinapex.com.wallet.executor.runnable.eth.GetEthTransactionReceipt;
 import chinapex.com.wallet.utils.CpLog;
 
 /**
@@ -25,7 +28,8 @@ import chinapex.com.wallet.utils.CpLog;
  * E-Mail：liuyi_61@163.com
  */
 public class ApexGlobalTask implements ICheckIsUpdateNeoAssetsCallback, IGetNeoAssetsCallback,
-        ICheckIsUpdateTxStateCallback, ICheckIsUpdateEthAssetsCallback, IGetEthAssetsCallback {
+        ICheckIsUpdateNeoTxStateCallback, ICheckIsUpdateEthAssetsCallback, IGetEthAssetsCallback,
+        ICheckIsUpdateEthTxStateCallback {
 
     private static final String TAG = ApexGlobalTask.class.getSimpleName();
 
@@ -50,7 +54,8 @@ public class ApexGlobalTask implements ICheckIsUpdateNeoAssetsCallback, IGetNeoA
         TaskController.getInstance().submit(new CheckIsUpdateEthAssets(this));
 
         // check tx state
-        TaskController.getInstance().submit(new CheckIsUpdateTxState(this));
+        TaskController.getInstance().submit(new CheckIsUpdateNeoTxState(this));
+        TaskController.getInstance().submit(new CheckIsUpdateEthTxState(this));
     }
 
     @Override
@@ -98,33 +103,63 @@ public class ApexGlobalTask implements ICheckIsUpdateNeoAssetsCallback, IGetNeoA
     }
 
     @Override
-    public void checkIsUpdateTxState(List<TransactionRecord> transactionRecords) {
+    public void checkIsUpdateNeoTxState(List<TransactionRecord> transactionRecords) {
         if (null == transactionRecords || transactionRecords.isEmpty()) {
-            CpLog.i(TAG, "no need to update tx state!");
+            CpLog.i(TAG, "checkIsUpdateNeoTxState() -> no need to update neo tx state!");
             return;
         }
 
         for (TransactionRecord transactionRecord : transactionRecords) {
             if (null == transactionRecord) {
-                CpLog.e(TAG, "transactionRecord is null!");
+                CpLog.e(TAG, "checkIsUpdateNeoTxState() -> transactionRecord is null!");
                 continue;
             }
 
-            startPolling(transactionRecord.getTxID(), transactionRecord.getWalletAddress());
-            CpLog.i(TAG, "restart polling for txId:" + transactionRecord.getTxID());
+            startNeoPolling(transactionRecord.getTxID(), transactionRecord.getWalletAddress());
+            CpLog.i(TAG, "checkIsUpdateNeoTxState() -> restart neo polling for txId:" + transactionRecord.getTxID());
         }
     }
 
-    public void startPolling(String txId, String walletAddress) {
-        if (TextUtils.isEmpty(txId) || TextUtils.isEmpty(walletAddress)) {
-            CpLog.e(TAG, "txId or walletAddress is null!");
+    @Override
+    public void checkIsUpdateEthTxState(List<TransactionRecord> transactionRecords) {
+        if (null == transactionRecords || transactionRecords.isEmpty()) {
+            CpLog.i(TAG, "checkIsUpdateEthTxState() -> no need to update eth tx state!");
             return;
         }
 
-        ImpUpdateTxStateCallback impUpdateTxStateCallback = new ImpUpdateTxStateCallback(txId);
-        ScheduledFuture updateTxStateSF = TaskController.getInstance().schedule(new UpdateTxState
-                (txId, walletAddress, impUpdateTxStateCallback), 0, Constant.TX_POLLING_TIME);
-        impUpdateTxStateCallback.setScheduledFuture(updateTxStateSF);
+        for (TransactionRecord transactionRecord : transactionRecords) {
+            if (null == transactionRecord) {
+                CpLog.e(TAG, "checkIsUpdateEthTxState() -> transactionRecord is null!");
+                continue;
+            }
+
+            startEthPolling(transactionRecord.getTxID(), transactionRecord.getWalletAddress());
+            CpLog.i(TAG, "checkIsUpdateEthTxState() -> restart eth polling for txId:" + transactionRecord.getTxID());
+        }
+    }
+
+    public void startNeoPolling(String txId, String walletAddress) {
+        if (TextUtils.isEmpty(txId) || TextUtils.isEmpty(walletAddress)) {
+            CpLog.e(TAG, "startNeoPolling() -> txId or walletAddress is null!");
+            return;
+        }
+
+        UpdateNeoTxState updateNeoTxState = new UpdateNeoTxState(txId);
+        ScheduledFuture updateNeoTxStateSF = TaskController.getInstance().schedule(
+                new GetRawTransaction(txId, walletAddress, updateNeoTxState), 0, Constant.TX_NEO_POLLING_TIME);
+        updateNeoTxState.setScheduledFuture(updateNeoTxStateSF);
+    }
+
+    public void startEthPolling(String txId, String walletAddress) {
+        if (TextUtils.isEmpty(txId) || TextUtils.isEmpty(walletAddress)) {
+            CpLog.e(TAG, "startEthPolling() -> txId or walletAddress is null!");
+            return;
+        }
+
+        UpdateEthTxState updateEthTxState = new UpdateEthTxState(txId);
+        ScheduledFuture updateEthTxStateSF = TaskController.getInstance().schedule(
+                new GetEthTransactionReceipt(txId, walletAddress, updateEthTxState), 0, Constant.TX_ETH_POLLING_TIME);
+        updateEthTxState.setGetTxReceiptSF(updateEthTxStateSF);
     }
 
 }

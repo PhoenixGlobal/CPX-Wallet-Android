@@ -6,7 +6,9 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import chinapex.com.wallet.R;
+import chinapex.com.wallet.bean.AssetBean;
 import chinapex.com.wallet.bean.BalanceBean;
+import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.bean.gasfee.EthTxFee;
 import chinapex.com.wallet.bean.gasfee.ITxFee;
 import chinapex.com.wallet.bean.tx.EthTxBean;
@@ -22,9 +24,13 @@ import chinapex.com.wallet.executor.runnable.eth.CreateEthTx;
 import chinapex.com.wallet.executor.runnable.eth.EthSendRawTransaction;
 import chinapex.com.wallet.executor.runnable.eth.GetEthBalance;
 import chinapex.com.wallet.executor.runnable.eth.GetEthNonce;
+import chinapex.com.wallet.global.ApexGlobalTask;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
+import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
+import chinapex.com.wallet.utils.SharedPreferencesUtils;
+import chinapex.com.wallet.utils.WalletUtils;
 
 /**
  * Created by SteelCabbage on 2018/8/24 0024 15:56.
@@ -268,23 +274,58 @@ public class CreateEthTxModel implements ICreateTxModel, ICreateEthTxCallback, I
 
     @Override
     public void ethSendRawTransaction(Boolean isSendSuccess, String txId) {
-        if (!isSendSuccess) {
-            CpLog.e(TAG, "ethSendRawTransaction is false");
-            mICreateTxModelCallback.CreateTxModel(ApexWalletApplication.getInstance().getResources().getString(R.string
-                    .transaction_broadcast_failed), false);
-            return;
-        }
-
         if (TextUtils.isEmpty(txId)) {
-            CpLog.e(TAG, "txId is null!");
             mICreateTxModelCallback.CreateTxModel(ApexWalletApplication.getInstance().getResources().getString(R.string
                     .server_err_txId_null), false);
             return;
         }
 
+        // write db
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
+        if (null == apexWalletDbDao) {
+            CpLog.e(TAG, "apexWalletDbDao is null!");
+            mICreateTxModelCallback.CreateTxModel(ApexWalletApplication.getInstance().getResources().getString(R.string
+                    .db_exception), true);
+            return;
+        }
+
+        TransactionRecord transactionRecord = new TransactionRecord();
+        transactionRecord.setWalletAddress(mEthTxBean.getFromAddress());
+        transactionRecord.setTxType(mEthTxBean.getAssetType());
+        transactionRecord.setTxID(txId);
+        String amountDec = WalletUtils.toDecString(mEthTxBean.getAmount(), String.valueOf(mEthTxBean.getAssetDecimal()));
+        transactionRecord.setTxAmount("-" + amountDec);
+        transactionRecord.setTxFrom(mEthTxBean.getFromAddress());
+        transactionRecord.setTxTo(mEthTxBean.getToAddress());
+        transactionRecord.setTxTime(0);
+
+        AssetBean assetBean = apexWalletDbDao.queryAssetByHash(Constant.TABLE_ETH_ASSETS, mEthTxBean.getAssetID());
+        if (null == assetBean) {
+            CpLog.e(TAG, "assetBean is null!");
+            return;
+        }
+
+        transactionRecord.setAssetID(mEthTxBean.getAssetID());
+        transactionRecord.setAssetLogoUrl(assetBean.getImageUrl());
+        transactionRecord.setAssetSymbol(assetBean.getSymbol());
+
+        if (isSendSuccess) {
+            transactionRecord.setTxState(Constant.TRANSACTION_STATE_PACKAGING);
+            apexWalletDbDao.insertTxRecord(Constant.TABLE_ETH_TX_CACHE, transactionRecord);
+        } else {
+            transactionRecord.setTxState(Constant.TRANSACTION_STATE_FAIL);
+            apexWalletDbDao.insertTxRecord(Constant.TABLE_ETH_TRANSACTION_RECORD, transactionRecord);
+            mICreateTxModelCallback.CreateTxModel(ApexWalletApplication.getInstance().getResources().getString(R.string
+                    .transaction_broadcast_failed), true);
+        }
+
+        // start polling
+        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), txId, System.currentTimeMillis());
+        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant.TX_ETH_NONCE + txId,
+                mEthTxBean.getNonce());
+        ApexGlobalTask.getInstance().startEthPolling(txId, mEthTxBean.getFromAddress());
         mICreateTxModelCallback.CreateTxModel(ApexWalletApplication.getInstance().getResources().getString(R.string
                 .transaction_broadcast_successful), true);
     }
-
 
 }

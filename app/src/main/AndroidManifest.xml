@@ -108,7 +108,9 @@
             android:name=".view.wallet.PrivacyActivity"
             android:screenOrientation="portrait" />
         <!-- 激励 -->
-        <activity android:name=".view.excitation.detail.ExcitationDetailActivity" />
+        <activity
+            android:name=".view.excitation.detail.ExcitationDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

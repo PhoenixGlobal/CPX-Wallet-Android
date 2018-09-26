@@ -78,7 +78,7 @@
     <string name="place_of_residence">常住地</string>
     <string name="enterprise_key">企业密钥</string>
     <string name="to_dht_cloud">正在保存到DHT Cloud</string>
-    <string name="available_amount">交易金额 ( 可用数量: </string>
+    <string name="available_amount">交易金额 (可用数量: </string>
     <string name="amount_all">全部</string>
     <string name="dialog_amount">交易金额 : </string>
     <string name="change_wallet">切换钱包</string>
@@ -90,8 +90,11 @@
     <string name="seek_bar_fast">快</string>
     <string name="excitation">激励</string>
     <string name="latest_activity">最新活动</string>
-    <string name="current_gas_price">当前Gas单价:</string>
+    <string name="current_gas_price">最新Gas单价:</string>
     <string name="gas_fee">总计Gas价格 ≈</string>
+    <string name="gas_consumed">Gas数量</string>
+    <string name="gas_price">Gas单价(Gwei)</string>
+    <string name="gas_total_fee">Gas总费用(ETH)</string>
 
     <!--Me页面，功能菜单文字-->
     <string name="personal_portrait">个人画像</string>
@@ -133,6 +136,8 @@
     <string name="eth_data_null">交易内容生成失败！</string>
     <string name="no_this_type_asset">无此种类型的资产!</string>
     <string name="insufficient_gas">ETH的余额不足以支付Gas</string>
+    <string name="has_blocking_tx">您目前仍有一笔交易在打包中，请稍后</string>
+    <string name="illegal_address">请输入一个正确的钱包地址</string>
 
     <!--语言-->
     <string name="language_zh_cn">简体中文</string>
@@ -170,7 +175,6 @@
     <string name="excitation_cpx_address_empty_toast">CPX地址不能为空！</string>
     <string name="excitation_eth_address_wrong_format_toast">请输入正确格式的ETH地址！</string>
     <string name="excitation_eth_address_empty_toast">ETH地址不能为空！</string>
-
 
 
 </resources>

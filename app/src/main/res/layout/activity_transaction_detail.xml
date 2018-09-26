@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:singleLine="true"
         android:text="+10002.00000001"
         android:textColor="@color/c_333333"
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="@string/wallet_to"
         android:textColor="@color/c_999999"
         android:textSize="@dimen/paratext_14sp" />
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="@string/transaction_time"
         android:textColor="@color/c_999999"
         android:textSize="@dimen/paratext_14sp" />
@@ -103,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="@string/transaction_id"
         android:textColor="@color/c_999999"
         android:textSize="@dimen/paratext_14sp" />
@@ -112,10 +112,73 @@
         android:id="@+id/tv_transaction_detail_tx_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
         android:text="0xfbc12dd529a981b734e9324b3c0693d6b173b29c204922b27840749d661ca53f"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_gas_consumed_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/gas_consumed"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_gas_consumed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:text="210000"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_gas_price_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/gas_price"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_gas_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:text="6"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_gas_total_fee_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/gas_total_fee"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/paratext_14sp" />
+
+    <TextView
+        android:id="@+id/tv_transaction_detail_gas_total_fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:text="0.0001086"
         android:textColor="@android:color/black"
         android:textSize="@dimen/paratext_14sp" />
 

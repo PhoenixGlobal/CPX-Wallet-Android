@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="159dp"
     android:background="@drawable/gradient_dialog_pwd_bg">
@@ -15,40 +16,54 @@
         android:textSize="14sp"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/et_dialog_pwd_transfer"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_dialog_amount_left_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:text="@string/dialog_amount"
             android:textColor="@color/c_030303"
-            android:textSize="@dimen/paratext_14sp" />
+            android:textSize="12sp" />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_dialog_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/tv_dialog_unit"
+            android:layout_toEndOf="@+id/tv_dialog_amount_left_title"
+            android:gravity="center"
+            android:lines="1"
             android:text="0.00000007"
-            android:textColor="@color/c_030303"
-            android:textSize="@dimen/paratext_14sp" />
+            android:textColor="@color/c_1253BF"
+            app:autoSizeMaxTextSize="@dimen/paratext_14sp"
+            app:autoSizeMinTextSize="@dimen/d_10sp"
+            app:autoSizePresetSizes="@dimen/paratext_14sp"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeTextType="uniform" />
 
         <TextView
             android:id="@+id/tv_dialog_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="1dp"
             android:text="CPX"
             android:textColor="@color/c_030303"
-            android:textSize="@dimen/paratext_14sp" />
+            android:textSize="12sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/et_dialog_pwd_transfer"
@@ -60,8 +75,8 @@
         android:background="@android:color/white"
         android:hint="@string/pwd_hint"
         android:inputType="textPassword"
-        android:paddingEnd="10dp"
         android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:textColorHint="#C7C7CD"
         android:textSize="12sp" />
 

@@ -41,31 +41,37 @@ public class CreateEthWallet implements Runnable {
         if (TextUtils.isEmpty(mName)
                 || TextUtils.isEmpty(mPwd)
                 || null == mICreateEthWalletCallback) {
-            CpLog.e(TAG, "mName or mPwd or mICreateEthWalletCallback is null!");
+            CpLog.e(TAG, "eth mName or mPwd or mICreateEthWalletCallback is null!");
             return;
         }
 
-        Wallet wallet = null;
+        Wallet walletFirst = null;
         try {
-            wallet = Ethmobile.new_();
+            walletFirst = Ethmobile.new_();
         } catch (Exception e) {
-            CpLog.e(TAG, "new_() exception:" + e.getMessage());
+            CpLog.e(TAG, "eth new_() exception:" + e.getMessage());
         }
 
-        if (null == wallet) {
-            CpLog.e(TAG, "wallet is null!");
+        if (null == walletFirst) {
+            CpLog.e(TAG, "eth walletFirst is null!");
+            return;
+        }
+
+        Wallet walletChecked = checkMnemonic(walletFirst);
+        if (null == walletChecked) {
+            CpLog.e(TAG, "eth walletChecked is null!");
             return;
         }
 
         String toKeyStore = null;
         try {
-            toKeyStore = wallet.toKeyStore(mPwd);
+            toKeyStore = walletChecked.toKeyStore(mPwd);
         } catch (Exception e) {
-            CpLog.e(TAG, "toKeyStore exception:" + e.getMessage());
+            CpLog.e(TAG, "eth toKeyStore exception:" + e.getMessage());
         }
 
         if (TextUtils.isEmpty(toKeyStore)) {
-            CpLog.e(TAG, "toKeyStore is null！");
+            CpLog.e(TAG, "eth toKeyStore is null！");
             return;
         }
 
@@ -78,14 +84,13 @@ public class CreateEthWallet implements Runnable {
         EthWallet ethWallet = new EthWallet();
         ethWallet.setWalletType(Constant.WALLET_TYPE_ETH);
         ethWallet.setName(mName);
-        ethWallet.setAddress(wallet.address());
+        ethWallet.setAddress(walletChecked.address());
         ethWallet.setBackupState(Constant.BACKUP_UNFINISHED);
         ethWallet.setKeyStore(toKeyStore);
         ethWallet.setAssetJson(GsonUtils.toJsonStr(assets));
         ethWallet.setColorAssetJson(GsonUtils.toJsonStr(colorAssets));
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
@@ -93,6 +98,23 @@ public class CreateEthWallet implements Runnable {
 
         apexWalletDbDao.insert(Constant.TABLE_ETH_WALLET, ethWallet);
         ApexListeners.getInstance().notifyWalletAdd(ethWallet);
-        mICreateEthWalletCallback.createEthWallet(wallet);
+        mICreateEthWalletCallback.createEthWallet(walletChecked);
+    }
+
+    private Wallet checkMnemonic(Wallet wallet) {
+        Wallet walletFinal = null;
+        try {
+            String mnemonic = wallet.mnemonic("en_US");
+            walletFinal = Ethmobile.fromMnemonic(mnemonic, "en_US");
+        } catch (Exception e) {
+            CpLog.e(TAG, "eth checkMnemonic fromMnemonic Exception:" + e.getMessage());
+            try {
+                walletFinal = checkMnemonic(Ethmobile.new_());
+            } catch (Exception e1) {
+                CpLog.e(TAG, "eth checkMnemonic new_() Exception:" + e.getMessage());
+            }
+        }
+
+        return walletFinal;
     }
 }

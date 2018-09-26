@@ -5,6 +5,6 @@ package chinapex.com.wallet.executor.callback;
  * E-Mail：liuyi_61@163.com
  */
 
-public interface IUpdateTxStateCallback {
-    void updateTxState(String txId, String walletAddress, long confirmations);
+public interface IGetRawTransactionCallback {
+    void getRawTransaction(String txId, String walletAddress, long confirmations);
 }

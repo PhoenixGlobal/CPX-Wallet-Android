@@ -17,6 +17,9 @@ public class TransactionRecord implements Parcelable {
     private String assetSymbol;
     private String assetLogoUrl;
     private int assetDecimal;
+    private String gasPrice;
+    private String blockNumber;
+    private String gasFee;
     private long txTime;
 
     public TransactionRecord() {
@@ -119,6 +122,30 @@ public class TransactionRecord implements Parcelable {
         this.assetDecimal = assetDecimal;
     }
 
+    public String getGasPrice() {
+        return gasPrice;
+    }
+
+    public void setGasPrice(String gasPrice) {
+        this.gasPrice = gasPrice;
+    }
+
+    public String getBlockNumber() {
+        return blockNumber;
+    }
+
+    public void setBlockNumber(String blockNumber) {
+        this.blockNumber = blockNumber;
+    }
+
+    public String getGasFee() {
+        return gasFee;
+    }
+
+    public void setGasFee(String gasFee) {
+        this.gasFee = gasFee;
+    }
+
     public long getTxTime() {
         return txTime;
     }
@@ -127,56 +154,6 @@ public class TransactionRecord implements Parcelable {
         this.txTime = txTime;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.walletAddress);
-        dest.writeString(this.txType);
-        dest.writeString(this.txID);
-        dest.writeString(this.txAmount);
-        dest.writeInt(this.txState);
-        dest.writeString(this.txFrom);
-        dest.writeString(this.txTo);
-        dest.writeString(this.gasConsumed);
-        dest.writeString(this.assetID);
-        dest.writeString(this.assetSymbol);
-        dest.writeString(this.assetLogoUrl);
-        dest.writeInt(this.assetDecimal);
-        dest.writeLong(this.txTime);
-    }
-
-    protected TransactionRecord(Parcel in) {
-        this.walletAddress = in.readString();
-        this.txType = in.readString();
-        this.txID = in.readString();
-        this.txAmount = in.readString();
-        this.txState = in.readInt();
-        this.txFrom = in.readString();
-        this.txTo = in.readString();
-        this.gasConsumed = in.readString();
-        this.assetID = in.readString();
-        this.assetSymbol = in.readString();
-        this.assetLogoUrl = in.readString();
-        this.assetDecimal = in.readInt();
-        this.txTime = in.readLong();
-    }
-
-    public static final Creator<TransactionRecord> CREATOR = new Creator<TransactionRecord>() {
-        @Override
-        public TransactionRecord createFromParcel(Parcel source) {
-            return new TransactionRecord(source);
-        }
-
-        @Override
-        public TransactionRecord[] newArray(int size) {
-            return new TransactionRecord[size];
-        }
-    };
 
     @Override
     public boolean equals(Object o) {
@@ -199,21 +176,58 @@ public class TransactionRecord implements Parcelable {
     }
 
     @Override
-    public String toString() {
-        return "TransactionRecord{" +
-                "walletAddress='" + walletAddress + '\'' +
-                ", txType='" + txType + '\'' +
-                ", txID='" + txID + '\'' +
-                ", txAmount='" + txAmount + '\'' +
-                ", txState=" + txState +
-                ", txFrom='" + txFrom + '\'' +
-                ", txTo='" + txTo + '\'' +
-                ", gasConsumed='" + gasConsumed + '\'' +
-                ", assetID='" + assetID + '\'' +
-                ", assetSymbol='" + assetSymbol + '\'' +
-                ", assetLogoUrl='" + assetLogoUrl + '\'' +
-                ", assetDecimal=" + assetDecimal +
-                ", txTime=" + txTime +
-                '}';
+    public int describeContents() {
+        return 0;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.walletAddress);
+        dest.writeString(this.txType);
+        dest.writeString(this.txID);
+        dest.writeString(this.txAmount);
+        dest.writeInt(this.txState);
+        dest.writeString(this.txFrom);
+        dest.writeString(this.txTo);
+        dest.writeString(this.gasConsumed);
+        dest.writeString(this.assetID);
+        dest.writeString(this.assetSymbol);
+        dest.writeString(this.assetLogoUrl);
+        dest.writeInt(this.assetDecimal);
+        dest.writeString(this.gasPrice);
+        dest.writeString(this.blockNumber);
+        dest.writeString(this.gasFee);
+        dest.writeLong(this.txTime);
+    }
+
+    protected TransactionRecord(Parcel in) {
+        this.walletAddress = in.readString();
+        this.txType = in.readString();
+        this.txID = in.readString();
+        this.txAmount = in.readString();
+        this.txState = in.readInt();
+        this.txFrom = in.readString();
+        this.txTo = in.readString();
+        this.gasConsumed = in.readString();
+        this.assetID = in.readString();
+        this.assetSymbol = in.readString();
+        this.assetLogoUrl = in.readString();
+        this.assetDecimal = in.readInt();
+        this.gasPrice = in.readString();
+        this.blockNumber = in.readString();
+        this.gasFee = in.readString();
+        this.txTime = in.readLong();
+    }
+
+    public static final Creator<TransactionRecord> CREATOR = new Creator<TransactionRecord>() {
+        @Override
+        public TransactionRecord createFromParcel(Parcel source) {
+            return new TransactionRecord(source);
+        }
+
+        @Override
+        public TransactionRecord[] newArray(int size) {
+            return new TransactionRecord[size];
+        }
+    };
 }

@@ -174,13 +174,15 @@ public class DeleteWalletPwdDialog extends DialogFragment implements View.OnClic
         switch (mCurrentWalletBean.getWalletType()) {
             case Constant.WALLET_TYPE_NEO:
                 apexWalletDbDao.deleteByWalletNameAndAddr(Constant.TABLE_NEO_WALLET, mCurrentWalletBean.getName(), walletAddress);
-                apexWalletDbDao.delTxsByAddress(Constant.TABLE_TRANSACTION_RECORD, walletAddress);
-                apexWalletDbDao.delTxsByAddress(Constant.TABLE_TX_CACHE, walletAddress);
+                apexWalletDbDao.delTxsByAddress(Constant.TABLE_NEO_TRANSACTION_RECORD, walletAddress);
+                apexWalletDbDao.delTxsByAddress(Constant.TABLE_NEO_TX_CACHE, walletAddress);
                 SharedPreferencesUtils.remove(ApexWalletApplication.getInstance(), walletAddress);
                 break;
             case Constant.WALLET_TYPE_ETH:
                 apexWalletDbDao.deleteByWalletNameAndAddr(Constant.TABLE_ETH_WALLET, mCurrentWalletBean.getName(), walletAddress);
-                // TODO: 2018/8/21 0021  tx of eth
+                apexWalletDbDao.delTxsByAddress(Constant.TABLE_ETH_TRANSACTION_RECORD, walletAddress);
+                apexWalletDbDao.delTxsByAddress(Constant.TABLE_ETH_TX_CACHE, walletAddress);
+                SharedPreferencesUtils.remove(ApexWalletApplication.getInstance(), walletAddress);
                 break;
             case Constant.WALLET_TYPE_CPX:
                 break;

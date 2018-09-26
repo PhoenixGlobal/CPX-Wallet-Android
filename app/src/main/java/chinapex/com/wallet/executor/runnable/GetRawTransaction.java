@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import chinapex.com.wallet.bean.request.RequestGetRawTransaction;
 import chinapex.com.wallet.bean.response.ResponseGetRawTransaction;
-import chinapex.com.wallet.executor.callback.IUpdateTxStateCallback;
+import chinapex.com.wallet.executor.callback.IGetRawTransactionCallback;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.net.INetCallback;
 import chinapex.com.wallet.net.OkHttpClientManager;
@@ -18,26 +18,26 @@ import chinapex.com.wallet.utils.GsonUtils;
  * E-Mail：liuyi_61@163.com
  */
 
-public class UpdateTxState implements Runnable, INetCallback {
+public class GetRawTransaction implements Runnable, INetCallback {
 
-    private static final String TAG = UpdateTxState.class.getSimpleName();
+    private static final String TAG = GetRawTransaction.class.getSimpleName();
 
     private String mTxId;
     private String mWalletAddress;
-    private IUpdateTxStateCallback mIUpdateTxStateCallback;
+    private IGetRawTransactionCallback mIGetRawTransactionCallback;
 
-    public UpdateTxState(String txId, String walletAddress, IUpdateTxStateCallback iUpdateTxStateCallback) {
+    public GetRawTransaction(String txId, String walletAddress, IGetRawTransactionCallback iGetRawTransactionCallback) {
         mTxId = txId;
         mWalletAddress = walletAddress;
-        mIUpdateTxStateCallback = iUpdateTxStateCallback;
+        mIGetRawTransactionCallback = iGetRawTransactionCallback;
     }
 
     @Override
     public void run() {
-        if (null == mIUpdateTxStateCallback
+        if (null == mIGetRawTransactionCallback
                 || TextUtils.isEmpty(mTxId)
                 || TextUtils.isEmpty(mWalletAddress)) {
-            CpLog.e(TAG, "mIUpdateTxStateCallback or mTxId or mWalletAddress is null!");
+            CpLog.e(TAG, "mIGetRawTransactionCallback or mTxId or mWalletAddress is null!");
             return;
         }
 
@@ -58,25 +58,25 @@ public class UpdateTxState implements Runnable, INetCallback {
         ResponseGetRawTransaction responseGetRawTransaction = GsonUtils.json2Bean(result, ResponseGetRawTransaction.class);
         if (null == responseGetRawTransaction) {
             CpLog.e(TAG, "responseGetRawTransaction is null!");
-            mIUpdateTxStateCallback.updateTxState(mTxId, mWalletAddress, Constant.TX_CONFIRM_EXCEPTION);
+            mIGetRawTransactionCallback.getRawTransaction(mTxId, mWalletAddress, Constant.TX_CONFIRM_EXCEPTION);
             return;
         }
 
         ResponseGetRawTransaction.ResultBean resultBean = responseGetRawTransaction.getResult();
         if (null == resultBean) {
             CpLog.e(TAG, "resultBean is null!");
-            mIUpdateTxStateCallback.updateTxState(mTxId, mWalletAddress, Constant.TX_CONFIRM_EXCEPTION);
+            mIGetRawTransactionCallback.getRawTransaction(mTxId, mWalletAddress, Constant.TX_CONFIRM_EXCEPTION);
             return;
         }
 
         long confirmations = resultBean.getConfirmations();
         CpLog.w(TAG, "confirmations:" + confirmations);
-        mIUpdateTxStateCallback.updateTxState(mTxId, mWalletAddress, confirmations);
+        mIGetRawTransactionCallback.getRawTransaction(mTxId, mWalletAddress, confirmations);
     }
 
     @Override
     public void onFailed(int failedCode, String msg) {
         CpLog.e(TAG, "onFailed() -> msg:" + msg);
-        mIUpdateTxStateCallback.updateTxState(mTxId, mWalletAddress, Constant.TX_CONFIRM_EXCEPTION);
+        mIGetRawTransactionCallback.getRawTransaction(mTxId, mWalletAddress, Constant.TX_CONFIRM_EXCEPTION);
     }
 }

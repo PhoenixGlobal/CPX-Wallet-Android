@@ -64,16 +64,16 @@ public class GetEthAssets implements Runnable, INetCallback {
         /**
          *  erc20 NMB(Test)==========================================================
          */
-        AssetBean assetBeanErc20 = new AssetBean();
-        assetBeanErc20.setType(Constant.ASSET_TYPE_ERC20);
-        assetBeanErc20.setSymbol("NMB");
-        assetBeanErc20.setPrecision(18 + "");
-        assetBeanErc20.setName("NMB");
-        assetBeanErc20.setImageUrl("");
-        assetBeanErc20.setHexHash(Constant.ASSETS_ERC20_NMB);
-        assetBeanErc20.setHash(Constant.ASSETS_ERC20_NMB);
-
-        apexWalletDbDao.insertAsset(Constant.TABLE_ETH_ASSETS, assetBeanErc20);
+//        AssetBean assetBeanErc20 = new AssetBean();
+//        assetBeanErc20.setType(Constant.ASSET_TYPE_ERC20);
+//        assetBeanErc20.setSymbol("NMB");
+//        assetBeanErc20.setPrecision(18 + "");
+//        assetBeanErc20.setName("NMB");
+//        assetBeanErc20.setImageUrl("");
+//        assetBeanErc20.setHexHash(Constant.ASSETS_ERC20_NMB);
+//        assetBeanErc20.setHash(Constant.ASSETS_ERC20_NMB);
+//
+//        apexWalletDbDao.insertAsset(Constant.TABLE_ETH_ASSETS, assetBeanErc20);
         /**
          *  erc20 NMB(Test)==========================================================
          */

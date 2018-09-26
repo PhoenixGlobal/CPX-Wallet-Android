@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import chinapex.com.wallet.bean.TransactionRecord;
-import chinapex.com.wallet.executor.callback.ICheckIsUpdateTxStateCallback;
+import chinapex.com.wallet.executor.callback.ICheckIsUpdateNeoTxStateCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.model.ApexWalletDbDao;
@@ -15,20 +15,20 @@ import chinapex.com.wallet.utils.CpLog;
  * E-Mail：liuyi_61@163.com
  */
 
-public class CheckIsUpdateTxState implements Runnable {
+public class CheckIsUpdateNeoTxState implements Runnable {
 
-    private static final String TAG = CheckIsUpdateTxState.class.getSimpleName();
+    private static final String TAG = CheckIsUpdateNeoTxState.class.getSimpleName();
 
-    private ICheckIsUpdateTxStateCallback mICheckIsUpdateTxStateCallback;
+    private ICheckIsUpdateNeoTxStateCallback mICheckIsUpdateNeoTxStateCallback;
 
-    public CheckIsUpdateTxState(ICheckIsUpdateTxStateCallback ICheckIsUpdateTxStateCallback) {
-        mICheckIsUpdateTxStateCallback = ICheckIsUpdateTxStateCallback;
+    public CheckIsUpdateNeoTxState(ICheckIsUpdateNeoTxStateCallback ICheckIsUpdateNeoTxStateCallback) {
+        mICheckIsUpdateNeoTxStateCallback = ICheckIsUpdateNeoTxStateCallback;
     }
 
     @Override
     public void run() {
-        if (null == mICheckIsUpdateTxStateCallback) {
-            CpLog.e(TAG, "mICheckIsUpdateTxStateCallback is null!");
+        if (null == mICheckIsUpdateNeoTxStateCallback) {
+            CpLog.e(TAG, "mICheckIsUpdateNeoTxStateCallback is null!");
             return;
         }
 
@@ -42,17 +42,17 @@ public class CheckIsUpdateTxState implements Runnable {
         List<TransactionRecord> needUpdateStateTxs = new ArrayList<>();
 
         List<TransactionRecord> packagingTxs = apexWalletDbDao.queryTxByState(Constant
-                .TABLE_TX_CACHE, Constant.TRANSACTION_STATE_PACKAGING);
+                .TABLE_NEO_TX_CACHE, Constant.TRANSACTION_STATE_PACKAGING);
         if (null != packagingTxs && !packagingTxs.isEmpty()) {
             needUpdateStateTxs.addAll(packagingTxs);
         }
 
         List<TransactionRecord> confirmingTxs = apexWalletDbDao.queryTxByState(Constant
-                .TABLE_TRANSACTION_RECORD, Constant.TRANSACTION_STATE_CONFIRMING);
+                .TABLE_NEO_TRANSACTION_RECORD, Constant.TRANSACTION_STATE_CONFIRMING);
         if (null != confirmingTxs && !confirmingTxs.isEmpty()) {
             needUpdateStateTxs.addAll(confirmingTxs);
         }
 
-        mICheckIsUpdateTxStateCallback.checkIsUpdateTxState(needUpdateStateTxs);
+        mICheckIsUpdateNeoTxStateCallback.checkIsUpdateNeoTxState(needUpdateStateTxs);
     }
 }

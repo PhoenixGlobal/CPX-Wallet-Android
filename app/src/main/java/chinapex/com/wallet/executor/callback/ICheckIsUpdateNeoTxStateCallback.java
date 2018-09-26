@@ -9,6 +9,6 @@ import chinapex.com.wallet.bean.TransactionRecord;
  * E-Mail：liuyi_61@163.com
  */
 
-public interface ICheckIsUpdateTxStateCallback {
-    void checkIsUpdateTxState(List<TransactionRecord> transactionRecords);
+public interface ICheckIsUpdateNeoTxStateCallback {
+    void checkIsUpdateNeoTxState(List<TransactionRecord> transactionRecords);
 }

@@ -8,9 +8,9 @@ import java.util.concurrent.ScheduledFuture;
 import chinapex.com.wallet.bean.TransactionRecord;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.TaskController;
-import chinapex.com.wallet.executor.callback.IGetTransactionHistoryCallback;
-import chinapex.com.wallet.executor.callback.IUpdateTxStateCallback;
-import chinapex.com.wallet.executor.runnable.GetTransactionHistory;
+import chinapex.com.wallet.executor.callback.IGetNeoTransactionHistoryCallback;
+import chinapex.com.wallet.executor.callback.IGetRawTransactionCallback;
+import chinapex.com.wallet.executor.runnable.GetNeoTransactionHistory;
 import chinapex.com.wallet.model.ApexWalletDbDao;
 import chinapex.com.wallet.utils.CpLog;
 
@@ -19,15 +19,15 @@ import chinapex.com.wallet.utils.CpLog;
  * E-Mail：liuyi_61@163.com
  */
 
-public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback, IGetTransactionHistoryCallback {
+public class UpdateNeoTxState implements IGetRawTransactionCallback, IGetNeoTransactionHistoryCallback {
 
-    private static final String TAG = ImpUpdateTxStateCallback.class.getSimpleName();
+    private static final String TAG = UpdateNeoTxState.class.getSimpleName();
 
     private String mTxId;
     private ScheduledFuture mScheduledFuture;
     private long mConfirmations;
 
-    public ImpUpdateTxStateCallback(String txId) {
+    public UpdateNeoTxState(String txId) {
         mTxId = txId;
     }
 
@@ -36,9 +36,9 @@ public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback, IGetTra
     }
 
     @Override
-    public void updateTxState(String txId, String walletAddress, long confirmations) {
+    public void getRawTransaction(String txId, String walletAddress, long confirmations) {
         if (null == mScheduledFuture
-                || TextUtils.isEmpty(txId)
+                || TextUtils.isEmpty(mTxId)
                 || TextUtils.isEmpty(walletAddress)) {
             CpLog.e(TAG, "mUpdateTxStateSF or txId or walletAddress is null!");
             return;
@@ -54,34 +54,34 @@ public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback, IGetTra
             return;
         }
 
-        if (Constant.TX_CONFIRM_OK <= confirmations) {
-            CpLog.i(TAG, "TX_CONFIRM_OK");
+        if (Constant.TX_NEO_CONFIRM_OK <= confirmations) {
+            CpLog.i(TAG, "TX_NEO_CONFIRM_OK");
             mScheduledFuture.cancel(false);
         }
 
         mConfirmations = confirmations;
-        TaskController.getInstance().submit(new GetTransactionHistory(walletAddress, this));
+        TaskController.getInstance().submit(new GetNeoTransactionHistory(walletAddress, this));
     }
 
     @Override
-    public void getTransactionHistory(List<TransactionRecord> transactionRecords) {
-        if (Constant.TX_CONFIRM_OK > mConfirmations) {
+    public void getNeoTransactionHistory(List<TransactionRecord> transactionRecords) {
+        if (Constant.TX_NEO_CONFIRM_OK > mConfirmations) {
             return;
         }
 
-        handleFailedTx();
+        handleTx();
     }
 
-    private void handleFailedTx() {
+    private void handleTx() {
         ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
         }
 
-        List<TransactionRecord> cacheTxs = apexWalletDbDao.queryTxCacheByTxId(mTxId);
+        List<TransactionRecord> cacheTxs = apexWalletDbDao.queryTxCacheByTxId(Constant.TABLE_NEO_TX_CACHE, mTxId);
         if (null == cacheTxs || cacheTxs.isEmpty()) {
-            apexWalletDbDao.updateTxState(Constant.TABLE_TRANSACTION_RECORD, mTxId, Constant.TRANSACTION_STATE_SUCCESS);
+            apexWalletDbDao.updateTxState(Constant.TABLE_NEO_TRANSACTION_RECORD, mTxId, Constant.TRANSACTION_STATE_SUCCESS);
             ApexListeners.getInstance().notifyTxStateUpdate(mTxId, Constant.TRANSACTION_STATE_SUCCESS, Constant
                     .NO_NEED_MODIFY_TX_TIME);
             return;
@@ -94,9 +94,9 @@ public class ImpUpdateTxStateCallback implements IUpdateTxStateCallback, IGetTra
             }
 
             cacheTx.setTxState(Constant.TRANSACTION_STATE_FAIL);
-            apexWalletDbDao.insertTxRecord(Constant.TABLE_TRANSACTION_RECORD, cacheTx);
+            apexWalletDbDao.insertTxRecord(Constant.TABLE_NEO_TRANSACTION_RECORD, cacheTx);
         }
         ApexListeners.getInstance().notifyTxStateUpdate(mTxId, Constant.TRANSACTION_STATE_FAIL, Constant.NO_NEED_MODIFY_TX_TIME);
-        apexWalletDbDao.delCacheByTxId(mTxId);
+        apexWalletDbDao.delCacheByTxId(Constant.TABLE_NEO_TX_CACHE, mTxId);
     }
 }

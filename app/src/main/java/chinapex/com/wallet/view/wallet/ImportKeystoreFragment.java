@@ -339,12 +339,10 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
     }
 
     private void isFirstEnter() {
-        boolean isFirstExport = (boolean) SharedPreferencesUtils.getParam(ApexWalletApplication
-                .getInstance(), Constant
-                .IS_FIRST_ENTER_MAIN, true);
+        boolean isFirstExport = (boolean) SharedPreferencesUtils.getParam(ApexWalletApplication.getInstance(),
+                Constant.IS_FIRST_ENTER_MAIN, true);
         if (isFirstExport) {
-            SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant
-                    .IS_FIRST_ENTER_MAIN, false);
+            SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), Constant.IS_FIRST_ENTER_MAIN, false);
             startActivity(MainActivity.class, true);
         } else {
             getActivity().finish();

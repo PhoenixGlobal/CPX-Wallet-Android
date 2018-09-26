@@ -42,7 +42,7 @@ public class GetEthGasPrice implements Runnable, INetCallback {
         ArrayList<String> arrayList = new ArrayList<>();
         requestGetEthGasPrice.setParams(arrayList);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_ETH, GsonUtils.toJsonStr(requestGetEthGasPrice), this);
+        OkHttpClientManager.getInstance().postJsonByAuth(Constant.URL_CLI_ETH, GsonUtils.toJsonStr(requestGetEthGasPrice), this);
     }
 
     @Override

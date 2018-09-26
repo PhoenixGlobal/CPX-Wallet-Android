@@ -12,6 +12,8 @@ import java.util.List;
 
 import chinapex.com.wallet.R;
 import chinapex.com.wallet.bean.WalletBean;
+import chinapex.com.wallet.global.ApexWalletApplication;
+import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.utils.CpLog;
 
 public class SwitchWallet2RecyclerViewAdapter extends RecyclerView
@@ -85,6 +87,22 @@ public class SwitchWallet2RecyclerViewAdapter extends RecyclerView
             return;
         }
 
+        int walletType = walletBean.getWalletType();
+        switch (walletType) {
+            case Constant.WALLET_TYPE_NEO:
+                holder.walletType.setImageDrawable(ApexWalletApplication.getInstance().getResources().getDrawable(R.drawable
+                        .icon_wallet_type_neo));
+                break;
+            case Constant.WALLET_TYPE_ETH:
+                holder.walletType.setImageDrawable(ApexWalletApplication.getInstance().getResources().getDrawable(R.drawable
+                        .icon_wallet_type_eth));
+                break;
+            case Constant.WALLET_TYPE_CPX:
+                break;
+            default:
+                break;
+        }
+
         holder.walletName.setText(walletBean.getName());
         holder.walletAddress.setText(walletBean.getAddress());
         if (walletBean.isSelected()) {
@@ -103,12 +121,14 @@ public class SwitchWallet2RecyclerViewAdapter extends RecyclerView
 
 
     class SwitchWallet2Holder extends RecyclerView.ViewHolder {
+        ImageView walletType;
         TextView walletName;
         TextView walletAddress;
         ImageView checkState;
 
         SwitchWallet2Holder(View itemView) {
             super(itemView);
+            walletType = itemView.findViewById(R.id.iv_choose_wallet_logo);
             walletName = itemView.findViewById(R.id.tv_choose_wallet_name);
             walletAddress = itemView.findViewById(R.id.tv_choose_wallet_address);
             checkState = itemView.findViewById(R.id.iv_choose_wallet_check_state);

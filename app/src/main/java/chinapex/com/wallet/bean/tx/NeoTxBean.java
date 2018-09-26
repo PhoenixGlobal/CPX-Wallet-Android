@@ -13,6 +13,7 @@ public class NeoTxBean implements ITxBean {
     private String fromAddress;
     private String toAddress;
     private String amount;
+    private String assetType;
 
 
     public NeoTxBean() {
@@ -65,5 +66,13 @@ public class NeoTxBean implements ITxBean {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getAssetType() {
+        return assetType;
+    }
+
+    public void setAssetType(String assetType) {
+        this.assetType = assetType;
     }
 }

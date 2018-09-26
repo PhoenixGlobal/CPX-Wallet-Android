@@ -46,7 +46,7 @@
 
     <EditText
         android:id="@+id/et_transfer_to_wallet_addr"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_transfer_from_margin_start"
         android:background="@null"
@@ -74,7 +74,7 @@
             android:singleLine="true"
             android:text="@string/available_amount"
             android:textColor="@color/c_999999"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_available_amount"
@@ -83,13 +83,13 @@
             android:layout_marginStart="5dp"
             android:text="0.00000008"
             android:textColor="@color/c_E16A67"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" )"
-            android:textSize="15sp" />
+            android:text=")"
+            android:textSize="14sp" />
 
 
     </LinearLayout>
@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:layout_marginStart="30dp"
-            android:max="320" />
+            android:max="3200" />
 
         <TextView
             android:layout_width="wrap_content"

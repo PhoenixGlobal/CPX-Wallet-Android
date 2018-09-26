@@ -70,7 +70,7 @@ public class GetErc20Balance implements Runnable, INetCallback {
         arrayList.add("latest");
         requestGetErc20Balance.setParams(arrayList);
 
-        OkHttpClientManager.getInstance().postJson(Constant.URL_CLI_ETH, GsonUtils.toJsonStr(requestGetErc20Balance), this);
+        OkHttpClientManager.getInstance().postJsonByAuth(Constant.URL_CLI_ETH, GsonUtils.toJsonStr(requestGetErc20Balance), this);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class TransferPwdDialog extends DialogFragment implements View.OnClickLis
     private Button mBt_dialog_pwd_transfer_cancel;
     private Button mBt_dialog_pwd_transfer_confirm;
     private EditText mEt_dialog_pwd_transfer;
-    private TextView mTv_dialog_amount;
+    private AppCompatTextView mTv_dialog_amount;
     private TextView mTv_dialog_unit;
     private OnCheckPwdListener mOnCheckPwdListener;
 

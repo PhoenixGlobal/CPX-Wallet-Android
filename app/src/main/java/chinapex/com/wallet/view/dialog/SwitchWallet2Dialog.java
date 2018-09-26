@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import chinapex.com.wallet.R;
@@ -133,17 +134,21 @@ public class SwitchWallet2Dialog extends DialogFragment implements View.OnClickL
     }
 
     private void initData() {
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
         }
 
-        mWalletBeans = apexWalletDbDao.queryWallets(Constant.TABLE_NEO_WALLET);
-        if (null == mWalletBeans || mWalletBeans.isEmpty()) {
-            CpLog.e(TAG, "mWalletBeans is null or empty!");
-            return;
+        mWalletBeans = new ArrayList<>();
+        List<WalletBean> neoWalletBeans = apexWalletDbDao.queryWallets(Constant.TABLE_NEO_WALLET);
+        if (null != neoWalletBeans && !neoWalletBeans.isEmpty()) {
+            mWalletBeans.addAll(neoWalletBeans);
+        }
+
+        List<WalletBean> ethWalletBeans = apexWalletDbDao.queryWallets(Constant.TABLE_ETH_WALLET);
+        if (null != ethWalletBeans && !ethWalletBeans.isEmpty()) {
+            mWalletBeans.addAll(ethWalletBeans);
         }
 
         for (WalletBean walletBean : mWalletBeans) {

@@ -79,7 +79,7 @@
     <string name="place_of_residence">Place Of Residence</string>
     <string name="enterprise_key">Enterprise Key</string>
     <string name="to_dht_cloud">Saving Data To DHT Cloud</string>
-    <string name="available_amount">Amount ( Available: </string>
+    <string name="available_amount">Amount (Available: </string>
     <string name="amount_all">All</string>
     <string name="dialog_amount">Amount : </string>
     <string name="change_wallet">Change Wallet</string>
@@ -91,8 +91,12 @@
     <string name="seek_bar_fast">Fast</string>
     <string name="excitation">Reward</string>
     <string name="latest_activity">Latest Activity</string>
-    <string name="current_gas_price">Current Gas Price:</string>
+    <string name="current_gas_price">Last Gas Price:</string>
     <string name="gas_fee">Gas Fee ≈</string>
+    <string name="gas_consumed">Gas Used</string>
+    <string name="gas_price">Gas Price</string>
+    <string name="gas_total_fee">Gas Fee</string>
+
 
     <!--Me页面，功能菜单文字-->
     <string name="personal_portrait">Profile</string>
@@ -131,10 +135,12 @@
     <string name="mnemonic_can_not_be_empty">Mnemonic can not be empty</string>
     <string name="select_correct_import_type">Select the correct import type!</string>
     <string name="server_err_txId_null">Server error! TxId is null!</string>
-    <string name="eth_nonce_null">Nonce query failed, please check the network</string>
+    <string name="eth_nonce_null">Nonce query failed, please check the network!</string>
     <string name="eth_data_null">Transaction data generation failed!</string>
     <string name="no_this_type_asset">No asset of this type!</string>
     <string name="insufficient_gas">Insufficient gas</string>
+    <string name="has_blocking_tx">There is still a transaction in Blocking, Please wait a moment</string>
+    <string name="illegal_address">Please enter the correct wallet address</string>
 
     <!--语言-->
     <string name="language_zh_cn">简体中文</string>
@@ -143,6 +149,11 @@
     <!--画像类型-->
     <string name="portrait_type_common">Basic</string>
     <string name="portrait_type_enterprise">Enterprise</string>
+
+    <!--钱包类型-->
+    <string name="create_wallet_type_neo">NEO</string>
+    <string name="create_wallet_type_eth">ETH</string>
+
 
     <!--激励界面-->
     <string name="excitation_new_activity">New</string>
@@ -154,6 +165,7 @@
     <string name="excitation_detail_eth_address">ETH Address</string>
     <string name="excitation_detail_submit">Submit</string>
     <string name="excitation_detail_condition_chinese_tip_part_one">Please be sure you have local NEO wallet, and the total amount of CPX should be equal or more than </string>
+    <string name="excitation_detail_condition_chinese_tip_part_two">""</string>
     <string name="excitation_detail_copyright">The final interpretation of this activity belongs to APEX TECHNOLOGIES</string>
     <string name="excitation_detail_save_successfully">Save successfully</string>
     <string name="excitation_save_ok">Submitted successfully</string>

@@ -40,31 +40,37 @@ public class CreateNeoWallet implements Runnable {
         if (TextUtils.isEmpty(mWalletName)
                 || TextUtils.isEmpty(mPwd)
                 || null == mICreateWalletCallback) {
-            CpLog.e(TAG, "mWalletName or mPwd or mICreateWalletCallback is null!");
+            CpLog.e(TAG, "neo mWalletName or mPwd or mICreateWalletCallback is null!");
             return;
         }
 
-        Wallet wallet = null;
+        Wallet walletFirst = null;
         try {
-            wallet = Neomobile.new_();
+            walletFirst = Neomobile.new_();
         } catch (Exception e) {
-            CpLog.e(TAG, "new_() exception:" + e.getMessage());
+            CpLog.e(TAG, "neo new_() exception:" + e.getMessage());
         }
 
-        if (null == wallet) {
-            CpLog.e(TAG, "wallet is null!");
+        if (null == walletFirst) {
+            CpLog.e(TAG, "neo walletFirst is null!");
+            return;
+        }
+
+        Wallet walletChecked = checkMnemonic(walletFirst);
+        if (null == walletChecked) {
+            CpLog.e(TAG, "neo walletChecked is null!");
             return;
         }
 
         String toKeyStore = null;
         try {
-            toKeyStore = wallet.toKeyStore(mPwd);
+            toKeyStore = walletChecked.toKeyStore(mPwd);
         } catch (Exception e) {
-            CpLog.e(TAG, "toKeyStore exception:" + e.getMessage());
+            CpLog.e(TAG, "neo toKeyStore exception:" + e.getMessage());
         }
 
         if (TextUtils.isEmpty(toKeyStore)) {
-            CpLog.e(TAG, "toKeyStore is null！");
+            CpLog.e(TAG, "neo toKeyStore is null！");
             return;
         }
 
@@ -78,14 +84,13 @@ public class CreateNeoWallet implements Runnable {
         NeoWallet neoWallet = new NeoWallet();
         neoWallet.setWalletType(Constant.WALLET_TYPE_NEO);
         neoWallet.setName(mWalletName);
-        neoWallet.setAddress(wallet.address());
+        neoWallet.setAddress(walletChecked.address());
         neoWallet.setBackupState(Constant.BACKUP_UNFINISHED);
         neoWallet.setKeyStore(toKeyStore);
         neoWallet.setAssetJson(GsonUtils.toJsonStr(assets));
         neoWallet.setColorAssetJson(GsonUtils.toJsonStr(assetsNep5));
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             return;
@@ -93,6 +98,23 @@ public class CreateNeoWallet implements Runnable {
 
         apexWalletDbDao.insert(Constant.TABLE_NEO_WALLET, neoWallet);
         ApexListeners.getInstance().notifyWalletAdd(neoWallet);
-        mICreateWalletCallback.newWallet(wallet);
+        mICreateWalletCallback.newWallet(walletChecked);
+    }
+
+    private Wallet checkMnemonic(Wallet wallet) {
+        Wallet walletFinal = null;
+        try {
+            String mnemonic = wallet.mnemonic("en_US");
+            walletFinal = Neomobile.fromMnemonic(mnemonic, "en_US");
+        } catch (Exception e) {
+            CpLog.e(TAG, "neo checkMnemonic fromMnemonic Exception:" + e.getMessage());
+            try {
+                walletFinal = checkMnemonic(Neomobile.new_());
+            } catch (Exception e1) {
+                CpLog.e(TAG, "neo checkMnemonic new_() Exception:" + e.getMessage());
+            }
+        }
+
+        return walletFinal;
     }
 }

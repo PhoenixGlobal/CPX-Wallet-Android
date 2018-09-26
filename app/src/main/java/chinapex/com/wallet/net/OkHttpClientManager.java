@@ -142,6 +142,46 @@ public class OkHttpClientManager {
         });
     }
 
+    public void postJsonByAuth(String url, String jsonStr, final INetCallback iNetCallback) {
+        if (TextUtils.isEmpty(url) || TextUtils.isEmpty(jsonStr)) {
+            CpLog.e(TAG, "postJson() -> url or jsonStr is null or empty!");
+            return;
+        }
+
+        if (null == iNetCallback) {
+            CpLog.e(TAG, "postJson() -> iNetCallback is null!");
+            return;
+        }
+
+        RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, jsonStr);
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader(Constant.HEADER_KEY, Constant.HEADER_VALUE)
+                .post(requestBody)
+                .build();
+
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                iNetCallback.onFailed(Constant.NET_ERROR, e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                ResponseBody responseBody = response.body();
+                if (null == responseBody) {
+                    iNetCallback.onFailed(Constant.NET_BODY_NULL, "responseBody is null!");
+                    CpLog.e(TAG, "onResponse() -> responseBody is null");
+                    return;
+                }
+
+                String result = responseBody.string();
+                iNetCallback.onSuccess(Constant.NET_SUCCESS, "onResponse", result);
+            }
+        });
+    }
+
     public void get(String url, final INetCallback iNetCallback) {
         if (TextUtils.isEmpty(url)) {
             CpLog.e(TAG, "get() -> url is null!");
