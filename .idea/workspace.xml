@@ -10,7 +10,7 @@
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="chinapex" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/CreateNeoWallet.java" line="103" mnemonic="9" />
@@ -55,7 +55,17 @@
     <favorites_list name="ApexWallet" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="CpLog.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/CpLog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -71,16 +81,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>balanceBeanTmp is null!</find>
-      <find>wallet address:</find>
-      <find>bigDecString</find>
-      <find>GetEthNonce result:</find>
-      <find>mBalanceBeans</find>
-      <find>mBalanceBean</find>
-      <find>getGlobalAssetBalance() -&gt; mGlobalAssets is null or empty</find>
-      <find>getGlobalAssetBalance() -&gt; mGlobalAssets is null or empty!</find>
-      <find>ethBalance is null or empty!</find>
-      <find>getColorAssetBalance() -&gt; balanceBeans is null or empty!</find>
       <find>mAssetBeans</find>
       <find>onrefresh</find>
       <find>mCurrentClickedWallet</find>
@@ -101,6 +101,16 @@
       <find>mTv_dialog_amount</find>
       <find>tv_available_amount</find>
       <find>mTv_available_amount</find>
+      <find>handle t</find>
+      <find>nonce is:</find>
+      <find>handle</find>
+      <find>over 5 minutes,handle failed tx</find>
+      <find>mTxOfBlockNum</find>
+      <find>mGetTxReceiptSF</find>
+      <find>mWalletAddress</find>
+      <find>mBlockNumber</find>
+      <find>resultBean is null!</find>
+      <find>GlideApp</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -2402,7 +2412,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/model/transfer/CreateEthTxModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/dialog/DeleteWalletPwdDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/CreateNeoWallet.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/net/OkHttpClientManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthAssets.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/EthSendRawTransaction.java" />
@@ -2416,8 +2425,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/TransactionRecordRecyclerViewAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/AddAssetsRecyclerViewAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/Constant.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/UpdateEthTxState.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/AssetsOverviewRecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/UpdateEthTxState.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/CpLog.java" />
       </list>
     </option>
@@ -2425,8 +2435,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
-    <option name="width" value="1939" />
-    <option name="height" value="1049" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -2436,9 +2446,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -2450,6 +2457,12 @@
               <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
               <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ApexWallet" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ApexWallet" type="b2602c69:ProjectViewProjectNode" />
@@ -2606,6 +2619,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2617,13 +2633,13 @@
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.SignV1" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="cplo&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.CpLog&#10;global&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/ApexGlobalTask.java&#10;constan&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;okhtt&#9;PSI&#9;JAVA://chinapex.com.wallet.net.OkHttpClientManager&#10;from&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.FromMnemonicToNeoWallet&#10;create&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/wallet/CreateWalletActivity.java&#10;constant&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;del&#9;PSI&#9;JAVA://chinapex.com.wallet.view.dialog.DeleteWalletPwdDialog&#10;createethtx&#9;PSI&#9;JAVA://chinapex.com.wallet.model.transfer.CreateEthTxModel&#10;dialog&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/res/layout/dialog_transfer_pwd.xml&#10;transfa&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;basefra&#9;PSI&#9;JAVA://chinapex.com.wallet.base.BaseFragment&#10;basea&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java&#10;base&#9;PSI&#9;JAVA://chinapex.com.wallet.base.BaseActivity&#10;excita&#9;PSI&#9;JAVA://chinapex.com.wallet.view.excitation.detail.ExcitationDetailActivity&#10;getethtran&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.eth.GetEthTransactionHistory&#10;transfer&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;wallet&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java&#10;walletu&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java&#10;createtx&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/transfer/CreateEthTxModel.java&#10;import&#9;PSI&#9;JAVA://chinapex.com.wallet.view.wallet.ImportWalletActivity&#10;balance&#9;PSI&#9;JAVA://chinapex.com.wallet.view.assets.BalanceDetailActivity&#10;transfera&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;transf&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;dao&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbDao.java&#10;trans&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;geteth&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthAssets.java&#10;asseto&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java&#10;neomo&#9;PSI&#9;JAVA://chinapex.com.wallet.model.balance.GetNeoBalanceModel&#10;geterc&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetErc20Balance.java&#10;getethmo&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/balance/GetEthBalanceModel.java&#10;gather&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/GatheringActivity.java&#10;exci&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/excitation/detail/ExcitationDetailActivity.java&#10;balancede&#9;PSI&#9;JAVA://chinapex.com.wallet.view.assets.BalanceDetailActivity&#10;balancde&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/BalanceDetailActivity.java&#10;assets&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java&#10;newvis&#9;PSI&#9;JAVA://chinapex.com.wallet.view.NewVisitorActivity&#10;createt&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/transfer/CreateEthTxModel.java&#10;lang&#9;PSI&#9;JAVA://chinapex.com.wallet.view.me.MeLanguageSettingsActivity&#10;createth&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/transfer/CreateEthTxModel.java&#10;GetEthNonce&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.eth.GetEthNonce&#10;WalletUtils&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java&#10;FromKeystoreToEthWallet&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.eth.FromKeystoreToEthWallet&#10;creatneo&#9;PSI&#9;JAVA://chinapex.com.wallet.model.transfer.CreateNeoTxModel&#10;toast&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.ToastUtils&#10;fragmentf&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.FragmentFactory&#10;cplog&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/CpLog.java&#10;cons&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;GetDetailCode&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/excitation/detail/GetDetailCode.java&#10;maina&#9;PSI&#9;JAVA://chinapex.com.wallet.view.MainActivity" />
+    <property name="SearchEverywhereHistoryKey" value="getre&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthTransactionReceipt.java&#10;constant&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;GetEthNonce&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthNonce.java&#10;update&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/UpdateEthTxState.java&#10;createethwa&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java&#10;cplog&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/CpLog.java&#10;walletu&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java&#10;cplo&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.CpLog&#10;global&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/ApexGlobalTask.java&#10;constan&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/global/Constant.java&#10;okhtt&#9;PSI&#9;JAVA://chinapex.com.wallet.net.OkHttpClientManager&#10;from&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.FromMnemonicToNeoWallet&#10;create&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/wallet/CreateWalletActivity.java&#10;del&#9;PSI&#9;JAVA://chinapex.com.wallet.view.dialog.DeleteWalletPwdDialog&#10;createethtx&#9;PSI&#9;JAVA://chinapex.com.wallet.model.transfer.CreateEthTxModel&#10;dialog&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/res/layout/dialog_transfer_pwd.xml&#10;transfa&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;basefra&#9;PSI&#9;JAVA://chinapex.com.wallet.base.BaseFragment&#10;basea&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java&#10;base&#9;PSI&#9;JAVA://chinapex.com.wallet.base.BaseActivity&#10;excita&#9;PSI&#9;JAVA://chinapex.com.wallet.view.excitation.detail.ExcitationDetailActivity&#10;getethtran&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.eth.GetEthTransactionHistory&#10;transfer&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;wallet&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java&#10;createtx&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/transfer/CreateEthTxModel.java&#10;import&#9;PSI&#9;JAVA://chinapex.com.wallet.view.wallet.ImportWalletActivity&#10;balance&#9;PSI&#9;JAVA://chinapex.com.wallet.view.assets.BalanceDetailActivity&#10;transfera&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;transf&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;dao&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/ApexWalletDbDao.java&#10;trans&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/TransferActivity.java&#10;geteth&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthAssets.java&#10;asseto&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java&#10;neomo&#9;PSI&#9;JAVA://chinapex.com.wallet.model.balance.GetNeoBalanceModel&#10;geterc&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetErc20Balance.java&#10;getethmo&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/balance/GetEthBalanceModel.java&#10;gather&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/GatheringActivity.java&#10;exci&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/excitation/detail/ExcitationDetailActivity.java&#10;balancede&#9;PSI&#9;JAVA://chinapex.com.wallet.view.assets.BalanceDetailActivity&#10;balancde&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/BalanceDetailActivity.java&#10;assets&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/view/assets/AssetsOverviewActivity.java&#10;newvis&#9;PSI&#9;JAVA://chinapex.com.wallet.view.NewVisitorActivity&#10;createt&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/transfer/CreateEthTxModel.java&#10;lang&#9;PSI&#9;JAVA://chinapex.com.wallet.view.me.MeLanguageSettingsActivity&#10;createth&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/model/transfer/CreateEthTxModel.java&#10;WalletUtils&#9;FILE&#9;file://D:/develop/Repos/Demo/ApexWallet/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java&#10;FromKeystoreToEthWallet&#9;PSI&#9;JAVA://chinapex.com.wallet.executor.runnable.eth.FromKeystoreToEthWallet&#10;creatneo&#9;PSI&#9;JAVA://chinapex.com.wallet.model.transfer.CreateNeoTxModel&#10;toast&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.ToastUtils&#10;fragmentf&#9;PSI&#9;JAVA://chinapex.com.wallet.utils.FragmentFactory" />
     <property name="android.profiler.active" value="true" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$PROJECT_DIR$/../../../AndroidSDK" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537843299523" />
-    <property name="device.picker.selection" value="Pixel_2_API_21" />
+    <property name="device.picker.selection" value="EQK7RSYLJZHMAMBM" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../gather/sa-sdk-android" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
@@ -2868,50 +2884,50 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1551" height="839" extended-state="0" />
+    <frame x="-8" y="-8" width="1552" height="840" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="6" weight="0.32960895" />
-      <window_info id="Build Variants" order="0" sideWeight="0.5039106" side_tool="true" weight="0.25454545" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5010128" side_tool="true" weight="0.5414201" />
-      <window_info anchor="bottom" id="Logcat" order="14" weight="0.6933333" />
-      <window_info id="Capture Tool" order="1" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.24915597" />
-      <window_info anchor="right" id="Assistant" weight="0.32950708" />
-      <window_info anchor="bottom" id="Build" order="13" sideWeight="0.49898717" weight="0.5414201" />
-      <window_info id="Structure" order="6" sideWeight="0.50883394" side_tool="true" weight="0.25945947" />
-      <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" weight="0.32955772" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39929327" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32960895" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="4" />
+      <window_info id="Build Variants" order="0" sideWeight="0.5039106" side_tool="true" weight="0.25454545" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Preview" order="0" weight="0.23902768" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5010128" side_tool="true" weight="0.5414201" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32960895" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.3286219" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32908458" />
+      <window_info anchor="bottom" id="Logcat" order="14" weight="0.9645495" />
       <window_info id="Captures" order="7" sideWeight="0.4958775" weight="0.24972972" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.49116609" visible="true" weight="0.26401082" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.33925927" />
+      <window_info id="Capture Tool" order="1" />
+      <window_info id="Designer" order="2" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.49116609" weight="0.34615386" />
+      <window_info anchor="bottom" id="Build" order="13" sideWeight="0.49898717" weight="0.5414201" />
       <window_info anchor="right" id="Gradle" order="6" weight="0.32972974" />
+      <window_info id="Structure" order="6" sideWeight="0.50883394" side_tool="true" weight="0.25945947" />
+      <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" weight="0.32928476" />
       <window_info anchor="right" id="Theme Preview" order="7" weight="0.32994652" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39929327" />
       <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="right" id="Assistant" order="4" weight="0.32950708" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.35457706" />
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
-      <window_info anchor="right" id="Dynamic Properties" order="3" />
+      <window_info anchor="right" id="Preview" order="0" weight="0.23902768" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" id="Dynamic Properties" order="3" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Gradle Console" order="10" side_tool="true" weight="0.32960895" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.24915597" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33925927" />
     </layout>
     <layout-to-restore>
       <window_info id="Designer" order="4" />
       <window_info anchor="bottom" id="Gradle Console" order="11" side_tool="true" weight="0.32960895" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32960895" />
       <window_info id="Build Variants" order="2" sideWeight="0.5039106" side_tool="true" weight="0.25454545" />
       <window_info id="Image Layers" order="7" />
-      <window_info anchor="right" id="Commander" order="1" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32960895" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32960895" />
@@ -2923,20 +2939,21 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32960895" />
       <window_info anchor="right" id="Preview" order="0" visible="true" weight="0.21016043" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.2905028" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4960894" visible="true" weight="0.25454545" />
       <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" weight="0.32994652" />
+      <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="bottom" id="Logcat" order="8" weight="0.5620112" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32960895" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32960895" />
       <window_info anchor="right" id="Gradle" order="7" weight="0.32994652" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4960894" visible="true" weight="0.25454545" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.35530725" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32960895" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info anchor="right" id="Theme Preview" order="8" weight="0.32994652" />
       <window_info id="Structure" order="1" weight="0.24973261" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.2905028" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
     </layout-to-restore>
   </component>
@@ -2958,23 +2975,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/base/BaseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="59" column="27" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="87">
@@ -3074,13 +3074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetEthTransactionReceiptCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/bean/response/ResponseEthTxByHash.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -3134,13 +3127,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/view/wallet/CreateWalletActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -3162,24 +3148,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/app/libs/classes.jar!/ethmobile/Wallet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/CreateNeoWallet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
           <caret line="98" column="67" selection-start-line="98" selection-start-column="58" selection-end-line="98" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="107" column="68" selection-start-line="107" selection-start-column="68" selection-end-line="107" selection-end-column="68" />
         </state>
       </provider>
     </entry>
@@ -3222,20 +3194,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="53" column="57" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthTransactionReceipt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="50" column="44" selection-start-line="50" selection-start-column="44" selection-end-line="50" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthNonce.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="47" column="57" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -3282,24 +3240,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/TransactionRecordRecyclerViewAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1769">
-          <caret line="190" column="51" lean-forward="true" selection-start-line="190" selection-start-column="51" selection-end-line="190" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/AddAssetsRecyclerViewAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="182" column="66" selection-start-line="182" selection-start-column="66" selection-end-line="182" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/CpLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -3310,13 +3254,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthTransactionHistory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="82" selection-start-line="82" selection-end-line="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/net/OkHttpClientManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
@@ -3324,24 +3261,101 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/AssetsOverviewRecyclerViewAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/WalletUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="188" column="56" selection-start-line="188" selection-start-column="56" selection-end-line="188" selection-end-column="56" />
+        <state relative-caret-position="29">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/UpdateEthTxState.java">
+    <entry file="jar://$PROJECT_DIR$/app/libs/classes.jar!/ethmobile/Wallet.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="168" column="30" selection-start-line="168" selection-start-column="16" selection-end-line="168" selection-end-column="30" />
+        <state relative-caret-position="-435">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/libs/classes.jar!/ethmobile/Ethmobile.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/libs/classes.jar!/ethmobile/EthCall.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1392">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/CreateEthWallet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/Constant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="75" column="37" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
+        <state relative-caret-position="-9">
+          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthNonce.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthTransactionHistory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2494">
+          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/callback/eth/IGetEthTransactionReceiptCallback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/global/UpdateEthTxState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/executor/runnable/eth/GetEthTransactionReceipt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="58" column="46" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/AssetsOverviewRecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-386">
+          <caret line="188" column="56" selection-start-line="188" selection-start-column="56" selection-end-line="188" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/adapter/TransactionRecordRecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2590">
+          <caret line="128" column="24" selection-start-line="128" selection-start-column="16" selection-end-line="128" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/chinapex/com/wallet/utils/CpLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
         </state>
       </provider>
     </entry>

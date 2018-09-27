@@ -39,8 +39,6 @@ public class UpdateEthTxState implements IGetEthTransactionReceiptCallback, IGet
     private long mCurrentBlockNum;
     private long mStartPollingTime;
     private String mHexNonce;
-    private String mWalletAddress;
-    private String mBlockNumber;
 
     public UpdateEthTxState(String txId) {
         mTxId = txId;
@@ -59,28 +57,27 @@ public class UpdateEthTxState implements IGetEthTransactionReceiptCallback, IGet
             return;
         }
 
-        mWalletAddress = walletAddress;
-        mBlockNumber = blockNumber;
+        if (!TextUtils.isEmpty(blockNumber)) {
+            handleBlockNum(walletAddress, blockNumber);
+            return;
+        }
 
         if (System.currentTimeMillis() - mStartPollingTime > Constant.TX_ETH_EXCEPTION_TIME) {
             CpLog.w(TAG, "over 5 minutes,handle failed tx");
             mHexNonce = (String) SharedPreferencesUtils.getParam(ApexWalletApplication.getInstance(), Constant.TX_ETH_NONCE
                     + mTxId, "");
             TaskController.getInstance().submit(new GetEthNonce(walletAddress, this));
-            return;
         }
-
-        handleBlockNum(walletAddress, blockNumber);
     }
 
-    private void handleBlockNum(String walletAddress, String blockNumber) {
-        if (TextUtils.isEmpty(blockNumber)) {
-            CpLog.w(TAG, "handleBlockNum()-> blockNumber is null,this tx is not in block!");
+    private void handleBlockNum(String walletAddress, String txOfblockNumber) {
+        if (TextUtils.isEmpty(txOfblockNumber)) {
+            CpLog.w(TAG, "handleBlockNum()-> txOfblockNumber is null,this tx is not in block!");
             return;
         }
 
         try {
-            mTxOfBlockNum = Long.valueOf(blockNumber);
+            mTxOfBlockNum = Long.valueOf(txOfblockNumber);
         } catch (NumberFormatException e) {
             CpLog.e(TAG, "getEthTransactionReceipt NumberFormatException:" + e.getMessage());
             return;
@@ -162,16 +159,16 @@ public class UpdateEthTxState implements IGetEthTransactionReceiptCallback, IGet
         try {
             String currentNonce = WalletUtils.toDecString(nonce, "0");
             String txNonce = WalletUtils.toDecString(mHexNonce, "0");
+            CpLog.i(TAG, "currentNonce:" + currentNonce);
+            CpLog.i(TAG, "txNonce:" + txNonce);
 
             BigInteger subtract = new BigInteger(currentNonce).subtract(new BigInteger(txNonce));
             if (BigInteger.ZERO.compareTo(subtract) == 0 || BigInteger.ZERO.compareTo(subtract) == 1) {
                 CpLog.w(TAG, "this txNonce is valid!");
-                handleBlockNum(mWalletAddress, mBlockNumber);
                 return;
             }
         } catch (Exception e) {
             CpLog.e(TAG, "UpdateEthTxState getEthNonce Exception:" + e.getMessage());
-            handleBlockNum(mWalletAddress, mBlockNumber);
             return;
         }
 
