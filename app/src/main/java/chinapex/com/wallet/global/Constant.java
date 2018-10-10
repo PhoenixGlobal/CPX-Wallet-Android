@@ -25,9 +25,12 @@ public class Constant {
 
     // neo node
     public static final String HOSTNAME_VERIFIER_NEO = "tracker.chinapex.com.cn";
+    public static final String HOSTNAME_VERIFIER_NEO2 = "tmp.chinapex.com.cn";
     public static final String URL_CLI_NEO = "https://tracker.chinapex.com.cn/neo-cli/";
-    public static final String URL_UTXOS_NEO = "https://tracker.chinapex.com.cn/tool/utxos/";
-    public static final String URL_ASSETS_NEO = "https://tracker.chinapex.com.cn/tool/assets";
+//    public static final String URL_UTXOS_NEO = "https://tracker.chinapex.com.cn/tool/utxos/";
+    public static final String URL_UTXOS_NEO = "http://tmp.chinapex.com.cn/wallets-java-version/tool/utxos?address=";
+//    public static final String URL_ASSETS_NEO = "https://tracker.chinapex.com.cn/tool/assets";
+    public static final String URL_ASSETS_NEO = "http://tmp.chinapex.com.cn/wallets-java-version/tool/assets";
 
     // eth node
     public static final String HOSTNAME_VERIFIER_ETH = "tracker.chinapex.com.cn";

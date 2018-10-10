@@ -87,7 +87,9 @@ public class OkHttpClientManager {
     private class TrustAllHostnameVerifier implements HostnameVerifier {
         @Override
         public boolean verify(String hostname, SSLSession session) {
-            return Constant.HOSTNAME_VERIFIER_NEO.equals(hostname) || Constant.HOSTNAME_VERIFIER_ETH.equals(hostname);
+            return Constant.HOSTNAME_VERIFIER_NEO.equals(hostname)
+                    || Constant.HOSTNAME_VERIFIER_NEO2.equals(hostname)
+                    || Constant.HOSTNAME_VERIFIER_ETH.equals(hostname);
         }
     }
 

@@ -46,9 +46,9 @@ public class GetNeoAssets implements Runnable, INetCallback {
             return;
         }
 
-        List<ResponseGetNeoAssets.ResultBean> resultBeans = responseGetNeoAssets.getResult();
-        if (null == resultBeans || resultBeans.isEmpty()) {
-            CpLog.e(TAG, "resultBeans is null or empty!");
+        List<ResponseGetNeoAssets.DataBean> dataBeans = responseGetNeoAssets.getData();
+        if (null == dataBeans || dataBeans.isEmpty()) {
+            CpLog.e(TAG, "dataBeans is null or empty!");
             mIGetNeoAssetsCallback.getNeoAssets(null);
             return;
         }
@@ -60,26 +60,26 @@ public class GetNeoAssets implements Runnable, INetCallback {
             return;
         }
 
-        for (ResponseGetNeoAssets.ResultBean resultBean : resultBeans) {
-            if (null == resultBean) {
-                CpLog.e(TAG, "resultBean is null!");
+        for (ResponseGetNeoAssets.DataBean dataBean : dataBeans) {
+            if (null == dataBean) {
+                CpLog.e(TAG, "dataBean is null!");
                 continue;
             }
 
             AssetBean assetBean = new AssetBean();
-            String assetType = resultBean.getType();
+            String assetType = dataBean.getType();
             if (Constant.ASSET_TYPE_GOVERNING.equals(assetType) || Constant.ASSET_TYPE_UTILITY.equals(assetType)) {
                 assetBean.setType(Constant.ASSET_TYPE_GLOBAL);
             } else {
                 assetBean.setType(assetType);
             }
 
-            assetBean.setSymbol(resultBean.getSymbol());
-            assetBean.setPrecision(resultBean.getPrecision());
-            assetBean.setName(resultBean.getName());
-            assetBean.setImageUrl(resultBean.getImage_url());
-            assetBean.setHexHash(resultBean.getHex_hash());
-            assetBean.setHash(resultBean.getHash());
+            assetBean.setSymbol(dataBean.getSymbol());
+            assetBean.setPrecision(dataBean.getPrecision());
+            assetBean.setName(dataBean.getName());
+            assetBean.setImageUrl(dataBean.getImage_url());
+            assetBean.setHexHash(dataBean.getHex_hash());
+            assetBean.setHash(dataBean.getHash());
 
             apexWalletDbDao.insertAsset(Constant.TABLE_NEO_ASSETS, assetBean);
         }

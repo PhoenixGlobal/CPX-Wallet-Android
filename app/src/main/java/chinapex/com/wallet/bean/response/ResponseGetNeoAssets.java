@@ -8,53 +8,61 @@ import java.util.List;
  */
 public class ResponseGetNeoAssets {
 
+
     /**
-     * state : 200
-     * result : [{"type":"NEP5","symbol":"ASA","precision":"8","name":"Asura World Coin",
-     * "image_url":"https://i0.wp.com/www.blockchaindk
-     * .com/wp-content/uploads/2017/11/NEON-Wallet-Logo.png",
-     * "hex_hash":"0xa58b56b30425d3d1f8902034996fcac4168ef71d",
-     * "hash":"a58b56b30425d3d1f8902034996fcac4168ef71d"}]
+     * status : 200
+     * msg : null
+     * data : [{"type":"NEP5","name":"Switcheo","symbol":"SWTH","precision":"8",
+     * "hash":"ab38352559b8b203bde5fddfa0b07d8b2525e132","hex_hash":"0xab38352559b8b203bde5fddfa0b07d8b2525e132",
+     * "image_url":"todo_imageURL"}]
      */
 
-    private int state;
-    private List<ResultBean> result;
+    private int status;
+    private Object msg;
+    private List<DataBean> data;
 
-    public int getState() {
-        return state;
+    public int getStatus() {
+        return status;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public List<ResultBean> getResult() {
-        return result;
+    public Object getMsg() {
+        return msg;
     }
 
-    public void setResult(List<ResultBean> result) {
-        this.result = result;
+    public void setMsg(Object msg) {
+        this.msg = msg;
     }
 
-    public static class ResultBean {
+    public List<DataBean> getData() {
+        return data;
+    }
+
+    public void setData(List<DataBean> data) {
+        this.data = data;
+    }
+
+    public static class DataBean {
         /**
          * type : NEP5
-         * symbol : ASA
+         * name : Switcheo
+         * symbol : SWTH
          * precision : 8
-         * name : Asura World Coin
-         * image_url : https://i0.wp.com/www.blockchaindk
-         * .com/wp-content/uploads/2017/11/NEON-Wallet-Logo.png
-         * hex_hash : 0xa58b56b30425d3d1f8902034996fcac4168ef71d
-         * hash : a58b56b30425d3d1f8902034996fcac4168ef71d
+         * hash : ab38352559b8b203bde5fddfa0b07d8b2525e132
+         * hex_hash : 0xab38352559b8b203bde5fddfa0b07d8b2525e132
+         * image_url : todo_imageURL
          */
 
         private String type;
+        private String name;
         private String symbol;
         private String precision;
-        private String name;
-        private String image_url;
-        private String hex_hash;
         private String hash;
+        private String hex_hash;
+        private String image_url;
 
         public String getType() {
             return type;
@@ -62,6 +70,14 @@ public class ResponseGetNeoAssets {
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getSymbol() {
@@ -80,20 +96,12 @@ public class ResponseGetNeoAssets {
             this.precision = precision;
         }
 
-        public String getName() {
-            return name;
+        public String getHash() {
+            return hash;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getImage_url() {
-            return image_url;
-        }
-
-        public void setImage_url(String image_url) {
-            this.image_url = image_url;
+        public void setHash(String hash) {
+            this.hash = hash;
         }
 
         public String getHex_hash() {
@@ -104,12 +112,12 @@ public class ResponseGetNeoAssets {
             this.hex_hash = hex_hash;
         }
 
-        public String getHash() {
-            return hash;
+        public String getImage_url() {
+            return image_url;
         }
 
-        public void setHash(String hash) {
-            this.hash = hash;
+        public void setImage_url(String image_url) {
+            this.image_url = image_url;
         }
     }
 }

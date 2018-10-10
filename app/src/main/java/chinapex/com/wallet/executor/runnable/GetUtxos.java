@@ -1,6 +1,6 @@
 package chinapex.com.wallet.executor.runnable;
 
-import chinapex.com.wallet.bean.response.ResponseGetUtxos;
+import chinapex.com.wallet.bean.response.ResponseGetNeoUtxos;
 import chinapex.com.wallet.executor.callback.IGetUtxosCallback;
 import chinapex.com.wallet.global.Constant;
 import chinapex.com.wallet.net.INetCallback;
@@ -37,14 +37,14 @@ public class GetUtxos implements Runnable, INetCallback {
 
     @Override
     public void onSuccess(int statusCode, String msg, String result) {
-        ResponseGetUtxos responseGetUtxos = GsonUtils.json2Bean(result, ResponseGetUtxos.class);
-        if (null == responseGetUtxos) {
-            CpLog.e(TAG, "responseGetUtxos is null!");
+        ResponseGetNeoUtxos responseGetNeoUtxos = GsonUtils.json2Bean(result, ResponseGetNeoUtxos.class);
+        if (null == responseGetNeoUtxos) {
+            CpLog.e(TAG, "responseGetNeoUtxos is null!");
             mIGetUtxosCallback.getUtxos(null);
             return;
         }
 
-        String utxos = GsonUtils.toJsonStr(responseGetUtxos.getResult());
+        String utxos = GsonUtils.toJsonStr(responseGetNeoUtxos.getData());
         mIGetUtxosCallback.getUtxos(utxos);
     }
 
