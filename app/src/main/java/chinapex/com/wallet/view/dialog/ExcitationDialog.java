@@ -76,7 +76,7 @@ public class ExcitationDialog extends DialogFragment implements View.OnClickList
             mDialogContent.setText(chineseTip);
         } else {
             String tipPartOne = getResources().getString(R.string.excitation_detail_condition_chinese_tip_part_one);
-            String englishTip = tipPartOne + mGasLimit + ".";
+            String englishTip = tipPartOne + " "+mGasLimit + ".";
             mDialogContent.setText(englishTip);
         }
 

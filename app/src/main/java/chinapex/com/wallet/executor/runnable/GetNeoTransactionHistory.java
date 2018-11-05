@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import chinapex.com.wallet.bean.TransactionRecord;
-import chinapex.com.wallet.bean.response.ResponseGetTransactionHistory;
+import chinapex.com.wallet.bean.response.ResponseGetNeoTransactionHistory;
 import chinapex.com.wallet.changelistener.ApexListeners;
 import chinapex.com.wallet.executor.callback.IGetNeoTransactionHistoryCallback;
 import chinapex.com.wallet.global.ApexWalletApplication;
@@ -32,8 +32,7 @@ public class GetNeoTransactionHistory implements Runnable, INetCallback {
     private IGetNeoTransactionHistoryCallback mIGetNeoTransactionHistoryCallback;
     private long mRecentTime;
 
-    public GetNeoTransactionHistory(String address, IGetNeoTransactionHistoryCallback
-            IGetNeoTransactionHistoryCallback) {
+    public GetNeoTransactionHistory(String address, IGetNeoTransactionHistoryCallback IGetNeoTransactionHistoryCallback) {
         mAddress = address;
         mIGetNeoTransactionHistoryCallback = IGetNeoTransactionHistoryCallback;
     }
@@ -48,7 +47,7 @@ public class GetNeoTransactionHistory implements Runnable, INetCallback {
         mRecentTime = (long) SharedPreferencesUtils.getParam(ApexWalletApplication.getInstance(), mAddress, 0L);
         CpLog.i(TAG, "mRecentTime:" + mRecentTime);
 
-        String url = Constant.URL_NEO_TRANSACTION_HISTORY + mAddress + "?beginTime=" + mRecentTime;
+        String url = Constant.URL_NEO_TRANSACTION_HISTORY + mAddress + "&beginTime=" + mRecentTime;
         OkHttpClientManager.getInstance().get(url, this);
     }
 
@@ -60,31 +59,30 @@ public class GetNeoTransactionHistory implements Runnable, INetCallback {
             return;
         }
 
-        ResponseGetTransactionHistory responseGetTransactionHistory = GsonUtils.json2Bean(result,
-                ResponseGetTransactionHistory.class);
-        if (null == responseGetTransactionHistory) {
-            CpLog.e(TAG, "responseGetTransactionHistory is null!");
+        ResponseGetNeoTransactionHistory responseGetNeoTransactionHistory = GsonUtils.json2Bean(result,
+                ResponseGetNeoTransactionHistory.class);
+        if (null == responseGetNeoTransactionHistory) {
+            CpLog.e(TAG, "responseGetNeoTransactionHistory is null!");
             mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
             return;
         }
 
-        List<ResponseGetTransactionHistory.ResultBean> resultBeans = responseGetTransactionHistory.getResult();
-        if (null == resultBeans || resultBeans.isEmpty()) {
-            CpLog.w(TAG, "resultBeans is null or empty!");
+        List<ResponseGetNeoTransactionHistory.DataBean> dataBeans = responseGetNeoTransactionHistory.getData();
+        if (null == dataBeans || dataBeans.isEmpty()) {
+            CpLog.w(TAG, "dataBeans is null or empty!");
             mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
             return;
         }
 
-        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication
-                .getInstance());
+        ApexWalletDbDao apexWalletDbDao = ApexWalletDbDao.getInstance(ApexWalletApplication.getInstance());
         if (null == apexWalletDbDao) {
             CpLog.e(TAG, "apexWalletDbDao is null!");
             mIGetNeoTransactionHistoryCallback.getNeoTransactionHistory(null);
             return;
         }
 
-        HashMap<String, TransactionRecord> txCacheByAddress = apexWalletDbDao
-                .queryTxCacheByAddress(Constant.TABLE_NEO_TX_CACHE, mAddress);
+        HashMap<String, TransactionRecord> txCacheByAddress = apexWalletDbDao.queryTxCacheByAddress(
+                Constant.TABLE_NEO_TX_CACHE, mAddress);
 
         if (null == txCacheByAddress) {
             CpLog.e(TAG, "txCacheByAddress is null!");
@@ -93,33 +91,32 @@ public class GetNeoTransactionHistory implements Runnable, INetCallback {
         }
 
         // 记录该地址的最近更新时间
-        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), mAddress,
-                resultBeans.get(resultBeans.size() - 1).getTime());
+        SharedPreferencesUtils.putParam(ApexWalletApplication.getInstance(), mAddress, dataBeans.get(dataBeans.size() - 1)
+                .getTime());
 
         List<TransactionRecord> transactionRecords = new ArrayList<>();
 
-        for (ResponseGetTransactionHistory.ResultBean resultBean : resultBeans) {
-            if (null == resultBean) {
-                CpLog.e(TAG, "resultBean is null!");
+        for (ResponseGetNeoTransactionHistory.DataBean dataBean : dataBeans) {
+            if (null == dataBean) {
+                CpLog.e(TAG, "dataBean is null!");
                 continue;
             }
 
             TransactionRecord transactionRecord = new TransactionRecord();
 
             // 如果缓存中包含相同txid，删除缓存中该地址对应的该条txid，并写入正式表，状态为确认中
-            String txID = resultBean.getTxid();
-            String txType = resultBean.getType();
-            long txTime = resultBean.getTime();
-            String assetId = resultBean.getAssetId();
+            String txID = dataBean.getTxid();
+            String txType = dataBean.getType();
+            long txTime = dataBean.getTime();
+            String assetId = dataBean.getAssetId();
             if (txCacheByAddress.containsKey(txID)) {
                 transactionRecord.setTxState(Constant.TRANSACTION_STATE_CONFIRMING);
-                ApexListeners.getInstance().notifyTxStateUpdate(txID, Constant
-                        .TRANSACTION_STATE_CONFIRMING, txTime);
+                ApexListeners.getInstance().notifyTxStateUpdate(txID, Constant.TRANSACTION_STATE_CONFIRMING, txTime);
                 apexWalletDbDao.delCacheByTxIDAndAddr(Constant.TABLE_NEO_TX_CACHE, txID, mAddress);
             } else {
                 switch (txType) {
                     case Constant.ASSET_TYPE_NEP5:
-                        String vmstate = (String) resultBean.getVmstate();
+                        String vmstate = dataBean.getVmstate();
                         if (!TextUtils.isEmpty(vmstate) && !vmstate.contains("FAULT")) {
                             transactionRecord.setTxState(Constant.TRANSACTION_STATE_SUCCESS);
                         } else {
@@ -135,24 +132,23 @@ public class GetNeoTransactionHistory implements Runnable, INetCallback {
             transactionRecord.setWalletAddress(mAddress);
             transactionRecord.setTxType(txType);
             transactionRecord.setTxID(txID);
-            transactionRecord.setTxAmount(resultBean.getValue());
-            transactionRecord.setTxFrom(resultBean.getFrom());
-            transactionRecord.setTxTo(resultBean.getTo());
-            transactionRecord.setGasConsumed(null == resultBean.getGas_consumed() ? "0" : (String)
-                    resultBean.getGas_consumed());
+            transactionRecord.setTxAmount(dataBean.getValue());
+            transactionRecord.setTxFrom(dataBean.getFrom());
+            transactionRecord.setTxTo(dataBean.getTo());
+            transactionRecord.setGasConsumed(dataBean.getGas_consumed());
             transactionRecord.setAssetID(assetId);
             switch (assetId) {
                 case Constant.ASSETS_NEO_GAS:
                     transactionRecord.setAssetSymbol(Constant.SYMBOL_NEO_GAS);
                     break;
                 default:
-                    transactionRecord.setAssetSymbol(resultBean.getSymbol());
+                    transactionRecord.setAssetSymbol(dataBean.getSymbol());
                     break;
 
             }
-            transactionRecord.setAssetLogoUrl(resultBean.getImageURL());
-            transactionRecord.setAssetDecimal(null == resultBean.getDecimal() ? 0 : Integer
-                    .valueOf((String) resultBean.getDecimal()));
+            transactionRecord.setAssetLogoUrl(dataBean.getImageURL());
+            transactionRecord.setAssetDecimal(TextUtils.isEmpty(dataBean.getDecimal()) ?
+                    0 : Integer.valueOf(dataBean.getDecimal()));
             transactionRecord.setTxTime(txTime);
 
             List<TransactionRecord> txsByTxIdAndAddress = apexWalletDbDao.queryTxByTxIdAndAddress

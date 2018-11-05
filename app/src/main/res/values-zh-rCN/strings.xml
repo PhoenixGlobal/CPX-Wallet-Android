@@ -167,7 +167,7 @@
     <string name="excitation_format_err">您输入的ETH,CPX的格式错误，请重新输入 </string>
     <string name="excitation_save_fail">服务器存储失败</string>
     <string name="server_request_failed">服务器请求失败</string>
-    <string name="excitation_detail_sum_dialog_note">请确保本地创建的钱包中CPX总和 大于等于100（≥100）</string>
+    <string name="excitation_detail_sum_dialog_note">请确保本地创建的钱包中CPX总和大于等于</string>
     <string name="excitation_detail_sum_dialog_confirm">确认</string>
     <string name="excitation_about_to_begin_toast">活动即将开始，敬请期待！</string>
     <string name="excitation_closed_toast">活动已结束！</string>

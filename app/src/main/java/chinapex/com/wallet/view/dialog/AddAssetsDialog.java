@@ -240,6 +240,7 @@ public class AddAssetsDialog extends DialogFragment implements View.OnClickListe
                 }
 
                 dismiss();
+                break;
             case R.id.ib_add_assets_cancel:
                 mEt_add_assets_search.getText().clear();
                 break;

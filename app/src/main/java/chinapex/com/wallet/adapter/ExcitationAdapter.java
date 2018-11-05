@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,7 +25,8 @@ import static chinapex.com.wallet.R.drawable.new_event_status;
 import static chinapex.com.wallet.R.drawable.new_event_status_end;
 
 
-public class ExcitationAdapter extends RecyclerView.Adapter<ExcitationAdapter.ExcitationAdapterHolder> implements View.OnClickListener {
+public class ExcitationAdapter extends RecyclerView.Adapter<ExcitationAdapter.ExcitationAdapterHolder> implements View
+        .OnClickListener {
     private static final String TAG = ExcitationAdapter.class.getSimpleName();
 
 
@@ -35,7 +35,7 @@ public class ExcitationAdapter extends RecyclerView.Adapter<ExcitationAdapter.Ex
 
     private View mHeaderView;
 
-    private List<ExcitationBean> mExcitationBeans = new ArrayList<>();
+    private List<ExcitationBean> mExcitationBeans;
     private OnItemClickListener mOnItemClickListener = null;
 
     public ExcitationAdapter(List<ExcitationBean> list) {
@@ -82,7 +82,7 @@ public class ExcitationAdapter extends RecyclerView.Adapter<ExcitationAdapter.Ex
         }
         int realPos = getRealItemPosition(position);
         ExcitationBean bean = mExcitationBeans.get(realPos);
-        if (bean == null) {
+        if (null == bean) {
             CpLog.e(TAG, "ExcitationBean is null!");
             return;
         }
@@ -112,20 +112,21 @@ public class ExcitationAdapter extends RecyclerView.Adapter<ExcitationAdapter.Ex
 
         int newEventStatus = bean.getNewEventStatus();
         if (newEventStatus == Constant.EXCITATION_EXCITATION_AOUBT_TO_BEGIN) {
-            holder.newEventStatus.setText(ApexWalletApplication.getInstance().getResources().getText(R.string.excitation_about_to_begin));
-            holder.newEventStatus.setBackground(ApexWalletApplication.getInstance().getResources().getDrawable(new_event_status_end));
+            holder.newEventStatus.setText(ApexWalletApplication.getInstance().getResources().getText(R.string
+                    .excitation_about_to_begin));
+            holder.newEventStatus.setBackground(ApexWalletApplication.getInstance().getResources().getDrawable
+                    (new_event_status_end));
             holder.newEventStatus.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_ff666666));
         } else if (newEventStatus == Constant.EXCITATION_EXCITATION_IN_PROGRESS) {
-            holder.newEventStatus.setText(ApexWalletApplication.getInstance().getResources().getText(R.string.excitation_in_progress));
+            holder.newEventStatus.setText(ApexWalletApplication.getInstance().getResources().getText(R.string
+                    .excitation_in_progress));
             holder.newEventStatus.setBackground(ApexWalletApplication.getInstance().getResources().getDrawable(new_event_status));
             holder.newEventStatus.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_FFFFFF));
         } else {
             holder.newEventStatus.setText(ApexWalletApplication.getInstance().getResources().getText(R.string.excitation_closed));
-            holder.newEventStatus.setBackground(ApexWalletApplication.getInstance().getResources().getDrawable(new_event_status_end));
+            holder.newEventStatus.setBackground(ApexWalletApplication.getInstance().getResources().getDrawable
+                    (new_event_status_end));
             holder.newEventStatus.setTextColor(ApexWalletApplication.getInstance().getResources().getColor(R.color.c_ff666666));
-        }
-        if (null != mOnItemClickListener) {
-
         }
         holder.itemView.setTag(realPos);
     }

@@ -85,7 +85,7 @@
         android:textSize="@dimen/d_12sp"
         android:visibility="gone" />
 
-    <RelativeLayout
+<!--    <RelativeLayout
         android:id="@+id/eth_address_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -129,12 +129,12 @@
                 android:visibility="gone" />
 
         </RelativeLayout>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/eth_address_container">
+        android:layout_below="@+id/cpx_address_container">
 
         <ImageView
             android:id="@+id/excitation_note_pic"

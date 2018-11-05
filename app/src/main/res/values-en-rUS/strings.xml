@@ -115,7 +115,7 @@
     <string name="transaction_broadcast_failed">Transaction broadcast failed</string>
     <string name="transaction_creation_failed">Transaction creation failed, please verify the input parameters!</string>
     <string name="db_exception">Database exception!</string>
-    <string name="wallet_copied_share">Copy success,you can send it to friends</string>
+    <string name="wallet_copied_share">Copy success, you can send it to friends</string>
     <string name="insufficient_balance">Insufficient balance</string>
     <string name="illegal_input">Illegal input</string>
     <string name="generate_utxo_failed">Generate UTXO Failed, Please Check Network Status</string>
@@ -173,7 +173,7 @@
     <string name="excitation_format_err">Please enter the correct wallet address. </string>
     <string name="excitation_save_fail">Server error, storage failed</string>
     <string name="server_request_failed">Server request failed</string>
-    <string name="excitation_detail_sum_dialog_note">Please be sure the amount of CPX in the local wallets more than 100(≥100)</string>
+    <string name="excitation_detail_sum_dialog_note">Please be sure the amount of CPX in the local wallets more than </string>
     <string name="excitation_detail_sum_dialog_confirm">Confirm</string>
     <string name="excitation_about_to_begin_toast">The reward is about to begin. Please look forward to it!</string>
     <string name="excitation_closed_toast">The reward is closed</string>

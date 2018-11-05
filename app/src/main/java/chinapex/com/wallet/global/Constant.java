@@ -23,22 +23,23 @@ public class Constant {
     public static final String HEADER_KEY = "Authorization";
     public static final String HEADER_VALUE = "Basic d2FsbEBDUFg6Q0BwIyowMQ==";
 
+    // hostname verifier
+    public static final String HOSTNAME_VERIFIER = "tracker.chinapex.com.cn";
+
+    // java server root path
+    public static final String SERVER_ROOT_PATH_JAVA = "https://tracker.chinapex.com.cn/tool/jar-serv/";
+
     // neo node
-    public static final String HOSTNAME_VERIFIER_NEO = "tracker.chinapex.com.cn";
-    public static final String HOSTNAME_VERIFIER_NEO2 = "tmp.chinapex.com.cn";
-    public static final String URL_CLI_NEO = "https://tracker.chinapex.com.cn/neo-cli/";
-//    public static final String URL_UTXOS_NEO = "https://tracker.chinapex.com.cn/tool/utxos/";
-    public static final String URL_UTXOS_NEO = "http://tmp.chinapex.com.cn/wallets-java-version/tool/utxos?address=";
-//    public static final String URL_ASSETS_NEO = "https://tracker.chinapex.com.cn/tool/assets";
-    public static final String URL_ASSETS_NEO = "http://tmp.chinapex.com.cn/wallets-java-version/tool/assets";
+    public static final String URL_CLI_NEO = "https://tracker.chinapex.com.cn/neo-cli-2-9/";
+    public static final String URL_UTXOS_NEO = SERVER_ROOT_PATH_JAVA + "utxos?address=";
+    public static final String URL_ASSETS_NEO = SERVER_ROOT_PATH_JAVA + "assets";
 
     // eth node
-    public static final String HOSTNAME_VERIFIER_ETH = "tracker.chinapex.com.cn";
     public static final String URL_CLI_ETH = "https://tracker.chinapex.com.cn/eth-parity-cli/";
-    public static final String URL_ASSETS_ETH = "https://tracker.chinapex.com.cn/tool/test/eth-assets";
+    public static final String URL_ASSETS_ETH = SERVER_ROOT_PATH_JAVA + "eth-assets";
 
     // ApexGlobalTask
-    public static final long ASSETS_POLLING_TIME = 10 * 1000;
+    public static final long ASSETS_POLLING_TIME = 60 * 1000;
     public static final String UPDATE_ASSETS_OK = "updateAssetsOk";
 
     // Portrait type
@@ -65,7 +66,7 @@ public class Constant {
     public static final String WALLET_TYPE_NAME_CPX = "CPX";
 
     // neo交易记录
-    public static final String URL_NEO_TRANSACTION_HISTORY = "https://tracker.chinapex.com.cn/tool/transaction-history/";
+    public static final String URL_NEO_TRANSACTION_HISTORY = SERVER_ROOT_PATH_JAVA + "transaction-history?address=";
     public static final long TX_NEO_POLLING_TIME = 20 * 1000;
     public static final long TX_CONFIRM_EXCEPTION = -1;
     public static final long TX_UN_CONFIRM = 0;
@@ -73,7 +74,7 @@ public class Constant {
     public static final long NO_NEED_MODIFY_TX_TIME = -2;
 
     // eth交易记录
-    public static final String URL_ETH_TRANSACTION_HISTORY = "https://tracker.chinapex.com.cn/tool/test/eth-transaction";
+    public static final String URL_ETH_TRANSACTION_HISTORY = SERVER_ROOT_PATH_JAVA + "eth-transaction?address=";
     public static final long TX_ETH_POLLING_TIME = 10 * 1000;
     public static final long TX_ETH_CONFIRM_OK = 12;
     public static final long TX_ETH_EXCEPTION_TIME = 5 * 60 * 1000;
@@ -153,10 +154,10 @@ public class Constant {
     // ETH
     public static final String ASSETS_ETH = "0xeth99999999";
     public static final String ASSETS_ERC20_NMB = "0xc7773e07adb2642a1eb03c5e340430b6cedc2aa9";
+
     //Excitation
-    public static final String EXCITATION_SHOW_LIST = "https://tracker.chinapex.com.cn/tool/j2/activitys/list/";
-    public static final String EXCITATION_DETAIL_UPLOAD_ADDRESS = "https://tracker.chinapex.com" +
-            ".cn/tool/j2/activitys/save/";
+    public static final String EXCITATION_SHOW_LIST = SERVER_ROOT_PATH_JAVA + "activities/list/";
+    public static final String EXCITATION_DETAIL_UPLOAD_ADDRESS = SERVER_ROOT_PATH_JAVA + "activities/save/";
     public static final String EXCITATION_GAS_LIMIT = "excitationGasLimit";
     public static final String EXCITATION_ACTIVITY_ID = "excitationActivityId";
 

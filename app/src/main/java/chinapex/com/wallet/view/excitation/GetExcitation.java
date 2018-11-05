@@ -65,7 +65,7 @@ public class GetExcitation implements Runnable, INetCallback {
         for (ResponseExcitation.DataBean data : datas) {
             ExcitationBean excitationBean = new ExcitationBean();
 
-            excitationBean.setEventNew(data.getNew_flag() != 0);
+            excitationBean.setEventNew(data.getNew_flag() == 1);
             excitationBean.setNewEventPic(data.getImagesurl());
             if (PhoneUtils.getAppLanguage().contains(Locale.CHINA.toString())) {
                 excitationBean.setNewEventText(data.getTitle_cn());

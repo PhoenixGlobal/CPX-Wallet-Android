@@ -55,9 +55,8 @@ public class GetEthTransactionHistory implements Runnable, INetCallback {
         CpLog.i(TAG, "startBlock:" + startBlock);
 
         String url = Constant.URL_ETH_TRANSACTION_HISTORY
-                + "?address=" + mAddress
-                + "&startblock=" + (startBlock + 1)
-                + "&endblock=99999999";
+                + mAddress
+                + "&startblock=" + (startBlock + 1);
         OkHttpClientManager.getInstance().get(url, this);
     }
 
@@ -150,7 +149,8 @@ public class GetEthTransactionHistory implements Runnable, INetCallback {
             transactionRecord.setAssetID(assetId);
             transactionRecord.setAssetSymbol(dataBean.getSymbol());
             transactionRecord.setAssetLogoUrl(dataBean.getImageURL());
-            transactionRecord.setAssetDecimal(null == dataBean.getDecimal() ? 0 : Integer.valueOf(dataBean.getDecimal()));
+            transactionRecord.setAssetDecimal(TextUtils.isEmpty(dataBean.getDecimal()) ?
+                    0 : Integer.valueOf(dataBean.getDecimal()));
             transactionRecord.setGasPrice(dataBean.getGas_price());
             transactionRecord.setBlockNumber(dataBean.getBlock_number());
             transactionRecord.setGasFee(dataBean.getGas_fee());
