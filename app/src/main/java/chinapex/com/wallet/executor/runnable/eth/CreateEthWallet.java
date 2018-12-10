@@ -79,7 +79,7 @@ public class CreateEthWallet implements Runnable {
         assets.add(Constant.ASSETS_ETH);
 
         ArrayList<String> colorAssets = new ArrayList<>();
-        colorAssets.add(Constant.ASSETS_ERC20_NMB);
+//        colorAssets.add(Constant.ASSETS_ERC20_NMB);
 
         EthWallet ethWallet = new EthWallet();
         ethWallet.setWalletType(Constant.WALLET_TYPE_ETH);

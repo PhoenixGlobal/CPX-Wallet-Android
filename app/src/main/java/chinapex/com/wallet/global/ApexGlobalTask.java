@@ -62,7 +62,7 @@ public class ApexGlobalTask implements ICheckIsUpdateNeoAssetsCallback, IGetNeoA
     public void checkIsUpdateNeoAssets(boolean isUpdate) {
         if (isUpdate) {
             CpLog.i(TAG, "need to update neo assets!");
-            mCheckIsUpdateEthAssetsSF = TaskController.getInstance().schedule(new GetNeoAssets(this), 0, Constant
+            mCheckIsUpdateNeoAssetsSF = TaskController.getInstance().schedule(new GetNeoAssets(this), 0, Constant
                     .ASSETS_POLLING_TIME);
         }
     }
@@ -71,7 +71,7 @@ public class ApexGlobalTask implements ICheckIsUpdateNeoAssetsCallback, IGetNeoA
     public void checkIsUpdateEthAssets(boolean isUpdate) {
         if (isUpdate) {
             CpLog.i(TAG, "need to update eth assets!");
-            mCheckIsUpdateNeoAssetsSF = TaskController.getInstance().schedule(new GetEthAssets(this), 0, Constant
+            mCheckIsUpdateEthAssetsSF = TaskController.getInstance().schedule(new GetEthAssets(this), 0, Constant
                     .ASSETS_POLLING_TIME);
         }
     }

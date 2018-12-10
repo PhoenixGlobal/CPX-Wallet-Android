@@ -311,7 +311,7 @@ public class ImportKeystoreFragment extends BaseFragment implements View.OnClick
             case Constant.WALLET_TYPE_ETH:
                 walletBean = new EthWallet();
                 assets.add(Constant.ASSETS_ETH);
-                colorAsset.add(Constant.ASSETS_ERC20_NMB);
+//                colorAsset.add(Constant.ASSETS_ERC20_NMB);
                 walletBean.setWalletType(Constant.WALLET_TYPE_ETH);
                 break;
             case Constant.WALLET_TYPE_CPX:

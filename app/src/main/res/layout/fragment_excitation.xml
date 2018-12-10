@@ -13,13 +13,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:collapsedTitleGravity="center_horizontal | bottom"
+            app:collapsedTitleGravity="center_horizontal|bottom"
             app:collapsedTitleTextAppearance="@style/ExcitationCollapsedTextStyle"
             app:contentInsetLeft="@dimen/d_0dp"
             app:contentInsetStart="@dimen/d_0dp"
             app:contentScrim="@drawable/excitation_actionbar_scrim"
             app:expandedTitleTextAppearance="@style/ExcitationCollapsedTextStyle"
-            app:layout_scrollFlags="scroll | exitUntilCollapsed ">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
                 android:layout_width="match_parent"
